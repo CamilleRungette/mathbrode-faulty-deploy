@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-UserModel = require('../models/user')
+UserModel = require('../models/user');
+MessageModel = require('../models/message');
 
 
 router.post('/sign-up', async function(req, res, next) {
@@ -46,6 +47,29 @@ router.post('/sign-in', async function(req, res, next){
   res.json({result: true, isUserExists})
 })
 
+router.post('/create-message', async function (req, res, next){
+  console.log("==================CREATE MESSAGE FUNCTION")
+  console.log(req.body)
+
+  newMessage = new MessageModel({
+    object: req.body.object,
+    content: req.body.content,
+    user_id: req.body.user_id,
+    item_id: req.body.item_id,
+    sender_email: req.body.sender_email,
+    date: Date.now()
+  })
+
+  newMessage.save(function(error, message){
+    if(message){
+      console.log("MESSAGE SAVED", message)
+      res.json({result:true, newMessage})
+    } else{
+      console.log("MESSAGE NOT SAVED:", error)
+    }
+  })
+
+})
 
 
 module.exports = router;
