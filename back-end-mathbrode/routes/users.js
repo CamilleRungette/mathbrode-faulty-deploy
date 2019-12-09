@@ -5,7 +5,6 @@ UserModel = require('../models/user')
 
 router.post('/sign-up', async function(req, res, next) {
   console.log("================ SIGN UP FUNCTION ===============")
-
   const userExists = await UserModel.findOne({ email: req.body.email})
 
   if (userExists){
@@ -29,6 +28,22 @@ router.post('/sign-up', async function(req, res, next) {
     }
   });
 }
+})
+
+router.post('/sign-in', async function(req, res, next){
+  console.log("=========================SIGN IN FUNCTION================");
+
+  userExists = await UserModel.findOne({email: req.body.email, password: req.body.password})
+  console.log("USER EXISTS:", userExists)
+  let isUserExists;
+
+  if(userExists){
+    isUserExists = true;
+  } else{
+    isUserExists = false;
+  }
+
+  res.json({result: true, isUserExists})
 })
 
 
