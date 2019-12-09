@@ -9,9 +9,6 @@ router.get('/', function(req, res, next) {
 
 
 // // ADMIN 
-// router.post('/create-item', {
-//   // Via un formulaire dans le dashboard administrateur, création de nouveaux produits en bases de données afin de pouvoir les afficher 
-// })
 
 // router.get('/show-orders', {
 //   //La page de récapitulatif de toutes les connades passées et en cours + l'affichage dans le carré du dashboard 
@@ -43,10 +40,6 @@ router.get('/', function(req, res, next) {
 
 
 // //USER
-// router.post('/sign-in'{
-
-// })
-
 
 // router.get('/basket'{
 //   //Le panier utilisateur
