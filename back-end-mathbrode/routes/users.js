@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 UserModel = require('../models/user');
 MessageModel = require('../models/message');
+OrderModel = require('../models/order');
+ItemOrderModel = require('../models/item_order');
 
 
 router.post('/sign-up', async function(req, res, next) {
@@ -70,6 +72,54 @@ router.post('/create-message', async function (req, res, next){
     }
   });
 
+})
+
+router.post('/order', function (req, res, next){
+  Date.prototype.addDays = function(days) {
+      this.setDate(this.getDate() + parseInt(days));
+      return this;
+  };
+   var currentDate = new Date();
+// Creation order
+  newOrder = new OrderModel({
+    user_id: req.body.user_id,
+    total: req.body.total,
+    date: Date.now(),
+    sent: false,
+    shipping_date: currentDate.addDays(4),
+  })
+
+  newOrder.save(function(error, order){
+    if(order){
+      console.log("ORDER SAVED", order)
+      
+      // Creation item_order
+      
+      // for(i=0; i < req.body.item.length; i++){
+        newItemOrder = new ItemOrderModel({
+          item_id: req.body._id,
+          price: req.body.price,
+          name: req.body.name,
+          order_id: newOrder._id,
+          copy: req.body.copy
+        })
+        
+        newItemOrder.save(function(error, item_order){
+          if (error){
+            console.log("ERROR:", error)
+            res.json({error})
+          } else if (item_order){
+            console.log("ITEM_ORDER SAVED:", item_order)
+            res.json({item_order, order})
+          }
+        });
+        // };
+      } else if (error){
+        console.log("ORDER NOT SAVED:", error)
+        res.json({error})
+      }
+    })
+        
 })
 
 
