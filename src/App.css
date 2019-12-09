@@ -36,3 +36,40 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* Container holding the image and the text */
+.container-fluid {
+  position: relative;
+}
+
+/* Bottom right text */
+.text-block {
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+  color: white;
+  font-size: 4vw ;
+  font-family:'Raleway',sans-serif;
+
+
+}
+
+img {
+  width:100%;
+  color: cyan;
+}
+
+
+
+.text-block-black {
+  
+  bottom: 10%;
+  left: 10%;
+  color: rgb(0, 0, 0);
+  font-size: 4vw ;
+  font-family:'Raleway',sans-serif;
+
+
+}
+
