@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 ItemModel = require('../models/item')
 
+
+
 router.post('/create-item', async function(req, res, next){
   console.log("============== IN THE CREATE ITEM FUNCTION===========");
   const itemExists = await ItemModel.findOne({name: req.body.name})
@@ -32,5 +34,14 @@ router.post('/create-item', async function(req, res, next){
     });
 }
 });
+
+
+router.post('/update-item', async function(res, req, next){
+    res.json({result: true})
+})
+
+router.post('/delete-item', async function(res, req, next){
+    res.json({result: true})
+})
 
 module.exports = router;
