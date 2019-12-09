@@ -1,6 +1,38 @@
 var express = require('express');
 var router = express.Router();
-ItemModel = require('../models/item')
+ItemModel = require('../models/item');
+AdminModel = require('../models/admin');
+
+router.post('/create-admin', function (req, res, next){
+    newAdmin = AdminModel({
+        name: "Mathilde",
+        email: "blabla@gmail.com",
+        password: "broderie"
+    })
+
+    newAdmin.save(function(error, admin){
+        if (error){
+            console.log("ADMIN NOT SAVED:", error)
+            res.json({error})
+        } else if (admin){
+            console.log("ADMIN SAVED", admin)
+            res.json({admin})
+        }
+    })
+
+})
+
+router.post('/sign-in', async function(req, res, next){
+    adminExists = await AdminModel.findOne({email: "blabla@gmail.com", password: "broderie" });
+    let isAdminExists;
+
+    if(adminExists){
+        isAdminExists = true;
+    } else if (!isAdminExists) {
+        isAdminExists = false
+    };
+    res.json({isAdminExists})
+})
 
 router.post('/create-item', async function(req, res, next){
   console.log("============== IN THE CREATE ITEM FUNCTION===========");
@@ -32,5 +64,9 @@ router.post('/create-item', async function(req, res, next){
     });
 }
 });
+
+
+
+
 
 module.exports = router;

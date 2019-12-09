@@ -59,15 +59,16 @@ router.post('/create-message', async function (req, res, next){
     sender_email: req.body.sender_email,
     date: Date.now()
   })
-
+  
   newMessage.save(function(error, message){
     if(message){
       console.log("MESSAGE SAVED", message)
       res.json({result:true, newMessage})
     } else{
       console.log("MESSAGE NOT SAVED:", error)
+      res.json({error})
     }
-  })
+  });
 
 })
 

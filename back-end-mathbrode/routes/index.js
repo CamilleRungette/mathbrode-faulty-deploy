@@ -69,10 +69,6 @@ router.get('/', function(req, res, next) {
 //   //Ajouter un produit à mon panier
 // })
 
-// router.post('/message-item', {
-//   //Contacter Mathilde par rapport à un produit
-// })
-
 // router.post('/basket-delete', {
 //   //Supprimer un produit du panier
 // })
