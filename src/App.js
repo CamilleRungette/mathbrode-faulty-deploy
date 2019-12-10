@@ -1,21 +1,17 @@
 import React from 'react';
 import './App.css';
-import Home from './Home'
-import Creations from './Creations'
-import Dashboard from './components/dashboard'
+import Home from './components/Home'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navigbar from './Navbar'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import Dashboard from './components/dashboard';
 
 
 function App() {
   return (
       <Router>
         <Switch>
-          <Navigbar/>
-          <Home />
-          <Creations />
-          <Dashboard/>
+          <Route path="/" exact component={Home} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>  
 

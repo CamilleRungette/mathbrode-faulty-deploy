@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import './App.css'
+import '../App.css'
+import Creations from './Creations'
+import Dashboard from './dashboard'
+import Navigbar from './Navbar'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 
@@ -18,6 +23,7 @@ class Home extends React.Component {
 
     return (
       <div>
+        <Navigbar/>
           <div className="row">
               <div className="col-lg-12">
             
@@ -32,7 +38,7 @@ class Home extends React.Component {
               </div>
           </div>
       
-      
+      <Creations/>
         </div>
       
       
