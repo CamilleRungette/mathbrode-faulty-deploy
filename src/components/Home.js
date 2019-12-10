@@ -3,7 +3,9 @@ import '../App.css'
 import Creations from './Creations'
 import Dashboard from './dashboard'
 import Navigbar from './Navbar'
+import Presentation from './Presentation'
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 
@@ -39,6 +41,7 @@ class Home extends React.Component {
           </div>
       
       <Creations/>
+      <Presentation/>
         </div>
       
       
