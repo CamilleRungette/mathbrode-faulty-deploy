@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import '../App.css'
 import Creations from './Creations'
 import Navigbar from './Navbar'
+<<<<<<< HEAD
+import Presentation from './Presentation'
+=======
 import Service from './Service'
+>>>>>>> development
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 
@@ -39,6 +44,7 @@ class Home extends React.Component {
           </div>
       
       <Creations/>
+      <Presentation/>
       <div style={{marginBottom:"20em"}} ></div>
       <Service/>
       <div style={{marginBottom:"20em"}} ></div>
