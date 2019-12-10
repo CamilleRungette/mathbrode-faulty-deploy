@@ -11,9 +11,9 @@ function App() {
   return (
     <div className="App">
       <div className="container-fluid">
-        <Home />
-        <Creations />
-        <Dashboard></Dashboard>
+        <Home/>
+        <Creations/>
+        <Dashboard/>
       </div>  
 
     </div>

@@ -34,17 +34,21 @@ class ProduitMini extends React.Component {
 return (
 
 
-    <div className="col-lg-4 mb-3">
+  <div className="col-lg-4 mb-3">
       
-      <div className="productTitle"></div>
+    <div className="productTitle"></div>
+
       <img src="background 1.png"></img>
-      
       <div className="transparentFilter">
       <div className="text-block-mini">
         <p>Nom<br/>12x35cm</p>
       </div>
-      </div>
+
+      
+      
     </div>
+  </div>
+
 
 
     )
