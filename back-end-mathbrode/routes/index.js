@@ -6,12 +6,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-module.exports = router;
+
 
 // // ADMIN 
-// router.post('/create-item', {
-//   // Via un formulaire dans le dashboard administrateur, création de nouveaux produits en bases de données afin de pouvoir les afficher 
-// })
 
 // router.get('/show-orders', {
 //   //La page de récapitulatif de toutes les connades passées et en cours + l'affichage dans le carré du dashboard 
@@ -43,13 +40,6 @@ module.exports = router;
 
 
 // //USER
-// router.post('/sign-in'{
-
-// })
-
-// router.post('/sign-up', {
-
-// })
 
 // router.get('/basket'{
 //   //Le panier utilisateur
@@ -79,10 +69,6 @@ module.exports = router;
 //   //Ajouter un produit à mon panier
 // })
 
-// router.post('/message-item', {
-//   //Contacter Mathilde par rapport à un produit
-// })
-
 // router.post('/basket-delete', {
 //   //Supprimer un produit du panier
 // })
@@ -90,3 +76,6 @@ module.exports = router;
 // router.get('/basket-buy', {
 //   //Passer commande depuis le panier
 // })
+
+
+module.exports = router;

@@ -86,11 +86,32 @@ img {
   opacity:50%;
 }
 
-.text-block-mini{
+.text-block-mini:hover{
   bottom: 10%;
   left: 10%;
   color: rgb(0, 0, 0);
   font-size: 4vw ;
   font-family:'Raleway',sans-serif;
+}
+
+.content{
+  margin-right: 10px;
+}
+
+.roww {  
+  border-top: 1px solid #DADADA ;
+  border-right: 1px solid #DADADA;
+  border-left: 1px solid #DADADA;
+  border-bottom: 1px solid #DADADA;
+  background-color: #FFFFFF;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+
+.trash {
+  width : 15px;
+  margin-left: auto;
 }
 
