@@ -9,6 +9,8 @@ var usersRouter = require('./routes/users');
 var adminsRouter = require('./routes/admins');
 
 var app = express();
+var cors = require('cors')
+app.use(cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
