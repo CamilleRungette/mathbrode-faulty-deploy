@@ -45,11 +45,9 @@ class Creations extends React.Component {
 
 
 
-    <div className="row">
-        <div className="col-lg-12">
+    <div className="row justify-content-center">
+        <div className="col-lg-10">
       
-      
-              <img className="col-lg-10"></img>
 
               <div className="text-block-black">
               <p>Mes Créations</p>

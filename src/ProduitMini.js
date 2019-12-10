@@ -23,19 +23,32 @@ import './App.css'
 
 
 
-const ProduitMini = (props) => {
-const [isOpen, setIsOpen] = useState(false);
+class ProduitMini extends React.Component {
   
-const toggle = () => setIsOpen(!isOpen);
+
+
+  render() {
+
+  
   
 return (
 
 
     <div className="col-lg-4 mb-3">
-    <img src="background 1.png"></img>
+      
+      <div className="productTitle"></div>
+      <img src="background 1.png"></img>
+      
+      <div className="transparentFilter">
+      <div className="text-block-mini">
+        <p>Nom<br/>12x35cm</p>
+      </div>
+      </div>
     </div>
 
 
     )
+}
+
 }
 export default ProduitMini;
