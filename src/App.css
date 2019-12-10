@@ -140,6 +140,7 @@ img {
   margin-left: auto;
 }
 
+<<<<<<< HEAD
 
 /********* Superposition simple de texte sur une image *******/
 /* Conteneur principal */
@@ -197,3 +198,21 @@ img {
   align-items: flex-end;
 }
  
+=======
+.iconstat {
+  width : 300px;
+  padding: 70px;
+  
+}
+
+.navigbar {
+  color : #6c757d;
+  padding-right: .5rem;
+  padding-left: .5rem;
+  font-family: Raleway;
+}
+
+.textstat {
+  font-family: Raleway;
+}
+>>>>>>> development

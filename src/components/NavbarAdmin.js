@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {  Button,  Navbar,  NavbarBrand,  Nav,  NavItem,  NavLink,} from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
+import {Link} from 'react-router-dom';
 
 
 class Navigbar extends React.Component{
@@ -20,18 +21,18 @@ class Navigbar extends React.Component{
         <div >
             <Nav navbar style={{fontSize:"1.2em"}}>
                 <NavItem>
-                <NavLink href="/components/">Accueil</NavLink>
+                <Link to="/dashboard" class="navigbar nav-link">Acceuil</Link>
                 </NavItem>
                 <NavItem>
-                <NavLink href="/components/">Projet</NavLink>
+                <Link to="/orderTracking" class="navigbar nav-link">Commandes et suivi</Link>
                 </NavItem>
                 <NavItem>
-                <NavLink href="/components/">Evénements</NavLink>
+                <Link to="/messaging" class="navigbar nav-link">Messagerie</Link>
                 </NavItem>
                 <NavItem>
-                <NavLink href="/components/">Contact</NavLink>
+                <Link to="/stock" class="navigbar nav-link">Liste du stock</Link>
                 </NavItem>
-                <Button color="secondary">Se Connecter</Button>
+                <Button color="secondary">Se déconnecter</Button>
             </Nav>
         </div>
     </Navbar>
