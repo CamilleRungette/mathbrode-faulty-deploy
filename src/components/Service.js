@@ -43,6 +43,10 @@ constructor(){
 
   render(){
     return(
+      <div style={{fontFamily: 'Raleway'}}>
+      <h1 style={{fontSize:"3.5em", textAlign:"center"}} > <em>Mes Prestations</em></h1>
+      <div style={{height:"10em"}}></div>
+
       <Col xs="10" style={{margin:"auto"}}>
         <Row style={{fontFamily:"Raleway", display:"flex", justifyContent:"space-around"}}>
 
@@ -60,9 +64,9 @@ constructor(){
 
           <Col xs="3">
             <Card style={{backgroundColor:"#EDF3F7", width:"20em", height:"14em", padding:"1em", border:"none"}}>
-              <CardBody >
+              <CardBody onClick={this.handleShow} >
                 <div style={{display:"flex", justifyContent:"space-between", marginBottom:"0.6em"}} >
-                <CardLink style={{ fontSize:"1.2em"}} onClick={this.handleShow} ><strong>Projets personnalisés</strong> </CardLink>
+                <CardLink style={{ fontSize:"1.2em"}}  ><strong>Projets personnalisés</strong> </CardLink>
                 <FontAwesomeIcon icon={faCut} className={"fa-2x"}/>
                 </div>
                   <CardText>Une idée de modèle ? Vous pouvez me contacter pour des projets personnels. Dessins, prénom, couronnes .. Demandez-moi</CardText>
@@ -104,17 +108,17 @@ constructor(){
               value={this.state.SendMessageContent} />
             </Form.Group>
           </Form>
-            <Button variant="secondary" onClick={this.sendMessage}>
-              Close
+            <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.sendMessage}>
+              Envoyer
             </Button>
           </Modal.Body>
          </div>
        </Modal>
         </Col>
+        </div>
     )
   }
 }
-
 
 
 
