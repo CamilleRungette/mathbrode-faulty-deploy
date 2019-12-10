@@ -1,11 +1,46 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button} from 'reactstrap';
+  CardTitle, CardSubtitle, Button, CardLink} from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCut, faCalendarAlt, faHandshake } from '@fortawesome/free-solid-svg-icons'
+import {Modal, Form} from 'react-bootstrap'
 
+let modalStyle={
+  width:"50em",
+  backgroundColor: "white",
+  fontFamily: "Raleway"
+}
 
 class Service extends Component{
+constructor(){
+  super();
+  this.handleClose = this.handleClose.bind(this)
+  this.handleShow = this.handleShow.bind(this)
+  this.sendMessage = this.sendMessage.bind(this)
+  this.state={
+    show: false,
+    SendMessageContent: '',
+    SendMessageEmail: '',
+  }
+}
+
+  sendMessage(){
+    this.setState({show:false});
+    fetch('http://localhost:3000/users/create-message', {
+      method: 'POST',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: `object=personalised_project&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}`
+    })
+  }
+
+  handleClose(){
+    this.setState({show: false})
+  }
+
+  handleShow(){
+    this.setState({show:true})
+  }
+
   render(){
     return(
       <Col xs="10" style={{margin:"auto"}}>
@@ -27,7 +62,7 @@ class Service extends Component{
             <Card style={{backgroundColor:"#EDF3F7", width:"20em", height:"14em", padding:"1em", border:"none"}}>
               <CardBody >
                 <div style={{display:"flex", justifyContent:"space-between", marginBottom:"0.6em"}} >
-                <CardTitle style={{ fontSize:"1.2em"}} ><strong>Projets personnalisés</strong> </CardTitle>
+                <CardLink style={{ fontSize:"1.2em"}} onClick={this.handleShow} ><strong>Projets personnalisés</strong> </CardLink>
                 <FontAwesomeIcon icon={faCut} className={"fa-2x"}/>
                 </div>
                   <CardText>Une idée de modèle ? Vous pouvez me contacter pour des projets personnels. Dessins, prénom, couronnes .. Demandez-moi</CardText>
@@ -48,9 +83,41 @@ class Service extends Component{
           </Col>
 
         </Row>
-      </Col>
+     
+       
+       <Modal show={this.state.show} onHide={this.handleClose} className="col-lg-10" >
+         <div style={modalStyle}>
+          <Modal.Header closeButton>
+            <Modal.Title>Message pour projet personnalisé</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+          <Form>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Adresse email</Form.Label>
+              <Form.Control type="email"onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
+              value={this.state.SendMessageEmail} />
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Message</Form.Label>
+              <Form.Control as="textarea" onChange={(e)=> this.setState({SendMessageContent: e.target.value})} 
+              value={this.state.SendMessageContent} />
+            </Form.Group>
+          </Form>
+            <Button variant="secondary" onClick={this.sendMessage}>
+              Close
+            </Button>
+          </Modal.Body>
+         </div>
+       </Modal>
+        </Col>
     )
   }
 }
+
+
+
+
+
 
 export default Service;
