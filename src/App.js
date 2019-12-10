@@ -6,14 +6,17 @@ import Creations from './Creations'
 import ProduitMini from './ProduitMini'
 import Dashboard from './dashboard'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Navigbar from './Navbar'
+
 
 function App() {
   return (
     <div className="App">
       <div className="container-fluid">
+    <Navigbar/>
         <Home />
         <Creations />
-        <Dashboard></Dashboard>
+        <Dashboard/>
       </div>  
 
     </div>

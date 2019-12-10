@@ -8,11 +8,31 @@ import {
     Row,
     Table,
 } from 'react-bootstrap';
-import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'react-bootstrap';
 import './App.css';
 
 export default class Dashboard extends Component {
-
+        constructor(){
+        super();
+        this.ItemSubmit = this.ItemSubmit.bind(this);
+        this.state = {
+                CreateItemName: '',
+                CreateItemPrice: '',
+                CreateItemSize: '',
+                CreateItemDesc: '',
+                CreateItemShipFee: '',
+                CreateItemPhoto: '',
+        }
+}
+ 
+  ItemSubmit(){
+    console.log("click détécté")
+    console.log(this.state.CreateItemName)
+    fetch('http://localhost:3000/admins/create-item', {
+            method: 'POST',
+            headers: {'Content-Type':'application/x-www-form-urlencoded'},
+            body: `name=${this.state.CreateItemName}&price=${this.state.CreateItemPrice}&size=${this.state.CreateItemSize}&description=${this.state.CreateItemDesc}&shipping_fee=${this.state.CreateItemShipFee}&copy=1`
+    })
+   }
   
     render(){
   
@@ -32,56 +52,55 @@ export default class Dashboard extends Component {
                             <Form.Group as={Row} controlId="formHorizontalName">
                                 <Form.Label column sm={2}>Nom du produit</Form.Label>
                                         <Col sm={10}>
-                                                <Form.Control type="text" required/>
+                                                <Form.Control type="name" onChange={(e)=> this.setState({CreateItemName: e.target.value})}
+                                                value={this.state.CreateItemName} />
                                         </Col>  
                         </Form.Group>
 
                         <Form.Group as={Row} controlId="formHorizontalPrice">
                                 <Form.Label column sm={2}>Prix</Form.Label>
                                         <Col sm={10}>
-                                                <Form.Control type="text" required/>
+                                                <Form.Control type="text" onChange={(e)=> this.setState({CreateItemPrice: e.target.value})}
+                                                value={this.state.CreateItemPrice} />
                                         </Col>  
                         </Form.Group>
 
                         <Form.Group as={Row} controlId="formHorizontalSize">
                                 <Form.Label column sm={2}>Taille</Form.Label>
                                         <Col sm={10}>
-                                                <Form.Control type="text" required/>
+                                                <Form.Control type="text" onChange={(e)=> this.setState({CreateItemSize: e.target.value})}
+                                                value={this.state.CreateItemSize}/>
                                         </Col>  
                         </Form.Group>
 
-                        <Form.Group as={Row} controlId="formHorizontalNumber">
-                                <Form.Label column sm={2}>Nombre d'exemplaire</Form.Label>
-                                        <Col sm={10}>
-                                                <Form.Control type="number" min="1" required/>
-                                        </Col>  
-                        </Form.Group>
 
                         <Form.Group as={Row} controlId="formHorizontalDesc">
                                 <Form.Label column sm={2}>Description</Form.Label>
                                         <Col sm={10}>
-                                                <Form.Control as="textarea" required/>
+                                                <Form.Control as="textarea" onChange={(e)=> this.setState({CreateItemDesc: e.target.value})}
+                                                value={this.state.CreateItemDesc} />
                                         </Col>  
                         </Form.Group>
 
                         <Form.Group as={Row} controlId="formHorizontalPicture">
                                 <Form.Label column sm={2}>Photo</Form.Label>
                                         <Col sm={10}>
-                                                {/*  <Form.Control type="email" required/>  */}
+                                                 <Button> Rechercher </Button>
                                         </Col>  
                         </Form.Group>
 
                         <Form.Group as={Row} controlId="formHorizontalFees">
                                 <Form.Label column sm={2}>Frais de port</Form.Label>
                                         <Col sm={10}>
-                                                <Form.Control type="number" required/>
+                                                <Form.Control type="textarea" onChange={(e)=> this.setState({CreateItemShipFee: e.target.value})}
+                                                value={this.state.CreateItemShipFee} />
                                         </Col>  
                         </Form.Group>
 
 
                                         <Form.Group as={Row}>
                                             <Col sm={{ span: 10, offset: 2 }}>
-                                            <Button type="submit">Valider</Button>
+                                            <Button type="submit" onClick={this.ItemSubmit}>Valider</Button>
                                             </Col>
                                         </Form.Group>
                                         </Form>
