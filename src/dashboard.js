@@ -149,49 +149,75 @@ export default class Dashboard extends Component {
                            onjour je suis tres interessée par ce produit et j voudrais le c
                            onjour je suis tres interessée par ce produit et j voudrais le ccommander en bleu et noir  </p>
                            </div>
-
+                      <div>
                             <img class="trash" src="reply.png"></img>
+                            <br></br>
+                            <br></br>
                             <img class="trash" src="trash.png"></img>
-                                                
-                    </div> 
+                           </div>                     
+                      </div> 
                    
                  </Col>
                  <Col sm="6">
                  
-                  <div class="roww">
+                 <div class="roww">
 
-                            <div class="content">    
-                            <h4>Sujet : Nom du produit</h4>
-                            <p>bonjour je suis tres interessée par ce produit et j voudrais le onjour je suis tres interessée par ce produit et j voudrais le conjour je suis tres interessée par ce produit et j voudrais le c
-                            onjour je suis tres interessée par ce produit et j voudrais le c
-                            onjour je suis tres interessée par ce produit et j voudrais le c
-                            onjour je suis tres interessée par ce produit et j voudrais le ccommander en bleu et noir  </p>
-                            </div>
-
-                             <img class="trash" src="reply.png"></img>
-                             <img class="trash" src="trash.png"></img>
-                                                 
-                     </div> 
-                    
-                  </Col>
-                  <Col sm="6">
+                           <div class="content">    
+                           <h4>Sujet : Nom du produit</h4>
+                           <p>bonjour je suis tres interessée par ce produit et j voudrais le onjour je suis tres interessée par ce produit et j voudrais le conjour je suis tres interessée par ce produit et j voudrais le c
+                           onjour je suis tres interessée par ce produit et j voudrais le c
+                           onjour je suis tres interessée par ce produit et j voudrais le c
+                           onjour je suis tres interessée par ce produit et j voudrais le ccommander en bleu et noir  </p>
+                           </div>
+                      <div>
+                            <img class="trash" src="reply.png"></img>
+                            <br></br>
+                            <br></br>
+                            <img class="trash" src="trash.png"></img>
+                           </div>                     
+                      </div> 
+                   
+                 </Col>
+                 <Col sm="6">
                  
-                  <div class="roww">
+                 <div class="roww">
 
-                            <div class="content">    
-                            <h4>Sujet : Nom du produit</h4>
-                            <p>bonjour je suis tres interessée par ce produit et j voudrais le onjour je suis tres interessée par ce produit et j voudrais le conjour je suis tres interessée par ce produit et j voudrais le c
-                            onjour je suis tres interessée par ce produit et j voudrais le c
-                            onjour je suis tres interessée par ce produit et j voudrais le c
-                            onjour je suis tres interessée par ce produit et j voudrais le ccommander en bleu et noir  </p>
-                            </div>
+                           <div class="content">    
+                           <h4>Sujet : Nom du produit</h4>
+                           <p>bonjour je suis tres interessée par ce produit et j voudrais le onjour je suis tres interessée par ce produit et j voudrais le conjour je suis tres interessée par ce produit et j voudrais le c
+                           onjour je suis tres interessée par ce produit et j voudrais le c
+                           onjour je suis tres interessée par ce produit et j voudrais le c
+                           onjour je suis tres interessée par ce produit et j voudrais le ccommander en bleu et noir  </p>
+                           </div>
+                      <div>
+                            <img class="trash" src="reply.png"></img>
+                            <br></br>
+                            <br></br>
+                            <img class="trash" src="trash.png"></img>
+                           </div>                     
+                      </div> 
+                   
+                 </Col>
+                 <Col sm="6">
+                 
+                 <div class="roww">
 
-                             <img class="trash" src="reply.png"></img>
-                             <img class="trash" src="trash.png"></img>
-                                                 
-                     </div> 
-                    
-                  </Col>
+                           <div class="content">    
+                           <h4>Sujet : Nom du produit</h4>
+                           <p>bonjour je suis tres interessée par ce produit et j voudrais le onjour je suis tres interessée par ce produit et j voudrais le conjour je suis tres interessée par ce produit et j voudrais le c
+                           onjour je suis tres interessée par ce produit et j voudrais le c
+                           onjour je suis tres interessée par ce produit et j voudrais le c
+                           onjour je suis tres interessée par ce produit et j voudrais le ccommander en bleu et noir  </p>
+                           </div>
+                      <div>
+                            <img class="trash" src="reply.png"></img>
+                            <br></br>
+                            <br></br>
+                            <img class="trash" src="trash.png"></img>
+                           </div>                     
+                      </div> 
+                   
+                 </Col>
                   <br></br>
                   <br></br>
                   <br></br>
