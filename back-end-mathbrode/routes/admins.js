@@ -51,6 +51,7 @@ router.post('/create-item', async function(req, res, next){
         price: req.body.price,
         size: req.body.size,
         description: req.body.description,
+        shipping_fee: req.body.shipping_fee,
         copy: req.body.copy,
         first_presentation: req.body.first_presentation,
     })

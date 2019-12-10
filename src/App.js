@@ -1,14 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Dashboard from './dashboard'
+import Home from './components/Home'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import Dashboard from './components/dashboard';
+import Stock from './components/dashboardComponents/stock';
+import Tracking from './components/dashboardComponents/orderTracking';
+import Messaging from './components/dashboardComponents/messaging';
 
 
 function App() {
   return (
-    <Dashboard></Dashboard>
-  );
+      <Router>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/stock" component={Stock} />
+          <Route path="/orderTracking" component={Tracking} />
+          <Route path="/messaging" component={Messaging} />
+        </Switch>
+      </Router>  
+
+  )
+
+
 }
 
 export default App;
