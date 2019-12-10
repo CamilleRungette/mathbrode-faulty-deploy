@@ -22,7 +22,7 @@ export default class Dashboard extends Component {
 
      <div>
          
-         
+         <div class="row justify-content-center">
                 <Col sm="6">
                     <Card>
                             <Card.Header>Formulaire de création d'un produit</Card.Header>
@@ -81,7 +81,7 @@ export default class Dashboard extends Component {
 
                                         <Form.Group as={Row}>
                                             <Col sm={{ span: 10, offset: 2 }}>
-                                            <Button type="submit">Valider</Button>
+                                            <Button type="submit" variant="info">Valider</Button>
                                             </Col>
                                         </Form.Group>
                                         </Form>
@@ -89,6 +89,7 @@ export default class Dashboard extends Component {
                                 </Card.Body>
                         </Card>
                   </Col>
+                  </div>
              <br></br>
              <br></br>
              <br></br>
