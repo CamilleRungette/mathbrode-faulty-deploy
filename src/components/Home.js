@@ -39,8 +39,11 @@ class Home extends React.Component {
       
               </div>
           </div>
+          <div style={{marginBottom:"10em"}} ></div>
+
       
       <Creations/>
+      <div style={{marginBottom:"20em"}} ></div>
       <Presentation/>
       <div style={{marginBottom:"20em"}} ></div>
       <Service/>
