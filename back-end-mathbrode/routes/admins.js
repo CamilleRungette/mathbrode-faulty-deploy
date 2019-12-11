@@ -81,7 +81,9 @@ router.post('/create-event', function(req, res, next){
       name: req.body.name,
       address: req.body.address,
       date: req.body.date,
-      photo: req.body.photo
+      photo: req.body.photo,
+      starting_time: req.body.starting_time,
+      ending_time: req.body.ending_time
     });
 
     newEvent.save(function(error, event){
