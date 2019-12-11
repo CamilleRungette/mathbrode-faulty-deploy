@@ -1,41 +1,53 @@
 import React, { useState } from 'react';
-import {Card, Button,   Col, Form, Row, Table} from 'react-bootstrap';
 import NavbarAdmin from './NavbarAdmin';
 import Footer from '../Footer'
+import MessageItem from '../cards/Message-item';
 
 
-class messaging extends React.Component{
+class Messages extends React.Component{
+
+  constructor(props){
+    super(props)
+    this.state= {
+      messages: [],
+    }
+  }
+
+  componentDidMount(){
+    let ctx = this;
+    fetch('http://localhost:3000/admins/messages')
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data){
+      ctx.setState({messages: data.allMessages})
+     console.log("THE STATE ===========>", ctx.state.messages)
+    })
+    .catch(function(error) {
+      console.log('Request failed ->', error)
+  });
+  }
+
     render(){
 
+      let messageList = this.state.messages.map(function(message, i){
+        return <MessageItem key={i}
+        messageObject={message.object}
+        messageContent={message.content}
+        messageSender={message.sender_email}
+        messageDate={message.date}
+        />
+      }, this)
+
+      console.log("MESSAGE LISTE", messageList.length)
 
         return(
           <div style={{fontFamily:"Raleway"}}>
           <NavbarAdmin/>
             <div style={{height:"75vh"}}>
-        
-              <div style={{ height:"100%", display:"flex", justifyContent:"center", paddingTop:"10%"}}>
-                <Col sm="6">
-                <div class="roww">
-                  <div class="content">    
-                  <h4>Sujet : Nom du produit</h4>
-                    <p>bonjour je suis tres interessée par ce produit et j voudrais le onjour je suis tres interessée par ce produit et j voudrais le conjour je suis tres interessée par ce produit et j voudrais le c
-                    onjour je suis tres interessée par ce produit et j voudrais le c
-                    onjour je suis tres interessée par ce produit et j voudrais le c
-                    onjour je suis tres interessée par ce produit et j voudrais le ccommander en bleu et noir  </p>
-                  </div>
-
-                  <div>
-                  <img class="trash" src="reply.png"></img>
-                    <br></br>
-                    <br></br>
-                  <img class="trash" src="trash.png"></img>
-                  </div>                    
-                  </div> 
-                </Col>
-              </div>
-        
-            <div style={{height:"6em"}}></div>
+              {messageList}
             </div>
+            <div style={{height:"6em"}}></div>
           <Footer/>
           </div>
         
@@ -46,7 +58,7 @@ class messaging extends React.Component{
 }
 
 
-export default messaging;
+export default Messages;
 
 
 
