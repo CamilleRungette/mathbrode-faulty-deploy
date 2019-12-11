@@ -10,6 +10,7 @@ export default class Dashboard extends Component {
   constructor(){
   super();
   this.ItemSubmit = this.ItemSubmit.bind(this);
+  this.EventSubmit = this.EventSubmit.bind(this);
   this.state = {
           CreateItemName: '',
           CreateItemPrice: '',
@@ -17,6 +18,10 @@ export default class Dashboard extends Component {
           CreateItemDesc: '',
           CreateItemShipFee: '',
           CreateItemPhoto: '',
+          CreateEventName: '',
+          CreateEventAddress: '',
+          CreateEventDate:'',
+          CreateEventPhoto:''
         }
   }
   
@@ -24,13 +29,22 @@ export default class Dashboard extends Component {
 
   ItemSubmit(){
     console.log("click détécté")
-    console.log(this.state.CreateItemName)
     fetch('http://localhost:3000/admins/create-item', {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             body: `name=${this.state.CreateItemName}&price=${this.state.CreateItemPrice}&size=${this.state.CreateItemSize}&description=${this.state.CreateItemDesc}&shipping_fee=${this.state.CreateItemShipFee}&copy=1`
     })
    }
+
+  EventSubmit(){
+    console.log("click détécté")
+    fetch('http://localhost:3000/admins/create-event', {
+      method: 'POST',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: `name=${this.state.CreateEventName}&address=${this.state.CreateEventAddress}&date=${this.state.CreateEventDate}`
+})
+
+  }
   
     render(){
 
@@ -65,9 +79,11 @@ export default class Dashboard extends Component {
 </Table>
 
 
-  <div class="row justify-content-center">
+  <div style={{display:"flex", flexDirection:"column" }}>
+  <div style={{height:"4em"}}></div>
+
             {/* Create-item form */}
-    <Col sm="6">
+    <Col lg={{offset:3, span:6 }}>
         <Card>
           <Card.Header style={{fontSize:"1.3em"}}>Ajouter un produit</Card.Header>
             <Card.Body>
@@ -132,9 +148,67 @@ export default class Dashboard extends Component {
           </Card.Body>
         </Card>
       </Col> 
-  </div>
+ 
 
-<div style={{height:"6em"}}></div>
+
+<div style={{height:"12em"}}></div>
+
+
+<Col lg={{offset:3, span:6 }}>
+        <Card>
+          <Card.Header style={{fontSize:"1.3em"}}>Ajouter un événement</Card.Header>
+            <Card.Body>
+                        
+            <Form>
+              <Form.Group as={Row} controlId="formHorizontalName">
+                <Form.Label column sm={2}>Nom</Form.Label>
+                  <Col sm={10}>
+                    <Form.Control type="name" onChange={(e)=> this.setState({CreateEventName: e.target.value})}
+                          value={this.state.CreateEventName} />
+                  </Col>  
+            </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalPrice">
+              <Form.Label column sm={2}>Adresse</Form.Label>
+                <Col sm={10}>
+                  <Form.Control type="text" onChange={(e)=> this.setState({CreateEventAddress: e.target.value})}
+                        value={this.state.CreateEventAddress} />
+                </Col>  
+            </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalSize">
+              <Form.Label column sm={2}>Date</Form.Label>
+                <Col sm={10}>
+                  <Form.Control type="text" onChange={(e)=> this.setState({CreateEventDate: e.target.value})}
+                        value={this.state.CreateEventDate}/>
+                </Col>  
+            </Form.Group>
+
+
+            <Form.Group as={Row} controlId="formHorizontalPicture">
+              <Form.Label column sm={2}>Photo</Form.Label>
+                <Col sm={10}>
+                  <Button style={{border:"none", backgroundColor:"#1B263B"}} > Rechercher </Button>
+                </Col>  
+            </Form.Group>
+
+
+            <Form.Group style={{textAlign:"center"}} as={Row}>
+                <Col sm={{ offset: 1 }}>
+                  <Button type="submit" onClick={this.EventSubmit} style={{border:"none", backgroundColor:"#1B263B"}}>Valider</Button>
+                </Col>
+            </Form.Group>
+          </Form>
+
+          </Card.Body>
+        </Card>
+      </Col> 
+
+      </div>
+
+<div style={{height:"8em"}}></div>
+
+
 <Footer/>
 
 </div>

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 ItemModel = require('../models/item');
 AdminModel = require('../models/admin');
+EventModel = require('../models/event');
 
 router.post('/create-admin', function (req, res, next){
     newAdmin = AdminModel({
@@ -33,8 +34,6 @@ router.post('/sign-in', async function(req, res, next){
     };
     res.json({isAdminExists})
 })
-
-
 
 router.post('/create-item', async function(req, res, next){
   console.log("============== IN THE CREATE ITEM FUNCTION===========");
@@ -68,12 +67,31 @@ router.post('/create-item', async function(req, res, next){
 }
 });
 
-router.post('/update-item', async function(res, req, next){
+router.post('/update-item', async function(req, res, next){
     res.json({result: true})
 })
 
-router.post('/delete-item', async function(res, req, next){
+router.post('/delete-item', async function(req, res, next){
     res.json({result: true})
+})
+
+router.post('/create-event', function(req, res, next){
+  console.log("=====================CREATE-EVENT FUNCTION=========")
+    newEvent = new EventModel({
+      name: req.body.name,
+      address: req.body.address,
+      date: req.body.date,
+      photo: req.body.photo
+    });
+
+    newEvent.save(function(error, event){
+      if(error){
+        console.log("ERREUR:", error);
+      }else if (event){
+        console.log("EVENT SAVED IN DATABASE", event)
+        res.json({event})
+      }
+    });
 })
 
 module.exports = router;
