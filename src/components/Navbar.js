@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {  Button,  Navbar,  NavbarBrand,  Nav,  NavItem,  NavLink,} from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
+import {Link} from 'react-router-dom'
+
 
 
 class Navigbar extends React.Component{
-    render(){
+   
+  pageScroll(){
+    window.setTimeout(function(){
+      window.scrollBy(0,2500);
+
+    }, 500)
+  } 
+  
+  
+  
+  render(){
         return(
 
 <div className="row" >
@@ -26,10 +38,10 @@ class Navigbar extends React.Component{
                 <NavLink href="/components/">Projet</NavLink>
                 </NavItem>
                 <NavItem>
-                <NavLink href="/components/">Evénements</NavLink>
+                <Link to="/events" ><NavLink>Evénements</NavLink></Link> 
                 </NavItem>
                 <NavItem>
-                <NavLink href="/components/">Contact</NavLink>
+                <NavLink onClick={this.pageScroll}>Contact</NavLink>
                 </NavItem>
                 <Button color="secondary" href="/signin">Se Connecter</Button>
             </Nav>
