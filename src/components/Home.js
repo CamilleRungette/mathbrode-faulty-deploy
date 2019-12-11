@@ -4,12 +4,9 @@ import Creations from './Creations'
 import Navigbar from './Navbar'
 import Presentation from './Presentation'
 import Service from './Service'
-<<<<<<< HEAD
 import FicheProduit from './FicheProduit'
 import MonPanier from './MonPanier'
-=======
 import Footer from './Footer'
->>>>>>> development
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
