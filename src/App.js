@@ -9,6 +9,9 @@ import Tracking from './components/dashboardComponents/orderTracking';
 import Messaging from './components/dashboardComponents/messaging';
 import Classes from './components/Classes'
 import Events from './components/Events'
+import Basket from './components/Basket'
+import ItemPres from './components/ItemPresentation'
+
 
 
 class App extends Component{
@@ -26,6 +29,8 @@ class App extends Component{
           <Route path="/messaging" component={Messaging} />
           <Route path="/classes" component={Classes} />
           <Route path="/events" component={Events} />
+          <Route path="/basket" component={Basket} />
+          <Route path="/item"  component={ItemPres}/>
         </Switch>
       </Router>  
 
