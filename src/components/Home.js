@@ -4,6 +4,7 @@ import Creations from './Creations'
 import Navigbar from './Navbar'
 import Presentation from './Presentation'
 import Service from './Service'
+import Footer from './Footer'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -48,6 +49,7 @@ class Home extends React.Component {
       <div style={{marginBottom:"20em"}} ></div>
       <Service/>
       <div style={{marginBottom:"20em"}} ></div>
+      <Footer/>
         </div>
       
       
