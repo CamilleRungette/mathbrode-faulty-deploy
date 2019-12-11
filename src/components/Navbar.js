@@ -7,7 +7,17 @@ import {Link} from 'react-router-dom'
 
 
 class Navigbar extends React.Component{
-    render(){
+   
+  pageScroll(){
+    window.setTimeout(function(){
+      window.scrollBy(0,2500);
+
+    }, 500)
+  } 
+  
+  
+  
+  render(){
         return(
 
 <div className="row" >
@@ -31,7 +41,7 @@ class Navigbar extends React.Component{
                 <Link to="/events" ><NavLink>Evénements</NavLink></Link> 
                 </NavItem>
                 <NavItem>
-                <NavLink href="/components/">Contact</NavLink>
+                <NavLink onClick={this.pageScroll}>Contact</NavLink>
                 </NavItem>
                 <Button color="secondary">Se Connecter</Button>
             </Nav>

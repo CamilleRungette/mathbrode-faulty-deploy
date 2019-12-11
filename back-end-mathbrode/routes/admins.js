@@ -3,6 +3,7 @@ var router = express.Router();
 ItemModel = require('../models/item');
 AdminModel = require('../models/admin');
 EventModel = require('../models/event');
+MessageModel= require('../models/message')
 
 router.post('/create-admin', function (req, res, next){
     newAdmin = AdminModel({
@@ -94,6 +95,14 @@ router.post('/create-event', function(req, res, next){
         res.json({event})
       }
     });
+})
+
+router.get('/messages', async function(req, res, next){
+  allMessages = await MessageModel.find(function(err, messages){
+    console.log(messages)
+  })
+
+  res.json({allMessages})
 })
 
 module.exports = router;
