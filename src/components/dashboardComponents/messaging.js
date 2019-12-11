@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NavbarAdmin from './NavbarAdmin';
 import Footer from '../Footer'
 import MessageItem from '../cards/Message-item';
@@ -6,8 +6,8 @@ import MessageItem from '../cards/Message-item';
 
 class Messages extends React.Component{
 
-  constructor(props){
-    super(props)
+  constructor(){
+    super()
     this.state= {
       messages: [],
     }
@@ -44,9 +44,9 @@ class Messages extends React.Component{
         return(
           <div style={{fontFamily:"Raleway"}}>
           <NavbarAdmin/>
-            <div style={{height:"75vh"}}>
+
               {messageList}
-            </div>
+
             <div style={{height:"6em"}}></div>
           <Footer/>
           </div>
