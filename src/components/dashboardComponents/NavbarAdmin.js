@@ -11,17 +11,17 @@ class Navigbar extends React.Component{
 
 <div className="row" >
 
-    <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "90%", height:"8em" , display:"flex", justifyContent:"space-between", margin:"auto"}}>
+    <Navbar  light expand="md" style={{ fontFamily:"Raleway", width: "90%", height:"8em" , display:"flex", justifyContent:"space-between", margin:"auto"}}>
         <div style={{textAlign:"right"}}>
-            <NavbarBrand href="/">
-                <FontAwesomeIcon icon={faStar} /><span className= "offset-1" style={{fontSize:"2em"}} >Mathbrode</span>
+            <NavbarBrand>
+                <div className= "offset-1" style={{display:"flex", alignItems:"center", fontSize:"2em"}}><FontAwesomeIcon icon={faStar} /> Mathbrode</div>
             </NavbarBrand>
         </div>
 
         <div >
-            <Nav navbar style={{fontSize:"1.2em"}}>
+            <Nav navbar style={{fontSize:"1.2em", width:"40em", justifyContent:"space-around" }}>
                 <NavItem>
-                <Link to="/dashboard" class="navigbar nav-link">Acceuil</Link>
+                <Link to="/dashboard" class="navigbar nav-link">Accueil</Link>
                 </NavItem>
                 <NavItem>
                 <Link to="/orderTracking" class="navigbar nav-link">Commandes et suivi</Link>
