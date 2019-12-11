@@ -7,7 +7,7 @@ import Dashboard from './components/dashboard';
 import Stock from './components/dashboardComponents/stock';
 import Tracking from './components/dashboardComponents/orderTracking';
 import Messaging from './components/dashboardComponents/messaging';
-
+import Signin from './components/signin';
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
           <Route path="/stock" component={Stock} />
           <Route path="/orderTracking" component={Tracking} />
           <Route path="/messaging" component={Messaging} />
+          <Route path="/signin" component={Signin}  />
         </Switch>
       </Router>  
 
