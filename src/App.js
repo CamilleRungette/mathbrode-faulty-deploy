@@ -7,6 +7,8 @@ import Dashboard from './components/dashboard';
 import Stock from './components/dashboardComponents/stock';
 import Tracking from './components/dashboardComponents/orderTracking';
 import Messaging from './components/dashboardComponents/messaging';
+import Classes from './components/Classes'
+import Events from './components/Events'
 
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
           <Route path="/stock" component={Stock} />
           <Route path="/orderTracking" component={Tracking} />
           <Route path="/messaging" component={Messaging} />
+          <Route path="/classes" component={Classes} />
+          <Route path="/events" component={Events} />
         </Switch>
       </Router>  
 
