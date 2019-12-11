@@ -46,15 +46,16 @@ class Creations extends React.Component {
 
 
     <div className="row justify-content-center">
-        <div className="col-lg-10">
+        <div className="col-lg-8">
       
 
-              <div className="text-block-black">
-              <p>Mes Créations</p>
-              <div className="row">
-              {rows}
+              <div style={{fontFamily:"Raleway"}}>
+                <h1 style={{fontSize:"4em", textAlign:"center"}}> <em>Mes Créations</em></h1>
+                <div style={{height:"10em"}}></div>
+              <div className="row" style={{display:"flex", justifyContent: "space-around"}}>
+                {rows}
               </div>
-              <Button color="secondary">en voir plus...</Button>
+              <Button color="secondary" >en voir plus...</Button>
               </div>
 
 

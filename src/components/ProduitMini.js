@@ -34,7 +34,7 @@ class ProduitMini extends React.Component {
 return (
 
 
-  <div className="col-lg-4 mb-3">
+  <div className="col-lg-4 my-3">
       
     <div className="productTitle">
         {/* <img src="background 1.png"></img>
@@ -45,7 +45,7 @@ return (
         </div> */}
 
 <div class="overlay-image">
-  <a href="URL_LIEN">
+  <a href="#">
  <img class="image" src="background 1.png" alt="Alt text" />
  <div class="normal">
   <div class="text"></div>
