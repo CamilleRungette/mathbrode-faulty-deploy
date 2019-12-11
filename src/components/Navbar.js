@@ -20,7 +20,7 @@ class Navigbar extends React.Component{
         <div >
             <Nav navbar style={{fontSize:"1.2em"}}>
                 <NavItem>
-                <NavLink href="/components/">Accueil</NavLink>
+                <NavLink href="/">Accueil</NavLink>
                 </NavItem>
                 <NavItem>
                 <NavLink href="/components/">Projet</NavLink>
@@ -31,7 +31,7 @@ class Navigbar extends React.Component{
                 <NavItem>
                 <NavLink href="/components/">Contact</NavLink>
                 </NavItem>
-                <Button color="secondary">Se Connecter</Button>
+                <Button color="secondary" href="/signin">Se Connecter</Button>
             </Nav>
         </div>
     </Navbar>
