@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import Home from './components/Home'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,8 +11,12 @@ import Classes from './components/Classes'
 import Events from './components/Events'
 
 
-function App() {
-  return (
+class App extends Component{
+
+  render(){
+
+
+    return (
       <Router>
         <Switch>
           <Route path="/" exact component={Home} />
@@ -25,7 +29,7 @@ function App() {
         </Switch>
       </Router>  
 
-  )
+  )}
 
 
 }

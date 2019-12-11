@@ -21,7 +21,9 @@ export default class Dashboard extends Component {
           CreateEventName: '',
           CreateEventAddress: '',
           CreateEventDate:'',
-          CreateEventPhoto:''
+          CreateEventPhoto:'',
+          CreateEventStart: '',
+          CreateEventEnd: '',
         }
   }
   
@@ -41,7 +43,7 @@ export default class Dashboard extends Component {
     fetch('http://localhost:3000/admins/create-event', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `name=${this.state.CreateEventName}&address=${this.state.CreateEventAddress}&date=${this.state.CreateEventDate}`
+      body: `name=${this.state.CreateEventName}&address=${this.state.CreateEventAddress}&date=${this.state.CreateEventDate}&starting_time=${this.state.CreateEventStart}&ending_time=${this.state.CreateEventEnd}`
 })
 
   }
@@ -89,12 +91,20 @@ export default class Dashboard extends Component {
             <Card.Body>
                         
             <Form>
-              <Form.Group as={Row} controlId="formHorizontalName">
-                <Form.Label column sm={2}>Nom du produit</Form.Label>
-                  <Col sm={10}>
-                    <Form.Control type="name" onChange={(e)=> this.setState({CreateItemName: e.target.value})}
-                          value={this.state.CreateItemName} />
-                  </Col>  
+
+            <Form.Group as={Row} controlId="formHorizontalPicture">
+              <Form.Label column sm={2}>Photo</Form.Label>
+                <Col sm={10}>
+                  <Button style={{border:"none", backgroundColor:"#1B263B"}} > Rechercher </Button>
+                </Col>  
+            </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalName">
+              <Form.Label column sm={2}>Nom</Form.Label>
+                <Col sm={10}>
+                  <Form.Control type="name" onChange={(e)=> this.setState({CreateItemName: e.target.value})}
+                        value={this.state.CreateItemName} />
+                </Col>  
             </Form.Group>
 
             <Form.Group as={Row} controlId="formHorizontalPrice">
@@ -119,13 +129,6 @@ export default class Dashboard extends Component {
                 <Col sm={10}>
                   <Form.Control as="textarea" onChange={(e)=> this.setState({CreateItemDesc: e.target.value})}
                         value={this.state.CreateItemDesc} />
-                </Col>  
-            </Form.Group>
-
-            <Form.Group as={Row} controlId="formHorizontalPicture">
-              <Form.Label column sm={2}>Photo</Form.Label>
-                <Col sm={10}>
-                  <Button style={{border:"none", backgroundColor:"#1B263B"}} > Rechercher </Button>
                 </Col>  
             </Form.Group>
 
@@ -160,6 +163,14 @@ export default class Dashboard extends Component {
             <Card.Body>
                         
             <Form>
+
+            <Form.Group as={Row} controlId="formHorizontalPicture">
+              <Form.Label column sm={2}>Photo</Form.Label>
+                <Col sm={10}>
+                  <Button style={{border:"none", backgroundColor:"#1B263B"}} > Rechercher </Button>
+                </Col>  
+            </Form.Group>
+
               <Form.Group as={Row} controlId="formHorizontalName">
                 <Form.Label column sm={2}>Nom</Form.Label>
                   <Col sm={10}>
@@ -179,19 +190,22 @@ export default class Dashboard extends Component {
             <Form.Group as={Row} controlId="formHorizontalSize">
               <Form.Label column sm={2}>Date</Form.Label>
                 <Col sm={10}>
-                  <Form.Control type="text" onChange={(e)=> this.setState({CreateEventDate: e.target.value})}
+                  <Form.Control type="date" onChange={(e)=> this.setState({CreateEventDate: e.target.value})}
                         value={this.state.CreateEventDate}/>
                 </Col>  
             </Form.Group>
 
-
-            <Form.Group as={Row} controlId="formHorizontalPicture">
-              <Form.Label column sm={2}>Photo</Form.Label>
-                <Col sm={10}>
-                  <Button style={{border:"none", backgroundColor:"#1B263B"}} > Rechercher </Button>
+            <Form.Group as={Row} controlId="formHorizontalPrice">
+              <Form.Label column sm={2}>Heure</Form.Label>
+                <Col sm={5}>
+                  <Form.Control placeholder="Début" type="text" onChange={(e)=> this.setState({CreateEventStart: e.target.value})}
+                        value={this.state.CreateEventStart} />
+                </Col> 
+                <Col sm={5                }>
+                  <Form.Control placeholder="Fin" type="text" onChange={(e)=> this.setState({CreateEventEnd: e.target.value})}
+                        value={this.state.CreateEventEnd} />
                 </Col>  
             </Form.Group>
-
 
             <Form.Group style={{textAlign:"center"}} as={Row}>
                 <Col sm={{ offset: 1 }}>
