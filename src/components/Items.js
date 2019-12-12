@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
-import MiniItem from './cards/MiniItem'
+import ShopItem from './cards/Shop-item'
 import Footer from './Footer'
 import Navigbar from './Navbar'
 import {Col} from 'reactstrap'
 
 
 class Items extends Component{
+  
   constructor(props){
     super(props);
     this.state={
@@ -30,7 +31,7 @@ class Items extends Component{
 
   render(){
     let itemsList = this.state.items.map(function(item, i){
-      return <MiniItem key={i}
+      return <ShopItem key={i}
        itemCopy={item.copy}
        itemName={item.name}
        itemDesc={item.desc}

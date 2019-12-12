@@ -144,12 +144,12 @@ export default class Dashboard extends Component {
                 placeholder="upload an image"
                 onChange={this.uploadItemImage} 
                 />
+                  </Col>  
                 {this.state.loading ? (
                   <h6> Chargement ...</h6>
                 ) : (
-                 <img src={this.state.CreateItemPhoto} style={{width:"10em"}} />
+                 <img src={this.state.CreateItemPhoto} style={{width:"10em", marginLeft:'8em'}} />
                 )}
-                </Col>  
             </Form.Group>
 
             <Form.Group as={Row} controlId="formHorizontalName">
