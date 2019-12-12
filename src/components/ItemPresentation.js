@@ -1,32 +1,12 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import {
   Button,
-  CardTitle,
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-  Text
 } from 'reactstrap';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
 import '../App.css'
-import ProduitMini from './ProduitMini'
-import { render } from '@testing-library/react';
-
-import { Col, Row, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Col, Row, Form, FormGroup, Input } from 'reactstrap';
 
 
-class FicheProduit extends React.Component {
+class ItemPresentation extends React.Component {
 
 
     render() {
@@ -140,4 +120,4 @@ Une petite description du produit; inspiration, couleur, matière etc ... Une pe
 }
 
 
-export default FicheProduit;
+export default ItemPresentation;

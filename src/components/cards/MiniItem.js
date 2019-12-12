@@ -1,29 +1,8 @@
 import React, { useState } from 'react';
-import {
-  Button,
-  CardTitle,
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-  Text
-} from 'reactstrap';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
-import '../App.css'
 
 
 
-class ProduitMini extends React.Component {
+class MiniItem extends React.Component {
   
 
 
@@ -68,4 +47,4 @@ return (
 }
 
 }
-export default ProduitMini;
+export default MiniItem;

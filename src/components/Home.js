@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../App.css'
 import Creations from './Creations'
 import Navigbar from './Navbar'
 import Presentation from './Presentation'
 import Service from './Service'
-import FicheProduit from './ItemPresentation'
-import MonPanier from './Basket'
 import Footer from './Footer'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -33,7 +31,7 @@ class Home extends React.Component {
               <div className="col-lg-12">
             
             
-                    <img src="background 1.png"></img>
+                    <img src="background 1.png" alt="background"></img>
       
                     <div className="text-block">
                     <p>Broderie <br/> Moderne</p>
