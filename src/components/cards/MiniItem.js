@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import {Link} from 'react-router-dom';
 
 
 class MiniItem extends React.Component {
@@ -16,14 +16,12 @@ return (
   <div className="col-lg-4 my-3">
       
     <div className="productTitle">
-        {/* <img src="background 1.png"></img>
-        <div className="transparentFilter">
-        </div>
-        <div className="text-block-mini">
-          <p className="NomTaille">Nom<br/>12x35cm</p>
-        </div> */}
 
+
+<Link to="/item" >
+  
 <div class="overlay-image">
+ 
   <a href="#">
  <img class="image" src="background 1.png" alt="Alt text" />
  <div class="normal">
@@ -35,6 +33,8 @@ return (
  </div>
 </a>
 </div>
+
+</Link>
 
       
       

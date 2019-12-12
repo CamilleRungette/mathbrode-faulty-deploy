@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   Button } from 'reactstrap';
 import '../App.css'
+import {Link} from 'react-router-dom';
 
 
 class MonPanier extends React.Component {
@@ -14,10 +15,13 @@ class MonPanier extends React.Component {
     return(
 
 <div>
+<div style={{height:"5em"}}></div>
 
         <div className="text-block-black">
             <p>Mon Panier</p>
         </div>
+
+        <div style={{height:"5em"}}></div>
 
 
     
@@ -78,15 +82,20 @@ class MonPanier extends React.Component {
         </div>  
 
 
+        <div style={{height:"5em"}}></div>
+
+
 
 
        <div className="d-flex justify-content-center col-lg-12">  
             <div className="justify-content-center col-lg-6">          
-                <Button color="secondary">Continuer mes Achats</Button>
+                <Link to="/creations" ><Button color="secondary">Continuer mes Achats</Button></Link>
             </div>
             <div>
                 <Button color="secondary">Confirmer</Button>
             </div>
+
+            <div style={{height:"5em"}}></div>
                 
         </div>
 

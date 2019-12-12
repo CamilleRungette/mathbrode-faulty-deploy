@@ -9,14 +9,14 @@ import {Link} from 'react-router-dom';
 
 
 
-class Creations extends React.Component {
+class MaxCreations extends React.Component {
   
 
 
   render() {
 
     var rows = [];
-    for (var i=0; i<9; i++) {
+    for (var i=0; i<90; i++) {
         rows.push(<MiniItem key={i} />);
     }
     
@@ -45,7 +45,7 @@ class Creations extends React.Component {
 
 
               <div className="row justify-content-center">
-              <Link to="/maxcreations" ><Button color="secondary" >en voir plus...</Button></Link>
+              <Link to="/" ><Button color="secondary" >Home</Button></Link>
               </div>
 
               <div style={{height:"5em"}}></div>
@@ -70,4 +70,4 @@ class Creations extends React.Component {
 }
 
 
-export default Creations;
+export default MaxCreations;
