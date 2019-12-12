@@ -4,6 +4,7 @@ import {
 } from 'reactstrap';
 import '../App.css'
 import ProduitMini from './cards/MiniItem'
+import {Link} from 'react-router-dom'
 
 
 
@@ -37,7 +38,7 @@ class Creations extends React.Component {
               <div className="row" style={{display:"flex", justifyContent: "space-around"}}>
                 {rows}
               </div>
-              <Button color="secondary" >en voir plus...</Button>
+              <Link to="/items"> <Button> En voir plus...</Button> </Link>
               </div>
 
 

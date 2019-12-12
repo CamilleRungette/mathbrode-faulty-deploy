@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 let request = require("async-request");
 EventModel = require('../models/event')
+ItemsModel = require('../models/item')
+
 
 
 /* GET home page. */
@@ -16,6 +18,14 @@ router.get('/events', async function(req, res, next){
 
   res.json({result: true, allEvents})
 })
+
+router.get('/items', async function(req, res, next){
+  allItems = await ItemsModel.find(function(err, items){
+    console.log(items)
+  })
+  res.json({allItems})
+})
+
 
 // // ADMIN 
 

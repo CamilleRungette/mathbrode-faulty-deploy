@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { 
-  Col, Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem, CardLink
+  Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem 
   } from 'reactstrap';
-import { Container } from 'react-bootstrap';
-  
+
+
 
 class Event extends React.Component{
   render(){

@@ -5,6 +5,7 @@ AdminModel = require('../models/admin');
 EventModel = require('../models/event');
 MessageModel= require('../models/message')
 
+
 router.post('/create-admin', function (req, res, next){
     newAdmin = AdminModel({
         name: "Mathilde",
@@ -54,6 +55,7 @@ router.post('/create-item', async function(req, res, next){
         shipping_fee: req.body.shipping_fee,
         copy: req.body.copy,
         first_presentation: req.body.first_presentation,
+        photo: req.body.photo
     })
 
     newItem.save(function(error, item){

@@ -8,17 +8,18 @@ import ImageUploader from 'react-images-upload';
 
 
 export default class Dashboard extends Component {
-  constructor(){
-  super();
+  constructor(props){
+  super(props);
   this.ItemSubmit = this.ItemSubmit.bind(this);
   this.EventSubmit = this.EventSubmit.bind(this);
+  this.onDrop = this.onDrop.bind(this);
   this.state = {
           CreateItemName: '',
           CreateItemPrice: '',
           CreateItemSize: '',
           CreateItemDesc: '',
           CreateItemShipFee: '',
-          CreateItemPhoto: '',
+          CreateItemPhoto: [],
           CreateEventName: '',
           CreateEventAddress: '',
           CreateEventDate:'',
@@ -28,14 +29,18 @@ export default class Dashboard extends Component {
         }
   }
   
-  
+  onDrop(picture) {
+    this.setState({
+        CreateItemPhoto: this.state.CreateItemPhoto.concat(picture),
+    });
+  }
 
   ItemSubmit(){
     console.log("click détécté")
     fetch('http://localhost:3000/admins/create-item', {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            body: `name=${this.state.CreateItemName}&price=${this.state.CreateItemPrice}&size=${this.state.CreateItemSize}&description=${this.state.CreateItemDesc}&shipping_fee=${this.state.CreateItemShipFee}&copy=1`
+            body: `name=${this.state.CreateItemName}&price=${this.state.CreateItemPrice}&size=${this.state.CreateItemSize}&description=${this.state.CreateItemDesc}&shipping_fee=${this.state.CreateItemShipFee}&copy=1&photo=${this.state.CreateItemPhoto}`
     })
    }
 
@@ -85,6 +90,9 @@ export default class Dashboard extends Component {
   <div style={{display:"flex", flexDirection:"column" }}>
   <div style={{height:"4em"}}></div>
 
+  
+
+
             {/* Create-item form */}
     <Col lg={{offset:3, span:6 }}>
         <Card>
@@ -96,7 +104,13 @@ export default class Dashboard extends Component {
             <Form.Group as={Row} controlId="formHorizontalPicture">
               <Form.Label column sm={2}>Photo</Form.Label>
                 <Col sm={10}>
-                  <Button style={{border:"none", backgroundColor:"#1B263B"}} > Rechercher </Button>
+                <ImageUploader
+                withIcon={true}
+                buttonText='Choose images'
+                onChange={this.onDrop}
+                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                maxFileSize={5242880}
+            />
                 </Col>  
             </Form.Group>
 
