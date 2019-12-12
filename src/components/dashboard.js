@@ -4,7 +4,6 @@ import {Card, Button, Col, Form, Row, Table,} from 'react-bootstrap';
 import '../App.css';
 import NavbarAdmin from './dashboardComponents/NavbarAdmin';
 import Footer from './Footer'
-import ImageUploader from 'react-images-upload';
 
 
 export default class Dashboard extends Component {
@@ -13,19 +12,21 @@ export default class Dashboard extends Component {
   this.ItemSubmit = this.ItemSubmit.bind(this);
   this.EventSubmit = this.EventSubmit.bind(this);
   this.onDrop = this.onDrop.bind(this);
+  this.uploadImage = this.uploadImage.bind(this);
   this.state = {
           CreateItemName: '',
           CreateItemPrice: '',
           CreateItemSize: '',
           CreateItemDesc: '',
           CreateItemShipFee: '',
-          CreateItemPhoto: [],
+          CreateItemPhoto: '',
           CreateEventName: '',
           CreateEventAddress: '',
           CreateEventDate:'',
           CreateEventPhoto:'',
           CreateEventStart: '',
           CreateEventEnd: '',
+          loading: ''
         }
   }
   
@@ -51,8 +52,24 @@ export default class Dashboard extends Component {
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `name=${this.state.CreateEventName}&address=${this.state.CreateEventAddress}&date=${this.state.CreateEventDate}&starting_time=${this.state.CreateEventStart}&ending_time=${this.state.CreateEventEnd}`
 })
-
   }
+
+  async uploadImage(e){
+    const files = e.target.files
+    const data= new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'camille')
+    this.setState({loading: true})
+    const res = await fetch('https://api.cloudinary.com/v1_1/dduugb9jy/image/upload', {
+        method: 'POST',
+        body: data
+      })
+    const file = await res.json()
+    
+    this.setState({CreateItemPhoto: file.secure_url})
+    this.setState({loading: false})
+  }
+
   
     render(){
 
@@ -104,13 +121,15 @@ export default class Dashboard extends Component {
             <Form.Group as={Row} controlId="formHorizontalPicture">
               <Form.Label column sm={2}>Photo</Form.Label>
                 <Col sm={10}>
-                <ImageUploader
-                withIcon={true}
-                buttonText='Choose images'
-                onChange={this.onDrop}
-                imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                maxFileSize={5242880}
-            />
+                <input type="file"
+                placeholder="upload an image"
+                onChange={this.uploadImage} 
+                />
+                {this.state.loading ? (
+                  <h6> Chargement ...</h6>
+                ) : (
+                 <img src={this.state.CreateItemPhoto} style={{width:"10em"}} />
+                )}
                 </Col>  
             </Form.Group>
 

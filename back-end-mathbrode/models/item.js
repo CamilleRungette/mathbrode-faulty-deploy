@@ -7,7 +7,7 @@ var itemSchema = mongoose.Schema({
     description: String,
     shipping_fee: Number,
     copy: Number,
-    photo: Buffer,
+    photo: String,
     first_presentation: Boolean,
 })
 
