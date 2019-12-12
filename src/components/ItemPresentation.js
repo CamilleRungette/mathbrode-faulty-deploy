@@ -1,14 +1,15 @@
 import React  from 'react';
 import {  Button} from 'reactstrap';
 import '../App.css'
-import { Col, Row, Form, FormGroup, Input } from 'reactstrap';
-import {Link} from 'react-router-dom';
+import { Col, Row, Form, FormGroup, Input, FormControl } from 'reactstrap';
+import {Link, Redirect} from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer'
 
 class ItemPresentation extends React.Component {
   constructor(props){
     super(props);
+    this.sendMessage = this.sendMessage.bind(this)
     this.state={
       name: '',
       desc: '',
@@ -17,6 +18,10 @@ class ItemPresentation extends React.Component {
       price: '',
       shipping_fee: '',
       size:'',
+      userName: '',
+      userEmail: '',
+      content: '',
+      item_id: ''
         }
     console.log("PROPS", this.props.match.params.id)  
   }
@@ -36,8 +41,17 @@ class ItemPresentation extends React.Component {
          photo: data.thisItem.photo,
          price: data.thisItem.price,
          shipping_fee: data.thisItem.shipping_fee,
-         size: data.thisItem.size
+         size: data.thisItem.size,
+         item_id: data.thisItem._id
        })
+      })
+    }
+
+    sendMessage(){
+      fetch('http://localhost:3000/users/create-message',{
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body: `object=${this.props.match.params.id}&content=${this.state.content}&sender_email=${this.state.userEmail}&name=${this.state.userName}&item_id=${this.state.item_id}`
       })
     }
 
@@ -69,7 +83,7 @@ class ItemPresentation extends React.Component {
             </Row>          
             </div> 
               <div className="d-flex justify-content-center mb-4" >
-                <Link to="/basket" ><Button style={{backgroundColor:"#1b263b"}}>Ajouter</Button></Link>
+                <Link to="/basket" ><Button style={{backgroundColor:"#1b263b"}}>Ajouter au panier</Button></Link>
               </div>
           </div>
         </div>
@@ -81,20 +95,23 @@ class ItemPresentation extends React.Component {
               <Row form>
                 <Col lg={6}>
                   <FormGroup>
-                    <Input type="Nom" name="Nom" id="exampleNom" placeholder="Nom" />
+                    <Input type="Nom" name="Nom" id="exampleNom" placeholder="Nom" onChange={(e)=> this.setState({userName: e.target.value})}
+                    value={this.state.userName}/>
                   </FormGroup>
                 </Col>
                 <Col lg={6}>
                   <FormGroup>
-                    <Input type="Email" name="Email" id="exampleEmail" placeholder="Email" />
+                    <Input type="Email" name="Email" id="exampleEmail" placeholder="Email" onChange={(e)=> this.setState({userEmail: e.target.value})}
+                    value={this.state.userEmail} />
                   </FormGroup>
                 </Col>
               </Row>
               <FormGroup>
-                <Input type="textarea" rows="4" name="Messsage" id="exampleMesssage" placeholder="Messsage"/>
+                <Input type="textarea" rows="4" name="Message"  onChange={(e)=> this.setState({content: e.target.value})}
+                value={this.state.content} />
               </FormGroup>
               <div className="d-flex justify-content-center" >
-                <Button  style={{backgroundColor:"#1b263b"}} >Envoyer</Button>    
+                <Button  style={{backgroundColor:"#1b263b"}} onClick={this.sendMessage}><a href="#" style={{color:"white", textDecoration:"none"}}>Envoyer</a></Button>    
               </div>
             <div style={{height:"5em"}}></div>
             </Form>

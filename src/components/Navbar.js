@@ -7,15 +7,7 @@ import {Link} from 'react-router-dom'
 
 
 class Navigbar extends React.Component{
-   
-  pageScroll(){
-    window.setTimeout(function(){
-      window.scrollBy(0,2500);
-
-    }, 500)
-  } 
-  
-  
+     
   
   render(){
         return(
