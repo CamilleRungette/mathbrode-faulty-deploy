@@ -55,10 +55,15 @@ class Creations extends React.Component {
               <div className="row" style={{display:"flex", justifyContent: "space-around"}}>
                 {rows}
               </div>
-              <Button color="secondary" >en voir plus...</Button>
+              
               </div>
 
+              <div style={{height:"5em"}}></div>
 
+
+              <div className="row justify-content-center">
+              <Button color="secondary" >en voir plus...</Button>
+              </div>
         </div>
     </div>
     
