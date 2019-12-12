@@ -3,7 +3,7 @@ import '../App.css'
 
 
 
-class ProduitMini extends React.Component {
+class MiniItem extends React.Component {
   
 
 
@@ -48,4 +48,4 @@ return (
 }
 
 }
-export default ProduitMini;
+export default MiniItem;
