@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, Button,   Col, Form, Row, Table} from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 
 class MessageItem extends Component{
   render(){
@@ -18,10 +18,10 @@ class MessageItem extends Component{
 
       <Col lg={1}>
         <div>
-        <img class="trash" src="reply.png"></img>
+        <img class="trash" alt="trash" src="reply.png"></img>
           <br></br>
           <br></br>
-        <img class="trash" src="trash.png"></img>
+        <img class="trash" src="trash.png" alt="trash"></img>
         </div>                    
         </Col>
         </div> 

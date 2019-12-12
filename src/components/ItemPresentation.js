@@ -1,28 +1,8 @@
 import React, { useState } from 'react';
 import {
   Button,
-  CardTitle,
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-  Text
 } from 'reactstrap';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
 import '../App.css'
-import ProduitMini from './ProduitMini'
-import { render } from '@testing-library/react';
-
 import { Col, Row, Form, FormGroup, Label, Input } from 'reactstrap';
 
 

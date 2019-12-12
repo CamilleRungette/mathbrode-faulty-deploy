@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import {  Button,  Navbar,  NavbarBrand,  Nav,  NavItem,  NavLink,} from 'reactstrap';
+import React from 'react';
+import {  Navbar} from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLaptop, faIndustry } from '@fortawesome/free-solid-svg-icons'
+import { faLaptop } from '@fortawesome/free-solid-svg-icons'
 
 
 class Footer extends React.Component{
