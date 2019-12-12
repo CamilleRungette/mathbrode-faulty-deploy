@@ -14,6 +14,8 @@ import Basket from './components/Basket'
 import ItemPres from './components/ItemPresentation'
 import Items from './components/Items'
 import Exemple from './components/Exemple'
+import Creations from './components/Creations'
+import MaxCreations from './components/MaxCreations'
 
 
 
@@ -37,6 +39,8 @@ class App extends Component{
           <Route path="/item" exact component={ItemPres}/>
           <Route path="/items" component={Items} />
           <Route path="/exemple" component={Exemple} />
+          <Route path="/creations" component={Creations}/>
+          <Route path="/maxcreations" component={MaxCreations}/>
         </Switch>
       </Router>  
 

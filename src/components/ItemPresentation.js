@@ -4,7 +4,7 @@ import {
 } from 'reactstrap';
 import '../App.css'
 import { Col, Row, Form, FormGroup, Input } from 'reactstrap';
-
+import {Link} from 'react-router-dom';
 
 class ItemPresentation extends React.Component {
 
@@ -17,6 +17,7 @@ class ItemPresentation extends React.Component {
 
 <div className="row justify-content-center">
     <div className="col-lg-10">
+    <div style={{height:"5em"}}></div>
 
         <div className="text-block-black">
             <p>Fiche Produit</p>
@@ -27,8 +28,8 @@ class ItemPresentation extends React.Component {
         <img src="background 1.png" className=" col-lg-8" alt="Alt text" />
 
 
-        <div className="row justify-content-center  col-lg-6">
-        <div className="d-flex align-items-end">
+        <div className="row justify-content-center  col-lg-8">
+        <div className="d-flex ">
             
         <p className="presentation" >Une petite description du produit; inspiration, couleur, matière etc ... Toutes les infos qui peuvent donner envie d'acheter. 
 Une petite description du produit; inspiration, couleur, matière etc ... Une petite description du produit; inspiration, couleur, matière etc ... 
@@ -47,7 +48,7 @@ Une petite description du produit; inspiration, couleur, matière etc ... Une pe
 <div className="col-lg-8">
 
 <div className="d-flex justify-content-center" >
-<Button color="secondary">Ajouter</Button>
+<Link to="/basket" ><Button color="secondary">Ajouter</Button></Link>
       </div>
 
 
@@ -81,6 +82,7 @@ Une petite description du produit; inspiration, couleur, matière etc ... Une pe
       <div className="d-flex justify-content-center" >
       <Button color="secondary">Envoyer</Button>    
       </div>
+      <div style={{height:"5em"}}></div>
       
     </Form>
 
