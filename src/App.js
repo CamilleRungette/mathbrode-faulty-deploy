@@ -7,6 +7,7 @@ import Dashboard from './components/dashboard';
 import Stock from './components/dashboardComponents/stock';
 import Tracking from './components/dashboardComponents/orderTracking';
 import Messaging from './components/dashboardComponents/messaging';
+import Signin from './components/signin';
 import Classes from './components/Classes'
 import Events from './components/Events'
 import Basket from './components/Basket'
@@ -29,6 +30,7 @@ class App extends Component{
           <Route path="/stock" component={Stock} />
           <Route path="/orderTracking" component={Tracking} />
           <Route path="/messaging" component={Messaging} />
+          <Route path="/signin" component={Signin}  />
           <Route path="/classes" component={Classes} />
           <Route path="/events" component={Events} />
           <Route path="/basket" component={Basket} />

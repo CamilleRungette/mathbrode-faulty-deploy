@@ -43,7 +43,7 @@ class Navigbar extends React.Component{
                 <NavItem>
                 <NavLink onClick={this.pageScroll}>Contact</NavLink>
                 </NavItem>
-                <Button color="secondary">Se Connecter</Button>
+                <Button color="secondary" href="/signin">Se Connecter</Button>
             </Nav>
         </div>
     </Navbar>
