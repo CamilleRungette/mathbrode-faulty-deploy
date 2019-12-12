@@ -3,7 +3,7 @@ import {
   Button,
 } from 'reactstrap';
 import '../App.css'
-import ProduitMini from './ProduitMini'
+import ProduitMini from './cards/MiniItem'
 
 
 
