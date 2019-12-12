@@ -36,7 +36,7 @@ class App extends Component{
           <Route path="/classes" component={Classes} />
           <Route path="/events" component={Events} />
           <Route path="/basket" component={Basket} />
-          <Route path="/item" exact component={ItemPres}/>
+          <Route path="/item/:id" exact component={ItemPres}/>
           <Route path="/items" component={Items} />
           <Route path="/exemple" component={Exemple} />
           <Route path="/creations" component={Creations}/>
