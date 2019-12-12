@@ -4,6 +4,7 @@ import {Card, Button, Col, Form, Row, Table} from 'react-bootstrap';
 import '../App.css';
 import NavbarAdmin from './dashboardComponents/NavbarAdmin';
 import Footer from './Footer'
+import ImageUploader from 'react-images-upload';
 
 
 export default class Dashboard extends Component {
@@ -64,10 +65,10 @@ export default class Dashboard extends Component {
     <Table responsive>
 <thead>
 <tr>
-<th> <img src="users.png" class="iconstat"></img></th>
-<th><img src="euro.png" class="iconstat"></img></th>
-<th><img src="vendu.png" class="iconstat"></img></th>
-<th><img src="prepa.png" class="iconstat"></img></th>
+<th> <img src="users.png" alt="icon" class="iconstat"/></th>
+<th><img src="euro.png" class="iconstat" alt="icon"/></th>
+<th><img src="vendu.png" class="iconstat" alt="icon"/></th>
+<th><img src="prepa.png" class="iconstat"alt="icon"/></th>
 </tr>
 </thead>
 <tbody>

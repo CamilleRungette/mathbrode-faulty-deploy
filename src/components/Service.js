@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Container, Row, Col, Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button, CardLink} from 'reactstrap';
+import { Row, Col, Card, CardText, CardBody,
+  CardTitle, Button, CardLink} from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCut, faCalendarAlt, faHandshake } from '@fortawesome/free-solid-svg-icons'
 import {Modal, Form} from 'react-bootstrap'
