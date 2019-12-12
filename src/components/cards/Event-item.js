@@ -10,7 +10,7 @@ class Event extends React.Component{
     return(
       <div style={{fontFamily:"Raleway"}}>
        <Card style={{ width: '38rem', fontSize:"1.3em" }}>
-        <CardImg variant="top" src="./market.jpg" />
+        <CardImg variant="top" src={this.props.eventPhoto} />
         <CardBody>
           <CardTitle> <strong> {this.props.eventName} </strong></CardTitle>
           <CardText>
