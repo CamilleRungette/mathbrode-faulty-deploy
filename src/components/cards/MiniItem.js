@@ -9,13 +9,13 @@ class MiniItem extends React.Component {
       <div className="productTitle">
         <div class="overlay-image">
           <a href="#">
-            <img class="image" src={this.props.itemPhoto} alt="Alt text" />
+            <img class="image" src={this.props.itemPhoto} alt={this.props.itemName} />
             <div class="normal">
               <div class="text"></div>
             </div>
             <div class="hover">
-              <img class="imageBlur" src="background 1.png" alt="" />
-            <div class="text">{this.props.itemName}<br/>12x35</div>
+              <img class="imageBlur" src={this.props.itemPhoto} alt={this.props.itemName} />
+            <div class="text">{this.props.itemName}<br/>{this.props.itemSize}</div>
             </div>
           </a>
         </div>
