@@ -57,74 +57,74 @@ this.state = {
 
 }
 
-    render(){
-      if (this.state.isUserExist === true){
-        console.log("CONDITION:", this.state.isUserExist)
-        return < Redirect to="/" />
-      }
-  return(
+      render(){
+        if (this.state.isUserExist === true){
+          console.log("CONDITION:", this.state.isUserExist)
+          return < Redirect to="/" />
+        }
+        
+        return(
+          <div>
+          <Navbar></Navbar>
+            <div class="container" style={{marginTop:'5em', fontFamily:"Raleway"}}>
+            <Row style={{justifyContent:"space-around"}}>
+            <Col sm={5}>
+              <h3 style={{marginBottom:"2em", textAlign:'center'}}>Se connecter</h3>
+                <Form>
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type="email" onChange={(e)=> this.setState({SignInEmail: e.target.value})}
+                    value={this.state.SignInEmail} />
+                  </Form.Group>
 
-<div>
-            <Navbar></Navbar>
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Mot de passe</Form.Label>
+                    <Form.Control type="password" onChange={(e)=> this.setState({SignInPassword: e.target.value})} 
+                    value={this.state.SignInPassword} />
+                  </Form.Group>
+                </Form>
+                  <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.handleSubmitSignIn}>
+                    Se Connecter
+                  </Button>
+            </Col>
 
+            <Col sm={5}>              
+              <h3 style={{marginBottom:"2em", textAlign:'center'}}>S'inscrire</h3>
+                <Form>
+                <Form.Group >
+                  <Row>
+                    <Col>
+                  <Form.Label>Prénom </Form.Label>
+                  <Form.Control type="text" onChange={(e)=> this.setState({newUserFirstName: e.target.value})}
+                  value={this.state.newUserFirstName} />
+                  </Col>
+                  <Col>
+                  <Form.Label>Nom</Form.Label>
+                  <Form.Control type="text" onChange={(e)=> this.setState({ newUserLastName: e.target.value})}
+                  value={this.state.newUserLastName} />
+                  </Col>
+                  </Row>
+                </Form.Group>
 
-            <div class="container">
+                <Form.Group >
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control type="email" onChange={(e)=> this.setState({newUserEmail: e.target.value})}
+                  value={this.state.newUserEmail} />
+                </Form.Group>
 
-
-<Form>
-  <Form.Group controlId="formBasicEmail">
-    <Form.Label>Email</Form.Label>
-    <Form.Control type="email" onChange={(e)=> this.setState({SignInEmail: e.target.value})}
-    value={this.state.SignInEmail} />
-  </Form.Group>
-
-  <Form.Group controlId="formBasicPassword">
-    <Form.Label>Mot de passe</Form.Label>
-    <Form.Control type="password" onChange={(e)=> this.setState({SignInPassword: e.target.value})} 
-    value={this.state.SignInPassword} />
-  </Form.Group>
-</Form>
-  <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.handleSubmitSignIn}>
-    Envoyer
-  </Button>
-
-
- <h3>Sign up</h3>
-  <Form>
-  <Form.Group >
-    <Form.Label>Prénom </Form.Label>
-    <Form.Control type="text" onChange={(e)=> this.setState({newUserFirstName: e.target.value})}
-    value={this.state.newUserFirstName} />
-  </Form.Group>
-  <Form.Group>
-    <Form.Label>Nom</Form.Label>
-    <Form.Control type="text" onChange={(e)=> this.setState({ newUserLastName: e.target.value})}
-    value={this.state.newUserLastName} />
-  </Form.Group>
-
-  <Form.Group >
-    <Form.Label>Email</Form.Label>
-    <Form.Control type="email" onChange={(e)=> this.setState({newUserEmail: e.target.value})}
-    value={this.state.newUserEmail} />
-  </Form.Group>
-
-  <Form.Group>
-    <Form.Label>Mot de passe</Form.Label>
-    <Form.Control type="password" onChange={(e)=> this.setState({newUserPassword: e.target.value})} 
-    value={this.state.newUserPassword} />
-  </Form.Group>
-</Form>
-  <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.handleSubmitSignUp}>
-    Envoyer
-</Button>
-
- </div>
- </div>
-
-
-   
-
-
+                <Form.Group>
+                  <Form.Label>Mot de passe</Form.Label>
+                  <Form.Control type="password" onChange={(e)=> this.setState({newUserPassword: e.target.value})} 
+                  value={this.state.newUserPassword} />
+                </Form.Group>
+              </Form>
+                <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.handleSubmitSignUp}>
+                  S'inscrire
+              </Button>
+            </Col>
+            </Row>
+            </div>
+          </div>
         )}
 }
 
