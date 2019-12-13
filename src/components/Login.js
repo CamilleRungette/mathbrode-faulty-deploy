@@ -1,0 +1,132 @@
+import React, { useState } from 'react';
+import {Card, Button,   Col, Row, Table, Form} from 'react-bootstrap';
+import '../App.css';
+import Navbar from './Navbar';
+import {Redirect } from 'react-router-dom';
+
+
+class Signin extends React.Component{
+    constructor(){
+super();
+this.handleSubmitSignUp = this.handleSubmitSignUp.bind(this);
+this.handleSubmitSignIn = this.handleSubmitSignIn.bind(this)
+this.state = {
+     newUserFirstName:'',
+     newUserLastName: '',
+     newUserEmail: '',
+     newUserPassword: '',
+      SignInEmail:'',
+      SignInPassword:'',
+      isUserExist: false,
+    }
+}
+
+  handleSubmitSignUp(){
+    let ctx = this
+    fetch("http://localhost:3000/users/sign-up",{
+    method:"POST",
+    headers: {'Content-Type':'application/x-www-form-urlencoded'},
+    body:`first_name=${this.state.newUserFirstName}&last_name=${this.state.newUserLastName}&email=${this.state.newUserEmail}&password=${this.state.newUserPassword}`
+    })
+    .then(function(response, err){
+      return response.json();
+    }).then(data=>{
+      if (data.isUserExists === false ){
+        ctx.setState({isUserExist: true});
+      }
+      console.log(data)
+    });
+  }
+
+
+    handleSubmitSignIn(){   
+      let ctx = this;     
+    fetch("http://localhost:3000/users/sign-in",{
+    method:"POST",
+    headers: {'Content-Type':'application/x-www-form-urlencoded'},
+    body: `email=${this.state.SignInEmail}&password=${this.state.SignInPassword}`
+  })
+  .then(function(response, err){
+    return response.json();
+  }).then(data=>{
+      if (data.isUserExists === true ){
+        ctx.setState({isUserExist: true});
+      }
+      console.log("RESULTAT DU FECTH SIGN-UP:", data.isUserExists, ctx.state.isUserExist)
+});
+
+}
+
+    render(){
+      if (this.state.isUserExist === true){
+        console.log("CONDITION:", this.state.isUserExist)
+        return < Redirect to="/" />
+      }
+  return(
+
+<div>
+            <Navbar></Navbar>
+
+
+            <div class="container">
+
+
+<Form>
+  <Form.Group controlId="formBasicEmail">
+    <Form.Label>Email</Form.Label>
+    <Form.Control type="email" onChange={(e)=> this.setState({SignInEmail: e.target.value})}
+    value={this.state.SignInEmail} />
+  </Form.Group>
+
+  <Form.Group controlId="formBasicPassword">
+    <Form.Label>Mot de passe</Form.Label>
+    <Form.Control type="password" onChange={(e)=> this.setState({SignInPassword: e.target.value})} 
+    value={this.state.SignInPassword} />
+  </Form.Group>
+</Form>
+  <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.handleSubmitSignIn}>
+    Envoyer
+  </Button>
+
+
+ <h3>Sign up</h3>
+  <Form>
+  <Form.Group >
+    <Form.Label>Prénom </Form.Label>
+    <Form.Control type="text" onChange={(e)=> this.setState({newUserFirstName: e.target.value})}
+    value={this.state.newUserFirstName} />
+  </Form.Group>
+  <Form.Group>
+    <Form.Label>Nom</Form.Label>
+    <Form.Control type="text" onChange={(e)=> this.setState({ newUserLastName: e.target.value})}
+    value={this.state.newUserLastName} />
+  </Form.Group>
+
+  <Form.Group >
+    <Form.Label>Email</Form.Label>
+    <Form.Control type="email" onChange={(e)=> this.setState({newUserEmail: e.target.value})}
+    value={this.state.newUserEmail} />
+  </Form.Group>
+
+  <Form.Group>
+    <Form.Label>Mot de passe</Form.Label>
+    <Form.Control type="password" onChange={(e)=> this.setState({newUserPassword: e.target.value})} 
+    value={this.state.newUserPassword} />
+  </Form.Group>
+</Form>
+  <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.handleSubmitSignUp}>
+    Envoyer
+</Button>
+
+ </div>
+ </div>
+
+
+   
+
+
+        )}
+}
+
+
+export default Signin;
