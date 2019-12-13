@@ -1,16 +1,22 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {  Button,  Navbar,  NavbarBrand,  Nav,  NavItem,  NavLink,} from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
 import {Link} from 'react-router-dom'
 
 
 
 class Navigbar extends React.Component{
-     
-  
+  constructor(){
+    super();
+    this.LogOut = this.LogOut.bind(this) 
+   }
+
+  LogOut(){
+    let thisUser = this.props.user
+    this.props.onLogOutClick(thisUser) 
+  }
   render(){
-        return(
+    return(
 
 <div className="row" >
 
@@ -35,7 +41,11 @@ class Navigbar extends React.Component{
                 <NavItem>
                 <NavLink onClick={this.pageScroll}>Contact</NavLink>
                 </NavItem>
-                <Button color="secondary" href="/signin">Se Connecter</Button>
+                {this.props.user == null ? (
+                  <Button color="secondary" href="/login">Se Connecter</Button>
+                ):(
+                  <Button color="secondary" onClick={this.LogOut}>Se Déonnecter</Button>
+                )}
             </Nav>
         </div>
     </Navbar>
@@ -45,5 +55,20 @@ class Navigbar extends React.Component{
         )}
 }
 
+function mapDispacthToProps(dispatch){
+  return{
+    onLogOutClick: function(data){
+      dispatch({type: 'logout', thisUser: data})
+    }
+  }
+}
 
-export default Navigbar
+function mapStatetoProps(state){
+  return  {user: state.user}
+}
+
+
+export default connect(
+  mapStatetoProps,
+  mapDispacthToProps
+)(Navigbar);

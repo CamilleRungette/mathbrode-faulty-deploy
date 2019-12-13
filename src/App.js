@@ -7,7 +7,7 @@ import Dashboard from './components/dashboard';
 import Stock from './components/dashboardComponents/stock';
 import Tracking from './components/dashboardComponents/orderTracking';
 import Messaging from './components/dashboardComponents/messaging';
-import Signin from './components/signin';
+import Login from './components/Login';
 import Classes from './components/Classes'
 import Events from './components/Events'
 import Basket from './components/Basket'
@@ -16,6 +16,10 @@ import Items from './components/Items'
 import Exemple from './components/Exemple'
 import Creations from './components/Creations'
 import MaxCreations from './components/MaxCreations'
+import {createStore, combineReducers}  from 'redux';
+import {Provider} from 'react-redux';
+import user from './components/Reducer/user.reducer';
+const store = createStore(combineReducers({user}));
 
 
 
@@ -25,6 +29,7 @@ class App extends Component{
 
 
     return (
+     <Provider store={store}>
       <Router>
         <Switch>
           <Route path="/" exact component={Home} />
@@ -32,7 +37,7 @@ class App extends Component{
           <Route path="/stock" component={Stock} />
           <Route path="/orderTracking" component={Tracking} />
           <Route path="/messaging" component={Messaging} />
-          <Route path="/signin" component={Signin}  />
+          <Route path="/login" component={Login}  />
           <Route path="/classes" component={Classes} />
           <Route path="/events" component={Events} />
           <Route path="/basket" component={Basket} />
@@ -43,7 +48,7 @@ class App extends Component{
           <Route path="/maxcreations" component={MaxCreations}/>
         </Switch>
       </Router>  
-
+    </Provider>
   )}
 
 
