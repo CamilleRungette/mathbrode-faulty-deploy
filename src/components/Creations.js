@@ -58,14 +58,23 @@ class Creations extends React.Component {
               <div style={{fontFamily:"Raleway"}}>
                 <h1 style={{fontSize:"4em", textAlign:"center"}}> <em>Mes Créations</em></h1>
                 <div style={{height:"10em"}}></div>
+
               <div className="row" style={{display:"flex", justifyContent: "space-around"}}>
                 {itemsList}
               </div>
-              <Link to="/items"> <Button> En voir plus...</Button> </Link>
+             
               </div>
 
 
+              <div style={{height:"5em"}}></div>
+              <div className="row" style={{display:"flex", justifyContent: "center"}}>
+                <Link to="/items"> <Button> En voir plus...</Button> </Link>
+              </div>
+
+
+
         </div>
+
     </div>
     
     

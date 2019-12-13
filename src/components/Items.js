@@ -49,7 +49,12 @@ class Items extends Component{
           <h1 style={{textAlign:"center", fontSize:"3.5em", marginTop:"0.5em"}}>La Boutique</h1>
           <div style={{height:"6em"}}></div>
         <div className="col-lg-10" style={{ margin:"auto", display:"flex", flexWrap:"wrap"}}>         
-          {itemsList}
+        
+      
+       
+            {itemsList}
+         
+      
         </div>
       </Col>
       <div style={{height:"8em"}}></div>

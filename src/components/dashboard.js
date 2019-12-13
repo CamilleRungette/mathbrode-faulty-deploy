@@ -106,9 +106,9 @@ export default class Dashboard extends Component {
     <Table responsive>
 <thead>
 <tr>
-<th> <img src="users.png" alt="icon" class="iconstat"/></th>
-<th><img src="euro.png" class="iconstat" alt="icon"/></th>
-<th><img src="vendu.png" class="iconstat" alt="icon"/></th>
+<th> <img src="users bis.png" alt="icon" class="iconstat"/></th>
+<th><img src="euros bis.png" class="iconstat" alt="icon"/></th>
+<th><img src="vendu bis.png" class="iconstat" alt="icon"/></th>
 <th><img src="prepa.png" class="iconstat"alt="icon"/></th>
 </tr>
 </thead>

@@ -19,6 +19,7 @@ class MiniItem extends React.Component {
             <div class="text">{this.props.itemName}<br/>{this.props.itemSize}</div>
             </div>
           </Link>
+
         </div>
       </div>
     </div>
