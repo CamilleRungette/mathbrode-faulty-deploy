@@ -21,7 +21,7 @@ router.get('/events', async function(req, res, next){
 
 router.get('/items', async function(req, res, next){
   allItems = await ItemsModel.find(function(err, items){
-    console.log(items)
+    console.log("créations")
   })
   res.json({allItems})
 })

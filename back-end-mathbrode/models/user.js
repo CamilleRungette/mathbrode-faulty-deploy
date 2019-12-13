@@ -8,6 +8,8 @@ var userSchema = mongoose.Schema({
     address: String,
     zip_code: String,
     city: String,
+    token: String,
+    salt: String,
 })
 
 const UserModel = mongoose.model('users', userSchema);

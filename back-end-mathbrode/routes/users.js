@@ -4,9 +4,13 @@ UserModel = require('../models/user');
 MessageModel = require('../models/message');
 OrderModel = require('../models/order');
 ItemOrderModel = require('../models/item_order');
+var uid2 = require("uid2"); 
+var SHA256 = require("crypto-js/sha256"); 
+var encBase64 = require("crypto-js/enc-base64"); 
 
 
 router.post('/sign-up', async function(req, res, next) {
+  var salt = uid2(32); 
   console.log("================ SIGN UP FUNCTION ===============")
   const userExists = await UserModel.findOne({ email: req.body.email})
 
@@ -18,7 +22,9 @@ router.post('/sign-up', async function(req, res, next) {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     email: req.body.email,
-    password: req.body.password,  
+    password: SHA256(req.body.password+salt).toString(encBase64),
+    token: uid2(32),
+    salt: salt
   })
 
   newUser.save(function(error, user){
@@ -37,9 +43,9 @@ router.post('/sign-up', async function(req, res, next) {
 })
 
 router.post('/sign-in', async function(req, res, next){
-  console.log("=========================SIGN IN FUNCTION================");
+  let thisUser = await UserModel.findOne({email: req.body.email})
+  let userExists = await UserModel.findOne({email: req.body.email, password: SHA256(req.body.password + thisUser.salt).toString(encBase64)});
 
-  userExists = await UserModel.findOne({email: req.body.email, password: req.body.password})
   console.log("USER EXISTS:", userExists)
   let isUserExists;
 
