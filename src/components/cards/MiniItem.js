@@ -28,8 +28,10 @@ return (
   <div class="text"></div>
  </div>
  <div class="hover">
- <img class="imageBlur" src="background 1.png" alt="" />
+   <div class="zoom">
+ <img class="imageBlurZoom" src="background 1.png" alt="" />
   <div class="text">Nom<br/>12x35</div>
+  </div>
  </div>
 </a>
 </div>
