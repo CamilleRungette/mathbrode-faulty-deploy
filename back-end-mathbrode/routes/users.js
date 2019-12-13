@@ -22,12 +22,15 @@ router.post('/sign-up', async function(req, res, next) {
   })
 
   newUser.save(function(error, user){
+    let isUserExists;
     if (user){
+    isUserExists = false
     console.log("NEW USER SAVED:", user)
-    res.json({user})
+    res.json({user, isUserExists})
     }else if (error){
+      isUserExists = true
       console.log("USER NOR CREATED:", error)
-      res.json({error})
+      res.json({error, isUserExists})
     }
   });
 }
@@ -46,7 +49,7 @@ router.post('/sign-in', async function(req, res, next){
     isUserExists = false;
   }
 
-  res.json({result: true, isUserExists})
+  res.json({isUserExists})
 })
 
 router.post('/create-message', async function (req, res, next){
