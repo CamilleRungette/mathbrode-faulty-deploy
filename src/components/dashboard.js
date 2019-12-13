@@ -4,14 +4,16 @@ import {Card, Button, Col, Form, Row, Table,} from 'react-bootstrap';
 import '../App.css';
 import NavbarAdmin from './dashboardComponents/NavbarAdmin';
 import Footer from './Footer'
-import ImageUploader from 'react-images-upload';
 
 
 export default class Dashboard extends Component {
-  constructor(){
-  super();
+  constructor(props){
+  super(props);
   this.ItemSubmit = this.ItemSubmit.bind(this);
   this.EventSubmit = this.EventSubmit.bind(this);
+  this.onDrop = this.onDrop.bind(this);
+  this.uploadItemImage = this.uploadItemImage.bind(this);
+  this.uploadEventImage = this.uploadEventImage.bind(this);
   this.state = {
           CreateItemName: '',
           CreateItemPrice: '',
@@ -25,17 +27,22 @@ export default class Dashboard extends Component {
           CreateEventPhoto:'',
           CreateEventStart: '',
           CreateEventEnd: '',
+          loading: ''
         }
   }
   
-  
+  onDrop(picture) {
+    this.setState({
+        CreateItemPhoto: this.state.CreateItemPhoto.concat(picture),
+    });
+  }
 
   ItemSubmit(){
     console.log("click détécté")
     fetch('http://localhost:3000/admins/create-item', {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            body: `name=${this.state.CreateItemName}&price=${this.state.CreateItemPrice}&size=${this.state.CreateItemSize}&description=${this.state.CreateItemDesc}&shipping_fee=${this.state.CreateItemShipFee}&copy=1`
+            body: `name=${this.state.CreateItemName}&price=${this.state.CreateItemPrice}&size=${this.state.CreateItemSize}&description=${this.state.CreateItemDesc}&shipping_fee=${this.state.CreateItemShipFee}&copy=1&photo=${this.state.CreateItemPhoto}`
     })
    }
 
@@ -44,10 +51,44 @@ export default class Dashboard extends Component {
     fetch('http://localhost:3000/admins/create-event', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `name=${this.state.CreateEventName}&address=${this.state.CreateEventAddress}&date=${this.state.CreateEventDate}&starting_time=${this.state.CreateEventStart}&ending_time=${this.state.CreateEventEnd}`
+      body: `name=${this.state.CreateEventName}&address=${this.state.CreateEventAddress}&date=${this.state.CreateEventDate}&starting_time=${this.state.CreateEventStart}&ending_time=${this.state.CreateEventEnd}&photo=${this.state.CreateEventPhoto}`
 })
-
   }
+
+  async uploadItemImage(e){
+    const files = e.target.files
+    const data= new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'camille')
+    this.setState({loading: true})
+    const res = await fetch('https://api.cloudinary.com/v1_1/dduugb9jy/image/upload', {
+        method: 'POST',
+        body: data
+      })
+    const file = await res.json()
+    
+    this.setState({CreateItemPhoto: file.secure_url})
+    this.setState({loading: false})
+  }
+
+
+  async uploadEventImage(e){
+    const files = e.target.files
+    const data= new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'camille')
+    this.setState({loading: true})
+    const res = await fetch('https://api.cloudinary.com/v1_1/dduugb9jy/image/upload', {
+        method: 'POST',
+        body: data
+      })
+    const file = await res.json()
+    
+    this.setState({CreateEventPhoto: file.secure_url})
+    this.setState({loading: false})
+  }
+
+
   
     render(){
 
@@ -85,6 +126,9 @@ export default class Dashboard extends Component {
   <div style={{display:"flex", flexDirection:"column" }}>
   <div style={{height:"4em"}}></div>
 
+  
+
+
             {/* Create-item form */}
     <Col lg={{offset:3, span:6 }}>
         <Card>
@@ -96,8 +140,16 @@ export default class Dashboard extends Component {
             <Form.Group as={Row} controlId="formHorizontalPicture">
               <Form.Label column sm={2}>Photo</Form.Label>
                 <Col sm={10}>
-                  <Button style={{border:"none", backgroundColor:"#1B263B"}} > Rechercher </Button>
-                </Col>  
+                <input type="file"
+                placeholder="upload an image"
+                onChange={this.uploadItemImage} 
+                />
+                  </Col>  
+                {this.state.loading ? (
+                  <h6> Chargement ...</h6>
+                ) : (
+                 <img src={this.state.CreateItemPhoto} style={{width:"10em", marginLeft:'8em'}} />
+                )}
             </Form.Group>
 
             <Form.Group as={Row} controlId="formHorizontalName">
@@ -168,7 +220,16 @@ export default class Dashboard extends Component {
             <Form.Group as={Row} controlId="formHorizontalPicture">
               <Form.Label column sm={2}>Photo</Form.Label>
                 <Col sm={10}>
-                  <Button style={{border:"none", backgroundColor:"#1B263B"}} > Rechercher </Button>
+                <input type="file"
+                placeholder="upload an image"
+                onChange={this.uploadEventImage} 
+                />
+                {this.state.loading ? (
+                  <h6> Chargement ...</h6>
+                ) : (
+                 <img src={this.state.CreateEventPhoto} style={{width:"10em"}} />
+                )}
+
                 </Col>  
             </Form.Group>
 

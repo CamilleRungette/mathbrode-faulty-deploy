@@ -4,7 +4,7 @@ let eventSchema = mongoose.Schema({
     name: String,
     address: String,
     date: Date,
-    photo: Buffer,
+    photo: String,
     starting_time: String,
     ending_time: String,
 });

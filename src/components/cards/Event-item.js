@@ -1,16 +1,16 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { 
-  Col, Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem, CardLink
+  Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem 
   } from 'reactstrap';
-import { Container } from 'react-bootstrap';
-  
+
+
 
 class Event extends React.Component{
   render(){
     return(
       <div style={{fontFamily:"Raleway"}}>
        <Card style={{ width: '38rem', fontSize:"1.3em" }}>
-        <CardImg variant="top" src="./market.jpg" />
+        <CardImg variant="top" src={this.props.eventPhoto} />
         <CardBody>
           <CardTitle> <strong> {this.props.eventName} </strong></CardTitle>
           <CardText>

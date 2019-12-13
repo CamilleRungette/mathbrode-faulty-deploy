@@ -36,7 +36,8 @@ class Events extends Component{
         eventAddress={event.address}
         eventDate={event.date}
         eventStart={event.starting_time}
-        eventEnd={event.ending_time} 
+        eventEnd={event.ending_time}
+        eventPhoto={event.photo} 
       />
     }, this)
   

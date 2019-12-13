@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 let request = require("async-request");
 EventModel = require('../models/event')
+ItemsModel = require('../models/item')
+
 
 
 /* GET home page. */
@@ -17,6 +19,22 @@ router.get('/events', async function(req, res, next){
   res.json({result: true, allEvents})
 })
 
+router.get('/items', async function(req, res, next){
+  allItems = await ItemsModel.find(function(err, items){
+    console.log(items)
+  })
+  res.json({allItems})
+})
+
+router.get('/find-items', async function(req, res, next){
+  console.log("in the find item method ==============")
+  thisItem = await ItemsModel.findOne({ name: req.query.name})
+  console.log(thisItem)
+
+  res.json({thisItem})
+})
+
+
 // // ADMIN 
 
 // router.get('/show-orders', {
@@ -31,10 +49,6 @@ router.get('/events', async function(req, res, next){
 //   // la possibilité de supprimer un produit depuis l'inventaire, ou que le produit se supprime automatiquement si le sotck arrive à 0
 // })
 
-// router.get('/show-message', {
-//   // DEpuis le dashboard, l'admin a accès aux messages des utilisateurs 
-// })
-
 // router.get('/update-intro', {
 //   // La possibilité de modifier la partie présentation ainsi que la photo 
 // })
@@ -42,11 +56,6 @@ router.get('/events', async function(req, res, next){
 // router.post('/create-class'{
 //   //Description des cours proposés
 // })
-
-// router.post('/admin/event', {
-//   //Un formulaire pour créer les événements auxquels elle participera 
-// })
-
 
 // //USER
 
@@ -60,14 +69,6 @@ router.get('/events', async function(req, res, next){
 
 // router.post('/message-class', {
 //   //L'utilisateur peut la contacter à propos d'un cours 
-// })
-
-// router.post('/message-project',{
-//   //La possibilité de contacter mathilde pour un projet personnalisé
-// })
-
-// router.get('/message-event', {
-//   //Accès à la page qui répertorie les événements de Mathilde
 // })
 
 // router.get('/item/:id',{

@@ -7,25 +7,17 @@ import {Link} from 'react-router-dom'
 
 
 class Navigbar extends React.Component{
-   
-  pageScroll(){
-    window.setTimeout(function(){
-      window.scrollBy(0,2500);
-
-    }, 500)
-  } 
-  
-  
+     
   
   render(){
         return(
 
 <div className="row" >
 
-    <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "90%", height:"8em" , display:"flex", justifyContent:"space-between", margin:"auto"}}>
+    <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "90%", height:"7em" , display:"flex", justifyContent:"space-between", margin:"auto"}}>
         <div style={{textAlign:"right"}}>
             <NavbarBrand href="/">
-                <FontAwesomeIcon icon={faStar} /><span className= "offset-1" style={{fontSize:"2em"}} >Mathbrode</span>
+              <img src="./logo.png" style={{width:"9em"}} />
             </NavbarBrand>
         </div>
 
