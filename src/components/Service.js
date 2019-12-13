@@ -6,6 +6,8 @@ import { faCut, faCalendarAlt, faHandshake } from '@fortawesome/free-solid-svg-i
 import {Modal, Form} from 'react-bootstrap'
 import '../App.css'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux';
+
 
 let modalStyle={
   width:"50em",
@@ -100,8 +102,12 @@ constructor(){
           <Form>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Adresse email</Form.Label>
-              <Form.Control type="email"onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
-              value={this.state.SendMessageEmail} />
+              {this.props.user == null ? (
+                <Form.Control type="email"onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
+                value={this.state.SendMessageEmail} />
+              ): (
+                <Form.Control type="email" value={this.props.user.email} />
+              )}
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
@@ -123,4 +129,12 @@ constructor(){
 }
 
 
-export default Service;
+function mapStatetoProps(state){
+  console.log("LE STORE:", state)
+  return  {user: state.user}
+}
+
+export default connect(
+  mapStatetoProps,
+  null
+)(Service)

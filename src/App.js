@@ -16,6 +16,10 @@ import Items from './components/Items'
 import Exemple from './components/Exemple'
 import Creations from './components/Creations'
 import MaxCreations from './components/MaxCreations'
+import {createStore, combineReducers}  from 'redux';
+import {Provider} from 'react-redux';
+import user from './Reducer/user.reducer';
+const store = createStore(combineReducers({user}));
 
 
 
@@ -25,6 +29,7 @@ class App extends Component{
 
 
     return (
+     <Provider store={store}>
       <Router>
         <Switch>
           <Route path="/" exact component={Home} />
@@ -43,7 +48,7 @@ class App extends Component{
           <Route path="/maxcreations" component={MaxCreations}/>
         </Switch>
       </Router>  
-
+    </Provider>
   )}
 
 

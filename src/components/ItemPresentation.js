@@ -5,6 +5,7 @@ import { Col, Row, Form, FormGroup, Input, FormControl } from 'reactstrap';
 import {Link, Redirect} from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer'
+import {connect} from 'react-redux'
 
 class ItemPresentation extends React.Component {
   constructor(props){
@@ -48,12 +49,19 @@ class ItemPresentation extends React.Component {
     }
 
     sendMessage(){
+      if (this.props.user == null){
       fetch('http://localhost:3000/users/create-message',{
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body: `object=${this.props.match.params.id}&content=${this.state.content}&sender_email=${this.state.userEmail}&name=${this.state.userName}&item_id=${this.state.item_id}`
+        body: `object=${this.props.match.params.id}&content=${this.state.content}&sender_email=${this.state.userEmail}&sender_name=${this.state.userName}&item_id=${this.state.item_id}`
+      })} else if (this.props.user != null){
+        fetch('http://localhost:3000/users/create-message',{
+          method: 'POST',
+          headers: {'Content-Type':'application/x-www-form-urlencoded'},
+          body: `object=${this.props.match.params.id}&content=${this.state.content}&sender_email=${this.props.user.email}&sender_name=${this.props.user.first_name}&item_id=${this.state.item_id}&user_id=${this.props.user._id}`
       })
     }
+  }
 
     render() {
    return(
@@ -95,14 +103,22 @@ class ItemPresentation extends React.Component {
               <Row form>
                 <Col lg={6}>
                   <FormGroup>
-                    <Input type="Nom" name="Nom" id="exampleNom" placeholder="Nom" onChange={(e)=> this.setState({userName: e.target.value})}
-                    value={this.state.userName}/>
+                    {this.props.user == null ?(
+                      <Input type="Nom" name="Nom" id="exampleNom" placeholder="Nom" onChange={(e)=> this.setState({userName: e.target.value})}
+                      value={this.state.userName}/>
+                    ): (
+                      <Input type="Nom" name="Nom" id="exampleNom" placeholder="Nom" value={this.props.user.first_name}/>
+                    )}
                   </FormGroup>
                 </Col>
                 <Col lg={6}>
                   <FormGroup>
-                    <Input type="Email" name="Email" id="exampleEmail" placeholder="Email" onChange={(e)=> this.setState({userEmail: e.target.value})}
-                    value={this.state.userEmail} />
+                    {this.props.user == null ?(
+                      <Input type="Email" name="Email" id="exampleEmail" placeholder="Email" onChange={(e)=> this.setState({userEmail: e.target.value})}
+                      value={this.state.userEmail} />
+                    ):(
+                      <Input type="Email" name="Email" id="exampleEmail" placeholder="Email" value={this.props.user.email} />
+                    )}
                   </FormGroup>
                 </Col>
               </Row>
@@ -122,4 +138,12 @@ class ItemPresentation extends React.Component {
 )}
 }
 
-export default ItemPresentation;
+function mapStatetoProps(state){
+  console.log("LE STORE:", state)
+  return  {user: state.user}
+}
+
+export default connect(
+  mapStatetoProps,
+  null
+)(ItemPresentation);

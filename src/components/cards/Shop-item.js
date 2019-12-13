@@ -8,7 +8,6 @@ class ShopItem extends React.Component {
     <div className="col-lg-4 my-3">  
       <div className="productTitle">
         <div class="overlay-image">
-          <a href="#">
             <img class="image" src={this.props.itemPhoto} alt={this.props.itemName} />
             <div class="normal">
               <div class="text"></div>
@@ -17,7 +16,6 @@ class ShopItem extends React.Component {
               <img class="imageBlur" src={this.props.itemPhoto} alt={this.props.itemName} />
             <div class="text">{this.props.itemName}<br/>{this.props.itemSize}</div>
             </div>
-          </a>
         </div>
       </div>
     </div>

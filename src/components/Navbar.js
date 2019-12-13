@@ -1,16 +1,14 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {  Button,  Navbar,  NavbarBrand,  Nav,  NavItem,  NavLink,} from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
 import {Link} from 'react-router-dom'
 
 
 
 class Navigbar extends React.Component{
      
-  
   render(){
-        return(
+    return(
 
 <div className="row" >
 
@@ -35,7 +33,7 @@ class Navigbar extends React.Component{
                 <NavItem>
                 <NavLink onClick={this.pageScroll}>Contact</NavLink>
                 </NavItem>
-                <Button color="secondary" href="/login">Se Connecter</Button>
+                  <Button color="secondary" href="/login">Se Connecter</Button>
             </Nav>
         </div>
     </Navbar>
@@ -45,5 +43,11 @@ class Navigbar extends React.Component{
         )}
 }
 
+function mapStatetoProps(state){
+  return  {user: state.user}
+}
 
-export default Navigbar
+export default connect(
+  mapStatetoProps,
+  null
+)(Navigbar);

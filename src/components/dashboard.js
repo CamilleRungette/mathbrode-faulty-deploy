@@ -38,7 +38,6 @@ export default class Dashboard extends Component {
   }
 
   ItemSubmit(){
-    console.log("click détécté")
     fetch('http://localhost:3000/admins/create-item', {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
@@ -47,7 +46,6 @@ export default class Dashboard extends Component {
    }
 
   EventSubmit(){
-    console.log("click détécté")
     fetch('http://localhost:3000/admins/create-event', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
@@ -148,7 +146,7 @@ export default class Dashboard extends Component {
                 {this.state.loading ? (
                   <h6> Chargement ...</h6>
                 ) : (
-                 <img src={this.state.CreateItemPhoto} style={{width:"10em", marginLeft:'8em'}} />
+                 <img src={this.state.CreateItemPhoto} alt="item chosen photo" style={{width:"10em", marginLeft:'8em'}} />
                 )}
             </Form.Group>
 
@@ -227,7 +225,7 @@ export default class Dashboard extends Component {
                 {this.state.loading ? (
                   <h6> Chargement ...</h6>
                 ) : (
-                 <img src={this.state.CreateEventPhoto} style={{width:"10em"}} />
+                 <img alt="chosen photo" src={this.state.CreateEventPhoto} style={{width:"10em"}} />
                 )}
 
                 </Col>  

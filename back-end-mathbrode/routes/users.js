@@ -55,19 +55,18 @@ router.post('/sign-in', async function(req, res, next){
     isUserExists = false;
   }
 
-  res.json({isUserExists})
+  res.json({isUserExists, userExists})
 })
 
 router.post('/create-message', async function (req, res, next){
   console.log("==================CREATE MESSAGE FUNCTION")
-  console.log(req.body)
-
   newMessage = new MessageModel({
     object: req.body.object,
     content: req.body.content,
     user_id: req.body.user_id,
     item_id: req.body.item_id,
     sender_email: req.body.sender_email,
+    sender_name: req.body.name,
     date: Date.now()
   })
   
