@@ -6,7 +6,15 @@ import {Link} from 'react-router-dom'
 
 
 class Navigbar extends React.Component{
-     
+  constructor(){
+    super();
+    this.LogOut = this.LogOut.bind(this) 
+   }
+
+  LogOut(){
+    let thisUser = this.props.user
+    this.props.onLogOutClick(thisUser) 
+  }
   render(){
     return(
 
@@ -33,7 +41,11 @@ class Navigbar extends React.Component{
                 <NavItem>
                 <NavLink onClick={this.pageScroll}>Contact</NavLink>
                 </NavItem>
+                {this.props.user == null ? (
                   <Button color="secondary" href="/login">Se Connecter</Button>
+                ):(
+                  <Button color="secondary" onClick={this.LogOut}>Se Déonnecter</Button>
+                )}
             </Nav>
         </div>
     </Navbar>
@@ -43,11 +55,20 @@ class Navigbar extends React.Component{
         )}
 }
 
+function mapDispacthToProps(dispatch){
+  return{
+    onLogOutClick: function(data){
+      dispatch({type: 'logout', thisUser: data})
+    }
+  }
+}
+
 function mapStatetoProps(state){
   return  {user: state.user}
 }
 
+
 export default connect(
   mapStatetoProps,
-  null
+  mapDispacthToProps
 )(Navigbar);

@@ -23,7 +23,6 @@ class Creations extends React.Component {
     })
     .then(function(data){
       ctx.setState({items: data.allItems})
-     console.log("THE STATE ===========>", ctx.state.items)
     })
     .catch(function(error){
       console.log("FAILED")

@@ -91,7 +91,11 @@ class ItemPresentation extends React.Component {
             </Row>          
             </div> 
               <div className="d-flex justify-content-center mb-4" >
-                <Link to="/basket" ><Button style={{backgroundColor:"#1b263b"}}>Ajouter au panier</Button></Link>
+                {this.props.user == null ? (
+                  <Link to="/login" ><Button style={{backgroundColor:"#1b263b"}}>Ajouter au panier</Button></Link>
+                ):(
+                  <Link to="#" ><Button style={{backgroundColor:"#1b263b"}}>Ajouter au panier</Button></Link>
+                )}
               </div>
           </div>
         </div>
@@ -127,7 +131,7 @@ class ItemPresentation extends React.Component {
                 value={this.state.content} />
               </FormGroup>
               <div className="d-flex justify-content-center" >
-                <Button  style={{backgroundColor:"#1b263b"}} onClick={this.sendMessage}><a href="#" style={{color:"white", textDecoration:"none"}}>Envoyer</a></Button>    
+                <Link to="/"><Button  style={{backgroundColor:"#1b263b"}} onClick={this.sendMessage}>Envoyer</Button> </Link> 
               </div>
             <div style={{height:"5em"}}></div>
             </Form>

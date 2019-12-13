@@ -32,9 +32,11 @@ this.state = {
     .then(function(response, err){
       return response.json();
     }).then(data=>{
+      console.log("NOTRE DATA", data)
       if (data.isUserExists === false ){
         ctx.setState({isUserExist: true});
       }
+    ctx.props.onSiginClick(data.user)
     });
   }
 
@@ -130,6 +132,7 @@ this.state = {
 function mapDispatchToProps(dispatch){
   return{
     onSiginClick: function(data){
+      console.log("CONSOLELOG RETOUR DU REDUCER ", data)
       dispatch({type: 'signin', userSigned: data})
     }
   }

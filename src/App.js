@@ -18,7 +18,7 @@ import Creations from './components/Creations'
 import MaxCreations from './components/MaxCreations'
 import {createStore, combineReducers}  from 'redux';
 import {Provider} from 'react-redux';
-import user from './Reducer/user.reducer';
+import user from './components/Reducer/user.reducer';
 const store = createStore(combineReducers({user}));
 
 

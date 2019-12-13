@@ -32,7 +32,7 @@ router.post('/sign-up', async function(req, res, next) {
     if (user){
     isUserExists = false
     console.log("NEW USER SAVED:", user)
-    res.json({user, isUserExists})
+    res.json({user, isUserExists, userExists})
     }else if (error){
       isUserExists = true
       console.log("USER NOR CREATED:", error)
