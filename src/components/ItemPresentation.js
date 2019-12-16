@@ -67,7 +67,7 @@ class ItemPresentation extends React.Component {
     render() {
    return(
 <div>
-  <Navbar />
+  <Navbar/>
     <div className="row justify-content-center" style={{fontFamily:"Raleway"}}>
       <div className="col-lg-10" >
       <div style={{height:"5em"}}></div>
@@ -76,18 +76,23 @@ class ItemPresentation extends React.Component {
         </div>
 
         <div className="row col-lg-7 border" style={{margin:"auto"}} >
+        <div class="hover">
+          <div class="zoom">
         <img src={this.state.photo} className=" col-lg-8" style={{height:"40em", objectFit:"contain", margin:"auto"}} alt="Alt text" />
+          </div>
+        </div>
           <div className="col-lg-9" style={{margin:"auto"}}>
             <div style={{display:"flex", justifyContent:"center"}}>
               <Row> 
                 <Col sm={8}>          
-                  <p style={{fontSize:"1.5em"}}> {this.state.desc} </p>
+                  <p style={{fontSize:"1.5em"}}>{this.state.desc}</p>
                 </Col>
                 <Col>
                   <p className="" >Info Pratiques :<br/>
                   Prix: {this.state.price}€<br/>
                   Exemplaire: {this.state.copy}<br/>
-                  Taille: {this.state.size}</p>
+                  Taille: {this.state.size}
+                  </p>
                 </Col>
             </Row>          
             </div> 
