@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {  Button,  Navbar,  NavbarBrand,  Nav,  NavItem,  NavLink,} from 'reactstrap';
+import { Button,  Navbar,  NavbarBrand,  Nav,  NavItem,  NavLink } from 'reactstrap';
 import {Link} from 'react-router-dom'
 
 
@@ -20,13 +20,13 @@ class Navigbar extends React.Component{
 <div className="row" >
 
     <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "90%", height:"7em" , display:"flex", justifyContent:"space-between", margin:"auto"}}>
-        <div style={{textAlign:"right"}}>
+        <div xs="2" style={{textAlign:"right"}}>
             <NavbarBrand href="/">
               <img src="/logo.png" style={{width:"9em"}} />
             </NavbarBrand>
         </div>
 
-        <div >
+        <div xs="10">
             <Nav navbar style={{fontSize:"1.2em"}}>
                 <NavItem>
                 <NavLink href="/">Accueil</NavLink>

@@ -45,21 +45,22 @@ class Items extends Component{
     return(
       <div  style={{fontFamily:"Raleway"}}>
       <Navigbar/>
+
       <Col style={{margin:"auto"}}>
+          <div className="col-6" style={{ margin:"auto", display:"flex", justifyContent:"center",flexWrap:"wrap"}} >
           <h1 style={{textAlign:"center", fontSize:"3.5em", marginTop:"0.5em"}}>La Boutique</h1>
+          </div>
           <div style={{height:"6em"}}></div>
+
         <div className="col-lg-10" style={{ margin:"auto", display:"flex", flexWrap:"wrap"}}>         
-        
-      
-       
             {itemsList}
-         
-      
         </div>
       </Col>
+
       <div style={{height:"8em"}}></div>
 
       <Footer/>
+      
     </div>
     )
   }
