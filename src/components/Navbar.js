@@ -44,7 +44,7 @@ class Navigbar extends React.Component{
                 {this.props.user == null ? (
                   <Button color="secondary" href="/login">Se Connecter</Button>
                 ):(
-                  <Button color="secondary" onClick={this.LogOut}>Se Déonnecter</Button>
+                  <Button color="secondary" onClick={this.LogOut}>Se Déconnecter</Button>
                 )}
             </Nav>
         </div>
