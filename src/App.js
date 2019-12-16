@@ -25,10 +25,7 @@ const store = createStore(combineReducers({user, item}));
 
 
 class App extends Component{
-
   render(){
-
-
     return (
      <Provider store={store}>
       <Router>
@@ -51,8 +48,6 @@ class App extends Component{
       </Router>  
     </Provider>
   )}
-
-
 }
 
 export default App;

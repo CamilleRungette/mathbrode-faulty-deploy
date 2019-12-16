@@ -10,12 +10,33 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
 
 
-
+let total = 0;
 
 
 class Basket extends React.Component {
+  constructor(props){
+    super(props);
+    this.OnBuyClick = this.OnBuyClick.bind(this)
+    this.state = {
+      itemsToBuy : [this.props.item]
+    }
+  }
 
-    render() {
+  // componentDidMount(){
+  //   this.setState({itemsToBuy: this.props.item})
+  // }
+  
+  
+  OnBuyClick(){
+    fetch('http://localhost:3000/users/order',{
+      method: 'POST',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: `user_id=${this.props.user._id}&total=${total}&items=${this.state.itemsToBuy}`
+    })
+  }
+  
+  render() {
+    console.log("ITEMS TO BUY", this.state.itemsToBuy)
       if (this.props.connected == false || this.props.connected == null){
         return <Redirect to="/" />
       }else if (this.props.item.length == 0){
@@ -38,7 +59,10 @@ class Basket extends React.Component {
           </div>
         )
       } else {
-        console.log("STORE FROM BASKET", this.props.item.photo, this.props.user)
+        console.log("STORE FROM BASKET", this.props.item)
+        for (let i=0; i<this.props.item.length; i++){
+          total = total + this.props.item[i].price
+        } 
    return(
     <div style={{fontFamily:"Raleway"}}>
       <Navbar />
@@ -48,8 +72,8 @@ class Basket extends React.Component {
             </div>
             <div style={{height:"5em"}}></div>
       {this.props.item.map((item, i) => (
-            <div className="col-lg-8 border" style={{display:"flex", alignItems:"center", margin:"auto", fontSize:"1.3em", paddingRight:"3em"}}>
-            <img src={item.photo} className="col-4" style={{marginLeft:"-1.5em"}} alt="Alt text" /> 
+            <div className="col-lg-8 border" style={{display:"flex", alignItems:"center", margin:"auto", fontSize:"1.3em", paddingRight:"3em", height:"13em"}}>
+            <img src={item.photo} className="col-4" style={{marginLeft:"-1.5em", height:"11em", objectFit:"contain"}} alt="Alt text" /> 
               <div className="col-5">
                 <p >{item.name}</p>
               </div>
@@ -65,7 +89,7 @@ class Basket extends React.Component {
         </div>
       <div className="col-8 border" style={{margin:"auto", display:"flex", paddingTop:"0.3em", fontSize:"1.3em", textAlign:"right"}}>
         <p className="col-9">Total:</p>
-        <p className="col-3">X €</p>
+        <p className="col-3">{total} €</p>
       </div>
       <div style={{height:"5em"}}></div>
       <div className="d-flex justify-content-center col-lg-12">  
@@ -73,7 +97,7 @@ class Basket extends React.Component {
           <Link to="/creations" ><Button color="secondary">Continuer mes Achats</Button></Link>
         </div>
         <div>
-          <Button color="secondary">Confirmer</Button>
+          <Button color="secondary" onClick={this.OnBuyClick}>Confirmer</Button>
         </div>
         <div style={{height:"5em"}}></div>  
       </div>
@@ -87,6 +111,7 @@ class Basket extends React.Component {
 
 function mapStatetoProps(state){
   return  {connected: state.user.isUserExist,
+          user: state.user.userSigned,
           item: state.item}
 }
 

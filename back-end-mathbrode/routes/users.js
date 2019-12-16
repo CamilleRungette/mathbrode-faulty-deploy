@@ -83,12 +83,13 @@ router.post('/create-message', async function (req, res, next){
 })
 
 router.post('/order', function (req, res, next){
+  console.log("coucou")
+  console.log(req.body)
   Date.prototype.addDays = function(days) {
       this.setDate(this.getDate() + parseInt(days));
       return this;
   };
    var currentDate = new Date();
-// Creation order
   newOrder = new OrderModel({
     user_id: req.body.user_id,
     total: req.body.total,
@@ -99,36 +100,51 @@ router.post('/order', function (req, res, next){
 
   newOrder.save(function(error, order){
     if(order){
-      console.log("ORDER SAVED", order)
-      
-      // Creation item_order
-      
-      // for(i=0; i < req.body.item.length; i++){
+      console.log("ORDER SAVED", order, req.body.items[0]) 
+      for(i=0; i < req.body.items[0].length; i++){
         newItemOrder = new ItemOrderModel({
-          item_id: req.body._id,
-          price: req.body.price,
-          name: req.body.name,
+          item_id: req.body.items[i]._id,
+          price: req.body.items[i].price,
+          name: req.body.items[i].name,
           order_id: newOrder._id,
-          copy: req.body.copy
+          copy: 1
         })
         
-        newItemOrder.save(function(error, item_order){
-          if (error){
-            console.log("ERROR:", error)
-            res.json({error})
-          } else if (item_order){
-            console.log("ITEM_ORDER SAVED:", item_order)
-            res.json({item_order, order})
-          }
-        });
-        // };
-      } else if (error){
-        console.log("ORDER NOT SAVED:", error)
-        res.json({error})
-      }
-    })
-        
+          newItemOrder.save(function(error, item_order){
+            if (error){
+              console.log("ERROR:", error)
+            } else if (item_order){
+              console.log("ITEM_ORDER SAVED:", item_order)
+            }
+          });
+        }
+  res.json({order})
+} else if (error){
+  console.log("ORDER NOT SAVED:", error)
+  res.json({error})
+}
+})
+
 })
 
 
+
 module.exports = router;
+
+  // for(i=0; i < req.body.items.length; i++){
+  //    newItemOrder = new ItemOrderModel({
+  //      item_id: req.body.items[i]._id,
+  //      price: req.body.items[i].price,
+  //      name: req.body.items[i].name,
+  //      order_id: newOrder._id,
+  //      copy: 1
+  //    })
+     
+  //      newItemOrder.save(function(error, item_order){
+  //        if (error){
+  //          console.log("ERROR:", error)
+  //        } else if (item_order){
+  //          console.log("ITEM_ORDER SAVED:", item_order)
+  //        }
+  //      });
+  //    }
