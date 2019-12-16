@@ -130,7 +130,6 @@ constructor(){
 
 
 function mapStatetoProps(state){
-  console.log("LE STORE:", state)
   return  {user: state.user}
 }
 

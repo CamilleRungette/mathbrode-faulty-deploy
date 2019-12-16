@@ -6,21 +6,9 @@ import Presentation from './Presentation'
 import Service from './Service'
 import Footer from './Footer'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-
-
-
+import {connect} from 'react-redux';
 
 class Home extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {isOpen:false}
-  }
- 
-  toggle(){
-    this.setState(!this.state.isOpen);
-  }
 
   render(){
 
@@ -51,17 +39,15 @@ class Home extends React.Component {
       <div style={{marginBottom:"20em"}} ></div>
       <Footer/>
         </div>
-
-        
-      
-      
-      
-      
-        );
-
-
+        )
   }
-  
 }
 
-export default Home;
+function mapStatetoProps(state){
+  return  {user: state.user.connected}
+}
+
+export default connect(
+  mapStatetoProps,
+  null
+)(Home);

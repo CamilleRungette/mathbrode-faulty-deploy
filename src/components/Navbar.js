@@ -29,19 +29,28 @@ class Navigbar extends React.Component{
         <div >
             <Nav navbar style={{fontSize:"1.2em"}}>
                 <NavItem>
-                <NavLink href="/">Accueil</NavLink>
+                  <Link to="/"><NavLink>Accueil</NavLink> </Link>
                 </NavItem>
                 <NavItem>
-                <NavLink href="/components/">Projet</NavLink>
+                  <Link to="/items"> <NavLink>Articles</NavLink></Link>
                 </NavItem>
                 <NavItem>
-                <Link to="/events" ><NavLink>Evénements</NavLink></Link> 
+                  <Link to="/events"> <NavLink>Evénements</NavLink></Link>
                 </NavItem>
                 <NavItem>
                 <NavLink onClick={this.pageScroll}>Contact</NavLink>
                 </NavItem>
                 {this.props.connected ? (
+                <NavItem>
+                  <Link to ="/basket" > <NavLink>Panier</NavLink> </Link>
+                </NavItem>
+                ):(
+                  <div></div>
+                )}
+                {this.props.connected ? (
+                  <div>
                   <Button color="secondary" onClick={this.LogOut}>Se Déconnecter</Button>
+                  </div>
                 ):(
                   <Button color="secondary" href="/login">Se Connecter</Button>
                 )}
