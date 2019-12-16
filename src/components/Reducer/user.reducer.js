@@ -1,10 +1,10 @@
 export default function(userSave = {}, action){
   if (action.type == 'signin'){
-    return action.userSigned
+    return action
   }else if (action.type == 'logout'){
-    console.log("in the log out method")
-    action.thisUser = null
-    return action.thisUser
+    console.log("IN THE LOG OUT METHOD REDUCER:", action)
+    action.connected = false
+    return action.connected
   } else{
     return userSave
   }

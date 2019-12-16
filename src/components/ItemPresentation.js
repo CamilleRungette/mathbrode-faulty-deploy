@@ -149,7 +149,7 @@ class ItemPresentation extends React.Component {
 
 function mapStatetoProps(state){
   console.log("LE STORE:", state)
-  return  {user: state.user}
+  return  {user: state.user.userSigned}
 }
 
 export default connect(
