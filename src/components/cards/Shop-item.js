@@ -5,7 +5,7 @@ import React from 'react';
 class ShopItem extends React.Component {
   render() {  
   return (
-    <div className="col-lg-4 my-3">  
+    <div className="col-6 col-lg-4 my-3">  
       <div className="productTitle">
         <div class="overlay-image">
             <img class="image" src={this.props.itemPhoto} alt={this.props.itemName} />

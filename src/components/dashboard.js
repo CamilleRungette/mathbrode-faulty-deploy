@@ -104,10 +104,10 @@ export default class Dashboard extends Component {
     <Table responsive>
 <thead>
 <tr>
-<th> <img src="users bis.png" alt="icon" class="iconstat"/></th>
-<th><img src="euros bis.png" class="iconstat" alt="icon"/></th>
-<th><img src="vendu bis.png" class="iconstat" alt="icon"/></th>
-<th><img src="prepa.png" class="iconstat"alt="icon"/></th>
+<th> <img src="clients.png" alt="icon" class="iconstat"/></th>
+<th><img src="revenu.png" class="iconstat" alt="icon"/></th>
+<th><img src="commandes terminées.png" class="iconstat" alt="icon"/></th>
+<th><img src="commandes en attente.png" class="iconstat"alt="icon"/></th>
 </tr>
 </thead>
 <tbody>
@@ -128,7 +128,7 @@ export default class Dashboard extends Component {
 
 
             {/* Create-item form */}
-    <Col lg={{offset:3, span:6 }}>
+    <Col xs={{span:12}} lg={{offset:3, span:6 }}>
         <Card>
           <Card.Header style={{fontSize:"1.3em"}}>Ajouter un produit</Card.Header>
             <Card.Body>
