@@ -3,38 +3,66 @@ import {
   Button } from 'reactstrap';
 import '../App.css'
 import {Link, Redirect} from 'react-router-dom';
-import BasketItem from './cards/basket-item'
 import Navbar from './Navbar'
 import Footer from './Footer'
-import {connect} from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { connect } from 'react-redux';
+
+
 
 
 
 class Basket extends React.Component {
 
     render() {
-      let allItemsList = this.props.item.map(function(item, i){
-        return <BasketItem key = {i}
-        itemCopy={item.copy}
-        itemName={item.name}
-        itemDesc={item.desc}
-        itemPrice={item.price}
-        itemShipFee={item.shipping_fee}
-        itemSize={item.size}
-        itemPhoto={item.photo}
-        itemId={item._id}
-        />
-      })
-
-
       if (this.props.connected == false || this.props.connected == null){
         return <Redirect to="/" />
+      }else if (this.props.item.length == 0){
+        return(
+          <div>
+            <Navbar />
+            <div style={{fontFamily:"Raleway", height:"75vh"}}>
+              <div style={{textAlign:"center", fontSize:"3.3em"}}>
+                <p>Mon Panier</p>
+              </div>
+              <div style={{height:"5em"}}></div>
+
+            <div style={{fontSize:"2em", textAlign:"center"}}>
+              <p>Votre panier est vide </p>
+             <Link to="/items"><Button style={{backgroundColor:"#1B263B"}}> Continuer mes achats</Button> </Link>
+            </div>
+
+            </div>
+            <Footer />
+          </div>
+        )
       } else {
-        console.log("STORE FROM BASKET", this.props.item, this.props.user)
+        console.log("STORE FROM BASKET", this.props.item.photo, this.props.user)
    return(
     <div style={{fontFamily:"Raleway"}}>
       <Navbar />
-      {allItemsList}
+            <div style={{fontFamily:"Raleway"}}>
+            <div style={{textAlign:"center", fontSize:"3.3em"}}>
+              <p>Mon Panier</p>
+            </div>
+            <div style={{height:"5em"}}></div>
+      {this.props.item.map((item, i) => (
+            <div className="col-lg-8 border" style={{display:"flex", alignItems:"center", margin:"auto", fontSize:"1.3em", paddingRight:"3em"}}>
+            <img src={item.photo} className="col-4" style={{marginLeft:"-1.5em"}} alt="Alt text" /> 
+              <div className="col-5">
+                <p >{item.name}</p>
+              </div>
+              <div className="col-3">
+                <p >{item.price} €</p>
+              </div> 
+              <div className="col-2">
+                <FontAwesomeIcon onClick={() => this.props.onDeleteClick(i)} icon={faTrashAlt} />
+              </div> 
+            </div>  
+          )      
+        )}
+        </div>
       <div className="col-8 border" style={{margin:"auto", display:"flex", paddingTop:"0.3em", fontSize:"1.3em", textAlign:"right"}}>
         <p className="col-9">Total:</p>
         <p className="col-3">X €</p>
@@ -62,8 +90,19 @@ function mapStatetoProps(state){
           item: state.item}
 }
 
+function mapDispatchToProps(dispatch){
+  console.log("DELETE FROM BASKET", dispatch)
+  return {
+    onDeleteClick: function(position){
+      console.log(position)
+      dispatch({type: 'delete', position: position})
+    }
+  }
+}
+
+
 export default connect(
   mapStatetoProps,
-  null
+  mapDispatchToProps
 )(Basket);
 
