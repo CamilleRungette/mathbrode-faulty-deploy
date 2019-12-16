@@ -12,8 +12,7 @@ class Navigbar extends React.Component{
    }
 
   LogOut(){
-    let thisUser = this.props.user
-    this.props.onLogOutClick(thisUser) 
+    this.props.onLogOutClick(this.props.connected) 
   }
   render(){
     return(
@@ -41,10 +40,10 @@ class Navigbar extends React.Component{
                 <NavItem>
                 <NavLink onClick={this.pageScroll}>Contact</NavLink>
                 </NavItem>
-                {this.props.user == null ? (
-                  <Button color="secondary" href="/login">Se Connecter</Button>
+                {this.props.connected ? (
+                  <Button color="secondary" onClick={this.LogOut}>Se Déconnecter</Button>
                 ):(
-                  <Button color="secondary" onClick={this.LogOut}>Se Déonnecter</Button>
+                  <Button color="secondary" href="/login">Se Connecter</Button>
                 )}
             </Nav>
         </div>
@@ -58,13 +57,13 @@ class Navigbar extends React.Component{
 function mapDispacthToProps(dispatch){
   return{
     onLogOutClick: function(data){
-      dispatch({type: 'logout', thisUser: data})
+      dispatch({type: 'logout', connected: data})
     }
   }
 }
 
 function mapStatetoProps(state){
-  return  {user: state.user}
+  return  {user: state.user.userSigned, connected: state.user.isUserExist}
 }
 
 
