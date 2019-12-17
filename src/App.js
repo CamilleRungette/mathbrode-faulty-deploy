@@ -15,7 +15,7 @@ import ItemPres from './components/ItemPresentation'
 import Items from './components/Items'
 import Exemple from './components/Exemple'
 import Creations from './components/Creations'
-import MaxCreations from './components/MaxCreations'
+
 import {createStore, combineReducers}  from 'redux';
 import {Provider} from 'react-redux';
 import user from './components/Reducer/user.reducer';
@@ -43,7 +43,7 @@ class App extends Component{
           <Route path="/items" component={Items} />
           <Route path="/exemple" component={Exemple} />
           <Route path="/creations" component={Creations}/>
-          <Route path="/maxcreations" component={MaxCreations}/>
+         
         </Switch>
       </Router>  
     </Provider>

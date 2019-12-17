@@ -17,17 +17,17 @@ class Navigbar extends React.Component{
   render(){
     return(
 
-<div className="row" >
+<div className="row" style={{marginLeft:"0px",marginRight:"0px"}}>
 
-    <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "90%", height:"7em" , display:"flex", justifyContent:"space-between", margin:"auto"}}>
+    <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "95%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto"}}>
         <div xs="2" style={{textAlign:"right"}}>
             <NavbarBrand href="/">
-              <img src="/logo.png" style={{width:"9em"}} />
+              <img src="/logo bis.png" style={{width:"9em"}} />
             </NavbarBrand>
         </div>
 
         <div xs="10">
-            <Nav navbar style={{fontSize:"1.2em"}}>
+            <Nav navbar style={{fontSize:"1.8em"}}>
                 <NavItem>
                   <Link to="/"><NavLink>Accueil</NavLink> </Link>
                 </NavItem>
@@ -40,6 +40,7 @@ class Navigbar extends React.Component{
                 <NavItem>
                 <NavLink onClick={this.pageScroll}>Contact</NavLink>
                 </NavItem>
+                <NavItem>
                 {this.props.connected ? (
                 <NavItem>
                   <Link to ="/basket" > <NavLink>Panier</NavLink> </Link>
@@ -52,8 +53,9 @@ class Navigbar extends React.Component{
                   <Button color="secondary" onClick={this.LogOut}>Se Déconnecter</Button>
                   </div>
                 ):(
-                  <Button color="secondary" href="/login">Se Connecter</Button>
+                  <Button color="secondary" style={{fontSize:"1em"}} href="/login">Se Connecter</Button>
                 )}
+                </NavItem>
             </Nav>
         </div>
     </Navbar>
