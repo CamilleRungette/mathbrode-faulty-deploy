@@ -27,7 +27,7 @@ class Navigbar extends React.Component{
         </div>
 
         <div xs="10">
-            <Nav navbar style={{fontSize:"1.8em"}}>
+            <Nav navbar style={{fontSize:"1.2em"}}>
                 <NavItem>
                   <Link to="/"><NavLink>Accueil</NavLink> </Link>
                 </NavItem>

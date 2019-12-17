@@ -19,17 +19,14 @@ class Basket extends React.Component {
     super(props);
     this.OnBuyClick = this.OnBuyClick.bind(this)
   }
-
-  // componentDidMount(){
-  //   this.setState({itemsToBuy: this.props.item})
-  // }
   
   
   OnBuyClick(){
+    let items = JSON.stringify(this.props.item);
     fetch('http://localhost:3000/users/order',{
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `user_id=${this.props.user._id}&total=${total}&items=${this.props.item}`
+      body: `user_id=${this.props.user._id}&total=${total}&items=${items}`
     })
   }
   
@@ -95,7 +92,7 @@ class Basket extends React.Component {
           <Link to="/creations" ><Button color="secondary">Continuer mes Achats</Button></Link>
         </div>
         <div>
-          <Button color="secondary" onClick={this.OnBuyClick}>Confirmer</Button>
+         <Link to="/"> <Button color="secondary" onClick={this.OnBuyClick}>Confirmer</Button></Link>
         </div>
         <div style={{height:"5em"}}></div>  
       </div>

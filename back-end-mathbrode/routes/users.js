@@ -100,26 +100,25 @@ router.post('/order', function (req, res, next){
 
   newOrder.save(function(error, order){
     if(order){
-      console.log("ORDER SAVED", order, req.body.items[0]) 
-      // for(i=0; i < req.body.items.length; i++){
-      //   console.log("============ITEM NUMERO ", i)
-      //   console.log(req.body.items)
-      //   newItemOrder = new ItemOrderModel({
-      //     item_id: req.body.items[i]._id,
-      //     price: req.body.items[i].price,
-      //     name: req.body.items[i].name,
-      //     order_id: newOrder._id,
-      //     copy: 1
-      //   })
+      items = JSON.parse(req.body.items)
+      console.log("==============> ORDER SAVED", order ) 
+      for(i=0; i < items.length; i++){
+        newItemOrder = new ItemOrderModel({
+          item_id: items[i]._id,
+          price:items[i].price,
+          name: items[i].name,
+          order_id: newOrder._id,
+          copy: 1
+        })
         
-      //     newItemOrder.save(function(error, item_order){
-      //       if (error){
-      //         console.log("ERROR:", error)
-      //       } else if (item_order){
-      //         console.log("ITEM_ORDER SAVED:", item_order)
-      //       }
-      //     });
-      //   }
+          newItemOrder.save(function(error, item_order){
+            if (error){
+              console.log("ERROR:", error)
+            } else if (item_order){
+              console.log("ITEM_ORDER SAVED:", item_order)
+            }
+          });
+        }
   res.json({order})
 } else if (error){
   console.log("ORDER NOT SAVED:", error)
