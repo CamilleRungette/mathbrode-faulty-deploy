@@ -18,9 +18,6 @@ class Basket extends React.Component {
   constructor(props){
     super(props);
     this.OnBuyClick = this.OnBuyClick.bind(this)
-    this.state = {
-      itemsToBuy : [this.props.item]
-    }
   }
 
   // componentDidMount(){
@@ -32,12 +29,11 @@ class Basket extends React.Component {
     fetch('http://localhost:3000/users/order',{
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `user_id=${this.props.user._id}&total=${total}&items=${this.state.itemsToBuy}&times=${times}`
+      body: `user_id=${this.props.user._id}&total=${total}&items=${this.props.item}`
     })
   }
   
   render() {
-    console.log("ITEMS TO BUY", this.state.itemsToBuy)
       if (this.props.connected == false || this.props.connected == null){
         return <Redirect to="/" />
       }else if (this.props.item.length == 0){

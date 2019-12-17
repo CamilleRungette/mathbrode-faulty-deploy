@@ -78,11 +78,29 @@ router.get('/stock', async function(req, res, next){
 });
 
 router.post('/update-item', async function(req, res, next){
+  console.log("IN THE UPDATE METHOD")
+  item = await ItemModel.updateOne(
+    {_id: req.body.id},
+    {name: req.body.name,
+    price: req.body.price,
+    size: req.body.size,
+    description: req.body.desc,
+    shipping_fee: req.body.shipping_fee,
+    copy: req.body.copy},
+    function(error, raw){
+    console.log("UPDATE:", raw)
+    })
     res.json({result: true})
 })
 
 router.post('/delete-item', async function(req, res, next){
-    res.json({result: true})
+  ItemModel.deleteOne(
+    {_id: req.body.id},
+    function(error){
+
+    }
+  );
+  res.json({result: true})
 })
 
 router.post('/create-event', function(req, res, next){
@@ -112,6 +130,19 @@ router.get('/messages', async function(req, res, next){
   })
 
   res.json({allMessages})
+})
+
+router.post('/delete-message', async function(req, res, next){
+    console.log("in the delete message method")
+  message = await MessageModel.findOne({_id: req.body.message_id})
+    console.log(message)
+  MessageModel.deleteOne(
+    {_id: req.body.message_id},
+    function(error) {
+    }
+    );
+  res.json({result: true})
+    console.log("message deleted")
 })
 
 module.exports = router;

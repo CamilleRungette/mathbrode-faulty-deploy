@@ -1,12 +1,54 @@
 import React, {Component} from 'react';
 import { Col } from 'react-bootstrap';
+import {Link} from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck, faTrashAlt, faReply, faTimes } from '@fortawesome/free-solid-svg-icons'
+
+const readMessage ={
+  backgroundColor:"#ededed",
+  fontSize: "0.8em"
+}
+
 
 class MessageItem extends Component{
+  constructor(){
+    super();
+    this.onReadClick = this.onReadClick.bind(this)
+    this.deleteMessage = this.deleteMessage.bind(this)
+    this.state={
+      read: false,
+    }
+  }
+
+  onReadClick(){
+    this.setState({
+      read: !this.state.read,
+    })
+  }
+
+  deleteMessage(data){
+     fetch('http://localhost:3000/admins/delete-message',{
+      method: 'POST',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: `message_id=${data}`
+     })
+   }
+
   render(){
+    var iconMessage = faCheck
+    var marker = "Marquer comme lu"
+    var styleMessage;
+    if (this.state.read == true){
+      styleMessage = readMessage
+      iconMessage = faTimes
+      marker = "Marquer comme non lu"
+
+    } 
+
     return(
-      <div style={{ height:"100%", display:"flex", justifyContent:"center", paddingTop:"10%"}}>
-      <Col sm="6">
-      <div class="roww">
+      <div style={{ display:"flex", justifyContent:"center", paddingTop:"5%"}}>
+      <Col sm="6">  
+        <div style={styleMessage} class="roww">
         <Col lg={11}>
         <div class="content">    
         <h4>Sujet : {this.props.messageObject}</h4>
@@ -18,10 +60,13 @@ class MessageItem extends Component{
 
       <Col lg={1}>
         <div>
-        <img class="trash" alt="trash" src="reply.png"></img>
+          <FontAwesomeIcon icon={faReply} />
           <br></br>
           <br></br>
-        <img class="trash" src="trash.png" alt="trash"></img>
+          <FontAwesomeIcon onClick={this.onReadClick} title={marker} icon={iconMessage} />
+          <br></br>
+          <br></br>
+           <FontAwesomeIcon href="#" onClick={() => this.deleteMessage(this.props.messageId)}  icon={faTrashAlt} />
         </div>                    
         </Col>
         </div> 

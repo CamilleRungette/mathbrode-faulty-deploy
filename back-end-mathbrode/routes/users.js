@@ -83,7 +83,7 @@ router.post('/create-message', async function (req, res, next){
 })
 
 router.post('/order', function (req, res, next){
-  console.log("coucou")
+  console.log("coucou=================")
   console.log(req.body)
   Date.prototype.addDays = function(days) {
       this.setDate(this.getDate() + parseInt(days));
@@ -101,9 +101,9 @@ router.post('/order', function (req, res, next){
   newOrder.save(function(error, order){
     if(order){
       console.log("ORDER SAVED", order, req.body.items[0]) 
-      for(i=0; i < req.body.times; i++){
-        console.log("============ITEM NUMERO ", i)
-        console.log(req.body.items[0])
+      // for(i=0; i < req.body.items.length; i++){
+      //   console.log("============ITEM NUMERO ", i)
+      //   console.log(req.body.items)
       //   newItemOrder = new ItemOrderModel({
       //     item_id: req.body.items[i]._id,
       //     price: req.body.items[i].price,
@@ -112,14 +112,14 @@ router.post('/order', function (req, res, next){
       //     copy: 1
       //   })
         
-      //     // newItemOrder.save(function(error, item_order){
-      //     //   if (error){
-      //     //     console.log("ERROR:", error)
-      //     //   } else if (item_order){
-      //     //     console.log("ITEM_ORDER SAVED:", item_order)
-      //     //   }
-      //     // });
-        }
+      //     newItemOrder.save(function(error, item_order){
+      //       if (error){
+      //         console.log("ERROR:", error)
+      //       } else if (item_order){
+      //         console.log("ITEM_ORDER SAVED:", item_order)
+      //       }
+      //     });
+      //   }
   res.json({order})
 } else if (error){
   console.log("ORDER NOT SAVED:", error)
