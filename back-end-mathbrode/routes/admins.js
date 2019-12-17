@@ -70,6 +70,13 @@ router.post('/create-item', async function(req, res, next){
 }
 });
 
+router.get('/stock', async function(req, res, next){
+  allItems = await ItemModel.find(function(err, items){
+    console.log(items)
+    })
+    res.json({allItems})
+});
+
 router.post('/update-item', async function(req, res, next){
     res.json({result: true})
 })

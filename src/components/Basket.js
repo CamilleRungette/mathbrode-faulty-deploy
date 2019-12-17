@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 
 
 let total = 0;
+let times = 0;
 
 
 class Basket extends React.Component {
@@ -31,7 +32,7 @@ class Basket extends React.Component {
     fetch('http://localhost:3000/users/order',{
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `user_id=${this.props.user._id}&total=${total}&items=${this.state.itemsToBuy}`
+      body: `user_id=${this.props.user._id}&total=${total}&items=${this.state.itemsToBuy}&times=${times}`
     })
   }
   
@@ -62,6 +63,7 @@ class Basket extends React.Component {
         console.log("STORE FROM BASKET", this.props.item)
         for (let i=0; i<this.props.item.length; i++){
           total = total + this.props.item[i].price
+          times += 1
         } 
    return(
     <div style={{fontFamily:"Raleway"}}>
