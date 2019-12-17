@@ -25,10 +25,10 @@ class Home extends React.Component {
   render(){
 
     return (
-      <div>
+      <div className="col-12 col-lg-12"  style={{paddingLeft:0,paddingRight:0}}>
         <Navigbar/>
-          <div className="row">
-              <div className="col-lg-12">
+          <div className="row" style={{margin:"auto"}}>
+              <div className="col-lg-12" style={{paddingLeft:0,paddingRight:0}}>
             
             
                     <img src="background 1.png" alt="background"></img>
