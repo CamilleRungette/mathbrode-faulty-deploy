@@ -19,7 +19,8 @@ import Creations from './components/Creations'
 import {createStore, combineReducers}  from 'redux';
 import {Provider} from 'react-redux';
 import user from './components/Reducer/user.reducer';
-const store = createStore(combineReducers({user}));
+import item from './components/Reducer/cart.reducer'
+const store = createStore(combineReducers({user, item}));
 
 
 

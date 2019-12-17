@@ -22,7 +22,8 @@ class ItemPresentation extends React.Component {
       userName: '',
       userEmail: '',
       content: '',
-      item_id: ''
+      item_id: '',
+      item:[],
         }
     console.log("PROPS", this.props.match.params.id)  
   }
@@ -34,17 +35,17 @@ class ItemPresentation extends React.Component {
         return response.json();
       })
       .then(function(data){
-       console.log("THE STATE ===========>", data.thisItem)
-       ctx.setState({
-         name: data.thisItem.name,
-         desc: data.thisItem.description,
-         copy: data.thisItem.copy,
-         photo: data.thisItem.photo,
-         price: data.thisItem.price,
-         shipping_fee: data.thisItem.shipping_fee,
-         size: data.thisItem.size,
-         item_id: data.thisItem._id
-       })
+        ctx.setState({
+          name: data.thisItem.name,
+          desc: data.thisItem.description,
+          copy: data.thisItem.copy,
+          photo: data.thisItem.photo,
+          price: data.thisItem.price,
+          shipping_fee: data.thisItem.shipping_fee,
+          size: data.thisItem.size,
+          item_id: data.thisItem._id,
+          item: data.thisItem
+        })
       })
     }
 
@@ -96,10 +97,11 @@ class ItemPresentation extends React.Component {
             </Row>          
             </div> 
               <div className="d-flex justify-content-center mb-4" >
+              <Button color="secondary" style={{marginRight:"2em"}}> Retour </Button>
                 {this.props.user == null ? (
                   <Link to="/login" ><Button style={{backgroundColor:"#1b263b"}}>Ajouter au panier</Button></Link>
                 ):(
-                  <Link to="#" ><Button style={{backgroundColor:"#1b263b"}}>Ajouter au panier</Button></Link>
+                  <Button onClick={() => this.props.onBuyClick(this.state.item)} style={{backgroundColor:"#1b263b"}}>Ajouter au panier</Button>
                 )}
               </div>
           </div>
@@ -148,11 +150,21 @@ class ItemPresentation extends React.Component {
 }
 
 function mapStatetoProps(state){
-  console.log("LE STORE:", state)
+  console.log(state)
   return  {user: state.user.userSigned}
 }
 
+function mapDispatchToProps(dispatch){
+  return{
+    onBuyClick: function(data){
+      console.log("info envoyée au reducer", data)
+      dispatch({type: 'carted', item: data})
+    }
+  }
+}
+
+
 export default connect(
   mapStatetoProps,
-  null
+  mapDispatchToProps
 )(ItemPresentation);

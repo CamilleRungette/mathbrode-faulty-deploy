@@ -1,10 +1,12 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 
 
 class ShopItem extends React.Component {
   render() {  
   return (
+   < Link to={`/item/${this.props.itemName}`}>
     <div className="col-6 col-lg-4 my-3">  
       <div className="productTitle">
         <div class="overlay-image">
@@ -19,6 +21,7 @@ class ShopItem extends React.Component {
         </div>
       </div>
     </div>
+    </Link>
   )}
 }
 export default ShopItem;
