@@ -93,7 +93,7 @@ router.post('/order', function (req, res, next){
   newOrder = new OrderModel({
     user_id: req.body.user_id,
     total: req.body.total,
-    date: Date.now(),
+    date: new Date,
     sent: false,
     shipping_date: currentDate.addDays(4),
   })

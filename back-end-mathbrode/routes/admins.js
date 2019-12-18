@@ -3,7 +3,9 @@ var router = express.Router();
 ItemModel = require('../models/item');
 AdminModel = require('../models/admin');
 EventModel = require('../models/event');
-MessageModel= require('../models/message')
+MessageModel= require('../models/message');
+OrderModel = require('../models/order')
+ItemOrderModel = require ('../models/item_order')
 
 
 router.post('/create-admin', function (req, res, next){
@@ -143,6 +145,20 @@ router.post('/delete-message', async function(req, res, next){
     );
   res.json({result: true})
     console.log("message deleted")
+})
+
+router.get('/orders', async function(req, res, next){
+  allOrders = await OrderModel.find(function(err, orders){
+    console.log(orders)
+  })
+  res.json({allOrders})
+})
+
+router.get('/order', async function(req, res, next){
+  thisOrder = await OrderModel.findOne({_id: req.query.id})
+  items = await ItemOrderModel.find({order_id: thisOrder._id})
+    console.log("================> ITEMS", items)
+  res.json({items})
 })
 
 module.exports = router;
