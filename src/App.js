@@ -15,17 +15,19 @@ import ItemPres from './components/ItemPresentation'
 import Items from './components/Items'
 import Exemple from './components/Exemple'
 import Creations from './components/Creations'
-import MaxCreations from './components/MaxCreations'
-import Workshops from './components/dashboardComponents/workshops';
+
+import {createStore, combineReducers}  from 'redux';
+import {Provider} from 'react-redux';
+import user from './components/Reducer/user.reducer';
+import item from './components/Reducer/cart.reducer'
+const store = createStore(combineReducers({user, item}));
 
 
 
 class App extends Component{
-
   render(){
-
-
     return (
+     <Provider store={store}>
       <Router>
         <Switch>
           <Route path="/" exact component={Home} />
@@ -41,14 +43,11 @@ class App extends Component{
           <Route path="/items" component={Items} />
           <Route path="/exemple" component={Exemple} />
           <Route path="/creations" component={Creations}/>
-          <Route path="/maxcreations" component={MaxCreations}/>
-          <Route path="/workshops" component={Workshops}/>
+         
         </Switch>
       </Router>  
-
+    </Provider>
   )}
-
-
 }
 
 export default App;

@@ -36,6 +36,7 @@ class Messages extends React.Component{
         messageContent={message.content}
         messageSender={message.sender_email}
         messageDate={message.date}
+        messageId = {message._id}
         />
       }, this)
 
@@ -44,6 +45,9 @@ class Messages extends React.Component{
         return(
           <div style={{fontFamily:"Raleway"}}>
           <NavbarAdmin/>
+          <div style={{height:"6em"}}></div>
+          <h2 style={{textAlign:"center", fontSize:"3em"}}>Messagerie</h2>
+          <div style={{height:"6em"}}></div>
 
               {messageList}
 

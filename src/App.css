@@ -180,7 +180,7 @@ img {
  
 .iconstat {
   width : 300px;
-  padding: 70px;
+  padding: 40px;
   
 }
 
@@ -204,7 +204,7 @@ img {
   color: #212529;
 }
 
-.hover .zoom{
+.hover .zoom {
   overflow: hidden;
   position: relative; 
 }
@@ -225,10 +225,13 @@ img {
 }
  
 .hover:hover .zoom img{
-  -moz-transform: scale(1.20);
-  -webkit-transform: scale(1.20);
-  transform: scale(1.20);
+  -moz-transform: scale(1.50);
+  -webkit-transform: scale(1.50);
+  transform: scale(1.50);
+  
 }
 
-  
-
+body {
+  display:flex;
+  width:100%;
+}

@@ -3,9 +3,10 @@ import {Card, Button,   Col, Row, Table, Form} from 'react-bootstrap';
 import '../App.css';
 import Navbar from './Navbar';
 import {Redirect } from 'react-router-dom';
+import {connect} from 'react-redux';
 
 
-class Signin extends React.Component{
+class Login extends React.Component{
     constructor(){
 super();
 this.handleSubmitSignUp = this.handleSubmitSignUp.bind(this);
@@ -34,7 +35,7 @@ this.state = {
       if (data.isUserExists === false ){
         ctx.setState({isUserExist: true});
       }
-      console.log(data)
+    ctx.props.onSiginClick(data.user, this.state.isUserExist)
     });
   }
 
@@ -52,9 +53,8 @@ this.state = {
       if (data.isUserExists === true ){
         ctx.setState({isUserExist: true});
       }
-      console.log("RESULTAT DU FECTH SIGN-UP:", data.isUserExists, ctx.state.isUserExist)
-});
-
+      ctx.props.onSiginClick(data.userExists, this.state.isUserExist)
+    });
 }
 
       render(){
@@ -128,5 +128,15 @@ this.state = {
         )}
 }
 
+function mapDispatchToProps(dispatch){
+  return{
+    onSiginClick: function(data, isUserExist){
+      dispatch({type: 'signin', userSigned: data, isUserExist })
+    }
+  }
+}
 
-export default Signin;
+export default connect (
+  null,
+  mapDispatchToProps
+)(Login)

@@ -6,6 +6,8 @@ import { faCut, faCalendarAlt, faHandshake } from '@fortawesome/free-solid-svg-i
 import {Modal, Form} from 'react-bootstrap'
 import '../App.css'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux';
+
 
 let modalStyle={
   width:"50em",
@@ -45,15 +47,18 @@ constructor(){
 
   render(){
     return(
-      <div style={{fontFamily: 'Raleway'}}>
-      <h1 style={{fontSize:"3.5em", textAlign:"center"}} > <em>Mes Prestations</em></h1>
-      <div style={{height:"10em"}}></div>
+    <div style={{fontFamily: 'Raleway'}}>
+        <h1 style={{fontSize:"3.5em", textAlign:"center"}} > <em>Mes Prestations</em></h1>
 
-      <Col xs="8" style={{margin:"auto"}}>
+        <div style={{height:"10em"}}></div>
+
+
+
         <Row style={{fontFamily:"Raleway", display:"flex", justifyContent:"space-around"}}>
+          
 
-          <Col xs="3">
-            <Card style={{cursor:"pointer", backgroundColor:"#EDF3F7", width:"20em", height:"14em", padding:"1em", border:"none"}}>
+          <Col xs="12" lg="4" style={{display:"flex", justifyContent:"center",marginBottom:"2em"}}>
+            <Card style={{cursor:"pointer", backgroundColor:"#EDF3F7", width:"17em", height:"17em", padding:"1em", border:"none"}}>
               <CardBody >
                 <div style={{display:"flex", justifyContent:"space-between", marginBottom:"0.6em"}} >
                 <Link to="/classes" ><CardTitle style={{ fontSize:"1.2em", color:"black"}} ><strong>Atelier d'initiation</strong> </CardTitle></Link>
@@ -64,8 +69,8 @@ constructor(){
             </Card>
           </Col>
 
-          <Col xs="3">
-            <Card style={{cursor:"pointer", backgroundColor:"#EDF3F7", width:"20em", height:"14em", padding:"1em", border:"none"}}>
+          <Col xs="12" lg="4" style={{display:"flex", justifyContent:"center",marginBottom:"2em"}}>
+            <Card style={{cursor:"pointer", backgroundColor:"#EDF3F7", width:"17em", height:"17em", padding:"1em", border:"none"}}>
               <CardBody onClick={this.handleShow} >
                 <div style={{display:"flex", justifyContent:"space-between", marginBottom:"0.6em"}} >
                 <CardLink style={{ fontSize:"1.2em"}} ><strong>Projets personnalisés</strong> </CardLink>
@@ -76,8 +81,8 @@ constructor(){
             </Card>
           </Col>
 
-          <Col xs="3">
-            <Card style={{cursor:"pointer", backgroundColor:"#EDF3F7", width:"20em", height:"14em", padding:"1em", border:"none"}}>
+          <Col xs="12" lg="4" style={{display:"flex", justifyContent:"center",marginBottom:"2em"}}>
+            <Card style={{cursor:"pointer", backgroundColor:"#EDF3F7", width:"17em", height:"17em", padding:"1em", border:"none"}}>
               <CardBody >
                 <div style={{display:"flex", justifyContent:"space-between", marginBottom:"0.6em"}} >
                 <Link to="/events"> <CardTitle style={{ color: "black", fontSize:"1.2em"}} ><strong>Rencontrez-moi</strong> </CardTitle> </Link>
@@ -89,6 +94,8 @@ constructor(){
           </Col>
 
         </Row>
+
+ 
      
        
        <Modal show={this.state.show} onHide={this.handleClose} className="col-lg-10" >
@@ -100,8 +107,12 @@ constructor(){
           <Form>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Adresse email</Form.Label>
-              <Form.Control type="email"onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
-              value={this.state.SendMessageEmail} />
+              {this.props.user == null ? (
+                <Form.Control type="email"onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
+                value={this.state.SendMessageEmail} />
+              ): (
+                <Form.Control type="email" value={this.props.user.email} />
+              )}
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
@@ -116,11 +127,18 @@ constructor(){
           </Modal.Body>
          </div>
        </Modal>
-        </Col>
+       
         </div>
     )
   }
 }
 
 
-export default Service;
+function mapStatetoProps(state){
+  return  {user: state.user}
+}
+
+export default connect(
+  mapStatetoProps,
+  null
+)(Service)

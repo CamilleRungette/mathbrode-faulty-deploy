@@ -23,7 +23,6 @@ class Creations extends React.Component {
     })
     .then(function(data){
       ctx.setState({items: data.allItems})
-     console.log("THE STATE ===========>", ctx.state.items)
     })
     .catch(function(error){
       console.log("FAILED")
@@ -52,20 +51,29 @@ class Creations extends React.Component {
 
 
     <div className="row justify-content-center">
-        <div className="col-lg-8">
+        <div className="col-lg-10">
       
 
               <div style={{fontFamily:"Raleway"}}>
                 <h1 style={{fontSize:"4em", textAlign:"center"}}> <em>Mes Créations</em></h1>
-                <div style={{height:"10em"}}></div>
+                <div style={{height:"5em"}}></div>
+
               <div className="row" style={{display:"flex", justifyContent: "space-around"}}>
                 {itemsList}
               </div>
-              <Link to="/items"> <Button> En voir plus...</Button> </Link>
+             
               </div>
 
 
+              <div style={{height:"5em"}}></div>
+              <div className="row" style={{display:"flex", justifyContent: "center"}}>
+                <Link to="/items"> <Button> En voir plus...</Button> </Link>
+              </div>
+
+
+
         </div>
+
     </div>
     
     

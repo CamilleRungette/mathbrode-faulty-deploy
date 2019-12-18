@@ -11,6 +11,7 @@ export default class Dashboard extends Component {
   super(props);
   this.ItemSubmit = this.ItemSubmit.bind(this);
   this.EventSubmit = this.EventSubmit.bind(this);
+  this.WorkshopSubmit = this.WorkshopSubmit.bind(this);
   this.onDrop = this.onDrop.bind(this);
   this.uploadItemImage = this.uploadItemImage.bind(this);
   this.uploadEventImage = this.uploadEventImage.bind(this);
@@ -27,7 +28,12 @@ export default class Dashboard extends Component {
           CreateEventPhoto:'',
           CreateEventStart: '',
           CreateEventEnd: '',
-          loading: ''
+          loading: '',
+          CreateWorkshopTitle: '',
+          CreateWorkshopDesc: '',
+          CreateWorkshopPrice: '',
+          CreateWorkshopDuration: '',
+          
         }
   }
   
@@ -38,7 +44,6 @@ export default class Dashboard extends Component {
   }
 
   ItemSubmit(){
-    console.log("click détécté")
     fetch('http://localhost:3000/admins/create-item', {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
@@ -47,11 +52,18 @@ export default class Dashboard extends Component {
    }
 
   EventSubmit(){
-    console.log("click détécté")
     fetch('http://localhost:3000/admins/create-event', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `name=${this.state.CreateEventName}&address=${this.state.CreateEventAddress}&date=${this.state.CreateEventDate}&starting_time=${this.state.CreateEventStart}&ending_time=${this.state.CreateEventEnd}&photo=${this.state.CreateEventPhoto}`
+})
+  }
+
+  WorkshopSubmit(){
+    fetch('http://localhost:3000/admins/create-workshop', {
+      method: 'POST',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: `title=${this.state.CreateWorkshopTitle}&desc=${this.state.CreateWorkshopDesc}&price=${this.state.CreateWorkshopPrice}&duration=${this.state.CreateWorkshopDuration}`
 })
   }
 
@@ -106,10 +118,10 @@ export default class Dashboard extends Component {
     <Table responsive>
 <thead>
 <tr>
-<th> <img src="users.png" alt="icon" class="iconstat"/></th>
-<th><img src="euro.png" class="iconstat" alt="icon"/></th>
-<th><img src="vendu.png" class="iconstat" alt="icon"/></th>
-<th><img src="prepa.png" class="iconstat"alt="icon"/></th>
+<th> <img src="clients.png" alt="icon" class="iconstat"/></th>
+<th><img src="revenu.png" class="iconstat" alt="icon"/></th>
+<th><img src="commandes terminées.png" class="iconstat" alt="icon"/></th>
+<th><img src="commandes en attente.png" class="iconstat"alt="icon"/></th>
 </tr>
 </thead>
 <tbody>
@@ -130,7 +142,7 @@ export default class Dashboard extends Component {
 
 
             {/* Create-item form */}
-    <Col lg={{offset:3, span:6 }}>
+    <Col xs={{span:12}} lg={{offset:3, span:6 }}>
         <Card>
           <Card.Header style={{fontSize:"1.3em"}}>Ajouter un produit</Card.Header>
             <Card.Body>
@@ -148,7 +160,7 @@ export default class Dashboard extends Component {
                 {this.state.loading ? (
                   <h6> Chargement ...</h6>
                 ) : (
-                 <img src={this.state.CreateItemPhoto} style={{width:"10em", marginLeft:'8em'}} />
+                 <img src={this.state.CreateItemPhoto} alt="item chosen photo" style={{width:"10em", marginLeft:'8em'}} />
                 )}
             </Form.Group>
 
@@ -227,7 +239,7 @@ export default class Dashboard extends Component {
                 {this.state.loading ? (
                   <h6> Chargement ...</h6>
                 ) : (
-                 <img src={this.state.CreateEventPhoto} style={{width:"10em"}} />
+                 <img alt="chosen photo" src={this.state.CreateEventPhoto} style={{width:"10em"}} />
                 )}
 
                 </Col>  
@@ -281,6 +293,72 @@ export default class Dashboard extends Component {
       </Col> 
 
       </div>
+
+
+      <div style={{height:"12em"}}></div>
+
+ <Col lg={{offset:3, span:6 }}>
+        <Card>
+          <Card.Header style={{fontSize:"1.3em"}}>Ajouter un atelier</Card.Header>
+            <Card.Body>
+                        
+            <Form>
+
+        {/*    <Form.Group as={Row} controlId="formHorizontalPicture">
+              <Form.Label column sm={2}>Photo</Form.Label>
+                <Col sm={10}>
+                <input type="file"
+                placeholder="upload an image"
+
+                />
+                  </Col>  
+             
+            </Form.Group>  */}
+
+            <Form.Group as={Row} controlId="formHorizontalTitle">
+              <Form.Label column sm={2}>Titre</Form.Label>
+                <Col sm={10}>
+                  <Form.Control type="text" onChange={(e)=> this.setState({CreateWorkshopTitle: e.target.value})}
+                        value={this.state.CreateWorkshopTitle} />
+                </Col>  
+            </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalDesc">
+              <Form.Label column sm={2}>Description</Form.Label>
+                <Col sm={10}>
+                  <Form.Control as="textarea"  onChange={(e)=> this.setState({CreateWorkshopDesc: e.target.value})}
+                        value={this.state.CreateWorkshopDesc} />
+                </Col>  
+            </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalPrice">
+              <Form.Label column sm={2}>Prix</Form.Label>
+                <Col sm={10}>
+                  <Form.Control type="text"  onChange={(e)=> this.setState({CreateWorkshopPrice: e.target.value})}
+                        value={this.state.CreateWorkshopPrice} />
+                </Col>  
+            </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalDuration">
+              <Form.Label column sm={2}>Durée</Form.Label>
+                <Col sm={10}>
+                  <Form.Control type="text" onChange={(e)=> this.setState({CreateWorkshopDuration: e.target.value})}
+                        value={this.state.CreateWorkshopDuration} />
+                </Col>  
+            </Form.Group>
+
+            <Form.Group style={{textAlign:"center"}} as={Row}>
+                <Col sm={{ offset: 1 }}>
+                  <Button type="submit" onClick={this.WorkshopSubmit} style={{border:"none", backgroundColor:"#1B263B"}}>Valider</Button>
+                </Col>
+            </Form.Group>
+          </Form>
+
+          </Card.Body>
+        </Card>
+      </Col> 
+ 
+
 
 <div style={{height:"8em"}}></div>
 

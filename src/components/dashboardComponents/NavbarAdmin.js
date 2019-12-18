@@ -14,7 +14,7 @@ class Navigbar extends React.Component{
     <Navbar  light expand="md" style={{ fontFamily:"Raleway", width: "90%", height:"8em" , display:"flex", justifyContent:"space-between", margin:"auto"}}>
         <div style={{textAlign:"right"}}>
             <NavbarBrand>
-                <div className= "offset-1" style={{display:"flex", alignItems:"center", fontSize:"2em"}}><FontAwesomeIcon icon={faStar} /> Mathbrode</div>
+            <img src="/logo.png" style={{width:"9em"}} />
             </NavbarBrand>
         </div>
 
@@ -31,9 +31,6 @@ class Navigbar extends React.Component{
                 </NavItem>
                 <NavItem>
                 <Link to="/stock" class="navigbar nav-link">Liste du stock</Link>
-                </NavItem>
-                <NavItem>
-                <Link to="/workshops" class="navigbar nav-link">Ateliers</Link>
                 </NavItem>
                 <Button color="secondary">Se déconnecter</Button>
             </Nav>
