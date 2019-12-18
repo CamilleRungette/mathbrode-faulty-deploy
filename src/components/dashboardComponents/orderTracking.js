@@ -7,7 +7,6 @@ import { faCircle, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import DateFormat from '../function';
 import {Modal, Form, Button, ListGroup, InputGroup, FormControl} from 'react-bootstrap'
 import '../../App.css'
-import { Link, Redirect } from 'react-router-dom';
 
 let modalStyle={
   width:"50em",
@@ -86,7 +85,6 @@ class tracking extends React.Component{
     .catch(function(error) {
       console.log('Request failed ->', error)
   });
-
   }
 
     render(){
@@ -134,49 +132,46 @@ class tracking extends React.Component{
                   ))}
                 </tbody>
               </Table>
-
-        <Modal show={this.state.show} onHide={this.handleClose} className="col-lg-8" >
-          <div style={modalStyle}>
-            <Modal.Header closeButton>
-              <Modal.Title>Détails de la commande :</Modal.Title>
-            </Modal.Header>
-              <Modal.Body>
-                <Card style={{ width: "90%", margin:"auto" }}>
-                  <Card.Body>
-                    <Card.Title> <strong>Produits: </strong></Card.Title>
-                    <Card.Text>
-                      {this.state.items.map((item, i) =>(
-                        <ListGroup.Item> - {item.name} ({item.price}€)</ListGroup.Item>
-                      ))}
-                    </Card.Text>
-                    <Card.Title> <strong>Acheteur: </strong></Card.Title>
-                    <Card.Text>
-                        <ListGroup.Item> {this.state.user.first_name} {this.state.user.last_name}: <br/>
-                                    {this.state.user.email}
-                         </ListGroup.Item>
-                    </Card.Text>
-                      
-                      <Card.Text>
-                        <ListGroup.Item style={{display:"flex"}}>
-                          {this.state.order.sent === false? (
-                            <Form.Check onClick={() => this.checkOrderSent(this.state.order)} type="checkbox"/>
-                          ): (
-                            <FontAwesomeIcon style={{marginRight:'1em'}} icon={faCheck} />
-                          )}
-                          Commande envoyée 
-                        </ListGroup.Item>
-                      </Card.Text>
- 
-                  </Card.Body>
-                </Card>
-                <Button style={{backgroundColor:"#1B263B", border:"none", marginLeft:'47%', marginTop:'2em'}} variant="secondary" onClick={() => this.orderSent(this.state.order._id)}>
-                 Enregistrer
-                </Button>
-              </Modal.Body>
-          </div>
-        </Modal>
-
-
+                  <Modal show={this.state.show} onHide={this.handleClose} className="col-lg-8" >
+                    <div style={modalStyle}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Détails de la commande :</Modal.Title>
+                      </Modal.Header>
+                        <Modal.Body>
+                          <Card style={{ width: "90%", margin:"auto" }}>
+                            <Card.Body>
+                              <Card.Title> <strong>Produits: </strong></Card.Title>
+                              <Card.Text>
+                                {this.state.items.map((item, i) =>(
+                                  <ListGroup.Item> - {item.name} ({item.price}€)</ListGroup.Item>
+                                ))}
+                              </Card.Text>
+                              <Card.Title> <strong>Acheteur: </strong></Card.Title>
+                              <Card.Text>
+                                  <ListGroup.Item> {this.state.user.first_name} {this.state.user.last_name}: <br/>
+                                              {this.state.user.email}
+                                  </ListGroup.Item>
+                              </Card.Text>
+                                
+                                <Card.Text>
+                                  <ListGroup.Item style={{display:"flex"}}>
+                                    {this.state.order.sent === false? (
+                                      <Form.Check onClick={() => this.checkOrderSent(this.state.order)} type="checkbox"/>
+                                    ): (
+                                      <FontAwesomeIcon style={{marginRight:'1em'}} icon={faCheck} />
+                                    )}
+                                    Commande envoyée 
+                                  </ListGroup.Item>
+                                </Card.Text>
+          
+                            </Card.Body>
+                          </Card>
+                          <Button style={{backgroundColor:"#1B263B", border:"none", marginLeft:'47%', marginTop:'2em'}} variant="secondary" onClick={() => this.orderSent(this.state.order._id)}>
+                          Enregistrer
+                          </Button>
+                        </Modal.Body>
+                    </div>
+                  </Modal>
             </Card.Body>
           </Card>
         </Col>

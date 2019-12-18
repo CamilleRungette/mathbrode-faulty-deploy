@@ -101,14 +101,17 @@ router.post('/order', function (req, res, next){
   newOrder.save(function(error, order){
     if(order){
       items = JSON.parse(req.body.items)
-      console.log("==============> ORDER SAVED", order ) 
+      console.log("==============> ITEMS", items ) 
+      
       for(i=0; i < items.length; i++){
         newItemOrder = new ItemOrderModel({
           item_id: items[i]._id,
           price:items[i].price,
           name: items[i].name,
           order_id: newOrder._id,
-          copy: 1
+          copy: 1,
+          photo: items[i].photo,
+          description: items[i].description,
         })
         
           newItemOrder.save(function(error, item_order){
@@ -128,6 +131,18 @@ router.post('/order', function (req, res, next){
 
 })
 
+router.get('/myorders', async function(req, res, next){
+  myOrders = await OrderModel.find({user_id: "5df3727eff7e8a105c9ff8a2" })
+  
+  var orderList = [];
+  for(let i = 0; i < myOrders.length; i++){ 
+    let copyOrder ={_id: myOrders[i]._id, total: myOrders[i].total, date :myOrders[i].date};
+    copyOrder.items = await ItemOrderModel.find({order_id: myOrders[i]._id});
+    orderList.push(copyOrder);
+  }
+  console.log(orderList);
+  res.json({myOrders: orderList})
+})
 
 
 module.exports = router;

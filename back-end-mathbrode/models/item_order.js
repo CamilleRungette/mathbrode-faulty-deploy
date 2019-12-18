@@ -6,6 +6,8 @@ let itemOrderSchema = mongoose.Schema({
     name: String,
     order_id: {type: mongoose.Schema.Types.ObjectId, ref: "orders"},
     copy: Number,
+    photo: String,
+    description: String,
 });
 
 const ItemOrderModel = mongoose.model("item_orders", itemOrderSchema);
