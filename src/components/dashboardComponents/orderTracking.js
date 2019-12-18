@@ -3,10 +3,11 @@ import {Card,   Col, Table} from 'react-bootstrap';
 import NavbarAdmin from './NavbarAdmin';
 import Footer from '../Footer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle } from '@fortawesome/free-solid-svg-icons'
+import { faCircle, faCheck } from '@fortawesome/free-solid-svg-icons'
 import DateFormat from '../function';
-import {Modal, Form, Button, ListGroup} from 'react-bootstrap'
+import {Modal, Form, Button, ListGroup, InputGroup, FormControl} from 'react-bootstrap'
 import '../../App.css'
+import { Link, Redirect } from 'react-router-dom';
 
 let modalStyle={
   width:"50em",
@@ -25,11 +26,16 @@ class tracking extends React.Component{
   constructor(){
     super();
     this.handleClose = this.handleClose.bind(this)
-    this.handleShow = this.handleShow.bind(this)  
+    this.handleShow = this.handleShow.bind(this)
+    this.checkOrderSent = this.checkOrderSent.bind(this); 
+    this.orderSent = this.orderSent.bind(this) 
     this.state={
       orders:[],
       show: false,
-      items: []
+      items: [],
+      order: [],
+      user: [],
+      sent: false,
     }
   }
 
@@ -45,15 +51,27 @@ class tracking extends React.Component{
       return response.json();
     })
     .then(function(data){
-      ctx.setState({items: data.items})
+      ctx.setState({items: data.items, order: data.thisOrder, user: data.thisUser})
      console.log("THE STATE ===========>", ctx.state.items)
     })
     .catch(function(error) {
       console.log('Request failed ->', error)
   });
-
   }
 
+  checkOrderSent(){
+    this.setState({sent: !this.state.sent})
+  }
+
+  orderSent(order){
+    if (this.state.sent === true){
+      fetch('http://localhost:3000/admins/update-order',{
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body: `order=${order}`
+      })
+    }
+  }
 
   componentDidMount(){
     let ctx = this;
@@ -72,7 +90,7 @@ class tracking extends React.Component{
   }
 
     render(){
-      let status = false
+      console.log("sent state:", this.state.sent)
         return(
   <div style={{fontFamily:"Raleway"}}>
   <NavbarAdmin/>
@@ -106,33 +124,53 @@ class tracking extends React.Component{
                     )}
                     <td>{order.total}€</td>
                     <td>{DateFormat(order.shipping_date)}</td>
-                    <td><FontAwesomeIcon icon={faCircle} /> </td>
+                    {order.sent == false?(
+                     <td> <FontAwesomeIcon icon={faCircle} /> </td>
+                    ):(
+                      <td>  <FontAwesomeIcon icon={faCheck} /> </td>
+                    )}
                     <td onClick={() => this.handleShow(order)}  > Détails</td>
                   </tr>
                   ))}
                 </tbody>
               </Table>
 
-        <Modal show={this.state.show} onHide={this.handleClose} className="col-lg-10" >
+        <Modal show={this.state.show} onHide={this.handleClose} className="col-lg-8" >
           <div style={modalStyle}>
             <Modal.Header closeButton>
               <Modal.Title>Détails de la commande :</Modal.Title>
             </Modal.Header>
               <Modal.Body>
-                <Card style={{ width: "80%" }}>
+                <Card style={{ width: "90%", margin:"auto" }}>
                   <Card.Body>
-                    <Card.Title>Produits:</Card.Title>
+                    <Card.Title> <strong>Produits: </strong></Card.Title>
                     <Card.Text>
                       {this.state.items.map((item, i) =>(
-                        <ListGroup.Item>{item.name}</ListGroup.Item>
+                        <ListGroup.Item> - {item.name} ({item.price}€)</ListGroup.Item>
                       ))}
                     </Card.Text>
-                    <Card.Link href="#">Card Link</Card.Link>
-                    <Card.Link href="#">Another Link</Card.Link>
+                    <Card.Title> <strong>Acheteur: </strong></Card.Title>
+                    <Card.Text>
+                        <ListGroup.Item> {this.state.user.first_name} {this.state.user.last_name}: <br/>
+                                    {this.state.user.email}
+                         </ListGroup.Item>
+                    </Card.Text>
+                      
+                      <Card.Text>
+                        <ListGroup.Item style={{display:"flex"}}>
+                          {this.state.order.sent === false? (
+                            <Form.Check onClick={() => this.checkOrderSent(this.state.order)} type="checkbox"/>
+                          ): (
+                            <FontAwesomeIcon style={{marginRight:'1em'}} icon={faCheck} />
+                          )}
+                          Commande envoyée 
+                        </ListGroup.Item>
+                      </Card.Text>
+ 
                   </Card.Body>
                 </Card>
-                <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.sendMessage}>
-                  Envoyer
+                <Button style={{backgroundColor:"#1B263B", border:"none", marginLeft:'47%', marginTop:'2em'}} variant="secondary" onClick={() => this.orderSent(this.state.order._id)}>
+                 Enregistrer
                 </Button>
               </Modal.Body>
           </div>
