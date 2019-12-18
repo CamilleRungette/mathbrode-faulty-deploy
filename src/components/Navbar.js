@@ -19,10 +19,10 @@ class Navigbar extends React.Component{
 
 <div className="row" style={{marginLeft:"0px",marginRight:"0px"}}>
 
-    <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "95%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto"}}>
+    <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "95%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto",padding:"0"}}>
         <div xs="2" style={{textAlign:"right"}}>
             <NavbarBrand href="/">
-              <img src="/logo bis.png" style={{width:"9em"}} />
+              <img src="/logo bis.png" style={{width:"6em"}} />
             </NavbarBrand>
         </div>
 

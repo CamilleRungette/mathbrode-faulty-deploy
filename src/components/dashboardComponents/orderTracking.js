@@ -74,12 +74,14 @@ class tracking extends React.Component{
     render(){
       let status = false
         return(
-  <div style={{fontFamily:"Raleway"}}>
+
+
+<div style={{fontFamily:"Raleway"}}>
   <NavbarAdmin/>
-    <div style={{height:"75vh"}}>
+    
 
       <div style={{ height:"100%", display:"flex", justifyContent:"center", paddingTop:"10%"}}>
-        <Col sm="11">
+        <Col>
           <Card>
           <Card.Header>Commandes et suivi</Card.Header>
             <Card.Body>
@@ -107,7 +109,7 @@ class tracking extends React.Component{
                     <td>{order.total}€</td>
                     <td>{DateFormat(order.shipping_date)}</td>
                     <td><FontAwesomeIcon icon={faCircle} /> </td>
-                    <td onClick={() => this.handleShow(order)}  > Détails</td>
+                    <td onClick={() => this.handleShow(order)}  className="cursor"> Détails</td>
                   </tr>
                   ))}
                 </tbody>
@@ -147,7 +149,7 @@ class tracking extends React.Component{
     <div style={{height:"6em"}}></div>
 
 
-    </div>
+   
   <Footer/>
   </div>
  )}
