@@ -7,6 +7,6 @@ let workshopSchema = mongoose.Schema({
     duration: String,
 });
 
-const WorkshopModel = mongoose.model("events", workshopSchema);
+const WorkshopModel = mongoose.model("workshops", workshopSchema);
 
 module.exports = WorkshopModel;
