@@ -3,7 +3,7 @@ import {Card,   Col, Table} from 'react-bootstrap';
 import NavbarAdmin from './NavbarAdmin';
 import Footer from '../Footer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCircle, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import DateFormat from '../function';
 import {Modal, Form, Button, ListGroup, InputGroup, FormControl} from 'react-bootstrap'
 import '../../App.css'
@@ -90,8 +90,8 @@ class tracking extends React.Component{
   }
 
     render(){
-      console.log("sent state:", this.state.sent)
-        return(
+
+      return(
   <div style={{fontFamily:"Raleway"}}>
   <NavbarAdmin/>
     <div style={{height:"75vh"}}>
@@ -125,11 +125,11 @@ class tracking extends React.Component{
                     <td>{order.total}€</td>
                     <td>{DateFormat(order.shipping_date)}</td>
                     {order.sent == false?(
-                     <td> <FontAwesomeIcon icon={faCircle} /> </td>
+                     <td> <FontAwesomeIcon style={{color:"red"}} icon={faTimes} /> </td>
                     ):(
-                      <td>  <FontAwesomeIcon icon={faCheck} /> </td>
+                      <td><FontAwesomeIcon icon={faCheck} style={{color:"green"}} /> </td>
                     )}
-                    <td onClick={() => this.handleShow(order)}  > Détails</td>
+                    <td onClick={() => this.handleShow(order)}> Détails</td>
                   </tr>
                   ))}
                 </tbody>
