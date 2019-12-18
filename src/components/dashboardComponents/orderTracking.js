@@ -122,17 +122,12 @@ class tracking extends React.Component{
                     )}
                     <td>{order.total}€</td>
                     <td>{DateFormat(order.shipping_date)}</td>
-<<<<<<< HEAD
-                    <td><FontAwesomeIcon icon={faCircle} /> </td>
-                    <td onClick={() => this.handleShow(order)}  className="cursor"> Détails</td>
-=======
                     {order.sent == false?(
                      <td> <FontAwesomeIcon style={{color:"red"}} icon={faTimes} /> </td>
                     ):(
                       <td><FontAwesomeIcon icon={faCheck} style={{color:"green"}} /> </td>
                     )}
                     <td onClick={() => this.handleShow(order)}> Détails</td>
->>>>>>> development
                   </tr>
                   ))}
                 </tbody>
