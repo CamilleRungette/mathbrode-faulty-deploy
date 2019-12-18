@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import DateFormat from '../function';
 import {Modal, Form, Button, ListGroup} from 'react-bootstrap'
-
+import '../../App.css'
 
 let modalStyle={
   width:"50em",
@@ -107,7 +107,7 @@ class tracking extends React.Component{
                     <td>{order.total}€</td>
                     <td>{DateFormat(order.shipping_date)}</td>
                     <td><FontAwesomeIcon icon={faCircle} /> </td>
-                    <td onClick={() => this.handleShow(order)} style={{textDecoration:"underline"}} > Détails</td>
+                    <td onClick={() => this.handleShow(order)}  > Détails</td>
                   </tr>
                   ))}
                 </tbody>
@@ -123,7 +123,9 @@ class tracking extends React.Component{
                   <Card.Body>
                     <Card.Title>Produits:</Card.Title>
                     <Card.Text>
-                     <ListGroup.Item>Cras justo odio</ListGroup.Item>
+                      {this.state.items.map((item, i) =>(
+                        <ListGroup.Item>{item.name}</ListGroup.Item>
+                      ))}
                     </Card.Text>
                     <Card.Link href="#">Card Link</Card.Link>
                     <Card.Link href="#">Another Link</Card.Link>
