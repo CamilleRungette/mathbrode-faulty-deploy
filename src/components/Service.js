@@ -33,7 +33,7 @@ constructor(){
     fetch('http://localhost:3000/users/create-message', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `object=personalised_project&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}`
+      body: `object=Projet_personnalisé&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}`
     })
   }
 

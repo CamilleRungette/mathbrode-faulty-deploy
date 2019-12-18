@@ -47,6 +47,7 @@ class Navigbar extends React.Component{
 
                 <NavItem>
                 {this.props.connected ? (
+                  <div>
                 <NavItem>
                   <Link to ="/basket" > <NavLink>Panier</NavLink> </Link>
                 </NavItem>
