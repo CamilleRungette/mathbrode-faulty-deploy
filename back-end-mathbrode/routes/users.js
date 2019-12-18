@@ -67,7 +67,8 @@ router.post('/create-message', async function (req, res, next){
     item_id: req.body.item_id,
     sender_email: req.body.sender_email,
     sender_name: req.body.name,
-    date: Date.now()
+    date: Date.now(),
+    read: false,
   })
   
   newMessage.save(function(error, message){
