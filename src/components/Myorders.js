@@ -3,6 +3,9 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import DateFormat from '../components/function'
 import {Card, Button} from 'react-bootstrap'
+import { connect } from 'react-redux';
+import {Redirect, Link} from 'react-router-dom'
+
  
 class MyOrders extends Component{
   constructor(){
@@ -12,8 +15,9 @@ class MyOrders extends Component{
     }
   }
   componentDidMount(){
+    console.log(this.props.user)
     let ctx = this;
-    fetch('http://localhost:3000/users/myorders')
+    fetch(`http://localhost:3000/users/myorders?id=${this.props.user._id}`)
     .then(function(response) {
       return response.json();
     })
@@ -28,7 +32,30 @@ class MyOrders extends Component{
 
 
   render(){
-    return(
+    if (this.props.connected === false || this.props.connected === null){
+      return <Redirect to="/" />
+    }else if (this.state.myOrders.length === 0){
+      return(
+        <div>
+          <Navbar />
+          <div style={{fontFamily:"Raleway", height:"75vh"}}>
+            <div style={{textAlign:"center", fontSize:"3.3em"}}>
+              <p>Mes Commandes</p>
+            </div>
+            <div style={{height:"5em"}}></div>
+
+          <div style={{fontSize:"2em", textAlign:"center"}}>
+            <p>Tu n'as passé aucune commande </p>
+           <Link to="/"><Button style={{backgroundColor:"#1B263B"}}> Retour</Button> </Link>
+          </div>
+
+          </div>
+          <Footer />
+        </div>
+      )
+
+        } else{
+      return(
       <div style={{fontFamily:"Raleway"}}>
         <Navbar/>
         <div style={{height:'5em'}}></div>
@@ -66,6 +93,16 @@ class MyOrders extends Component{
       </div>
     )
   }
+}}
+
+function mapStatetoProps(state){
+  return  {connected: state.user.isUserExist,
+          user: state.user.userSigned,
+          }
 }
 
-export default MyOrders;
+
+export default connect(
+  mapStatetoProps,
+  null
+)(MyOrders);

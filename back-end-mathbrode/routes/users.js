@@ -132,7 +132,7 @@ router.post('/order', function (req, res, next){
 })
 
 router.get('/myorders', async function(req, res, next){
-  myOrders = await OrderModel.find({user_id: "5df3727eff7e8a105c9ff8a2" })
+  myOrders = await OrderModel.find({user_id: req.query.id })
   
   var orderList = [];
   for(let i = 0; i < myOrders.length; i++){ 

@@ -2,7 +2,16 @@ import React from 'react';
 import NavbarAdmin from './NavbarAdmin';
 import Footer from '../Footer'
 import MessageItem from '../cards/Message-item';
+import {Card} from 'react-bootstrap'
 
+const givenSize ={
+  height: '70vh',
+  marginBottom:"3em"
+}
+
+const noGivenSize={
+  marginBottom:"3em"
+}
 
 class Messages extends React.Component{
 
@@ -41,17 +50,26 @@ class Messages extends React.Component{
       }, this)
 
       console.log("MESSAGE LISTE", messageList.length)
-
+      let size;
+      if (messageList.length <= 1) {
+        size = givenSize
+      } else{
+        size= noGivenSize
+      }
         return(
           <div style={{fontFamily:"Raleway"}}>
           <NavbarAdmin/>
+          <div style={size}>
           <div style={{height:"6em"}}></div>
-          <h2 style={{textAlign:"center", fontSize:"3em"}}>Messagerie</h2>
-          <div style={{height:"6em"}}></div>
+          <Card className="col-8 mx-auto" >
+          <h2 style={{textAlign:"center", fontSize:"3em", marginTop:'1em'}}>Messagerie</h2>
+          <div style={{height:"1em"}}></div>
 
               {messageList}
 
             <div style={{height:"6em"}}></div>
+            </Card>
+            </div>
           <Footer/>
           </div>
         

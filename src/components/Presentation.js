@@ -29,7 +29,7 @@ class Presentation extends React.Component {
           fetch('http://localhost:3000/users/create-message', {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            body: `object=contact_me&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}`
+            body: `object=Contactez_moi&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}`
           })
         }
       

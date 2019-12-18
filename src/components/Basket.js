@@ -44,7 +44,7 @@ class Basket extends React.Component {
               <div style={{height:"5em"}}></div>
 
             <div style={{fontSize:"2em", textAlign:"center"}}>
-              <p>Votre panier est vide </p>
+              <p>Ton panier est vide </p>
              <Link to="/items"><Button style={{backgroundColor:"#1B263B"}}> Continuer mes achats</Button> </Link>
             </div>
 
