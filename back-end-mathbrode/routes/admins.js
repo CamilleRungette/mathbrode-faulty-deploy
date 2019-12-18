@@ -5,7 +5,8 @@ AdminModel = require('../models/admin');
 EventModel = require('../models/event');
 MessageModel= require('../models/message');
 OrderModel = require('../models/order')
-ItemOrderModel = require ('../models/item_order')
+ItemOrderModel = require('../models/item_order')
+UserModel = require('../models/user')
 
 
 router.post('/create-admin', function (req, res, next){
@@ -156,9 +157,19 @@ router.get('/orders', async function(req, res, next){
 
 router.get('/order', async function(req, res, next){
   thisOrder = await OrderModel.findOne({_id: req.query.id})
+  thisUser = await UserModel.findOne({_id: thisOrder.user_id})
+  console.log(thisUser)
   items = await ItemOrderModel.find({order_id: thisOrder._id})
     console.log("================> ITEMS", items)
-  res.json({items})
+  res.json({thisOrder, thisUser, items})
+})
+
+router.post('/update-order', async function(req, res, next){
+  console.log("================>", req.body.order)
+  update = await OrderModel.updateOne(
+    {_id: req.body.order},
+    {sent: true}
+    )
 })
 
 module.exports = router;
