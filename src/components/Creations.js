@@ -3,7 +3,7 @@ import {
   Button,
 } from 'reactstrap';
 import '../App.css'
-import MiniItem from './cards/MiniItem'
+import ShopItem from './cards/Shop-item'
 import {Link} from 'react-router-dom'
 
 class Creations extends React.Component {
@@ -32,7 +32,7 @@ class Creations extends React.Component {
 
   render() {
     let itemsList = this.state.items.map(function(item, i){
-      return <MiniItem key={i}
+      return <ShopItem key={i}
        itemCopy={item.copy}
        itemName={item.name}
        itemDesc={item.desc}
@@ -51,7 +51,7 @@ class Creations extends React.Component {
 
 
     <div className="row justify-content-center">
-        <div className="col-lg-10">
+        <div className="col-lg-8">
       
 
               <div style={{fontFamily:"Raleway"}}>

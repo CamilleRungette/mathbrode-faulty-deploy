@@ -42,9 +42,13 @@ class Events extends Component{
     }, this)
   
     return(
+
+
     <div  style={{fontFamily:"Raleway"}}>
+      
       <Navigbar/>
       <Col lg={11} style={{margin:"auto"}}>
+      <div style={{height:"10em"}}></div>
           <h1 style={{textAlign:"center", fontSize:"3.5em", marginTop:"0.5em"}}>Mes Événements</h1>
           <div style={{height:"6em"}}></div>
         <div  style={{ display:"flex", justifyContent:"space-around"}}>

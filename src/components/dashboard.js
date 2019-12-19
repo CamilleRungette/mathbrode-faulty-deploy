@@ -104,10 +104,10 @@ export default class Dashboard extends Component {
     <Table responsive>
 <thead>
 <tr>
-<th> <img src="clients.png" alt="icon" class="iconstat"/></th>
-<th><img src="revenu.png" class="iconstat" alt="icon"/></th>
-<th><img src="commandes terminées.png" class="iconstat" alt="icon"/></th>
-<th><img src="commandes en attente.png" class="iconstat"alt="icon"/></th>
+<th className="col-4"> <img src="clients.png" alt="icon" class="iconstat"/></th>
+<th className="col-4"><img src="revenu.png" class="iconstat" alt="icon"/></th>
+<th className="col-4" ><img src="commandes terminées.png" class="iconstat" alt="icon"/></th>
+<th className="col-4" ><img src="commandes en attente.png" class="iconstat"alt="icon"/></th>
 </tr>
 </thead>
 <tbody>
