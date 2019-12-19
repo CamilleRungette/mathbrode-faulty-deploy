@@ -32,7 +32,7 @@ class Navigbar extends React.Component{
                 <NavItem>
                 <Link to="/stock" class="navigbar nav-link">Liste du stock</Link>
                 </NavItem>
-                <Button color="secondary">Se déconnecter</Button>
+                <Button color="secondary" style={{fontSize:"1em"}}>Se déconnecter</Button>
             </Nav>
         </div>
     </Navbar>

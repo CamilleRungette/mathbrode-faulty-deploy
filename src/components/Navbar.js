@@ -63,7 +63,7 @@ class Navigbar extends React.Component{
                 <NavItem>
                 {this.props.connected ? (
                   <div>
-                  <Button color="secondary" onClick={this.LogOut}>Se Déconnecter</Button>
+                  <Button color="secondary" style={{fontSize:"1em"}} onClick={this.LogOut}>Se Déconnecter</Button>
                   </div>
                 ):(
                   <Button color="secondary" style={{fontSize:"1em"}} href="/login">Se Connecter</Button>
