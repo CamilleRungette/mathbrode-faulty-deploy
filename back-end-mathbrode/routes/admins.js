@@ -29,15 +29,17 @@ router.post('/create-admin', function (req, res, next){
 })
 
 router.post('/sign-in', async function(req, res, next){
-    adminExists = await AdminModel.findOne({email: "blabla@gmail.com", password: "broderie" });
+  console.log(req.body)
+    adminExists = await AdminModel.findOne({email: req.body.email, password: req.body.password });
     let isAdminExists;
+    console.log(adminExists)
 
     if(adminExists){
         isAdminExists = true;
     } else if (!isAdminExists) {
         isAdminExists = false
     };
-    res.json({isAdminExists})
+    res.json({isAdminExists, adminExists})
 })
 
 router.post('/create-item', async function(req, res, next){

@@ -18,9 +18,11 @@ import Creations from './components/Creations'
 import MyOrders from './components/Myorders'
 import {createStore, combineReducers}  from 'redux';
 import {Provider} from 'react-redux';
+import LoginAdmin from './components/LoginAdmin'
 import user from './components/Reducer/user.reducer';
 import item from './components/Reducer/cart.reducer'
-const store = createStore(combineReducers({user, item}));
+import admin from './components/Reducer/admin.reducer'
+const store = createStore(combineReducers({user, item, admin}));
 
 
 
@@ -43,7 +45,8 @@ class App extends Component{
           <Route path="/items" component={Items} />
           <Route path="/exemple" component={Exemple} />
           <Route path="/creations" component={Creations}/>
-          <Route path="/myorders" component={MyOrders} />         
+          <Route path="/myorders" component={MyOrders} />
+          <Route path="/loginadmin" component={LoginAdmin} />         
         </Switch>
       </Router>  
     </Provider>

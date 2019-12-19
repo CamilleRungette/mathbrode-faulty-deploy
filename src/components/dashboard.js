@@ -4,9 +4,11 @@ import {Card, Button, Col, Form, Row, Table,} from 'react-bootstrap';
 import '../App.css';
 import NavbarAdmin from './dashboardComponents/NavbarAdmin';
 import Footer from './Footer'
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
   constructor(props){
   super(props);
   this.ItemSubmit = this.ItemSubmit.bind(this);
@@ -89,13 +91,17 @@ export default class Dashboard extends Component {
 
   
     render(){
-
       var totalUsers = 120;
       var totalMoney = 840;
       var ordersCompleted = 18;
       var ordersPending = 4;
 
 
+      console.log("--------------->", this.props.adminConnected)
+      if (this.props.adminConnected == false || this.props.adminConnected == null){
+         return <Redirect to="/" />
+      }
+      
       return(
 <div style={{fontFamily:"Raleway"}}>
        
@@ -286,11 +292,18 @@ export default class Dashboard extends Component {
 <Footer/>
 
 </div>
-
-  
-  
       )
-    }
-  
-
+    
+  }
 }
+
+function mapStatetoProps(state){
+  console.log("======>", state)
+  return {adminConnected: state.admin.isAdminExist}
+}
+
+
+export default connect(
+  mapStatetoProps,
+  null
+  )(Dashboard);
