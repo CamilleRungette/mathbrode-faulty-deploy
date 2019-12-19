@@ -32,9 +32,6 @@ class Messages extends React.Component{
       ctx.setState({messages: data.allMessages})
      console.log("THE STATE ===========>", ctx.state.messages)
     })
-    .catch(function(error) {
-      console.log('Request failed ->', error)
-  });
   }
 
     render(){
@@ -46,6 +43,7 @@ class Messages extends React.Component{
         messageSender={message.sender_email}
         messageDate={message.date}
         messageId = {message._id}
+        messageRead = {message.read}
         />
       }, this)
 

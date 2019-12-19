@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Col } from 'react-bootstrap';
+import { Col, Button } from 'react-bootstrap';
 import {Link, Redirect} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTrashAlt, faReply, faTimes } from '@fortawesome/free-solid-svg-icons'
@@ -13,18 +13,29 @@ const readMessage ={
 
 
 class MessageItem extends Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.onReadClick = this.onReadClick.bind(this)
     this.deleteMessage = this.deleteMessage.bind(this)
     this.state={
-      read: false,
+      readFromDb: this.props.messageRead,
     }
   }
 
-  onReadClick(){
-    this.setState({
-      read: !this.state.read,
+  onReadClick(data){
+    let ctx = this;
+  console.log("coucou")
+    fetch('http://localhost:3000/admins/read-message',{
+      method: 'POST',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: `message_id=${data}&`
+     })
+     .then(function(response) {
+      return response.json();
+    })
+    .then(function(data){
+      ctx.setState({readFromDb: data.newMessage.read})
+     console.log("THE STATE ===========>", ctx.state.readFromDb)
     })
   }
 
@@ -41,7 +52,8 @@ class MessageItem extends Component{
     var iconMessage = faCheck
     var marker = "Marquer comme lu"
     var styleMessage;
-    if (this.state.read == true){
+    console.log("ICICICI", this.state.readFromDb)
+    if (this.state.readFromDb == true){
       styleMessage = readMessage
       iconMessage = faTimes
       marker = "Marquer comme non lu"
@@ -66,7 +78,7 @@ class MessageItem extends Component{
             <FontAwesomeIcon icon={faReply} />
             <br></br>
             <br></br>
-            <FontAwesomeIcon onClick={this.onReadClick} title={marker} icon={iconMessage} />
+            <FontAwesomeIcon onClick={() => this.onReadClick(this.props.messageId)} title={marker} icon={iconMessage} />
             <br></br>
             <br></br>
             <FontAwesomeIcon onClick={() => this.deleteMessage(this.props.messageId)} icon={faTrashAlt} />

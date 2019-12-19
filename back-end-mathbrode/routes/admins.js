@@ -136,18 +136,19 @@ router.get('/messages', async function(req, res, next){
 })
 
 router.post('/read-message', async function (req, res, next){
-  if (req.body.state == 'false'){
+  console.log(req.body)
+  message = await MessageModel.findOne({_id: req.body.message_id})
+  if (message.read == false){
     update = await MessageModel.updateOne(
       {_id: req.body.message_id},
       {read: true})
-    } else if (req.body.state == 'true'){
+    } else if (message.read == true){
       update = await MessageModel.updateOne(
         {_id: req.body.message_id},
         {read: false})
       }
-  message = await MessageModel.findOne({_id: req.body.message_id})
-  console.log(update)
-  res.json({message})
+    newMessage = await MessageModel.findOne({_id: req.body.message_id})
+  res.json({newMessage})
 })
 
 router.post('/delete-message', async function(req, res, next){
