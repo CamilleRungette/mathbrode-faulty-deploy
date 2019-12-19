@@ -2,18 +2,100 @@ import React from 'react';
 import {Card,   Col, Table} from 'react-bootstrap';
 import NavbarAdmin from './NavbarAdmin';
 import Footer from '../Footer'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircle, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+import DateFormat from '../function';
+import {Modal, Form, Button, ListGroup, InputGroup, FormControl} from 'react-bootstrap'
+import '../../App.css'
 
+let modalStyle={
+  width:"50em",
+  backgroundColor: "white",
+  fontFamily: "Raleway"
+}
+
+const details={
+  '&:hover':{
+    textDecoration: "underline"
+  }
+}
 
 
 class tracking extends React.Component{
+  constructor(){
+    super();
+    this.handleClose = this.handleClose.bind(this)
+    this.handleShow = this.handleShow.bind(this)
+    this.checkOrderSent = this.checkOrderSent.bind(this); 
+    this.orderSent = this.orderSent.bind(this) 
+    this.state={
+      orders:[],
+      show: false,
+      items: [],
+      order: [],
+      user: [],
+      sent: false,
+    }
+  }
+
+  handleClose(){
+    this.setState({show: false})
+  }
+
+  handleShow(order){
+    this.setState({show:true})
+    let ctx = this;
+    fetch(`http://localhost:3000/admins/order?id=${order._id}`)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data){
+      ctx.setState({items: data.items, order: data.thisOrder, user: data.thisUser})
+     console.log("THE STATE ===========>", ctx.state.items)
+    })
+    .catch(function(error) {
+      console.log('Request failed ->', error)
+  });
+  }
+
+  checkOrderSent(){
+    this.setState({sent: !this.state.sent})
+  }
+
+  orderSent(order){
+    if (this.state.sent === true){
+      fetch('http://localhost:3000/admins/update-order',{
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body: `order=${order}`
+      })
+    }
+  }
+
+  componentDidMount(){
+    let ctx = this;
+    fetch('http://localhost:3000/admins/orders')
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data){
+      ctx.setState({orders: data.allOrders})
+     console.log("THE STATE ===========>", ctx.state.orders)
+    })
+    .catch(function(error) {
+      console.log('Request failed ->', error)
+  });
+  }
+
     render(){
-        return(
+
+      return(
   <div style={{fontFamily:"Raleway"}}>
   <NavbarAdmin/>
-    <div style={{height:"75vh"}}>
+    
 
       <div style={{ height:"100%", display:"flex", justifyContent:"center", paddingTop:"10%"}}>
-        <Col sm="6">
+        <Col>
           <Card>
           <Card.Header>Commandes et suivi</Card.Header>
             <Card.Body>
@@ -24,34 +106,72 @@ class tracking extends React.Component{
                   <th>Date de la commande</th>
                   <th>Statut</th>
                   <th>Montant</th>
-                  <th>Produit</th>
+                  <th>Date d'envoi</th>
+                  <th></th>
+                  <th></th>
                   </tr>
                 </thead>
                 <tbody>
+                  {this.state.orders.map((order,i) =>(               
                   <tr>                                  
-                    <td>12/06/2019</td>
-                    <td>Envoyé</td>
-                    <td>34,99€</td>
-                    <td>#12992</td>
+                    <td>{DateFormat(order.date)}</td>
+                    {order.sent == false ?(
+                      <td> En préparation</td>
+                    ):(
+                    <td>Envoyée</td>
+                    )}
+                    <td>{order.total}€</td>
+                    <td>{DateFormat(order.shipping_date)}</td>
+                    {order.sent == false?(
+                     <td> <FontAwesomeIcon style={{color:"red"}} icon={faTimes} /> </td>
+                    ):(
+                      <td><FontAwesomeIcon icon={faCheck} style={{color:"green"}} /> </td>
+                    )}
+                    <td onClick={() => this.handleShow(order)}> Détails</td>
                   </tr>
-
-                  <tr>                            
-                    <td>22/07/2019</td>
-                    <td>En cours de préparation</td>
-                    <td>59,95€</td>
-                    <td>#12991</td>
-                  </tr>
-
-                  <tr>
-                    <td>25/07/2019</td>
-                    <td>En cours de préparation</td>
-                    <td>99,99€</td>
-                    <td>#12990</td>
-                  </tr>
-
+                  ))}
                 </tbody>
               </Table>
-
+                  <Modal show={this.state.show} onHide={this.handleClose} className="col-lg-8" >
+                    <div style={modalStyle}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Détails de la commande :</Modal.Title>
+                      </Modal.Header>
+                        <Modal.Body>
+                          <Card style={{ width: "90%", margin:"auto" }}>
+                            <Card.Body>
+                              <Card.Title> <strong>Produits: </strong></Card.Title>
+                              <Card.Text>
+                                {this.state.items.map((item, i) =>(
+                                  <ListGroup.Item> - {item.name} ({item.price}€)</ListGroup.Item>
+                                ))}
+                              </Card.Text>
+                              <Card.Title> <strong>Acheteur: </strong></Card.Title>
+                              <Card.Text>
+                                  <ListGroup.Item> {this.state.user.first_name} {this.state.user.last_name}: <br/>
+                                              {this.state.user.email}
+                                  </ListGroup.Item>
+                              </Card.Text>
+                                
+                                <Card.Text>
+                                  <ListGroup.Item style={{display:"flex"}}>
+                                    {this.state.order.sent === false? (
+                                      <Form.Check onClick={() => this.checkOrderSent(this.state.order)} type="checkbox"/>
+                                    ): (
+                                      <FontAwesomeIcon style={{marginRight:'1em'}} icon={faCheck} />
+                                    )}
+                                    Commande envoyée 
+                                  </ListGroup.Item>
+                                </Card.Text>
+          
+                            </Card.Body>
+                          </Card>
+                          <Button style={{backgroundColor:"#1B263B", border:"none", marginLeft:'47%', marginTop:'2em'}} variant="secondary" onClick={() => this.orderSent(this.state.order._id)}>
+                          Enregistrer
+                          </Button>
+                        </Modal.Body>
+                    </div>
+                  </Modal>
             </Card.Body>
           </Card>
         </Col>
@@ -60,7 +180,7 @@ class tracking extends React.Component{
     <div style={{height:"6em"}}></div>
 
 
-    </div>
+   
   <Footer/>
   </div>
  )}

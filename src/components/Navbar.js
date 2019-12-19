@@ -19,43 +19,65 @@ class Navigbar extends React.Component{
 
 <div className="row" style={{marginLeft:"0px",marginRight:"0px"}}>
 
-    <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "95%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto"}}>
+    <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "95%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto",padding:"0"}}>
         <div xs="2" style={{textAlign:"right"}}>
             <NavbarBrand href="/">
-              <img src="/logo bis.png" style={{width:"9em"}} />
+              <img src="/logo bis.png" style={{width:"6em"}} />
             </NavbarBrand>
         </div>
 
         <div xs="10">
-            <Nav navbar style={{fontSize:"1.2em"}}>
+            <Nav navbar style={{fontSize:"1.2em"}}> 
+
+            {this.props.connected ? (
+              <div></div>
+            ):(
                 <NavItem>
                   <Link to="/"><NavLink>Accueil</NavLink> </Link>
                 </NavItem>
+            )}
+
                 <NavItem>
                   <Link to="/items"> <NavLink>Articles</NavLink></Link>
                 </NavItem>
+
                 <NavItem>
                   <Link to="/events"> <NavLink>Evénements</NavLink></Link>
                 </NavItem>
+
                 <NavItem>
                 <NavLink onClick={this.pageScroll}>Contact</NavLink>
                 </NavItem>
+
                 <NavItem>
                 {this.props.connected ? (
+            
                 <NavItem>
                   <Link to ="/basket" > <NavLink>Panier</NavLink> </Link>
                 </NavItem>
                 ):(
                   <div></div>
                 )}
+                </NavItem>
+
+                {this.props.connected ? (
+                <NavItem>
+                  <Link to ="/myorders" > <NavLink>Mes commandes</NavLink> </Link>
+                </NavItem>
+                ):(
+                  <div></div>
+                )}
+
+                <NavItem>
                 {this.props.connected ? (
                   <div>
-                  <Button color="secondary" onClick={this.LogOut}>Se Déconnecter</Button>
+                  <Button color="secondary" style={{fontSize:"1em"}} onClick={this.LogOut}>Se Déconnecter</Button>
                   </div>
                 ):(
                   <Button color="secondary" style={{fontSize:"1em"}} href="/login">Se Connecter</Button>
                 )}
                 </NavItem>
+
             </Nav>
         </div>
     </Navbar>

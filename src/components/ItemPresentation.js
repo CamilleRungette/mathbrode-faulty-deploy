@@ -85,10 +85,10 @@ class ItemPresentation extends React.Component {
             <div style={{display:"flex", justifyContent:"center"}}>
               <Row> 
                 <Col sm={8}>          
-                  <p style={{fontSize:"1.5em"}}>{this.state.desc}</p>
+                  <p style={{fontSize:"1.5em",marginTop: "2rem",marginBottom: "2rem"}}>{this.state.desc}</p>
                 </Col>
                 <Col>
-                  <p className="" >Info Pratiques :<br/>
+                  <p className="" style={{marginTop: "2rem",marginBottom: "2rem",padding:"0.5rem" ,backgroundColor:"#1b263b",color:"white"}} >Info Pratiques :<br/>
                   Prix: {this.state.price}€<br/>
                   Exemplaire: {this.state.copy}<br/>
                   Taille: {this.state.size}
