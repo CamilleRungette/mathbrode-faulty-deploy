@@ -210,6 +210,10 @@ router.post('/update-order', async function(req, res, next){
     {_id: req.body.order},
     {sent: true}
     )
+  allOrders = await OrderModel.find(function(err, orders){
+    console.log(orders)
+  })
+    res.json({allOrders})
 })
 
 module.exports = router;

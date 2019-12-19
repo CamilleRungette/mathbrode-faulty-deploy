@@ -60,6 +60,13 @@ class Navigbar extends React.Component{
                   <div></div>
                 )}
                 </NavItem>
+                {this.props.connected ? (
+                <NavItem>
+                  <Link to ="/profil" > <NavLink>Mon profil</NavLink> </Link>
+                </NavItem>
+                ):(
+                  <div></div>
+                )}
 
                 {this.props.connected ? (
                 <NavItem>

@@ -37,6 +37,7 @@ class MessageItem extends Component{
     .then(function(data){
       ctx.setState({readFromDb: data.newMessage.read})
     })
+    
   }
 
   deleteMessage(data){
@@ -106,7 +107,7 @@ class MessageItem extends Component{
         </Col>
 
     </div>
-    ) 
+    )
   }
 }
 

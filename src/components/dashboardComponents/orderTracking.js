@@ -37,12 +37,11 @@ class tracking extends React.Component{
       items: [],
       order: [],
       user: [],
-      sent: false,
+      sent: '',
     }
   }
 
   handleClose(){
-    this.setState({show: false})
   }
 
   handleShow(order){
@@ -66,12 +65,26 @@ class tracking extends React.Component{
   }
 
   orderSent(order){
+    let ctx = this;
+    this.setState({show: false})
+    console.log(this.state.show)
     if (this.state.sent === true){
       fetch('http://localhost:3000/admins/update-order',{
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body: `order=${order}`
       })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data){
+        ctx.setState({orders: data.allOrders})
+       console.log("THE STATE QUE JE CHERCHE ===========>", ctx.state.orders)
+      })
+      .catch(function(error) {
+        console.log('Request failed ->', error)
+    });
+  
     }
   }
 
@@ -101,7 +114,7 @@ class tracking extends React.Component{
     
 
       <div style={{ height:"100%", display:"flex", justifyContent:"center", paddingTop:"10%"}}>
-        <Col>
+        <Col lg={10}>
           <Card>
           <Card.Header>Commandes et suivi</Card.Header>
             <Card.Body>
@@ -112,7 +125,7 @@ class tracking extends React.Component{
                   <th>Date de la commande</th>
                   <th>Statut</th>
                   <th>Montant</th>
-                  <th>Date d'envoi</th>
+                  <th>Date d'envoi prévue</th>
                   <th></th>
                   <th></th>
                   </tr>
@@ -128,10 +141,11 @@ class tracking extends React.Component{
                     )}
                     <td>{order.total}€</td>
                     <td>{DateFormat(order.shipping_date)}</td>
-                    {order.sent == false?(
-                     <td> <FontAwesomeIcon style={{color:"red"}} icon={faTimes} /> </td>
-                    ):(
+                    {order.sent == true ?
+                    (
                       <td><FontAwesomeIcon icon={faCheck} style={{color:"green"}} /> </td>
+                      ):(
+                        <td> <FontAwesomeIcon style={{color:"red"}} icon={faTimes} /> </td>
                     )}
                     <td onClick={() => this.handleShow(order)}> Détails</td>
                   </tr>

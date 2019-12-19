@@ -18,6 +18,7 @@ import Creations from './components/Creations'
 import MyOrders from './components/Myorders'
 import {createStore, combineReducers}  from 'redux';
 import {Provider} from 'react-redux';
+import Profil from './components/Profil';
 import LoginAdmin from './components/LoginAdmin'
 import user from './components/Reducer/user.reducer';
 import item from './components/Reducer/cart.reducer'
@@ -46,7 +47,8 @@ class App extends Component{
           <Route path="/exemple" component={Exemple} />
           <Route path="/creations" component={Creations}/>
           <Route path="/myorders" component={MyOrders} />
-          <Route path="/loginadmin" component={LoginAdmin} />         
+          <Route path="/loginadmin" component={LoginAdmin} />  
+          <Route path="/profil" component={Profil} />     
         </Switch>
       </Router>  
     </Provider>
