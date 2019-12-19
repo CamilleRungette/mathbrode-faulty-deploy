@@ -10,7 +10,6 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
 
 
-let total = 0;
 let times = 0;
 
 
@@ -18,6 +17,9 @@ class Basket extends React.Component {
   constructor(props){
     super(props);
     this.OnBuyClick = this.OnBuyClick.bind(this)
+    this.state={
+      total: 0,
+    }
   }
   
   
@@ -26,8 +28,10 @@ class Basket extends React.Component {
     fetch('http://localhost:3000/users/order',{
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `user_id=${this.props.user._id}&total=${total}&items=${items}`
-    })
+      body: `user_id=${this.props.user._id}&total=${this.state.total}&items=${items}`
+    },
+    this.props.onResetClick()
+    )
   }
   
   render() {
@@ -56,7 +60,7 @@ class Basket extends React.Component {
       } else {
         console.log("STORE FROM BASKET", this.props.item)
         for (let i=0; i<this.props.item.length; i++){
-          total = total + this.props.item[i].price
+          this.state.total = this.state.total + this.props.item[i].price
           times += 1
         } 
    return(
@@ -85,7 +89,7 @@ class Basket extends React.Component {
         </div>
       <div className="col-8 border" style={{margin:"auto", display:"flex", paddingTop:"0.3em", fontSize:"1.3em", textAlign:"right"}}>
         <p className="col-9">Total:</p>
-        <p className="col-3">{total} €</p>
+        <p className="col-3">{this.state.total} €</p>
       </div>
       <div style={{height:"5em"}}></div>
       <div className="d-flex justify-content-center col-lg-12">  
@@ -93,7 +97,7 @@ class Basket extends React.Component {
           <Link to="/creations" ><Button color="secondary">Continuer mes Achats</Button></Link>
         </div>
         <div>
-         <Link to="/"> <Button color="secondary" onClick={this.OnBuyClick} onClick={this.onResetClick}  >Confirmer</Button></Link>
+         <Link to="/"> <Button color="secondary" onClick={this.OnBuyClick}  >Confirmer</Button></Link>
         </div>
         <div style={{height:"5em"}}></div>  
       </div>
@@ -119,7 +123,8 @@ function mapDispatchToProps(dispatch){
       dispatch({type: 'delete', position: position})
     },
     onResetClick: function(){
-      dispatch({type: 'reset'})
+      console.log("SENDING CALL TO RESET METHOD")
+      dispatch({type: 'reset', })
     }
   }
 }

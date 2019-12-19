@@ -12,9 +12,11 @@ export default function(itemSave = [], action){
     itemSaveCopy.splice(action.position, 1)
     return itemSaveCopy
   }else if (action.type === 'reset') {
-    console.log("in the reset method")
-    itemSaveCopy = []
-    return itemSaveCopy
+    console.log("IN THE RESET METHODE")
+    itemSaveCopy = [...itemSave]
+    itemSaveCopy.splice(0, itemSaveCopy.length)
+    console.log("======>", itemSaveCopy)
+    return []
   } else {
     return itemSave;
   }

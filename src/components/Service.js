@@ -21,11 +21,20 @@ constructor(){
   this.handleClose = this.handleClose.bind(this)
   this.handleShow = this.handleShow.bind(this)
   this.sendMessage = this.sendMessage.bind(this)
+  this.onDrop = this.onDrop.bind(this);
+  this.uploadMessageImage = this.uploadMessageImage.bind(this);
   this.state={
     show: false,
     SendMessageContent: '',
     SendMessageEmail: '',
+    SendMessagePhoto: '',
   }
+}
+
+onDrop(picture) {
+  this.setState({
+      CreateItemPhoto: this.state.CreateItemPhoto.concat(picture),
+  });
 }
 
   sendMessage(){
@@ -33,7 +42,7 @@ constructor(){
     fetch('http://localhost:3000/users/create-message', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `object=Projet_personnalisé&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}`
+      body: `object=Projet_personnalisé&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}&photo=${this.state.SendMessagePhoto}`
     })
   }
 
@@ -43,6 +52,22 @@ constructor(){
 
   handleShow(){
     this.setState({show:true})
+  }
+
+  async uploadMessageImage(e){
+    const files = e.target.files
+    const data= new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'camille')
+    this.setState({loading: true})
+    const res = await fetch('https://api.cloudinary.com/v1_1/dduugb9jy/image/upload', {
+        method: 'POST',
+        body: data
+      })
+    const file = await res.json()
+    
+    this.setState({SendMessagePhoto: file.secure_url})
+    this.setState({loading: false})
   }
 
   render(){
@@ -120,6 +145,22 @@ constructor(){
               <Form.Control as="textarea" onChange={(e)=> this.setState({SendMessageContent: e.target.value})} 
               value={this.state.SendMessageContent} />
             </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalPicture">
+              <Form.Label column sm={2}>Photo</Form.Label>
+                <Col sm={10}>
+                <input type="file"
+                placeholder="upload an image"
+                onChange={this.uploadMessageImage} 
+                />
+                  </Col>  
+                {this.state.loading ? (
+                  <h6> Chargement ...</h6>
+                ) : (
+                 <img src={this.state.SendMessagePhoto} alt="item chosen photo" style={{width:"10em", marginLeft:'8em'}} />
+                )}
+            </Form.Group>
+
           </Form>
             <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.sendMessage}>
               Envoyer

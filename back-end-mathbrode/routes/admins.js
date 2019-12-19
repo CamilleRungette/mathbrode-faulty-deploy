@@ -3,6 +3,7 @@ var router = express.Router();
 ItemModel = require('../models/item');
 AdminModel = require('../models/admin');
 EventModel = require('../models/event');
+WorkshopModel = require('../models/workshops')
 MessageModel= require('../models/message');
 OrderModel = require('../models/order')
 ItemOrderModel = require('../models/item_order')
@@ -29,15 +30,17 @@ router.post('/create-admin', function (req, res, next){
 })
 
 router.post('/sign-in', async function(req, res, next){
-    adminExists = await AdminModel.findOne({email: "blabla@gmail.com", password: "broderie" });
+  console.log(req.body)
+    adminExists = await AdminModel.findOne({email: req.body.email, password: req.body.password });
     let isAdminExists;
+    console.log(adminExists)
 
     if(adminExists){
         isAdminExists = true;
     } else if (!isAdminExists) {
         isAdminExists = false
     };
-    res.json({isAdminExists})
+    res.json({isAdminExists, adminExists})
 })
 
 router.post('/create-item', async function(req, res, next){
@@ -127,6 +130,7 @@ router.post('/create-event', function(req, res, next){
     });
 })
 
+
 router.get('/messages', async function(req, res, next){
   allMessages = await MessageModel.find(function(err, messages){
     console.log(messages)
@@ -166,6 +170,24 @@ router.post('/delete-message', async function(req, res, next){
     console.log("message deleted")
 })
 
+router.post('/create-workshop', function(req, res, next){
+  console.log("=====================CREATE-WORKSHOP FUNCTION=========")
+    newWorkshop = new WorkshopModel({
+      title: req.body.title,
+      desc: req.body.desc,
+      price: req.body.price,
+      duration: req.body.duration
+    });
+
+    newWorkshop.save(function(error, workshop){
+      if(error){
+        console.log("ERREUR:", error);
+      }else if (workshop){
+        console.log("WORKSHOP SAVED IN DATABASE", workshop)
+        res.json({workshop})
+      }
+    });
+})
 router.get('/orders', async function(req, res, next){
   allOrders = await OrderModel.find(function(err, orders){
     console.log(orders)

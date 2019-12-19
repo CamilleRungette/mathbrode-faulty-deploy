@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {connect} from 'react-redux';
 import { Button,  Navbar,  NavbarBrand,  Nav,  NavItem,  NavLink } from 'reactstrap';
 import {Link} from 'react-router-dom'
@@ -6,14 +6,15 @@ import {Link} from 'react-router-dom'
 
 
 class Navigbar extends React.Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.LogOut = this.LogOut.bind(this) 
    }
 
   LogOut(){
     this.props.onLogOutClick(this.props.connected) 
   }
+
   render(){
     return(
 

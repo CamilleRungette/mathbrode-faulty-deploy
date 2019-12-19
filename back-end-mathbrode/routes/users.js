@@ -69,6 +69,7 @@ router.post('/create-message', async function (req, res, next){
     sender_name: req.body.name,
     date: Date.now(),
     read: false,
+    photo: req.body.photo
   })
   
   newMessage.save(function(error, message){

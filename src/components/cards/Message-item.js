@@ -81,6 +81,13 @@ class MessageItem extends Component{
         <h4>Sujet : {this.props.messageObject}</h4>
         <p>De la part de:  {this.props.messageSender}</p>
           <p>{this.props.messageContent}  </p>
+          {this.props.messagePhoto != null ?(
+            <div>
+            <img style={{width:"10em", marginLeft:'10%'}} src={this.props.messagePhoto} />
+            </div>
+          ):(
+            <div></div>
+          )}
           <p>Envoyé le : {DateFormat(this.props.messageDate)} </p>
         </div>
         </Col>
@@ -97,6 +104,7 @@ class MessageItem extends Component{
           </Col>
           </div> 
         </Col>
+
     </div>
     ) 
   }

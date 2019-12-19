@@ -6,7 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import DateFormat from '../function';
 import {Modal, Form, Button, ListGroup, InputGroup, FormControl} from 'react-bootstrap'
-import '../../App.css'
+import '../../App.css';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
 
 let modalStyle={
   width:"50em",
@@ -88,6 +91,9 @@ class tracking extends React.Component{
   }
 
     render(){
+      if (this.props.adminConnected == false || this.props.adminConnected == null){
+        return <Redirect to="/loginadmin" />
+     }
 
       return(
   <div style={{fontFamily:"Raleway"}}>
@@ -187,4 +193,13 @@ class tracking extends React.Component{
 }
 
 
-export default tracking;
+function mapStatetoProps(state){
+  console.log("======>", state)
+  return {adminConnected: state.admin.isAdminExist}
+}
+
+
+export default connect(
+  mapStatetoProps,
+  null
+  )(tracking);
