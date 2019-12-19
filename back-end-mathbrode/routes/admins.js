@@ -5,7 +5,6 @@ AdminModel = require('../models/admin');
 EventModel = require('../models/event');
 MessageModel = require('../models/message');
 WorkshopModel = require('../models/workshops')
-MessageModel= require('../models/message');
 OrderModel = require('../models/order')
 ItemOrderModel = require('../models/item_order')
 UserModel = require('../models/user')
