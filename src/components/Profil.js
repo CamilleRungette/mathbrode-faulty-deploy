@@ -38,18 +38,32 @@ class Profil extends Component{
   }
 
   handleSubmitUpdate(){
+    let ctx = this;
     this.setState({show: false})
     fetch('http://localhost:3000/users/update-info', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `id=${this.state.id}&first_name=${this.state.first_name}&last_name=${this.state.last_name}&email=${this.state.email}&address=${this.state.address}&zipcode=${this.state.zipcode}&city=${this.state.city}`
     })
-
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data){
+      console.log(data)
+      ctx.setState({
+      first_name: data.thisUser.first_name ,
+      last_name: data.thisUser.last_name,
+      email: data.thisUser.email,
+      address: data.thisUser.address,
+      zipcode: data.thisUser.zip_code,
+      city: data.thisUser.city,
+      })
+    })
   }
 
 
   render(){
-    console.log("USER", this.props.userSigned)
+    console.log("USER", this.props.connected)
     if (this.props.connected == false || this.props.connected == null){
       return <Redirect to="/" />
     }
@@ -71,7 +85,14 @@ class Profil extends Component{
                     <div> <span style={titre}>Nom:</span> {this.props.userSigned.first_name} {this.props.userSigned.last_name} </div>
                     <div> <span style={titre}>Adresse e-mail:</span> {this.props.userSigned.email}</div>
                       <div><span style={titre}>Adresse postale:</span></div>
-                     {this.props.userSigned.address}<br/> <br/>
+                     {this.props.userSigned.address}
+                     {this.state.zipcode != null?(
+                       <div>{this.state.zipcode} 
+                       {this.state.city}</div>
+                     ):(
+                      <div></div>
+                     )}
+                     <br/> <br/>
                     <Button style={{backgroundColor:"#1B263B", border:"none", marginTop:'2em'}}  onClick={this.handleShow}>Modifier</Button>
                  </div>
               </div>

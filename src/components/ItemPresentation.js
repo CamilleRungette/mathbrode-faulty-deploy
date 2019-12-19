@@ -115,9 +115,9 @@ class ItemPresentation extends React.Component {
                 <Col lg={6}>
                   <FormGroup>
                     {this.props.user == null ?(
-                      <Input type="Nom" name="Nom" id="exampleNom" placeholder="Nom" onChange={(e)=> this.setState({userName: e.target.value})}
+                      <Input type="Nom" id="exampleNom" placeholder="Nom" onChange={(e)=> this.setState({userName: e.target.value})}
                       value={this.state.userName}/>
-                    ): (
+                    ):(
                       <Input type="Nom" name="Nom" id="exampleNom" placeholder="Nom" value={this.props.user.first_name}/>
                     )}
                   </FormGroup>

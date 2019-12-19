@@ -151,16 +151,18 @@ router.get('/myorders', async function(req, res, next){
 
 router.post('/update-info', async function(req, res, next){
   console.log(req.body)
-  // update = await UserModel.updateOne(
-  //   {_id: req.body.id},
-  //   {first_name: req.body.first_name,
-  //   last_name: req.body.last_name,
-  //   email: req.body.email,
-  //   address: req.body.address,
-  //   zip_code: req.body.zipcode,
-  //   city: req.body.city,
-  // })
+  update = await UserModel.updateOne(
+    {_id: req.body.id},
+    {first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+    address: req.body.address,
+    zip_code: req.body.zipcode,
+    city: req.body.city,
+  })
 
+  thisUser = await UserModel.findOne({_id: req.body.id})
+  res.json({thisUser})
 })
 
 
