@@ -14,7 +14,7 @@ class Navigbar extends React.Component{
     <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "95%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto",padding:"0"}}s>
         <div style={{textAlign:"right"}}>
             <NavbarBrand>
-            <img src="/logo bis.png" style={{width:"6em"}} />
+            <Link to="/" ><img src="/logo bis.png" style={{width:"6em"}} /> </Link>
             </NavbarBrand>
         </div>
 

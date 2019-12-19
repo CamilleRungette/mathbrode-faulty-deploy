@@ -15,16 +15,17 @@ const readMessage ={
 class MessageItem extends Component{
   constructor(props){
     super(props);
-    this.onReadClick = this.onReadClick.bind(this)
-    this.deleteMessage = this.deleteMessage.bind(this)
+    this.onReadClick = this.onReadClick.bind(this);
+    this.deleteMessage = this.deleteMessage.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.state={
       readFromDb: this.props.messageRead,
+      display: true,
     }
   }
 
   onReadClick(data){
     let ctx = this;
-  console.log("coucou")
     fetch('http://localhost:3000/admins/read-message',{
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
@@ -35,38 +36,48 @@ class MessageItem extends Component{
     })
     .then(function(data){
       ctx.setState({readFromDb: data.newMessage.read})
-     console.log("THE STATE ===========>", ctx.state.readFromDb)
     })
   }
 
   deleteMessage(data){
-    console.log("coucou")
+    let ctx = this
      fetch('http://localhost:3000/admins/delete-message',{
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `message_id=${data}`
-     })
+       })
+       .then(function(response) {
+        return response.json();
+      })
+      .then(function(data){
+        ctx.setState({display: false})
+        ctx.handleClick()
+      }) 
+   }
+
+   handleClick(){
+    this.props.handleClickParent()
    }
 
   render(){
     var iconMessage = faCheck
     var marker = "Marquer comme lu"
     var styleMessage;
-    console.log("ICICICI", this.state.readFromDb)
     if (this.state.readFromDb == true){
       styleMessage = readMessage
       iconMessage = faTimes
       marker = "Marquer comme non lu"
-    } 
-
-    
+    }
+    if (this.state.display == false){
+      console.log("pas de message")
+    }
 
     return(
       <div style={{ display:"flex", justifyContent:"center", paddingTop:"4%"}}>
       <Col sm="9">  
         <div style={styleMessage} class="roww">
         <Col lg={11}>
-        <div class="content">  
+        <div  class="content">  
         <h4>Sujet : {this.props.messageObject}</h4>
         <p>De la part de:  {this.props.messageSender}</p>
           <p>{this.props.messageContent}  </p>
@@ -75,20 +86,19 @@ class MessageItem extends Component{
         </Col>
         <Col lg={1}>
           <div>
-            <FontAwesomeIcon icon={faReply} />
+            <Button style={{backgroundColor: "#1B263B", border:"none"}}> <FontAwesomeIcon style={{backgroundColor:'#1B263B'}} icon={faReply} /> </Button>
             <br></br>
             <br></br>
-            <FontAwesomeIcon onClick={() => this.onReadClick(this.props.messageId)} title={marker} icon={iconMessage} />
+            <Button onClick={() => this.onReadClick(this.props.messageId)} style={{backgroundColor: "#1B263B", border:"none"}}><FontAwesomeIcon  style={{color:"white"}} title={marker} icon={iconMessage} /></Button>
             <br></br>
             <br></br>
-            <FontAwesomeIcon onClick={() => this.deleteMessage(this.props.messageId)} icon={faTrashAlt} />
+            <Button onClick={() => this.deleteMessage(this.props.messageId)} style={{backgroundColor: "#1B263B", border:"none"}}> <FontAwesomeIcon style={{color:"white"}} icon={faTrashAlt} /></Button>
           </div>                    
           </Col>
           </div> 
         </Col>
     </div>
-
-    )
+    ) 
   }
 }
 

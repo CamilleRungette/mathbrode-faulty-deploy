@@ -158,9 +158,11 @@ router.post('/delete-message', async function(req, res, next){
   MessageModel.deleteOne(
     {_id: req.body.message_id},
     function(error) {
-    }
-    );
-  res.json({result: true})
+    });
+    messages = await MessageModel.find(function(err, orders){
+      console.log("messages")
+    })
+  res.json({messages})
     console.log("message deleted")
 })
 
