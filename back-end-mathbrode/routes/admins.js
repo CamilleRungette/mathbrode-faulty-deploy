@@ -3,16 +3,13 @@ var router = express.Router();
 ItemModel = require('../models/item');
 AdminModel = require('../models/admin');
 EventModel = require('../models/event');
-<<<<<<< HEAD
 MessageModel = require('../models/message');
 WorkshopModel = require('../models/workshops')
-=======
 MessageModel= require('../models/message');
 OrderModel = require('../models/order')
 ItemOrderModel = require('../models/item_order')
 UserModel = require('../models/user')
 
->>>>>>> 966722cbabbe7e3174424e67f447fc13a2316937
 
 router.post('/create-admin', function (req, res, next){
     newAdmin = AdminModel({
