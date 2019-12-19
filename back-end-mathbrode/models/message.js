@@ -9,6 +9,7 @@ var messageSchema = mongoose.Schema({
     item_id: {type: mongoose.Schema.Types.ObjectId, ref: "items"},
     date: Date,
     read: Boolean,
+    photo: String,
 });
 
 const MessageModel = mongoose.model('messages', messageSchema);

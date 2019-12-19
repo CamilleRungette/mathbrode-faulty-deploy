@@ -63,6 +63,7 @@ class Messages extends React.Component{
         messageDate={message.date}
         messageId = {message._id}
         messageRead = {message.read}
+        messagePhoto = {message.photo}
         />
       }, this)
 
