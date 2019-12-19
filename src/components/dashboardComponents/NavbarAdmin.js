@@ -61,7 +61,11 @@ class Navigbar extends React.Component{
                 <NavItem>
                 <Link to="/stock" class="navigbar nav-link">Liste du stock</Link>
                 </NavItem>
+<<<<<<< HEAD
                 <Link to="/loginadmin"><Button color="secondary" onClick={this.LogOut}>Se déconnecter</Button> </Link>
+=======
+                <Button color="secondary" style={{fontSize:"1em"}}>Se déconnecter</Button>
+>>>>>>> development
             </Nav>
         </div>
     </Navbar>

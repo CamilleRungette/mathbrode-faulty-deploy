@@ -13,6 +13,7 @@ class Dashboard extends Component {
   super(props);
   this.ItemSubmit = this.ItemSubmit.bind(this);
   this.EventSubmit = this.EventSubmit.bind(this);
+  this.WorkshopSubmit = this.WorkshopSubmit.bind(this);
   this.onDrop = this.onDrop.bind(this);
   this.uploadItemImage = this.uploadItemImage.bind(this);
   this.uploadEventImage = this.uploadEventImage.bind(this);
@@ -29,7 +30,12 @@ class Dashboard extends Component {
           CreateEventPhoto:'',
           CreateEventStart: '',
           CreateEventEnd: '',
-          loading: ''
+          loading: '',
+          CreateWorkshopTitle: '',
+          CreateWorkshopDesc: '',
+          CreateWorkshopPrice: '',
+          CreateWorkshopDuration: '',
+          
         }
   }
   
@@ -52,6 +58,14 @@ class Dashboard extends Component {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `name=${this.state.CreateEventName}&address=${this.state.CreateEventAddress}&date=${this.state.CreateEventDate}&starting_time=${this.state.CreateEventStart}&ending_time=${this.state.CreateEventEnd}&photo=${this.state.CreateEventPhoto}`
+})
+  }
+
+  WorkshopSubmit(){
+    fetch('http://localhost:3000/admins/create-workshop', {
+      method: 'POST',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: `title=${this.state.CreateWorkshopTitle}&desc=${this.state.CreateWorkshopDesc}&price=${this.state.CreateWorkshopPrice}&duration=${this.state.CreateWorkshopDuration}`
 })
   }
 
@@ -285,6 +299,72 @@ class Dashboard extends Component {
       </Col> 
 
       </div>
+
+
+      <div style={{height:"12em"}}></div>
+
+ <Col lg={{offset:3, span:6 }}>
+        <Card>
+          <Card.Header style={{fontSize:"1.3em"}}>Ajouter un atelier</Card.Header>
+            <Card.Body>
+                        
+            <Form>
+
+        {/*    <Form.Group as={Row} controlId="formHorizontalPicture">
+              <Form.Label column sm={2}>Photo</Form.Label>
+                <Col sm={10}>
+                <input type="file"
+                placeholder="upload an image"
+
+                />
+                  </Col>  
+             
+            </Form.Group>  */}
+
+            <Form.Group as={Row} controlId="formHorizontalTitle">
+              <Form.Label column sm={2}>Titre</Form.Label>
+                <Col sm={10}>
+                  <Form.Control type="text" onChange={(e)=> this.setState({CreateWorkshopTitle: e.target.value})}
+                        value={this.state.CreateWorkshopTitle} />
+                </Col>  
+            </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalDesc">
+              <Form.Label column sm={2}>Description</Form.Label>
+                <Col sm={10}>
+                  <Form.Control as="textarea"  onChange={(e)=> this.setState({CreateWorkshopDesc: e.target.value})}
+                        value={this.state.CreateWorkshopDesc} />
+                </Col>  
+            </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalPrice">
+              <Form.Label column sm={2}>Prix</Form.Label>
+                <Col sm={10}>
+                  <Form.Control type="text"  onChange={(e)=> this.setState({CreateWorkshopPrice: e.target.value})}
+                        value={this.state.CreateWorkshopPrice} />
+                </Col>  
+            </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalDuration">
+              <Form.Label column sm={2}>Durée</Form.Label>
+                <Col sm={10}>
+                  <Form.Control type="text" onChange={(e)=> this.setState({CreateWorkshopDuration: e.target.value})}
+                        value={this.state.CreateWorkshopDuration} />
+                </Col>  
+            </Form.Group>
+
+            <Form.Group style={{textAlign:"center"}} as={Row}>
+                <Col sm={{ offset: 1 }}>
+                  <Button type="submit" onClick={this.WorkshopSubmit} style={{border:"none", backgroundColor:"#1B263B"}}>Valider</Button>
+                </Col>
+            </Form.Group>
+          </Form>
+
+          </Card.Body>
+        </Card>
+      </Col> 
+ 
+
 
 <div style={{height:"8em"}}></div>
 
