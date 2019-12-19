@@ -9,17 +9,17 @@ class Navigbar extends React.Component{
     render(){
         return(
 
-<div className="row" >
+<div className="row" style={{marginLeft:"0px",marginRight:"0px"}}>
 
-    <Navbar  light expand="md" style={{ fontFamily:"Raleway", width: "90%", height:"8em" , display:"flex", justifyContent:"space-between", margin:"auto"}}>
+    <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "95%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto",padding:"0"}}s>
         <div style={{textAlign:"right"}}>
             <NavbarBrand>
-            <img src="/logo.png" style={{width:"9em"}} />
+            <Link to="/" ><img src="/logo bis.png" style={{width:"6em"}} /> </Link>
             </NavbarBrand>
         </div>
 
-        <div >
-            <Nav navbar style={{fontSize:"1.2em", width:"40em", justifyContent:"space-around" }}>
+        <div xs="10">
+            <Nav navbar style={{fontSize:"1.2em"}}>
                 <NavItem>
                 <Link to="/dashboard" class="navigbar nav-link">Accueil</Link>
                 </NavItem>
@@ -32,7 +32,7 @@ class Navigbar extends React.Component{
                 <NavItem>
                 <Link to="/stock" class="navigbar nav-link">Liste du stock</Link>
                 </NavItem>
-                <Button color="secondary">Se déconnecter</Button>
+                <Button color="secondary" style={{fontSize:"1em"}}>Se déconnecter</Button>
             </Nav>
         </div>
     </Navbar>

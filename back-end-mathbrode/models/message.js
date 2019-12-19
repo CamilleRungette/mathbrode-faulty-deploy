@@ -8,6 +8,7 @@ var messageSchema = mongoose.Schema({
     user_id: {type: mongoose.Schema.Types.ObjectId, ref: "users"},
     item_id: {type: mongoose.Schema.Types.ObjectId, ref: "items"},
     date: Date,
+    read: Boolean,
 });
 
 const MessageModel = mongoose.model('messages', messageSchema);

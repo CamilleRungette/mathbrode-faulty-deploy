@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import { Col } from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+import { Col, Button } from 'react-bootstrap';
+import {Link, Redirect} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTrashAlt, faReply, faTimes } from '@fortawesome/free-solid-svg-icons'
+import DateFormat from '../function'
+
 
 const readMessage ={
   backgroundColor:"#ededed",
@@ -11,69 +13,92 @@ const readMessage ={
 
 
 class MessageItem extends Component{
-  constructor(){
-    super();
-    this.onReadClick = this.onReadClick.bind(this)
-    this.deleteMessage = this.deleteMessage.bind(this)
+  constructor(props){
+    super(props);
+    this.onReadClick = this.onReadClick.bind(this);
+    this.deleteMessage = this.deleteMessage.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.state={
-      read: false,
+      readFromDb: this.props.messageRead,
+      display: true,
     }
   }
 
-  onReadClick(){
-    this.setState({
-      read: !this.state.read,
+  onReadClick(data){
+    let ctx = this;
+    fetch('http://localhost:3000/admins/read-message',{
+      method: 'POST',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: `message_id=${data}&`
+     })
+     .then(function(response) {
+      return response.json();
+    })
+    .then(function(data){
+      ctx.setState({readFromDb: data.newMessage.read})
     })
   }
 
   deleteMessage(data){
+    let ctx = this
      fetch('http://localhost:3000/admins/delete-message',{
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `message_id=${data}`
-     })
+       })
+       .then(function(response) {
+        return response.json();
+      })
+      .then(function(data){
+        ctx.setState({display: false})
+        ctx.handleClick()
+      }) 
+   }
+
+   handleClick(){
+    this.props.handleClickParent()
    }
 
   render(){
     var iconMessage = faCheck
     var marker = "Marquer comme lu"
     var styleMessage;
-    if (this.state.read == true){
+    if (this.state.readFromDb == true){
       styleMessage = readMessage
       iconMessage = faTimes
       marker = "Marquer comme non lu"
-
-    } 
+    }
+    if (this.state.display == false){
+      console.log("pas de message")
+    }
 
     return(
-      <div style={{ display:"flex", justifyContent:"center", paddingTop:"5%"}}>
-      <Col sm="6">  
+      <div style={{ display:"flex", justifyContent:"center", paddingTop:"4%"}}>
+      <Col sm="9">  
         <div style={styleMessage} class="roww">
         <Col lg={11}>
-        <div class="content">    
+        <div  class="content">  
         <h4>Sujet : {this.props.messageObject}</h4>
         <p>De la part de:  {this.props.messageSender}</p>
           <p>{this.props.messageContent}  </p>
-          <p>Envoyé le {this.props.messageDate} </p>
+          <p>Envoyé le : {DateFormat(this.props.messageDate)} </p>
         </div>
         </Col>
-
-      <Col lg={1}>
-        <div>
-          <FontAwesomeIcon icon={faReply} />
-          <br></br>
-          <br></br>
-          <FontAwesomeIcon onClick={this.onReadClick} title={marker} icon={iconMessage} />
-          <br></br>
-          <br></br>
-           <FontAwesomeIcon href="#" onClick={() => this.deleteMessage(this.props.messageId)}  icon={faTrashAlt} />
-        </div>                    
+        <Col lg={1}>
+          <div>
+            <Button style={{backgroundColor: "#1B263B", border:"none"}}> <FontAwesomeIcon style={{backgroundColor:'#1B263B'}} icon={faReply} /> </Button>
+            <br></br>
+            <br></br>
+            <Button onClick={() => this.onReadClick(this.props.messageId)} style={{backgroundColor: "#1B263B", border:"none"}}><FontAwesomeIcon  style={{color:"white"}} title={marker} icon={iconMessage} /></Button>
+            <br></br>
+            <br></br>
+            <Button onClick={() => this.deleteMessage(this.props.messageId)} style={{backgroundColor: "#1B263B", border:"none"}}> <FontAwesomeIcon style={{color:"white"}} icon={faTrashAlt} /></Button>
+          </div>                    
+          </Col>
+          </div> 
         </Col>
-        </div> 
-      </Col>
     </div>
-
-    )
+    ) 
   }
 }
 

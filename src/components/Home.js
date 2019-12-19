@@ -13,7 +13,7 @@ class Home extends React.Component {
   render(){
 
     return (
-      <div className="col-12 col-lg-12"  style={{paddingLeft:0,paddingRight:0}}>
+      <div className="col-12 col-lg-12">
         <Navigbar/>
           <div className="row" style={{margin:"auto"}}>
               <div className="col-lg-12" style={{paddingLeft:0,paddingRight:0}}>
@@ -38,7 +38,16 @@ class Home extends React.Component {
       <Service/>
       <div style={{marginBottom:"20em"}} ></div>
       <Footer/>
-        </div>
+
+</div>
+
+
+
+
+
+
+
+
         )
   }
 }

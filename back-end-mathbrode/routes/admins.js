@@ -3,8 +3,16 @@ var router = express.Router();
 ItemModel = require('../models/item');
 AdminModel = require('../models/admin');
 EventModel = require('../models/event');
+<<<<<<< HEAD
 MessageModel = require('../models/message');
 WorkshopModel = require('../models/workshops')
+=======
+MessageModel= require('../models/message');
+OrderModel = require('../models/order')
+ItemOrderModel = require('../models/item_order')
+UserModel = require('../models/user')
+
+>>>>>>> 966722cbabbe7e3174424e67f447fc13a2316937
 
 router.post('/create-admin', function (req, res, next){
     newAdmin = AdminModel({
@@ -133,6 +141,22 @@ router.get('/messages', async function(req, res, next){
   res.json({allMessages})
 })
 
+router.post('/read-message', async function (req, res, next){
+  console.log(req.body)
+  message = await MessageModel.findOne({_id: req.body.message_id})
+  if (message.read == false){
+    update = await MessageModel.updateOne(
+      {_id: req.body.message_id},
+      {read: true})
+    } else if (message.read == true){
+      update = await MessageModel.updateOne(
+        {_id: req.body.message_id},
+        {read: false})
+      }
+    newMessage = await MessageModel.findOne({_id: req.body.message_id})
+  res.json({newMessage})
+})
+
 router.post('/delete-message', async function(req, res, next){
     console.log("in the delete message method")
   message = await MessageModel.findOne({_id: req.body.message_id})
@@ -140,9 +164,11 @@ router.post('/delete-message', async function(req, res, next){
   MessageModel.deleteOne(
     {_id: req.body.message_id},
     function(error) {
-    }
-    );
-  res.json({result: true})
+    });
+    messages = await MessageModel.find(function(err, orders){
+      console.log("messages")
+    })
+  res.json({messages})
     console.log("message deleted")
 })
 
@@ -164,4 +190,28 @@ router.post('/create-workshop', function(req, res, next){
       }
     });
 })
+router.get('/orders', async function(req, res, next){
+  allOrders = await OrderModel.find(function(err, orders){
+    console.log(orders)
+  })
+  res.json({allOrders})
+})
+
+router.get('/order', async function(req, res, next){
+  thisOrder = await OrderModel.findOne({_id: req.query.id})
+  thisUser = await UserModel.findOne({_id: thisOrder.user_id})
+  console.log(thisUser)
+  items = await ItemOrderModel.find({order_id: thisOrder._id})
+    console.log("================> ITEMS", items)
+  res.json({thisOrder, thisUser, items})
+})
+
+router.post('/update-order', async function(req, res, next){
+  console.log("================>", req.body.order)
+  update = await OrderModel.updateOne(
+    {_id: req.body.order},
+    {sent: true}
+    )
+})
+
 module.exports = router;
