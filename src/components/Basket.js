@@ -92,7 +92,7 @@ class Basket extends React.Component {
           <Link to="/creations" ><Button color="secondary">Continuer mes Achats</Button></Link>
         </div>
         <div>
-         <Link to="/"> <Button color="secondary" onClick={this.OnBuyClick}>Confirmer</Button></Link>
+         <Link to="/"> <Button color="secondary" onClick={this.OnBuyClick} onClick={this.onResetClick}  >Confirmer</Button></Link>
         </div>
         <div style={{height:"5em"}}></div>  
       </div>
@@ -116,6 +116,9 @@ function mapDispatchToProps(dispatch){
     onDeleteClick: function(position){
       console.log(position)
       dispatch({type: 'delete', position: position})
+    },
+    onResetClick: function(){
+      dispatch({type: 'reset'})
     }
   }
 }

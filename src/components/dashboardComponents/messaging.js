@@ -17,9 +17,23 @@ class Messages extends React.Component{
 
   constructor(){
     super()
+    this.handleClick = this.handleClick.bind(this);
     this.state= {
       messages: [],
     }
+  }
+
+  handleClick(){
+    console.log("coucou")
+    let ctx = this;
+    fetch('http://localhost:3000/admins/messages')
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data){
+      ctx.setState({messages: data.allMessages})
+     console.log("THE STATE FROM HANDLE CLICK ===========>", ctx.state.messages)
+    })
   }
 
   componentDidMount(){
@@ -32,24 +46,21 @@ class Messages extends React.Component{
       ctx.setState({messages: data.allMessages})
      console.log("THE STATE ===========>", ctx.state.messages)
     })
-    .catch(function(error) {
-      console.log('Request failed ->', error)
-  });
   }
 
     render(){
 
       let messageList = this.state.messages.map(function(message, i){
-        return <MessageItem key={i}
+        return <MessageItem handleClickParent={this.handleClick} key={i}
         messageObject={message.object}
         messageContent={message.content}
         messageSender={message.sender_email}
         messageDate={message.date}
         messageId = {message._id}
+        messageRead = {message.read}
         />
       }, this)
 
-      console.log("MESSAGE LISTE", messageList.length)
       let size;
       if (messageList.length <= 1) {
         size = givenSize
@@ -62,10 +73,19 @@ class Messages extends React.Component{
           <div style={size}>
           <div style={{height:"6em"}}></div>
           <Card className="col-8 mx-auto" >
-          <h2 style={{textAlign:"center", fontSize:"3em", marginTop:'1em'}}>Messagerie</h2>
+          <h2 style={{textAlign:"center", fontSize:"3em", marginTop:'1em'}}>Messagerie ({messageList.length})</h2>
           <div style={{height:"1em"}}></div>
-
+          {messageList.length == 0?(
+            <div>
+              <div style={{fontSize:'1.3em', textAlign:'center', marginTop:"2em"}} >Pas de messages</div>
+            </div>
+          ):(
+            <div>           
               {messageList}
+            </div>
+
+          )}
+
 
             <div style={{height:"6em"}}></div>
             </Card>

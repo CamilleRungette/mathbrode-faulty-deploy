@@ -135,6 +135,22 @@ router.get('/messages', async function(req, res, next){
   res.json({allMessages})
 })
 
+router.post('/read-message', async function (req, res, next){
+  console.log(req.body)
+  message = await MessageModel.findOne({_id: req.body.message_id})
+  if (message.read == false){
+    update = await MessageModel.updateOne(
+      {_id: req.body.message_id},
+      {read: true})
+    } else if (message.read == true){
+      update = await MessageModel.updateOne(
+        {_id: req.body.message_id},
+        {read: false})
+      }
+    newMessage = await MessageModel.findOne({_id: req.body.message_id})
+  res.json({newMessage})
+})
+
 router.post('/delete-message', async function(req, res, next){
     console.log("in the delete message method")
   message = await MessageModel.findOne({_id: req.body.message_id})
@@ -142,9 +158,11 @@ router.post('/delete-message', async function(req, res, next){
   MessageModel.deleteOne(
     {_id: req.body.message_id},
     function(error) {
-    }
-    );
-  res.json({result: true})
+    });
+    messages = await MessageModel.find(function(err, orders){
+      console.log("messages")
+    })
+  res.json({messages})
     console.log("message deleted")
 })
 

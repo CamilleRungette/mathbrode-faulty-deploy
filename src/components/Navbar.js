@@ -29,9 +29,13 @@ class Navigbar extends React.Component{
         <div xs="10">
             <Nav navbar style={{fontSize:"1.2em"}}> 
 
+            {this.props.connected ? (
+              <div></div>
+            ):(
                 <NavItem>
                   <Link to="/"><NavLink>Accueil</NavLink> </Link>
                 </NavItem>
+            )}
 
                 <NavItem>
                   <Link to="/items"> <NavLink>Articles</NavLink></Link>
@@ -56,9 +60,13 @@ class Navigbar extends React.Component{
                 )}
                 </NavItem>
 
+                {this.props.connected ? (
                 <NavItem>
                   <Link to ="/myorders" > <NavLink>Mes commandes</NavLink> </Link>
                 </NavItem>
+                ):(
+                  <div></div>
+                )}
 
                 <NavItem>
                 {this.props.connected ? (
