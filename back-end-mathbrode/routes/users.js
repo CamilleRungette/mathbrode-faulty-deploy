@@ -23,6 +23,9 @@ router.post('/sign-up', async function(req, res, next) {
     last_name: req.body.last_name,
     email: req.body.email,
     password: SHA256(req.body.password+salt).toString(encBase64),
+    address: "à renseigner",
+    zip_code: "à renseigner",
+    city: "à renseigner",
     token: uid2(32),
     salt: salt
   })
@@ -144,6 +147,20 @@ router.get('/myorders', async function(req, res, next){
   }
   console.log(orderList);
   res.json({myOrders: orderList})
+})
+
+router.post('/update-info', async function(req, res, next){
+  console.log(req.body)
+  // update = await UserModel.updateOne(
+  //   {_id: req.body.id},
+  //   {first_name: req.body.first_name,
+  //   last_name: req.body.last_name,
+  //   email: req.body.email,
+  //   address: req.body.address,
+  //   zip_code: req.body.zipcode,
+  //   city: req.body.city,
+  // })
+
 })
 
 
