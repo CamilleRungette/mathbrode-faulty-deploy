@@ -13,7 +13,7 @@ class Home extends React.Component {
   render(){
 
     return (
-      <div className="col-12 col-lg-12">
+      <div className="col-12 col-lg-12" style={{paddingLeft:"0px", paddingRight:"0px"}}>
         <Navigbar/>
           <div className="row" style={{margin:"auto"}}>
               <div className="col-lg-12" style={{paddingLeft:0,paddingRight:0}}>

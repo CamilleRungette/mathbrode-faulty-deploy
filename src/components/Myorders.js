@@ -39,6 +39,7 @@ class MyOrders extends Component{
         <div>
           <Navbar />
           <div style={{fontFamily:"Raleway", height:"75vh"}}>
+          <div style={{height:"10em"}}></div>
             <div style={{textAlign:"center", fontSize:"3.3em"}}>
               <p>Mes Commandes</p>
             </div>

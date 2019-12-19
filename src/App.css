@@ -51,7 +51,7 @@ body{
 .text-block {
   position: absolute;
   bottom: 10%;
-  left: 10%;
+  left: 8%;
   color: white;
   font-size: 4vw ;
   font-family:'Raleway',sans-serif;
@@ -61,7 +61,8 @@ body{
 
 img {
   width:100%;
-
+  
+  
 }
 
 
@@ -159,10 +160,13 @@ img {
 
 
  .imageBlur {
-
   filter: blur(10px);
   opacity:80%;
+}
 
+.productTitle{
+  background-color:black;
+  z-index:0;
 }
 
 .presentation {
@@ -176,13 +180,15 @@ img {
   
   margin-top: 3rem;
   margin-bottom: 3rem;
+
 }
  
 .iconstat {
-  width : 300px;
+  width : 200px;
   padding: 40px;
-  
 }
+
+
 
 .navigbar {
   color : #6c757d;
@@ -238,11 +244,21 @@ body {
 
 
 
-.cursor{
+.cursor {
   cursor:pointer;
   text-decoration: underline;;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+
+
+.topnav {
+  width: 100%;
+  position :absolute;
+  background-color: white;
+  opacity:85%;
+  z-index:10;
 }

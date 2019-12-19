@@ -18,7 +18,7 @@ class Navigbar extends React.Component{
   render(){
     return(
 
-<div className="row" style={{marginLeft:"0px",marginRight:"0px"}}>
+<div className="row topnav" style={{marginLeft:"0px",marginRight:"0px"}}>
 
     <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "95%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto",padding:"0"}}>
         <div xs="2" style={{textAlign:"right"}}>
@@ -28,7 +28,7 @@ class Navigbar extends React.Component{
         </div>
 
         <div xs="10">
-            <Nav navbar style={{fontSize:"1.2em"}}> 
+            <Nav navbar style={{fontSize:"1.3em", fontWeight:"bold"}}> 
 
             {this.props.connected ? (
               <div></div>
