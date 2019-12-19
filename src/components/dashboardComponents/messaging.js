@@ -2,7 +2,9 @@ import React from 'react';
 import NavbarAdmin from './NavbarAdmin';
 import Footer from '../Footer'
 import MessageItem from '../cards/Message-item';
-import {Card} from 'react-bootstrap'
+import {Card} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const givenSize ={
   height: '70vh',
@@ -49,6 +51,9 @@ class Messages extends React.Component{
   }
 
     render(){
+      if (this.props.adminConnected == false || this.props.adminConnected == null){
+        return <Redirect to="/loginadmin" />
+     }
 
       let messageList = this.state.messages.map(function(message, i){
         return <MessageItem handleClickParent={this.handleClick} key={i}
@@ -85,23 +90,25 @@ class Messages extends React.Component{
             </div>
 
           )}
-
-
             <div style={{height:"6em"}}></div>
             </Card>
             </div>
           <Footer/>
-          </div>
-        
-
-
-      
+          </div>     
         )}
 }
 
 
-export default Messages;
+function mapStatetoProps(state){
+  console.log("======>", state)
+  return {adminConnected: state.admin.isAdminExist}
+}
 
+
+export default connect(
+  mapStatetoProps,
+  null
+  )(Messages);
 
 
 

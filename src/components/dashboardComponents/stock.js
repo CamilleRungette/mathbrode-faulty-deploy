@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import {Card, Button,   Col, Form, Row, Table, Modal } from 'react-bootstrap';
 import NavbarAdmin from './NavbarAdmin';
-import Footer from '../Footer'
+import Footer from '../Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
 
 let displayMessage ={
   display:"block",
@@ -82,7 +85,10 @@ class stock extends React.Component{
 
     render(){
       console.log(this.state.show)
-
+      if (this.props.adminConnected == false || this.props.adminConnected == null){
+        return <Redirect to="/loginadmin" />
+     }
+     console.log("--------------->", this.props.adminConnected)
       var show = unDisplayMessage
       if (this.state.show === true){
         show = displayMessage
@@ -174,7 +180,16 @@ class stock extends React.Component{
 }
 
 
-export default stock;
+function mapStatetoProps(state){
+  console.log("======>", state)
+  return {adminConnected: state.admin.isAdminExist}
+}
+
+
+export default connect(
+  mapStatetoProps,
+  null
+  )(stock);
 
 
 

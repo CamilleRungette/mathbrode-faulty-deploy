@@ -99,7 +99,7 @@ class Dashboard extends Component {
 
       console.log("--------------->", this.props.adminConnected)
       if (this.props.adminConnected == false || this.props.adminConnected == null){
-         return <Redirect to="/" />
+         return <Redirect to="/loginadmin" />
       }
       
       return(

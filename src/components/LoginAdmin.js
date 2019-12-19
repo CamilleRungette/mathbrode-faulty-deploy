@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {Card, Button,   Col, Row, Table, Form} from 'react-bootstrap';
 import '../App.css';
 import Navbar from './dashboardComponents/NavbarAdmin';
-import {Redirect } from 'react-router-dom';
+import {Link, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 
 
@@ -18,7 +18,7 @@ this.state = {
 }
 
 
-    handleSubmitSignIn(){   
+    handleSubmitSignIn(){
       let ctx = this;     
     fetch("http://localhost:3000/admins/sign-in",{
     method:"POST",
@@ -37,7 +37,7 @@ this.state = {
   }
 
       render(){
-        if (this.state.isAdminExist === true){
+        if (this.state.isAdminExist === true || this.props.adminConnected == true){
           console.log("CONDITION:", this.state.isAdminExist)
           return < Redirect to="/dashboard" />
         }
@@ -73,6 +73,12 @@ this.state = {
         )}
 }
 
+function mapStatetoProps(state){
+  console.log("======>", state)
+  return {adminConnected: state.admin.isAdminExist}
+}
+
+
 function mapDispatchToProps(dispatch){
   return{
     onSiginClick: function(data, isAdminExist){
@@ -82,6 +88,6 @@ function mapDispatchToProps(dispatch){
 }
 
 export default connect (
-  null,
+  mapStatetoProps,
   mapDispatchToProps
 )(LoginAdmin)
