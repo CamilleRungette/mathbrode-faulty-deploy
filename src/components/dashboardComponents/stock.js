@@ -66,13 +66,23 @@ class stock extends React.Component{
     })
   }
 
+  
   onDeleteClick(item){
+    let ctx = this
     console.log("coucou", item)
-    fetch('http://localhost:3000/admins/delete-item', {
+    fetch('http://localhost:3000/admins/delete-item',{
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `id=${item._id}`
+    })
+  .then(function(response) {
+    return response.json();
   })
+  .then(function(data){
+    ctx.setState({items: data.allItems})
+    console.log("THE STATE ===========>", data)
+  })
+
   }
 
   updateItem(){
@@ -119,7 +129,7 @@ class stock extends React.Component{
                           <Col lg={1}>{item.price}</Col>
                           <Col lg={2} style={{textAlign:"center"}}>{item.shipping_fee}</Col>
                           <Col lg={4} sm={3} style={{ height:"3.5em", overflow:"auto"}}>{item.description}</Col>
-                          <Col lg={2} sm={3} style={{textAlign:"center"}}><Button variant="info" onClick={() => this.onShowClick(item)}>Modifier</Button> <Button variant="danger" href="/stock" onClick={() => this.onDeleteClick(item)} ><FontAwesomeIcon icon={faTrashAlt} /> </Button> </Col>
+                          <Col lg={2} sm={3} style={{textAlign:"center"}}><Button variant="info" onClick={() => this.onShowClick(item)}>Modifier</Button> <Button variant="danger" onClick={() => this.onDeleteClick(item)} ><FontAwesomeIcon icon={faTrashAlt} /> </Button> </Col>
                         </Row>
                       </div>
                           )

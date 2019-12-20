@@ -67,13 +67,15 @@ router.post('/create-item', async function(req, res, next){
     newItem.save(function(error, item){
         if (item){
         console.log("NEW item SAVED:", item)
-        res.json({item})
         }else if (error){
         console.log("item NOT CREATED:", error)
-        res.json({error})
         }
     });
 }
+allItems = await ItemModel.find(function(err, items){
+  console.log(items)
+  })
+  res.json({allItems})
 });
 
 router.get('/stock', async function(req, res, next){
@@ -103,11 +105,12 @@ router.post('/delete-item', async function(req, res, next){
   ItemModel.deleteOne(
     {_id: req.body.id},
     function(error){
-
-    }
-  );
-  res.json({result: true})
-})
+    });
+    allItems = await ItemModel.find(function(err, items){
+      console.log(items)
+      })
+    res.json({allItems})
+  })
 
 router.post('/create-event', function(req, res, next){
   console.log("=====================CREATE-EVENT FUNCTION=========")

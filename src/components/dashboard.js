@@ -35,7 +35,7 @@ class Dashboard extends Component {
           CreateWorkshopDesc: '',
           CreateWorkshopPrice: '',
           CreateWorkshopDuration: '',
-          
+          allItems: '',
         }
   }
   
@@ -46,10 +46,25 @@ class Dashboard extends Component {
   }
 
   ItemSubmit(){
+    let ctx = this
     fetch('http://localhost:3000/admins/create-item', {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             body: `name=${this.state.CreateItemName}&price=${this.state.CreateItemPrice}&size=${this.state.CreateItemSize}&description=${this.state.CreateItemDesc}&shipping_fee=${this.state.CreateItemShipFee}&copy=1&photo=${this.state.CreateItemPhoto}`
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data){
+      ctx.setState({
+      CreateItemName: '',
+      CreateItemPrice: '',
+      CreateItemSize: '',
+      CreateItemDesc: '',
+      CreateItemShipFee: '',
+      CreateItemPhoto: '',
+})
+     console.log("THE STATE ===========>", ctx.state.allItems)
     })
    }
 
@@ -204,7 +219,7 @@ class Dashboard extends Component {
 
             <Form.Group style={{textAlign:"center"}} as={Row}>
                 <Col sm={{ offset: 1 }}>
-                  <Button type="submit" onClick={this.ItemSubmit} style={{border:"none", backgroundColor:"#1B263B"}}>Valider</Button>
+                  <Button onClick={this.ItemSubmit} style={{border:"none", backgroundColor:"#1B263B"}}>Valider</Button>
                 </Col>
             </Form.Group>
           </Form>
