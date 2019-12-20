@@ -19,6 +19,7 @@ class Profil extends Component{
   constructor(props){
     super(props);
     this.handleShow = this.handleShow.bind(this)
+    this.handleClose = this.handleClose.bind(this)
     this.handleSubmitUpdate = this.handleSubmitUpdate.bind(this)
     this.state={
       id:this.props.userSigned._id,
@@ -35,6 +36,10 @@ class Profil extends Component{
 
   handleShow(){
     this.setState({show:true})
+  }
+  
+  handleClose(){
+    this.setState({show: false})
   }
 
   handleSubmitUpdate(){
