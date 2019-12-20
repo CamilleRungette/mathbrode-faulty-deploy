@@ -13,7 +13,6 @@ import Events from './components/Events'
 import Basket from './components/Basket'
 import ItemPres from './components/ItemPresentation'
 import Items from './components/Items'
-import Exemple from './components/Exemple'
 import Creations from './components/Creations'
 import MyOrders from './components/Myorders'
 import {createStore, combineReducers}  from 'redux';
@@ -44,7 +43,6 @@ class App extends Component{
           <Route path="/basket" component={Basket} />
           <Route path="/item/:id" exact component={ItemPres}/>
           <Route path="/items" component={Items} />
-          <Route path="/exemple" component={Exemple} />
           <Route path="/creations" component={Creations}/>
           <Route path="/myorders" component={MyOrders} />
           <Route path="/loginadmin" component={LoginAdmin} />  

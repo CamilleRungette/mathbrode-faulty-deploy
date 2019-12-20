@@ -75,19 +75,19 @@ class ItemPresentation extends React.Component {
           <p style={{textAlign:"center", fontSize:"3em"}}>{this.state.name}</p>
         </div>
 
-        <div className="row col-lg-7 border" style={{margin:"auto"}} >
+        <div className="row col-lg-6 border" style={{margin:"auto"}} >
         <div class="hover">
           <div class="zoom">
         <img src={this.state.photo} className=" col-lg-8" style={{height:"40em", objectFit:"contain", margin:"auto"}} alt="Alt text" />
           </div>
         </div>
-          <div className="col-lg-9" style={{margin:"auto"}}>
+          <div className="col-lg-10" style={{margin:"auto"}}>
             <div style={{display:"flex", justifyContent:"center"}}>
               <Row> 
-                <Col sm={8}>          
+                <Col sm={7}>          
                   <p style={{fontSize:"1.5em",marginTop: "2rem",marginBottom: "2rem"}}>{this.state.desc}</p>
                 </Col>
-                <Col>
+                <Col lg={4}>
                   <p className="" style={{marginTop: "2rem",marginBottom: "2rem",padding:"0.5rem" ,backgroundColor:"#1b263b",color:"white"}} >Info Pratiques :<br/>
                   Prix: {this.state.price}€<br/>
                   Exemplaire: {this.state.copy}<br/>
@@ -96,12 +96,12 @@ class ItemPresentation extends React.Component {
                 </Col>
             </Row>          
             </div> 
-              <div className="d-flex justify-content-center mb-4" >
-              <Button color="secondary" style={{marginRight:"2em"}}> Retour </Button>
+              <div className="d-flex justify-content-center my-4" >
+              <Link to="/items"><Button color="secondary" style={{marginRight:"2em", fontSize:'1.2em'}}> Retour </Button></Link>
                 {this.props.user == null ? (
-                  <Link to="/login" ><Button style={{backgroundColor:"#1b263b"}}>Ajouter au panier</Button></Link>
+                  <Link to="/login" ><Button style={{backgroundColor:"#1b263b", fontSize:'1.2em'}}>Ajouter au panier</Button></Link>
                 ):(
-                  <Button onClick={() => this.props.onBuyClick(this.state.item)} style={{backgroundColor:"#1b263b"}}>Ajouter au panier</Button>
+                  <Button onClick={() => this.props.onBuyClick(this.state.item)} style={{backgroundColor:"#1b263b", fontSize:'1.2em'}}>Ajouter au panier</Button>
                 )}
               </div>
           </div>

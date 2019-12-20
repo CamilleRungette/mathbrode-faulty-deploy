@@ -67,7 +67,7 @@ class Creations extends React.Component {
 
               <div style={{height:"5em"}}></div>
               <div className="row" style={{display:"flex", justifyContent: "center"}}>
-                <Link to="/items"> <Button> En voir plus...</Button> </Link>
+                <Link to="/items"> <Button style={{fontSize:"1.3em", backgroundColor:"#1b263b", fontFamily:"Raleway"}}> En voir plus...</Button> </Link>
               </div>
 
 

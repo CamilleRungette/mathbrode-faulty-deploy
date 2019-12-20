@@ -79,11 +79,11 @@ onDrop(picture) {
 
 
 
-        <Row style={{fontFamily:"Raleway", display:"flex", justifyContent:"space-around"}}>
+        <Row className="col-10 mx-auto" style={{fontFamily:"Raleway", display:"flex",  justifyContent:"space-around"}}>
           
 
-          <Col xs="12" lg="4" style={{display:"flex", justifyContent:"center",marginBottom:"2em"}}>
-            <Card style={{cursor:"pointer", backgroundColor:"#EDF3F7", width:"17em", height:"17em", padding:"1em", border:"none"}}>
+          <Col style={{display:"flex", justifyContent:"center",marginBottom:"2em"}}>
+            <Card style={{cursor:"pointer", backgroundColor:"#EDF3F7", width:"20em", height:"15em", padding:"1em", border:"none"}}>
               <CardBody >
                 <div style={{display:"flex", justifyContent:"space-between", marginBottom:"0.6em"}} >
                 <Link to="/classes" ><CardTitle style={{ fontSize:"1.2em", color:"black"}} ><strong>Atelier d'initiation</strong> </CardTitle></Link>
@@ -94,8 +94,8 @@ onDrop(picture) {
             </Card>
           </Col>
 
-          <Col xs="12" lg="4" style={{display:"flex", justifyContent:"center",marginBottom:"2em"}}>
-            <Card style={{cursor:"pointer", backgroundColor:"#EDF3F7", width:"17em", height:"17em", padding:"1em", border:"none"}}>
+          <Col style={{display:"flex", justifyContent:"center",marginBottom:"2em"}}>
+            <Card style={{cursor:"pointer", backgroundColor:"#EDF3F7", width:"20em", height:"15em", padding:"1em", border:"none"}}>
               <CardBody onClick={this.handleShow} >
                 <div style={{display:"flex", justifyContent:"space-between", marginBottom:"0.6em"}} >
                 <CardLink style={{ fontSize:"1.2em"}} ><strong>Projets personnalisés</strong> </CardLink>
@@ -106,8 +106,8 @@ onDrop(picture) {
             </Card>
           </Col>
 
-          <Col xs="12" lg="4" style={{display:"flex", justifyContent:"center",marginBottom:"2em"}}>
-            <Card style={{cursor:"pointer", backgroundColor:"#EDF3F7", width:"17em", height:"17em", padding:"1em", border:"none"}}>
+          <Col style={{display:"flex", justifyContent:"center",marginBottom:"2em"}}>
+            <Card style={{cursor:"pointer", backgroundColor:"#EDF3F7", width:"20em", height:"15em", padding:"1em", border:"none"}}>
               <CardBody >
                 <div style={{display:"flex", justifyContent:"space-between", marginBottom:"0.6em"}} >
                 <Link to="/events"> <CardTitle style={{ color: "black", fontSize:"1.2em"}} ><strong>Rencontrez-moi</strong> </CardTitle> </Link>

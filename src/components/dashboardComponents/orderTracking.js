@@ -114,9 +114,9 @@ class tracking extends React.Component{
     
 
       <div style={{ height:"100%", display:"flex", justifyContent:"center", paddingTop:"10%"}}>
-        <Col lg={10}>
+        <Col lg={9}>
           <Card>
-          <Card.Header>Commandes et suivi</Card.Header>
+          <Card.Header style={{fontSize:'1.7em',  textAlign:'center'}}>Commandes et suivi</Card.Header>
             <Card.Body>
 
               <Table striped>

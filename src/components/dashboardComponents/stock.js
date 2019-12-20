@@ -102,7 +102,7 @@ class stock extends React.Component{
             <div style={{display:"flex", justifyContent:"center", paddingTop:"10%"}}>
               <Col lg="8">
                 <Card>
-                <Card.Header style={{textAlign:"center", fontWeight:"bold"}}>Liste du stock</Card.Header>
+                <Card.Header style={{textAlign:"center", fontSize:'1.7em'}}>Liste du stock</Card.Header>
                 <Card.Header>
                     <Row style={{fontWeight:"bold"}} >
                           <Col lg={3}>Nom du produit</Col>
