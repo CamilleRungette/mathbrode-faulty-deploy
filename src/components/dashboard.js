@@ -105,40 +105,30 @@ class Dashboard extends Component {
 
   
     render(){
-      var totalUsers = 120;
-      var totalMoney = 840;
-      var ordersCompleted = 18;
-      var ordersPending = 4;
-
-
       console.log("--------------->", this.props.adminConnected)
-      if (this.props.adminConnected == false || this.props.adminConnected == null){
-         return <Redirect to="/loginadmin" />
-      }
+      // if (this.props.adminConnected == false || this.props.adminConnected == null){
+      //    return <Redirect to="/loginadmin" />
+      // }
       
       return(
 <div style={{fontFamily:"Raleway"}}>
        
   <NavbarAdmin/>
 
-    <Table responsive>
-<thead>
-<tr>
-<th className="col-4"> <img src="clients.png" alt="icon" class="iconstat"/></th>
-<th className="col-4"><img src="revenu.png" class="iconstat" alt="icon"/></th>
-<th className="col-4" ><img src="commandes terminées.png" class="iconstat" alt="icon"/></th>
-<th className="col-4" ><img src="commandes en attente.png" class="iconstat"alt="icon"/></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><h3 class="textstat">{totalUsers} clients inscrits</h3></td>
-<td><h3 class="textstat">{totalMoney} € de revenu</h3></td>
-<td><h3 class="textstat">{ordersCompleted} commandes terminées</h3></td>
-<td><h3 class="textstat">{ordersPending} commandes en attente</h3></td>
-</tr>
-</tbody>
-</Table>
+<div className="my-5" style={{ display:"flex", justifyContent:"space-between"}}>
+  <div className="col-3" style={{textAlign:"center"}}> <img src="./clients.png" alt="icon" class="iconstat"/></div>
+  <div className="col-3" style={{textAlign:"center"}}><img src="./income.png" class="iconstat" alt="icon"/></div>
+  <div className="col-3" style={{textAlign:"center"}} ><img src="./doneorder.png" class="iconstat" alt="icon"/></div>
+  <div className="col-3" style={{textAlign:"center"}} ><img src="./waitingorder.png" class="iconstat"alt="icon"/></div>
+</div>
+
+<div className="my-5" style={{ display:"flex", fontSize:'1.7em' ,justifyContent:"space-between"}}>
+  <div className="col-3" style={{textAlign:"center"}}> 18 client inscrits</div>
+  <div className="col-3" style={{textAlign:"center"}}> 120€ de revenus</div>
+  <div className="col-3" style={{textAlign:"center"}} > 6 commandes terminées</div>
+  <div className="col-3" style={{textAlign:"center"}} > 4 commandes en attente</div>
+</div>
+
 
 
   <div style={{display:"flex", flexDirection:"column" }}>
