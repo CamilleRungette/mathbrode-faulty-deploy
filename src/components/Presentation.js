@@ -45,25 +45,25 @@ class Presentation extends React.Component {
       
     return(
 
-<div className="row justify-content-center " style={{fontFamily:"Raleway"}}>
+<div className="row justify-content-center col-10 mx-auto" style={{fontFamily:"Raleway"}}>
   <div>
     <h1 style={{fontSize:"4em", textAlign:"center"}}> <em>Je me présente</em></h1>
-      <div style={{height:"5em"}}></div>
+      <div style={{height:"8em"}}></div>
 
       <div className="row">
 
-        <div className="row col-lg-12" style={{ display:"flex", justifyContent:"center", alignItems:"center"}} >
+        <div className="row" style={{ display:"flex", justifyContent:"center", alignItems:"center"}} >
 
           <div className="col-lg-4">
           <img src="presentation.png" style={{width:"100%"}} alt="Alt text" />
           </div>
 
-          <div className="col-lg-4">
+          <div className="offset-1 col-lg-4">
             <p  style={{fontSize:"1em"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             </p>
             <div style={{ display:"flex", justifyContent:"center", alignItems:"center"}}>
-            <Button onClick={this.handleShow} style={{backgroundColor: "#1B263B" , marginTop:"2em"}}>Me contacter</Button>
+            <Button onClick={this.handleShow} style={{backgroundColor: "#1B263B" , marginTop:"2em", fontSize:"1.2em"}}>Me contacter</Button>
             </div>
           </div>
 
