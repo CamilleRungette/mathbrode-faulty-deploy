@@ -253,12 +253,9 @@ html {
   scroll-behavior: smooth;
 }
 
-
-
 .topnav {
   width: 100%;
   position :absolute;
-  background-color: white;
-  opacity:85%;
+  background-color: rgba(255, 255, 255, 0.85);
   z-index:10;
 }
