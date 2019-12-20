@@ -64,8 +64,8 @@ this.state = {
         }
         
         return(
-          <div>
-          <Navbar></Navbar>
+          <div style={{position:"absolute", top: "0px", width:"100%"}}>
+          <Navbar/>
 
             <div class="container" style={{marginTop:'5em', fontFamily:"Raleway"}}>
               <div style={{height:"10em"}}></div>
