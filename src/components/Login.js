@@ -64,8 +64,14 @@ this.state = {
         }
         
         return(
+<<<<<<< HEAD
+          <div>
+          <Navbar></Navbar>
+          
+=======
           <div style={{position:"absolute", top: "0px", width:"100%"}}>
           <Navbar/>
+>>>>>>> development
 
             <div class="container" style={{marginTop:'5em', fontFamily:"Raleway"}}>
               <div style={{height:"10em"}}></div>
