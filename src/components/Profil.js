@@ -132,7 +132,7 @@ class Profil extends Component{
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label>Addresse</Form.Label>
+                    <Form.Label>Adresse</Form.Label>
                     <Form.Control as="textarea" onChange={(e)=> this.setState({address: e.target.value})}
                     value={this.state.address}  />
                   </Form.Group>
