@@ -65,8 +65,10 @@ class Basket extends React.Component {
         } 
    return(
     <div style={{fontFamily:"Raleway"}}>
-      <Navbar />
+      <Navbar/>
             <div style={{fontFamily:"Raleway"}}>
+            <div style={{height:"10em"}}></div>
+
             <div style={{textAlign:"center", fontSize:"3.3em"}}>
               <p>Mon Panier</p>
             </div>
@@ -81,7 +83,7 @@ class Basket extends React.Component {
                 <p >{item.price} €</p>
               </div> 
               <div className="col-2">
-                <FontAwesomeIcon onClick={() => this.props.onDeleteClick(i)} icon={faTrashAlt} />
+                <Button style={{backgroundColor:"#1b263b", color:"white"}} ><FontAwesomeIcon onClick={() => this.props.onDeleteClick(i)} icon={faTrashAlt} /> </Button>
               </div> 
             </div>  
           )      
@@ -94,10 +96,10 @@ class Basket extends React.Component {
       <div style={{height:"5em"}}></div>
       <div className="d-flex justify-content-center col-lg-12">  
         <div className="justify-content-center col-lg-6">          
-          <Link to="/creations" ><Button color="secondary">Continuer mes Achats</Button></Link>
+          <Link to="/creations" ><Button color="secondary" >Continuer mes Achats</Button></Link>
         </div>
         <div>
-         <Link to="/"> <Button color="secondary" onClick={this.OnBuyClick}  >Confirmer</Button></Link>
+         <Link to="/"> <Button style={{backgroundColor:"#1B263B", fontSize:"1.2em"}} onClick={this.OnBuyClick}  >Confirmer</Button></Link>
         </div>
         <div style={{height:"5em"}}></div>  
       </div>
