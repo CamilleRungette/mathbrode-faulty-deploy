@@ -121,24 +121,25 @@ class Dashboard extends Component {
        
   <NavbarAdmin/>
 
-    <Table responsive>
-<thead>
-<tr>
-<th className="col-4"> <img src="clients.png" alt="icon" class="iconstat"/></th>
-<th className="col-4"><img src="revenu.png" class="iconstat" alt="icon"/></th>
-<th className="col-4" ><img src="commandes terminées.png" class="iconstat" alt="icon"/></th>
-<th className="col-4" ><img src="commandes en attente.png" class="iconstat"alt="icon"/></th>
-</tr>
-</thead>
-<tbody>
-<tr>
+    
+
+<div style={{ display:"flex"}}>
+<th className="col-3"> <img src="clients.png" alt="icon" class="iconstat"/></th>
+<th className="col-3"><img src="revenu.png" class="iconstat" alt="icon"/></th>
+<th className="col-3" ><img src="commandes terminées.png" class="iconstat" alt="icon"/></th>
+<th className="col-3" ><img src="commandes en attente.png" class="iconstat"alt="icon"/></th>
+</div>
+
+
+
+
+<div  style={{ display:"flex"}}>
 <td><h3 class="textstat">{totalUsers} clients inscrits</h3></td>
 <td><h3 class="textstat">{totalMoney} € de revenu</h3></td>
 <td><h3 class="textstat">{ordersCompleted} commandes terminées</h3></td>
 <td><h3 class="textstat">{ordersPending} commandes en attente</h3></td>
-</tr>
-</tbody>
-</Table>
+</div>
+
 
 
   <div style={{display:"flex", flexDirection:"column" }}>
@@ -150,7 +151,7 @@ class Dashboard extends Component {
             {/* Create-item form */}
     <Col xs={{span:12}} lg={{offset:3, span:6 }}>
         <Card>
-          <Card.Header style={{fontSize:"1.3em"}}>Ajouter un produit</Card.Header>
+          <Card.Header style={{fontSize:"1.8em",textAlign:"center"}}>Ajouter un produit</Card.Header>
             <Card.Body>
                         
             <Form>
@@ -230,7 +231,7 @@ class Dashboard extends Component {
 
 <Col lg={{offset:3, span:6 }}>
         <Card>
-          <Card.Header style={{fontSize:"1.3em"}}>Ajouter un événement</Card.Header>
+          <Card.Header style={{fontSize:"1.8em",textAlign:"center"}}>Ajouter un événement</Card.Header>
             <Card.Body>
                         
             <Form>
@@ -305,7 +306,7 @@ class Dashboard extends Component {
 
  <Col lg={{offset:3, span:6 }}>
         <Card>
-          <Card.Header style={{fontSize:"1.3em"}}>Ajouter un atelier</Card.Header>
+          <Card.Header style={{fontSize:"1.8em",textAlign:"center"}}>Ajouter un atelier</Card.Header>
             <Card.Body>
                         
             <Form>

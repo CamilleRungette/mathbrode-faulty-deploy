@@ -50,6 +50,26 @@ class Navigbar extends React.Component{
                 <NavLink onClick={this.pageScroll}>Contact</NavLink>
                 </NavItem>
 
+                
+                
+                {this.props.connected ? (
+                <NavItem>
+                  <Link to ="/profil" > <NavLink>Mon profil</NavLink> </Link>
+                </NavItem>
+                ):(
+                  <div></div>
+                )}
+             
+
+                {this.props.connected ? (
+                <NavItem>
+                  <Link to ="/myorders" > <NavLink>Mes commandes</NavLink> </Link>
+                </NavItem>
+                ):(
+                  <div></div>
+                )}
+
+
                 <NavItem>
                 {this.props.connected ? (
             
@@ -60,21 +80,7 @@ class Navigbar extends React.Component{
                   <div></div>
                 )}
                 </NavItem>
-                {this.props.connected ? (
-                <NavItem>
-                  <Link to ="/profil" > <NavLink>Mon profil</NavLink> </Link>
-                </NavItem>
-                ):(
-                  <div></div>
-                )}
-
-                {this.props.connected ? (
-                <NavItem>
-                  <Link to ="/myorders" > <NavLink>Mes commandes</NavLink> </Link>
-                </NavItem>
-                ):(
-                  <div></div>
-                )}
+                
 
                 <NavItem>
                 {this.props.connected ? (
