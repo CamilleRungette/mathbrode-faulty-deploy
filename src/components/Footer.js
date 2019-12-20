@@ -15,11 +15,11 @@ class Footer extends React.Component{
        
           <p style={{fontSize:"1.3em"}}> Suivez-moi:</p>
           
-            <div className="icons d-flex col-lg-12" style={{display:"flex", justifyContent:"center"}}>
+            <div className="icons d-flex col-lg-12" style={{display:"flex", justifyContent:"space-between", width:"13em"}}>
             
-            <a href="https://www.instagram.com/mathbrode/?hl=fr" ><img src="/instagram.png" className="instagram col-6 col-lg-2" alt="Alt text" /></a> 
+            <a href="https://www.instagram.com/mathbrode/?hl=fr" ><img src="/instagram.png" className="instagram" style={{height:"4em", width:'4em'}} alt="Alt text" /></a> 
             {/* <a href="https://www.instagram.com/mathbrode/?hl=fr" ><FontAwesomeIcon icon={faLaptop} style={{color:"#121a28"}} className={"fa-3x"}/></a>   */}
-            <a href="https://www.instagram.com/mathbrode/?hl=fr" ><img src="/facebook.png" className="facebook col-6 col-lg-2" alt="Alt text" /></a>
+            <a href="https://www.instagram.com/mathbrode/?hl=fr" ><img src="/facebook.png" className="facebook" style={{height:"4em", width:'4em'}} alt="Alt text" /></a>
             </div>
           
           <p style={{fontSize:"1.3em", marginTop:"1em"}}>Mathbrode© 2019</p>
