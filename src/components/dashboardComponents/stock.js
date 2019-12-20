@@ -85,9 +85,9 @@ class stock extends React.Component{
 
     render(){
       console.log(this.state.show)
-    //   if (this.props.adminConnected == false || this.props.adminConnected == null){
-    //     return <Redirect to="/loginadmin" />
-    //  }
+      if (this.props.adminConnected == false || this.props.adminConnected == null){
+        return <Redirect to="/loginadmin" />
+     }
      console.log("--------------->", this.props.adminConnected)
       var show = unDisplayMessage
       if (this.state.show === true){

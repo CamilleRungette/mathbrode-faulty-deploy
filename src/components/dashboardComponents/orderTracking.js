@@ -104,9 +104,9 @@ class tracking extends React.Component{
   }
 
     render(){
-    //   if (this.props.adminConnected == false || this.props.adminConnected == null){
-    //     return <Redirect to="/loginadmin" />
-    //  }
+      if (this.props.adminConnected == false || this.props.adminConnected == null){
+        return <Redirect to="/loginadmin" />
+     }
 
       return(
   <div style={{fontFamily:"Raleway"}}>
