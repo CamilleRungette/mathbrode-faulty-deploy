@@ -69,19 +69,45 @@ class Dashboard extends Component {
    }
 
   EventSubmit(){
+    let ctx = this
     fetch('http://localhost:3000/admins/create-event', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `name=${this.state.CreateEventName}&address=${this.state.CreateEventAddress}&date=${this.state.CreateEventDate}&starting_time=${this.state.CreateEventStart}&ending_time=${this.state.CreateEventEnd}&photo=${this.state.CreateEventPhoto}`
-})
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data){
+      ctx.setState({
+        CreateEventName: '',
+        CreateEventAddress: '',
+        CreateEventDate:'',
+        CreateEventPhoto:'',
+        CreateEventStart: '',
+        CreateEventEnd: '',
+      })
+    })
   }
 
   WorkshopSubmit(){
+    let ctx = this
     fetch('http://localhost:3000/admins/create-workshop', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `title=${this.state.CreateWorkshopTitle}&desc=${this.state.CreateWorkshopDesc}&price=${this.state.CreateWorkshopPrice}&duration=${this.state.CreateWorkshopDuration}`
-})
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data){
+      ctx.setState({
+        CreateWorkshopTitle: '',
+        CreateWorkshopDesc: '',
+        CreateWorkshopPrice: '',
+        CreateWorkshopDuration: '',
+      })
+    })
   }
 
   async uploadItemImage(e){
@@ -294,7 +320,7 @@ class Dashboard extends Component {
 
             <Form.Group style={{textAlign:"center"}} as={Row}>
                 <Col sm={{ offset: 1 }}>
-                  <Button type="submit" onClick={this.EventSubmit} style={{border:"none", backgroundColor:"#1B263B"}}>Valider</Button>
+                  <Button onClick={this.EventSubmit} style={{border:"none", backgroundColor:"#1B263B"}}>Valider</Button>
                 </Col>
             </Form.Group>
           </Form>
@@ -314,18 +340,6 @@ class Dashboard extends Component {
             <Card.Body>
                         
             <Form>
-
-        {/*    <Form.Group as={Row} controlId="formHorizontalPicture">
-              <Form.Label column sm={2}>Photo</Form.Label>
-                <Col sm={10}>
-                <input type="file"
-                placeholder="upload an image"
-
-                />
-                  </Col>  
-             
-            </Form.Group>  */}
-
             <Form.Group as={Row} controlId="formHorizontalTitle">
               <Form.Label column sm={2}>Titre</Form.Label>
                 <Col sm={10}>
@@ -360,7 +374,7 @@ class Dashboard extends Component {
 
             <Form.Group style={{textAlign:"center"}} as={Row}>
                 <Col sm={{ offset: 1 }}>
-                  <Button type="submit" onClick={this.WorkshopSubmit} style={{border:"none", backgroundColor:"#1B263B"}}>Valider</Button>
+                  <Button onClick={this.WorkshopSubmit} style={{border:"none", backgroundColor:"#1B263B"}}>Valider</Button>
                 </Col>
             </Form.Group>
           </Form>

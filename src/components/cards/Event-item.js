@@ -2,6 +2,8 @@ import React from 'react';
 import { 
   Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem 
   } from 'reactstrap';
+  import DateFormat from '../function'
+
 
 
 
@@ -18,8 +20,8 @@ class Event extends React.Component{
           </CardText>
         </CardBody>
         <CardBody className="list-group-flush">
-          <CardText >Le {this.props.eventDate}  <br/>
-        De {this.props.eventStart} à {this.props.eventEnd} </CardText>
+          <CardText >Le {DateFormat(this.props.eventDate)}  <br/>
+        De {this.props.eventStart}h à {this.props.eventEnd}h </CardText>
         </CardBody>
         <ListGroup>
           <ListGroupItem> <a href="#">Évent F </a> </ListGroupItem>
