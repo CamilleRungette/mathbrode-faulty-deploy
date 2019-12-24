@@ -86,11 +86,21 @@ class stock extends React.Component{
   }
 
   updateItem(){
+    let ctx = this
     fetch('http://localhost:3000/admins/update-item', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `id=${this.state.id}&name=${this.state.name}&desc=${this.state.desc}&price=${this.state.price}&size=${this.state.size}&copy=${this.state.copy}&shipping_fee=${this.state.shipping_fee}`
   })
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data){
+    ctx.setState({items: data.allItems, show: !ctx.state.show,
+    })
+    console.log("THE STATE ===========>", data)
+  })
+
 }
 
     render(){
@@ -172,7 +182,7 @@ class stock extends React.Component{
                         </Col>
                       </div>
                       <br/>
-                      <Button href="/stock" style={{backgroundColor:"#1B263B", border:"none", marginLeft:"47%"}} variant="secondary" onClick={this.updateItem}>
+                      <Button style={{backgroundColor:"#1B263B", border:"none", marginLeft:"47%"}} variant="secondary" onClick={this.updateItem}>
                         Enregistrer
                       </Button>
                       <div style={{height:'1em'}}></div>

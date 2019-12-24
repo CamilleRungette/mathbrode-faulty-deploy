@@ -81,14 +81,14 @@ class ItemPresentation extends React.Component {
         <img src={this.state.photo} className=" col-lg-8" style={{height:"40em", objectFit:"contain", margin:"auto"}} alt="Alt text" />
           </div>
         </div>
-          <div className="col-lg-10" style={{margin:"auto"}}>
-            <div style={{display:"flex", justifyContent:"center"}}>
+          <div className="col-lg-11" style={{margin:"auto"}}>
+            <div >
               <Row> 
-                <Col sm={7}>          
-                  <p style={{fontSize:"1.5em",marginTop: "2rem",marginBottom: "2rem"}}>{this.state.desc}</p>
+                <Col sm={8}>          
+                  <p style={{display:"flex", alignItems:"center", fontSize:"1em",marginTop: "2rem",marginBottom: "2rem", height:"8em"}}>{this.state.desc}</p>
                 </Col>
-                <Col lg={4}>
-                  <p className="" style={{marginTop: "2rem",marginBottom: "2rem",padding:"0.5rem" ,backgroundColor:"#1b263b",color:"white"}} >Info Pratiques :<br/>
+                <Col sm={4} >
+                  <p style={{ fontSize:"1.2em", marginTop: "2rem",marginBottom: "2rem",padding:"0.5rem" ,backgroundColor:"#1b263b",color:"white"}}>Info Pratiques :<br/>
                   Prix: {this.state.price}€<br/>
                   Exemplaire: {this.state.copy}<br/>
                   Taille: {this.state.size}

@@ -98,8 +98,11 @@ router.post('/update-item', async function(req, res, next){
     function(error, raw){
     console.log("UPDATE:", raw)
     })
-    res.json({result: true})
-})
+    allItems = await ItemModel.find(function(err, items){
+      console.log(items)
+      })
+      res.json({allItems})
+  })
 
 router.post('/delete-item', async function(req, res, next){
   ItemModel.deleteOne(
