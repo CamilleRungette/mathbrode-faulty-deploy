@@ -24,6 +24,7 @@ class Dashboard extends Component {
           CreateItemDesc: '',
           CreateItemShipFee: '',
           CreateItemPhoto: '',
+          CreateItemFirstPres: false,
           CreateEventName: '',
           CreateEventAddress: '',
           CreateEventDate:'',
@@ -50,7 +51,7 @@ class Dashboard extends Component {
     fetch('http://localhost:3000/admins/create-item', {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            body: `name=${this.state.CreateItemName}&price=${this.state.CreateItemPrice}&size=${this.state.CreateItemSize}&description=${this.state.CreateItemDesc}&shipping_fee=${this.state.CreateItemShipFee}&copy=1&photo=${this.state.CreateItemPhoto}`
+            body: `name=${this.state.CreateItemName}&price=${this.state.CreateItemPrice}&size=${this.state.CreateItemSize}&description=${this.state.CreateItemDesc}&shipping_fee=${this.state.CreateItemShipFee}&copy=1&photo=${this.state.CreateItemPhoto}&first_presentation=${this.state.CreateItemFirstPres}`
     })
     .then(function(response) {
       return response.json();
@@ -63,6 +64,8 @@ class Dashboard extends Component {
       CreateItemDesc: '',
       CreateItemShipFee: '',
       CreateItemPhoto: '',
+      CreateItemFirstPres: false,
+
 })
      console.log("THE STATE ===========>", ctx.state.allItems)
     })
@@ -147,9 +150,10 @@ class Dashboard extends Component {
   
     render(){
       console.log("--------------->", this.props.adminConnected)
-      if (this.props.adminConnected == false || this.props.adminConnected == null){
-         return <Redirect to="/loginadmin" />
-      }
+      console.log("CHECKBOX:", this.state.CreateItemFirstPres)
+      // if (this.props.adminConnected == false || this.props.adminConnected == null){
+      //    return <Redirect to="/loginadmin" />
+      // }
       
       return(
 <div style={{fontFamily:"Raleway"}}>
@@ -241,6 +245,18 @@ class Dashboard extends Component {
                         value={this.state.CreateItemShipFee} />
                 </Col>  
             </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalFees">
+              <Form.Label column sm={2}>Mise en avant</Form.Label>
+                <Col sm={10}>
+                  {this.state.CreateItemFirstPres == false? (
+                    <Form.Check type="checkbox" onClick={() => this.setState({CreateItemFirstPres: !this.state.CreateItemFirstPres})} />
+                  ):(
+                    <Form.Check type="checkbox" checked onClick={() => this.setState({CreateItemFirstPres: !this.state.CreateItemFirstPres})} />
+                  )}
+                </Col>  
+            </Form.Group>
+
 
 
             <Form.Group style={{textAlign:"center"}} as={Row}>
