@@ -17,7 +17,7 @@ class Creations extends React.Component {
 
   componentDidMount(){
     let ctx=this
-    fetch('http://localhost:3000/items')
+    fetch('http://localhost:3000/items-creations')
     .then(function(response) {
       return response.json();
     })

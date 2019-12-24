@@ -26,6 +26,12 @@ router.get('/items', async function(req, res, next){
   res.json({allItems})
 })
 
+router.get('/items-creations', async function(req, res, next){
+  allItems = await ItemsModel.find({first_presentation: true })
+  res.json({allItems})
+})
+
+
 router.get('/find-items', async function(req, res, next){
   console.log("in the find item method ==============")
   thisItem = await ItemsModel.findOne({ name: req.query.name})
