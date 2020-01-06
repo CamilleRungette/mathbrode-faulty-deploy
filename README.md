@@ -9,6 +9,5 @@ It will be launched by the 20th December
 Express and React
 
 ### Collaborators :
-1. [Dimitri Jacquin](https://github.com/dimjcqn)
-2. [Guillaume Lanes](https://github.com/G-Lanes)
-3. Camille Rungette
+1. [Guillaume Lanes](https://github.com/G-Lanes)
+2. Camille Rungette
