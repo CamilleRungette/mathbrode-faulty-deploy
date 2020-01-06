@@ -82,7 +82,8 @@ router.get('/stock', async function(req, res, next){
   allItems = await ItemModel.find(function(err, items){
     console.log(items)
     })
-    res.json({allItems})
+  number = await ItemsModel.find({first_presentation: true })
+    res.json({allItems, number})
 });
 
 router.post('/update-item', async function(req, res, next){
@@ -94,14 +95,17 @@ router.post('/update-item', async function(req, res, next){
     size: req.body.size,
     description: req.body.desc,
     shipping_fee: req.body.shipping_fee,
-    copy: req.body.copy},
+    copy: req.body.copy,
+    first_presentation: req.body.first_presentation },
     function(error, raw){
     console.log("UPDATE:", raw)
     })
     allItems = await ItemModel.find(function(err, items){
       console.log(items)
       })
-      res.json({allItems})
+    number = await ItemsModel.find({first_presentation: true })
+
+      res.json({allItems, number})
   })
 
 router.post('/delete-item', async function(req, res, next){
