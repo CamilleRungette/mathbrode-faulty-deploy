@@ -151,9 +151,9 @@ class Dashboard extends Component {
     render(){
       console.log("--------------->", this.props.adminConnected)
       console.log("CHECKBOX:", this.state.CreateItemFirstPres)
-      // if (this.props.adminConnected == false || this.props.adminConnected == null){
-      //    return <Redirect to="/loginadmin" />
-      // }
+      if (this.props.adminConnected == false || this.props.adminConnected == null){
+         return <Redirect to="/loginadmin" />
+      }
       
       return(
 <div style={{fontFamily:"Raleway"}}>

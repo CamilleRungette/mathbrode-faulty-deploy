@@ -1,15 +1,47 @@
 import React, { Component } from 'react';
 import Footer from './Footer'
 import Navbar from './Navbar'
-import {Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem, Col, Row } from 'reactstrap';
+import {Button, Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem, Col, Row } from 'reactstrap';
+import {Modal, Form} from 'react-bootstrap'
+import {Redirect, Link} from 'react-router-dom'
+
+let modalStyle={
+  width:"50em",
+  backgroundColor: "white",
+  fontFamily: "Raleway",
+}
 
 
 class Classes extends Component{
   constructor(){
     super();
+    this.handleClose = this.handleClose.bind(this)
+    this.handleShow = this.handleShow.bind(this)
+    this.sendMessage = this.sendMessage.bind(this)  
     this.state = {
-      workshops:[]
+      workshops:[],
+      show: false,
+      SendMessageContent: '',
+      SendMessageEmail: '',
+      SendMessagePhoto: '',  
     }
+  }
+
+  handleClose(){
+    this.setState({show: false})
+  }
+
+  handleShow(){
+    this.setState({show:true})
+  }
+
+  sendMessage(){
+    this.setState({show:false});
+    fetch('http://localhost:3000/users/create-message', {
+      method: 'POST',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: `object=Atelier&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}&photo=${this.state.SendMessagePhoto}`
+    })
   }
 
   componentDidMount(){
@@ -53,7 +85,7 @@ class Classes extends Component{
               <CardText > <strong>Durée: </strong> {workshop.duration}</CardText>
           </CardBody>
           <ListGroup>
-            <ListGroupItem style={{textAlign:"center", fontSize:'1.2em'}}> Réserver un créneau </ListGroupItem>
+            <ListGroupItem style={{textAlign:"center", fontSize:'1.2em', fontWeight:"bold", cursor:"pointer"}}  onClick={this.handleShow} >Réserver un créneau </ListGroupItem>
           </ListGroup>
         </Card>
       </div>
@@ -63,6 +95,34 @@ class Classes extends Component{
        <div style={{height:"8em"}}></div>
 
       <Footer />
+
+      <Modal show={this.state.show} onHide={this.handleClose} className="col-lg-10" >
+         <div style={modalStyle}>
+          <Modal.Header closeButton>
+            <Modal.Title>Message pour réservation d'atelier</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+          <Form>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Adresse email</Form.Label>
+                <Form.Control type="email"onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
+                value={this.state.SendMessageEmail} />
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Message</Form.Label>
+              <Form.Control as="textarea" onChange={(e)=> this.setState({SendMessageContent: e.target.value})} 
+              value={this.state.SendMessageContent} />
+            </Form.Group>
+          </Form>
+            <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.sendMessage}> 
+              Envoyer
+            </Button>
+          </Modal.Body>
+         </div>
+       </Modal>
+
+
       
     </div>
     )}
