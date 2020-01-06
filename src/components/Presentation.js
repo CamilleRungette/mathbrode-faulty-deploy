@@ -1,6 +1,5 @@
 import React from 'react';
-import {
-  Button,} from 'reactstrap';
+import { Button, Row, Col} from 'reactstrap';
 import '../App.css'
 import {Modal, Form} from 'react-bootstrap'
 
@@ -21,6 +20,7 @@ class Presentation extends React.Component {
           show: false,
           SendMessageContent: '',
           SendMessageEmail: '',
+          SendMessageName: '',
         }
       }
       
@@ -29,7 +29,7 @@ class Presentation extends React.Component {
           fetch('http://localhost:3000/users/create-message', {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            body: `object=Contactez_moi&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}`
+            body: `object=Contactez_moi&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}&sender_name=${this.state.SendMessageName}`
           })
         }
       
@@ -86,11 +86,23 @@ class Presentation extends React.Component {
           </Modal.Header>
           <Modal.Body>
           <Form>
+          <Row>
+            <Col>
+              <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Nom</Form.Label>
+                    <Form.Control type="text"onChange={(e)=> this.setState({SendMessageName: e.target.value})}
+                    value={this.state.SendMessageName} />
+              </Form.Group>
+            </Col>
+
+            <Col>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Adresse email</Form.Label>
               <Form.Control type="email"onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
               value={this.state.SendMessageEmail} />
             </Form.Group>
+            </Col>
+            </Row>
 
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Message</Form.Label>

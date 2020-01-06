@@ -3,7 +3,6 @@ import Footer from './Footer'
 import Navbar from './Navbar'
 import {Button, Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem, Col, Row } from 'reactstrap';
 import {Modal, Form} from 'react-bootstrap'
-import {Redirect, Link} from 'react-router-dom'
 
 let modalStyle={
   width:"50em",
@@ -23,7 +22,8 @@ class Classes extends Component{
       show: false,
       SendMessageContent: '',
       SendMessageEmail: '',
-      SendMessagePhoto: '',  
+      SendMessagePhoto: '', 
+      SendMessageName:'', 
     }
   }
 
@@ -40,7 +40,7 @@ class Classes extends Component{
     fetch('http://localhost:3000/users/create-message', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `object=Atelier&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}&photo=${this.state.SendMessagePhoto}`
+      body: `object=Atelier&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}&photo=${this.state.SendMessagePhoto}&sender_name=${this.state.SendMessageName}`
     })
   }
 
@@ -103,11 +103,23 @@ class Classes extends Component{
           </Modal.Header>
           <Modal.Body>
           <Form>
+          <Row>
+            <Col>
+              <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Nom</Form.Label>
+                    <Form.Control type="text"onChange={(e)=> this.setState({SendMessageName: e.target.value})}
+                    value={this.state.SendMessageName} />
+              </Form.Group>
+            </Col>
+
+            <Col>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Adresse email</Form.Label>
                 <Form.Control type="email"onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
                 value={this.state.SendMessageEmail} />
             </Form.Group>
+            </Col>
+            </Row>
 
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Message</Form.Label>
@@ -115,7 +127,7 @@ class Classes extends Component{
               value={this.state.SendMessageContent} />
             </Form.Group>
           </Form>
-            <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.sendMessage}> 
+          <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.sendMessage}> 
               Envoyer
             </Button>
           </Modal.Body>

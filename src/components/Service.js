@@ -28,6 +28,7 @@ constructor(){
     SendMessageContent: '',
     SendMessageEmail: '',
     SendMessagePhoto: '',
+    SendMessageName:'', 
   }
 }
 
@@ -42,7 +43,7 @@ onDrop(picture) {
     fetch('http://localhost:3000/users/create-message', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `object=Projet_personnalisé&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}&photo=${this.state.SendMessagePhoto}`
+      body: `object=Projet_personnalisé&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}&photo=${this.state.SendMessagePhoto}&sender_name=${this.state.SendMessageName}`
     })
   }
 
@@ -71,6 +72,7 @@ onDrop(picture) {
   }
 
   render(){
+    console.log("RESULTAT:", this.props.user.userSigned)
     return(
     <div style={{fontFamily: 'Raleway'}}>
         <h1 style={{fontSize:"3.5em", textAlign:"center"}} > <em>Mes Prestations</em></h1>
@@ -130,15 +132,23 @@ onDrop(picture) {
           </Modal.Header>
           <Modal.Body>
           <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Adresse email</Form.Label>
-              {this.props.user == null ? (
-                <Form.Control type="email"onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
-                value={this.state.SendMessageEmail} />
-              ): (
-                <Form.Control type="email" value={this.props.user.email} />
-              )}
-            </Form.Group>
+            <Row>
+              <Col>
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Nom</Form.Label>
+                      <Form.Control type="text"onChange={(e)=> this.setState({SendMessageName: e.target.value})}
+                      value={this.state.SendMessageName} />
+                </Form.Group>
+              </Col>
+
+              <Col>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Adresse email</Form.Label>
+                  <Form.Control type="email"onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
+                  value={this.state.SendMessageEmail} />
+              </Form.Group>
+              </Col>
+            </Row>
 
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Message</Form.Label>
