@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Footer from './Footer'
 import Navbar from './Navbar'
-import {Button, Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem, Col, Row } from 'reactstrap';
+import {Button, Input, Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem, Col, Row } from 'reactstrap';
 import {Modal, Form} from 'react-bootstrap'
+import {connect} from 'react-redux'
+
 
 let modalStyle={
   width:"50em",
@@ -105,25 +107,31 @@ class Classes extends Component{
           <Form>
           <Row>
             <Col>
-              <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Nom</Form.Label>
-                    <Form.Control type="text"onChange={(e)=> this.setState({SendMessageName: e.target.value})}
-                    value={this.state.SendMessageName} />
+              <Form.Group>
+                {this.props.user == null?(
+                  <Form.Control type="text" placeholder="Nom" onChange={(e)=> this.setState({SendMessageName: e.target.value})}
+                  value={this.state.SendMessageName} />
+                ):(
+                  <Input type="text" placeholder="Nom" value={this.props.user.first_name}/>
+                  )}
               </Form.Group>
             </Col>
 
             <Col>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Adresse email</Form.Label>
-                <Form.Control type="email"onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
+            <Form.Group>
+              {this.props.user == null ? (
+                <Form.Control type="email" placeholder="Email" onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
                 value={this.state.SendMessageEmail} />
+              ):(
+                <Input type="Email"  placeholder="Email" value={this.props.user.email} />
+
+              )}
             </Form.Group>
             </Col>
             </Row>
 
             <Form.Group controlId="formBasicPassword">
-              <Form.Label>Message</Form.Label>
-              <Form.Control as="textarea" onChange={(e)=> this.setState({SendMessageContent: e.target.value})} 
+              <Form.Control as="textarea" placeholder="Message" onChange={(e)=> this.setState({SendMessageContent: e.target.value})} 
               value={this.state.SendMessageContent} />
             </Form.Group>
           </Form>
@@ -140,4 +148,12 @@ class Classes extends Component{
     )}
 }
 
-export default Classes ;
+function mapStatetoProps(state){
+  console.log(state)
+  return  {user: state.user.userSigned}
+}
+
+export default connect(
+  mapStatetoProps,
+  null
+)(Classes);

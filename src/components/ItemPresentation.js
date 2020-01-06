@@ -115,20 +115,21 @@ class ItemPresentation extends React.Component {
                 <Col lg={6}>
                   <FormGroup>
                     {this.props.user == null ?(
-                      <Input type="Nom" id="exampleNom" placeholder="Nom" onChange={(e)=> this.setState({userName: e.target.value})}
+                      <Input type="text" 
+                       placeholder="Nom" onChange={(e)=> this.setState({userName: e.target.value})}
                       value={this.state.userName}/>
                     ):(
-                      <Input type="Nom" name="Nom" id="exampleNom" placeholder="Nom" value={this.props.user.first_name}/>
+                      <Input type="text" placeholder="Nom" value={this.props.user.first_name}/>
                     )}
                   </FormGroup>
                 </Col>
                 <Col lg={6}>
                   <FormGroup>
                     {this.props.user == null ?(
-                      <Input type="Email" name="Email" id="exampleEmail" placeholder="Email" onChange={(e)=> this.setState({userEmail: e.target.value})}
+                      <Input type="Email" placeholder="Email" onChange={(e)=> this.setState({userEmail: e.target.value})}
                       value={this.state.userEmail} />
                     ):(
-                      <Input type="Email" name="Email" id="exampleEmail" placeholder="Email" value={this.props.user.email} />
+                      <Input type="email" placeholder="Email" value={this.props.user.email} />
                     )}
                   </FormGroup>
                 </Col>
