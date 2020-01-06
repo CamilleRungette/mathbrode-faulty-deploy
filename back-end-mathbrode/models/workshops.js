@@ -5,6 +5,7 @@ let workshopSchema = mongoose.Schema({
     desc: String,
     price: Number,
     duration: String,
+    photo: String,
 });
 
 const WorkshopModel = mongoose.model("workshops", workshopSchema);
