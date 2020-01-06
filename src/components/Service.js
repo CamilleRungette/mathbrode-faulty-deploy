@@ -78,7 +78,7 @@ onDrop(picture) {
 
     return(
     <div style={{fontFamily: 'Raleway'}}>
-        <h1 style={{fontSize:"3.5em", textAlign:"center"}} > <em>Mes Prestations</em></h1>
+        <h1 style={{fontSize:"3.5em", textAlign:"center"}} > Mes Prestations</h1>
 
         <div style={{height:"10em"}}></div>
 

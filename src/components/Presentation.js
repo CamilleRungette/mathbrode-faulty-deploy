@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button, Row, Col} from 'reactstrap';
+import { Button, Row, Col, Input} from 'reactstrap';
 import '../App.css'
 import {Modal, Form} from 'react-bootstrap'
+import {connect} from 'react-redux'
+
 
 let modalStyle={
   width:"50em",
@@ -47,7 +49,7 @@ class Presentation extends React.Component {
 
 <div className="row justify-content-center col-10 mx-auto" style={{fontFamily:"Raleway"}}>
   <div>
-    <h1 style={{fontSize:"4em", textAlign:"center"}}> <em>Je me présente</em></h1>
+    <h1 style={{fontSize:"4em", textAlign:"center"}}> Je me présente</h1>
       <div style={{height:"8em"}}></div>
 
       <div className="row">
@@ -79,38 +81,44 @@ class Presentation extends React.Component {
         </div>
       </div>
 
-        <Modal show={this.state.show} onHide={this.handleClose} className="col-lg-10" >
+      <Modal show={this.state.show} onHide={this.handleClose} className="col-lg-10" >
          <div style={modalStyle}>
           <Modal.Header closeButton>
-            <Modal.Title>Message pour projet personnalisé</Modal.Title>
+            <Modal.Title>Me contacter</Modal.Title>
           </Modal.Header>
           <Modal.Body>
           <Form>
           <Row>
             <Col>
-              <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Nom</Form.Label>
-                    <Form.Control type="text"onChange={(e)=> this.setState({SendMessageName: e.target.value})}
-                    value={this.state.SendMessageName} />
+              <Form.Group>
+                {this.props.user == null?(
+                  <Form.Control type="text" placeholder="Nom" onChange={(e)=> this.setState({SendMessageName: e.target.value})}
+                  value={this.state.SendMessageName} />
+                ):(
+                  <Input type="text" placeholder="Nom" value={this.props.user.first_name}/>
+                  )}
               </Form.Group>
             </Col>
 
             <Col>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Adresse email</Form.Label>
-              <Form.Control type="email"onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
-              value={this.state.SendMessageEmail} />
+            <Form.Group>
+              {this.props.user == null ? (
+                <Form.Control type="email" placeholder="Email" onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
+                value={this.state.SendMessageEmail} />
+              ):(
+                <Input type="Email"  placeholder="Email" value={this.props.user.email} />
+
+              )}
             </Form.Group>
             </Col>
             </Row>
 
             <Form.Group controlId="formBasicPassword">
-              <Form.Label>Message</Form.Label>
-              <Form.Control as="textarea" onChange={(e)=> this.setState({SendMessageContent: e.target.value})} 
+              <Form.Control as="textarea" placeholder="Message" onChange={(e)=> this.setState({SendMessageContent: e.target.value})} 
               value={this.state.SendMessageContent} />
             </Form.Group>
           </Form>
-            <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.sendMessage}>
+          <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.sendMessage}> 
               Envoyer
             </Button>
           </Modal.Body>
@@ -127,4 +135,12 @@ class Presentation extends React.Component {
 }
 
 
-export default Presentation;
+function mapStatetoProps(state){
+  console.log(state)
+  return  {user: state.user.userSigned}
+}
+
+export default connect(
+  mapStatetoProps,
+  null
+)(Presentation);

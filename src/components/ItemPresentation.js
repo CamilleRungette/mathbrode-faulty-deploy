@@ -115,8 +115,7 @@ class ItemPresentation extends React.Component {
                 <Col lg={6}>
                   <FormGroup>
                     {this.props.user == null ?(
-                      <Input type="text" 
-                       placeholder="Nom" onChange={(e)=> this.setState({userName: e.target.value})}
+                      <Input type="text" placeholder="Nom" onChange={(e)=> this.setState({userName: e.target.value})}
                       value={this.state.userName}/>
                     ):(
                       <Input type="text" placeholder="Nom" value={this.props.user.first_name}/>
@@ -135,7 +134,7 @@ class ItemPresentation extends React.Component {
                 </Col>
               </Row>
               <FormGroup>
-                <Input type="textarea" rows="4" name="Message"  onChange={(e)=> this.setState({content: e.target.value})}
+                <Input type="textarea" rows="4" name="Message" placeholder="Message"  onChange={(e)=> this.setState({content: e.target.value})}
                 value={this.state.content} />
               </FormGroup>
               <div className="d-flex justify-content-center" >
