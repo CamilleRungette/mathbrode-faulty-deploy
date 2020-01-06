@@ -7,6 +7,7 @@ let eventSchema = mongoose.Schema({
     photo: String,
     starting_time: String,
     ending_time: String,
+    link: String,
 });
 
 const EventModel = mongoose.model("events", eventSchema);

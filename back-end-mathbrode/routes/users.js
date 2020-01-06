@@ -167,21 +167,3 @@ router.post('/update-info', async function(req, res, next){
 
 
 module.exports = router;
-
-  // for(i=0; i < req.body.items.length; i++){
-  //    newItemOrder = new ItemOrderModel({
-  //      item_id: req.body.items[i]._id,
-  //      price: req.body.items[i].price,
-  //      name: req.body.items[i].name,
-  //      order_id: newOrder._id,
-  //      copy: 1
-  //    })
-     
-  //      newItemOrder.save(function(error, item_order){
-  //        if (error){
-  //          console.log("ERROR:", error)
-  //        } else if (item_order){
-  //          console.log("ITEM_ORDER SAVED:", item_order)
-  //        }
-  //      });
-  //    }

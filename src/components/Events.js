@@ -38,6 +38,7 @@ class Events extends Component{
         eventStart={event.starting_time}
         eventEnd={event.ending_time}
         eventPhoto={event.photo} 
+        eventLink={event.link}
       />
     }, this)
   
@@ -51,7 +52,7 @@ class Events extends Component{
       <div style={{height:"10em"}}></div>
           <h1 style={{textAlign:"center", fontSize:"3.5em", marginTop:"0.5em"}}>Mes Événements</h1>
           <div style={{height:"6em"}}></div>
-        <div  style={{ display:"flex", justifyContent:"space-around"}}>
+        <div style={{ display:"flex", justifyContent:"space-around", flexWrap:"wrap"}}>
          
           {eventList}
         </div>

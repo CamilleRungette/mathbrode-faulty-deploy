@@ -82,7 +82,8 @@ router.get('/stock', async function(req, res, next){
   allItems = await ItemModel.find(function(err, items){
     console.log(items)
     })
-    res.json({allItems})
+  number = await ItemsModel.find({first_presentation: true })
+    res.json({allItems, number})
 });
 
 router.post('/update-item', async function(req, res, next){
@@ -94,12 +95,18 @@ router.post('/update-item', async function(req, res, next){
     size: req.body.size,
     description: req.body.desc,
     shipping_fee: req.body.shipping_fee,
-    copy: req.body.copy},
+    copy: req.body.copy,
+    first_presentation: req.body.first_presentation },
     function(error, raw){
     console.log("UPDATE:", raw)
     })
-    res.json({result: true})
-})
+    allItems = await ItemModel.find(function(err, items){
+      console.log(items)
+      })
+    number = await ItemsModel.find({first_presentation: true })
+
+      res.json({allItems, number})
+  })
 
 router.post('/delete-item', async function(req, res, next){
   ItemModel.deleteOne(
@@ -120,7 +127,8 @@ router.post('/create-event', function(req, res, next){
       date: req.body.date,
       photo: req.body.photo,
       starting_time: req.body.starting_time,
-      ending_time: req.body.ending_time
+      ending_time: req.body.ending_time,
+      link: req.body.link
     });
 
     newEvent.save(function(error, event){
@@ -179,7 +187,8 @@ router.post('/create-workshop', function(req, res, next){
       title: req.body.title,
       desc: req.body.desc,
       price: req.body.price,
-      duration: req.body.duration
+      duration: req.body.duration,
+      photo: "https://res.cloudinary.com/dduugb9jy/image/upload/v1576163613/camille/diizhinpqeiouhwenbdj.jpg"
     });
 
     newWorkshop.save(function(error, workshop){

@@ -24,6 +24,7 @@ class Dashboard extends Component {
           CreateItemDesc: '',
           CreateItemShipFee: '',
           CreateItemPhoto: '',
+          CreateItemFirstPres: false,
           CreateEventName: '',
           CreateEventAddress: '',
           CreateEventDate:'',
@@ -35,6 +36,7 @@ class Dashboard extends Component {
           CreateWorkshopDesc: '',
           CreateWorkshopPrice: '',
           CreateWorkshopDuration: '',
+          CreateEventLink:'',
           allItems: '',
         }
   }
@@ -50,7 +52,7 @@ class Dashboard extends Component {
     fetch('http://localhost:3000/admins/create-item', {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            body: `name=${this.state.CreateItemName}&price=${this.state.CreateItemPrice}&size=${this.state.CreateItemSize}&description=${this.state.CreateItemDesc}&shipping_fee=${this.state.CreateItemShipFee}&copy=1&photo=${this.state.CreateItemPhoto}`
+            body: `name=${this.state.CreateItemName}&price=${this.state.CreateItemPrice}&size=${this.state.CreateItemSize}&description=${this.state.CreateItemDesc}&shipping_fee=${this.state.CreateItemShipFee}&copy=1&photo=${this.state.CreateItemPhoto}&first_presentation=${this.state.CreateItemFirstPres}`
     })
     .then(function(response) {
       return response.json();
@@ -63,25 +65,54 @@ class Dashboard extends Component {
       CreateItemDesc: '',
       CreateItemShipFee: '',
       CreateItemPhoto: '',
+      CreateItemFirstPres: false,
+
 })
      console.log("THE STATE ===========>", ctx.state.allItems)
     })
    }
 
   EventSubmit(){
+    let ctx = this
     fetch('http://localhost:3000/admins/create-event', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `name=${this.state.CreateEventName}&address=${this.state.CreateEventAddress}&date=${this.state.CreateEventDate}&starting_time=${this.state.CreateEventStart}&ending_time=${this.state.CreateEventEnd}&photo=${this.state.CreateEventPhoto}`
-})
+      body: `name=${this.state.CreateEventName}&address=${this.state.CreateEventAddress}&date=${this.state.CreateEventDate}&starting_time=${this.state.CreateEventStart}&ending_time=${this.state.CreateEventEnd}&photo=${this.state.CreateEventPhoto}&link=${this.state.CreateEventLink}`
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data){
+      ctx.setState({
+        CreateEventName: '',
+        CreateEventAddress: '',
+        CreateEventDate:'',
+        CreateEventPhoto:'',
+        CreateEventStart: '',
+        CreateEventEnd: '',
+        CreateEventLink: '',
+      })
+    })
   }
 
   WorkshopSubmit(){
+    let ctx = this
     fetch('http://localhost:3000/admins/create-workshop', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `title=${this.state.CreateWorkshopTitle}&desc=${this.state.CreateWorkshopDesc}&price=${this.state.CreateWorkshopPrice}&duration=${this.state.CreateWorkshopDuration}`
-})
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data){
+      ctx.setState({
+        CreateWorkshopTitle: '',
+        CreateWorkshopDesc: '',
+        CreateWorkshopPrice: '',
+        CreateWorkshopDuration: '',
+      })
+    })
   }
 
   async uploadItemImage(e){
@@ -121,6 +152,7 @@ class Dashboard extends Component {
   
     render(){
       console.log("--------------->", this.props.adminConnected)
+      console.log("CHECKBOX:", this.state.CreateItemFirstPres)
       if (this.props.adminConnected == false || this.props.adminConnected == null){
          return <Redirect to="/loginadmin" />
       }
@@ -216,6 +248,18 @@ class Dashboard extends Component {
                 </Col>  
             </Form.Group>
 
+            <Form.Group as={Row} controlId="formHorizontalFees">
+              <Form.Label column sm={2}>Mise en avant</Form.Label>
+                <Col sm={10}>
+                  {this.state.CreateItemFirstPres == false? (
+                    <Form.Check type="checkbox" onClick={() => this.setState({CreateItemFirstPres: !this.state.CreateItemFirstPres})} />
+                  ):(
+                    <Form.Check type="checkbox" checked onClick={() => this.setState({CreateItemFirstPres: !this.state.CreateItemFirstPres})} />
+                  )}
+                </Col>  
+            </Form.Group>
+
+
 
             <Form.Group style={{textAlign:"center"}} as={Row}>
                 <Col sm={{ offset: 1 }}>
@@ -273,6 +317,14 @@ class Dashboard extends Component {
             </Form.Group>
 
             <Form.Group as={Row} controlId="formHorizontalSize">
+              <Form.Label column sm={2}>Lien</Form.Label>
+                <Col sm={10}>
+                  <Form.Control type="text" onChange={(e)=> this.setState({CreateEventLink: e.target.value})}
+                        value={this.state.CreateEventLink}/>
+                </Col>  
+            </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalSize">
               <Form.Label column sm={2}>Date</Form.Label>
                 <Col sm={10}>
                   <Form.Control type="date" onChange={(e)=> this.setState({CreateEventDate: e.target.value})}
@@ -294,7 +346,7 @@ class Dashboard extends Component {
 
             <Form.Group style={{textAlign:"center"}} as={Row}>
                 <Col sm={{ offset: 1 }}>
-                  <Button type="submit" onClick={this.EventSubmit} style={{border:"none", backgroundColor:"#1B263B"}}>Valider</Button>
+                  <Button onClick={this.EventSubmit} style={{border:"none", backgroundColor:"#1B263B"}}>Valider</Button>
                 </Col>
             </Form.Group>
           </Form>
@@ -314,18 +366,6 @@ class Dashboard extends Component {
             <Card.Body>
                         
             <Form>
-
-        {/*    <Form.Group as={Row} controlId="formHorizontalPicture">
-              <Form.Label column sm={2}>Photo</Form.Label>
-                <Col sm={10}>
-                <input type="file"
-                placeholder="upload an image"
-
-                />
-                  </Col>  
-             
-            </Form.Group>  */}
-
             <Form.Group as={Row} controlId="formHorizontalTitle">
               <Form.Label column sm={2}>Titre</Form.Label>
                 <Col sm={10}>
@@ -360,7 +400,7 @@ class Dashboard extends Component {
 
             <Form.Group style={{textAlign:"center"}} as={Row}>
                 <Col sm={{ offset: 1 }}>
-                  <Button type="submit" onClick={this.WorkshopSubmit} style={{border:"none", backgroundColor:"#1B263B"}}>Valider</Button>
+                  <Button onClick={this.WorkshopSubmit} style={{border:"none", backgroundColor:"#1B263B"}}>Valider</Button>
                 </Col>
             </Form.Group>
           </Form>

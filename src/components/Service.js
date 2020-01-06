@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Row, Col, Card, CardText, CardBody,
-  CardTitle, Button, CardLink} from 'reactstrap';
+  CardTitle, Button, CardLink, Input} from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCut, faCalendarAlt, faHandshake } from '@fortawesome/free-solid-svg-icons'
 import {Modal, Form} from 'react-bootstrap'
@@ -28,6 +28,7 @@ constructor(){
     SendMessageContent: '',
     SendMessageEmail: '',
     SendMessagePhoto: '',
+    SendMessageName:'', 
   }
 }
 
@@ -42,7 +43,7 @@ onDrop(picture) {
     fetch('http://localhost:3000/users/create-message', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `object=Projet_personnalisé&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}&photo=${this.state.SendMessagePhoto}`
+      body: `object=Projet_personnalisé&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}&photo=${this.state.SendMessagePhoto}&sender_name=${this.state.SendMessageName}`
     })
   }
 
@@ -71,9 +72,13 @@ onDrop(picture) {
   }
 
   render(){
+    if (this.props.user){
+      console.log("voila", this.props.user)
+    }
+
     return(
     <div style={{fontFamily: 'Raleway'}}>
-        <h1 style={{fontSize:"3.5em", textAlign:"center"}} > <em>Mes Prestations</em></h1>
+        <h1 style={{fontSize:"3.5em", textAlign:"center"}} > Mes Prestations</h1>
 
         <div style={{height:"10em"}}></div>
 
@@ -130,19 +135,32 @@ onDrop(picture) {
           </Modal.Header>
           <Modal.Body>
           <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Adresse email</Form.Label>
-              {this.props.user == null ? (
-                <Form.Control type="email"onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
-                value={this.state.SendMessageEmail} />
-              ): (
-                <Form.Control type="email" value={this.props.user.email} />
-              )}
-            </Form.Group>
+            <Row>
+              <Col>
+                <Form.Group>
+                  {this.props.user == null?(
+                    <Form.Control type="text" placeholder="Nom" onChange={(e)=> this.setState({SendMessageName: e.target.value})}
+                    value={this.state.SendMessageName} />
+                  ):(
+                    <Input type="text" placeholder="Nom" value={this.props.user.first_name} />
+                  )}
+                </Form.Group>
+              </Col>
+
+              <Col>
+              <Form.Group>
+                {this.props.user == null ? (
+                  <Form.Control type="email" placeholder="Email" onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
+                  value={this.state.SendMessageEmail} />
+                ):(
+                  <Input type="email" placeholder="Email" value={this.props.user.email} />
+                )}
+              </Form.Group>
+              </Col>
+            </Row>
 
             <Form.Group controlId="formBasicPassword">
-              <Form.Label>Message</Form.Label>
-              <Form.Control as="textarea" onChange={(e)=> this.setState({SendMessageContent: e.target.value})} 
+              <Form.Control as="textarea" placeholder="Message" onChange={(e)=> this.setState({SendMessageContent: e.target.value})} 
               value={this.state.SendMessageContent} />
             </Form.Group>
 
@@ -150,7 +168,7 @@ onDrop(picture) {
               <Form.Label column sm={2}>Photo</Form.Label>
                 <Col sm={10}>
                 <input type="file"
-                placeholder="upload an image"
+                placeholder=""
                 onChange={this.uploadMessageImage} 
                 />
                   </Col>  
@@ -176,7 +194,7 @@ onDrop(picture) {
 
 
 function mapStatetoProps(state){
-  return  {user: state.user}
+  return  {user: state.user.userSigned}
 }
 
 export default connect(

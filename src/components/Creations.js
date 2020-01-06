@@ -17,7 +17,7 @@ class Creations extends React.Component {
 
   componentDidMount(){
     let ctx=this
-    fetch('http://localhost:3000/items')
+    fetch('http://localhost:3000/items-creations')
     .then(function(response) {
       return response.json();
     })
@@ -55,7 +55,7 @@ class Creations extends React.Component {
       
 
               <div style={{fontFamily:"Raleway"}}>
-                <h1 style={{fontSize:"4em", textAlign:"center"}}> <em>Mes Créations</em></h1>
+                <h1 style={{fontSize:"4em", textAlign:"center"}}> Mes Créations</h1>
                 <div style={{height:"5em"}}></div>
 
               <div className="row" style={{display:"flex"}}>
@@ -65,7 +65,7 @@ class Creations extends React.Component {
               </div>
 
 
-              <div style={{height:"5em"}}></div>
+              <div style={{height:"2em"}}></div>
               <div className="row" style={{display:"flex", justifyContent: "center"}}>
                 <Link to="/items"> <Button style={{fontSize:"1.3em", backgroundColor:"#1b263b", fontFamily:"Raleway"}}> En voir plus...</Button> </Link>
               </div>

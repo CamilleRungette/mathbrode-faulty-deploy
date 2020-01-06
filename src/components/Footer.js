@@ -2,13 +2,14 @@ import React from 'react';
 import {  Navbar} from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLaptop } from '@fortawesome/free-solid-svg-icons'
+import '../App.css'
 
 
 class Footer extends React.Component{
     render(){
         return(
 
-<div className="row" >
+<div className="row " >
 
     <Navbar expand="sm" style={{fontFamily:"Raleway", width: "100%", height:"15em" , display:"flex", justifyContent:"space-between", margin:"auto", backgroundColor:"#7A8AA8"}}>
         <div style={{margin:"auto",color:"white", textAlign:"center"}}>

@@ -81,14 +81,14 @@ class ItemPresentation extends React.Component {
         <img src={this.state.photo} className=" col-lg-8" style={{height:"40em", objectFit:"contain", margin:"auto"}} alt="Alt text" />
           </div>
         </div>
-          <div className="col-lg-10" style={{margin:"auto"}}>
-            <div style={{display:"flex", justifyContent:"center"}}>
+          <div className="col-lg-11" style={{margin:"auto"}}>
+            <div >
               <Row> 
-                <Col sm={7}>          
-                  <p style={{fontSize:"1.5em",marginTop: "2rem",marginBottom: "2rem"}}>{this.state.desc}</p>
+                <Col sm={8}>          
+                  <p style={{display:"flex", alignItems:"center", fontSize:"1em",marginTop: "2rem",marginBottom: "2rem", height:"8em"}}>{this.state.desc}</p>
                 </Col>
-                <Col lg={4}>
-                  <p className="" style={{marginTop: "2rem",marginBottom: "2rem",padding:"0.5rem" ,backgroundColor:"#1b263b",color:"white"}} >Info Pratiques :<br/>
+                <Col sm={4} >
+                  <p style={{ fontSize:"1.2em", marginTop: "2rem",marginBottom: "2rem",padding:"0.5rem" ,backgroundColor:"#1b263b",color:"white"}}>Info Pratiques :<br/>
                   Prix: {this.state.price}€<br/>
                   Exemplaire: {this.state.copy}<br/>
                   Taille: {this.state.size}
@@ -115,26 +115,26 @@ class ItemPresentation extends React.Component {
                 <Col lg={6}>
                   <FormGroup>
                     {this.props.user == null ?(
-                      <Input type="Nom" id="exampleNom" placeholder="Nom" onChange={(e)=> this.setState({userName: e.target.value})}
+                      <Input type="text" placeholder="Nom" onChange={(e)=> this.setState({userName: e.target.value})}
                       value={this.state.userName}/>
                     ):(
-                      <Input type="Nom" name="Nom" id="exampleNom" placeholder="Nom" value={this.props.user.first_name}/>
+                      <Input type="text" placeholder="Nom" value={this.props.user.first_name}/>
                     )}
                   </FormGroup>
                 </Col>
                 <Col lg={6}>
                   <FormGroup>
                     {this.props.user == null ?(
-                      <Input type="Email" name="Email" id="exampleEmail" placeholder="Email" onChange={(e)=> this.setState({userEmail: e.target.value})}
+                      <Input type="Email" placeholder="Email" onChange={(e)=> this.setState({userEmail: e.target.value})}
                       value={this.state.userEmail} />
                     ):(
-                      <Input type="Email" name="Email" id="exampleEmail" placeholder="Email" value={this.props.user.email} />
+                      <Input type="email" placeholder="Email" value={this.props.user.email} />
                     )}
                   </FormGroup>
                 </Col>
               </Row>
               <FormGroup>
-                <Input type="textarea" rows="4" name="Message"  onChange={(e)=> this.setState({content: e.target.value})}
+                <Input type="textarea" rows="4" name="Message" placeholder="Message"  onChange={(e)=> this.setState({content: e.target.value})}
                 value={this.state.content} />
               </FormGroup>
               <div className="d-flex justify-content-center" >
