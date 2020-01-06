@@ -3,6 +3,7 @@ import {
   Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem 
   } from 'reactstrap';
   import DateFormat from '../function'
+  import {Link} from 'react-router-dom'
 
 
 
@@ -10,7 +11,7 @@ import {
 class Event extends React.Component{
   render(){
     return(
-      <div style={{fontFamily:"Raleway"}}>
+      <div style={{fontFamily:"Raleway", marginBottom:"5em"}}>
        <Card style={{ width: '38rem', fontSize:"1.3em" }}>
         <CardImg variant="top" src={this.props.eventPhoto} />
         <CardBody>
@@ -24,7 +25,7 @@ class Event extends React.Component{
         De {this.props.eventStart}h à {this.props.eventEnd}h </CardText>
         </CardBody>
         <ListGroup>
-          <ListGroupItem> <a href="#">Évent F </a> </ListGroupItem>
+          <ListGroupItem> <a href={this.props.eventLink}>Voir l'évènement sur Facebook</a> </ListGroupItem>
         </ListGroup>
       </Card>
       </div>  

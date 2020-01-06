@@ -36,6 +36,7 @@ class Dashboard extends Component {
           CreateWorkshopDesc: '',
           CreateWorkshopPrice: '',
           CreateWorkshopDuration: '',
+          CreateEventLink:'',
           allItems: '',
         }
   }
@@ -76,7 +77,7 @@ class Dashboard extends Component {
     fetch('http://localhost:3000/admins/create-event', {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `name=${this.state.CreateEventName}&address=${this.state.CreateEventAddress}&date=${this.state.CreateEventDate}&starting_time=${this.state.CreateEventStart}&ending_time=${this.state.CreateEventEnd}&photo=${this.state.CreateEventPhoto}`
+      body: `name=${this.state.CreateEventName}&address=${this.state.CreateEventAddress}&date=${this.state.CreateEventDate}&starting_time=${this.state.CreateEventStart}&ending_time=${this.state.CreateEventEnd}&photo=${this.state.CreateEventPhoto}&link=${this.state.CreateEventLink}`
     })
     .then(function(response) {
       return response.json();
@@ -89,6 +90,7 @@ class Dashboard extends Component {
         CreateEventPhoto:'',
         CreateEventStart: '',
         CreateEventEnd: '',
+        CreateEventLink: '',
       })
     })
   }
@@ -311,6 +313,14 @@ class Dashboard extends Component {
                 <Col sm={10}>
                   <Form.Control type="text" onChange={(e)=> this.setState({CreateEventAddress: e.target.value})}
                         value={this.state.CreateEventAddress} />
+                </Col>  
+            </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalSize">
+              <Form.Label column sm={2}>Lien</Form.Label>
+                <Col sm={10}>
+                  <Form.Control type="text" onChange={(e)=> this.setState({CreateEventLink: e.target.value})}
+                        value={this.state.CreateEventLink}/>
                 </Col>  
             </Form.Group>
 

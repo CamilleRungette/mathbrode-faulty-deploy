@@ -127,7 +127,8 @@ router.post('/create-event', function(req, res, next){
       date: req.body.date,
       photo: req.body.photo,
       starting_time: req.body.starting_time,
-      ending_time: req.body.ending_time
+      ending_time: req.body.ending_time,
+      link: req.body.link
     });
 
     newEvent.save(function(error, event){
