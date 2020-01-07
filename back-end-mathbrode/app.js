@@ -13,6 +13,7 @@ var app = express();
 var cors = require('cors')
 app.use(cors())
 app.use(fileUpload());
+app.use(require("body-parser").text());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,5 +44,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;

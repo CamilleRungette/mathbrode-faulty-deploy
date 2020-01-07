@@ -22,6 +22,8 @@ import LoginAdmin from './components/LoginAdmin'
 import user from './components/Reducer/user.reducer';
 import item from './components/Reducer/cart.reducer'
 import admin from './components/Reducer/admin.reducer'
+import CheckoutForm from './components/checkout';
+
 const store = createStore(combineReducers({user, item, admin}));
 
 
@@ -29,6 +31,7 @@ const store = createStore(combineReducers({user, item, admin}));
 class App extends Component{
   render(){
     return (
+      
      <Provider store={store}>
       <Router>
         <Switch>
@@ -46,10 +49,12 @@ class App extends Component{
           <Route path="/creations" component={Creations}/>
           <Route path="/myorders" component={MyOrders} />
           <Route path="/loginadmin" component={LoginAdmin} />  
-          <Route path="/profil" component={Profil} />     
+          <Route path="/profil" component={Profil} />
+          <Route path="/checkout" component={CheckoutForm} />     
         </Switch>
       </Router>  
     </Provider>
+
   )}
 }
 

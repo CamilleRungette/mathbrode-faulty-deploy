@@ -9,7 +9,7 @@ class Footer extends React.Component{
     render(){
         return(
 
-<div className="row " >
+<div className="row footer" >
 
     <Navbar expand="sm" style={{fontFamily:"Raleway", width: "100%", height:"15em" , display:"flex", justifyContent:"space-between", margin:"auto", backgroundColor:"#7A8AA8"}}>
         <div style={{margin:"auto",color:"white", textAlign:"center"}}>

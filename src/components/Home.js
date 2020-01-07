@@ -36,17 +36,12 @@ class Home extends React.Component {
       <Presentation/>
       <div style={{marginBottom:"20em"}} ></div>
       <Service/>
-      <div style={{marginBottom:"20em"}} ></div>
+      <div > 
+      <p style={{color:"transparent"}}>sy</p></div>
+
       <Footer/>
 
 </div>
-
-
-
-
-
-
-
 
         )
   }
