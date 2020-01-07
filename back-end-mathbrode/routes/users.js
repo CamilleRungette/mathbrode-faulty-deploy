@@ -9,6 +9,7 @@ var SHA256 = require("crypto-js/sha256");
 var encBase64 = require("crypto-js/enc-base64"); 
 
 
+
 router.post('/sign-up', async function(req, res, next) {
   var salt = uid2(32); 
   console.log("================ SIGN UP FUNCTION ===============")
@@ -164,6 +165,5 @@ router.post('/update-info', async function(req, res, next){
   thisUser = await UserModel.findOne({_id: req.body.id})
   res.json({thisUser})
 })
-
 
 module.exports = router;

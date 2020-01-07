@@ -3,6 +3,8 @@ var router = express.Router();
 EventModel = require('../models/event')
 ItemsModel = require('../models/item')
 WorkshopModel = require ('../models/workshops')
+const stripe = require("stripe")("sk_test_U4Zt16oIOE1MZHl9cC8L7kjE00XOGTYa7j");
+
 
 
 
@@ -48,11 +50,22 @@ router.get('/workshops', async function(req, res, next){
   res.json({allWorkshops})
 })
 
+router.post("/charge", async (req, res) => {
+  console.log("coucou")
+  try {
+    let {status} = await stripe.charges.create({
+      amount: 2000,
+      currency: "eur",
+      description: "An example charge",
+      source: req.body
+    });
 
-// //USER
-// router.post('/message-class', {
-//   //L'utilisateur peut la contacter à propos d'un cours 
-// })
+    res.json({status});
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
+  }
+});
 
 
 module.exports = router;
