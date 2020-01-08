@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import {Button} from 'reactstrap'
 import {Redirect} from 'react-router-dom';
+import { connect } from 'react-redux';
 
 
 class CheckoutForm extends Component {
@@ -11,7 +12,7 @@ class CheckoutForm extends Component {
     super(props);
     this.state = {complete: false, redirect: false};
     this.submit = this.submit.bind(this);
-    this.RedirectMethod = this.RedirectMethod.bind(this)
+    this.redirectMethod = this.RedirectMethod.bind(this)
   }
 
   async submit(ev) {
@@ -26,7 +27,7 @@ class CheckoutForm extends Component {
     if (response.ok) this.setState({complete: true});
   }
 
-  RedirectMethod() {
+  redirectMethod() {
     this.id = setTimeout(() => this.setState({ redirect: true }), 3000)
   }
 
@@ -43,7 +44,7 @@ class CheckoutForm extends Component {
           <div style={{height:'75vh', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
             <h1> Commande validée ! </h1>
             <p>Vous allez être redirigé dans quelque secondes ... </p>
-            {this.state.redirect == true? (<Redirect to='/'/>):(false ) }  
+            {this.state.redirect === true? (<Redirect to='/'/>):(false ) }  
           </div>
           <Footer/>
       </div>
@@ -73,10 +74,18 @@ class CheckoutForm extends Component {
   }
 }
 
+// function mapStatetoProps(state){
+//   return  {connected: state.user.isUserExist,
+//           user: state.user.userSigned,
+//           item: state.item}
+// }
+
+// export default connect(
+//   mapStatetoProps,
+//   null
+// )(CheckoutForm)
+
 var Purchase = injectStripe(CheckoutForm);
-
-
-
     
 export default class StripeCheckout extends Component { 
 

@@ -69,7 +69,7 @@ class Profil extends Component{
 
   render(){
     console.log("USER", this.props.connected)
-    if (this.props.connected == false || this.props.connected == null){
+    if (this.props.connected === false || this.props.connected == null){
       return <Redirect to="/" />
     }
 
