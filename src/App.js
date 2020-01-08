@@ -22,9 +22,10 @@ import LoginAdmin from './components/LoginAdmin'
 import user from './components/Reducer/user.reducer';
 import item from './components/Reducer/cart.reducer'
 import admin from './components/Reducer/admin.reducer'
+import total from './components/Reducer/order.reducer'
 import CheckoutForm from './components/StripeCheckout';
 
-const store = createStore(combineReducers({user, item, admin}));
+const store = createStore(combineReducers({user, item, admin, total}));
 
 
 

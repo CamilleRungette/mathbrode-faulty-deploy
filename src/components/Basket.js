@@ -10,28 +10,18 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
 
 
-let times = 0;
-
 
 class Basket extends React.Component {
   constructor(props){
     super(props);
-    this.OnBuyClick = this.OnBuyClick.bind(this)
     this.state={
       total: 0,
+      items: []
     }
   }
   
-  
-  OnBuyClick(){
-    let items = JSON.stringify(this.props.item);
-    fetch('http://localhost:3000/users/order',{
-      method: 'POST',
-      headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `user_id=${this.props.user._id}&total=${this.state.total}&items=${items}`
-    },
-    this.props.onResetClick()
-    )
+  componentDidMount(){
+    this.setState({items: this.props.item})
   }
   
   render() {
@@ -58,10 +48,9 @@ class Basket extends React.Component {
           </div>
         )
       } else {
-        console.log("STORE FROM BASKET", this.props.item)
         for (let i=0; i<this.props.item.length; i++){
           this.state.total = this.state.total + this.props.item[i].price
-          times += 1
+          console.log("VOILA LE PRIX DE L'Item;", this.props.item[i].price)
         } 
    return(
     <div style={{fontFamily:"Raleway"}}>
@@ -99,7 +88,7 @@ class Basket extends React.Component {
           <Link to="/creations" ><Button color="secondary" >Continuer mes Achats</Button></Link>
         </div>
         <div>
-         <Link to="/checkout"> <Button style={{backgroundColor:"#1B263B", fontSize:"1.2em"}} onClick={this.OnBuyClick}  >Confirmer</Button></Link>
+         <Link to="/checkout"> <Button style={{backgroundColor:"#1B263B", fontSize:"1.2em"}} onClick={() => this.props.onOrderClick(this.state.total)} >Confirmer</Button></Link>
         </div>
         <div style={{height:"5em"}}></div>  
       </div>
@@ -124,9 +113,8 @@ function mapDispatchToProps(dispatch){
       console.log(position)
       dispatch({type: 'delete', position: position})
     },
-    onResetClick: function(){
-      console.log("SENDING CALL TO RESET METHOD")
-      dispatch({type: 'reset', })
+    onOrderClick: function(total){
+      dispatch({type: 'payOrder', total: total})
     }
   }
 }

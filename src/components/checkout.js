@@ -24,8 +24,23 @@ class CheckoutForm extends Component {
       body: token.id
     });
   
-    if (response.ok) this.setState({complete: true});
+    if (response.ok){
+
+     this.setState({complete: true});
+     
+    
+       let items = JSON.stringify(this.props.item);
+       fetch('http://localhost:3000/users/order',{
+         method: 'POST',
+         headers: {'Content-Type':'application/x-www-form-urlencoded'},
+         body: `user_id=${this.props.user._id}&total=${this.props.total.total}&items=${items}`
+       },
+       this.props.onResetClick()
+       )
+    }
   }
+
+
 
   RedirectMethod() {
     this.id = setTimeout(() => this.setState({ redirect: true }), 3000)
@@ -36,7 +51,7 @@ class CheckoutForm extends Component {
   }
 
   render() {
-    console.log("Le retour du reducer =========>", this.props)
+    console.log("lalalalalalaal", this.props.total)
 
     if (this.state.complete){
       this.RedirectMethod()
@@ -46,7 +61,7 @@ class CheckoutForm extends Component {
           <div style={{height:'75vh', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
             <h1> Commande validée ! </h1>
             <p>Vous allez être redirigé dans quelque secondes ... </p>
-            {this.state.redirect == true? (<Redirect to='/'/>):(false ) }  
+            {this.state.redirect === true? (<Redirect to='/'/>):(false ) }  
           </div>
           <Footer/>
       </div>
@@ -60,9 +75,20 @@ class CheckoutForm extends Component {
             <div style={{height:'10em'}}></div>
             <h1 style={{textAlign:'center', fontSize:'3.5em'}}>Paiement</h1>
             <div style={{height:'8em'}}></div>
-              <div className="border" style={{width:'50%', margin:'auto', padding:'2em', fontSize:'1.2em', height:'13em', display:'flex', flexDirection:"column"}}>
-                <h3 style={{textAlign:"center"}}>Montant de la commande:  XX €</h3> <br/>
-                  <div style={{width:"80%", margin:'auto', marginBottom:'1em' }}>
+              <div className="border" style={{width:'50%', margin:'auto', padding:'2em', fontSize:'1.2em', display:'flex', flexDirection:"column"}}>
+                <h3 style={{textAlign:"center"}}>Montant de la commande:  {this.props.total.total} €</h3> <br/>
+                <div style={{width:"80%", margin:"auto"}}>
+                  <h5 style={{marginBottom:"0.4em"}}>Récapitulatif:</h5>
+                  {this.props.item.map((item, i) => (
+                    <div className="border" style={{display:"flex", justifyContent:"space-between", alignItems:"center", paddingRight:'1em'}}>
+                    <img src="market.jpg" style={{width:"6em"}} />
+                      <p> {item.name}</p>
+                      <p> {item.price} €</p>
+                    </div>
+                  ))}
+                </div>
+                <br/>
+                  <div style={{width:"60%", margin:'auto', marginBottom:'1em' }}>
                     <CardElement />
                   </div> <br/>
                   <div style={{textAlign:"center"}}>
@@ -78,11 +104,25 @@ class CheckoutForm extends Component {
 
 function mapStatetoProps(state){
   return  {user: state.user.userSigned,
-          item: state.item}
+          item: state.item,
+          total: state.total
+         }
 }
+
+
+function mapDispatchToProps(dispatch){
+  console.log("DELETE FROM BASKET", dispatch)
+  return {
+    onResetClick: function(){
+      console.log("SENDING CALL TO RESET METHOD")
+      dispatch({type: 'reset', })
+    }
+  }
+}
+
 
 export default connect(
   mapStatetoProps,
-  null
+  mapDispatchToProps
 )(CheckoutForm);
 
