@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Col, Button } from 'react-bootstrap';
-import {Link, Redirect} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTrashAlt, faReply, faTimes } from '@fortawesome/free-solid-svg-icons'
 import DateFormat from '../function'
@@ -64,12 +63,12 @@ class MessageItem extends Component{
     var iconMessage = faCheck
     var marker = "Marquer comme lu"
     var styleMessage;
-    if (this.state.readFromDb == true){
+    if (this.state.readFromDb === true){
       styleMessage = readMessage
       iconMessage = faTimes
       marker = "Marquer comme non lu"
     }
-    if (this.state.display == false){
+    if (this.state.display === false){
       console.log("pas de message")
     }
 
@@ -84,7 +83,7 @@ class MessageItem extends Component{
           <p>{this.props.messageContent}  </p>
           {this.props.messagePhoto != null ?(
             <div>
-            <img style={{width:"10em", marginLeft:'10%'}} src={this.props.messagePhoto} />
+            <img style={{width:"10em", marginLeft:'10%'}} alt=" " src={this.props.messagePhoto} />
             </div>
           ):(
             <div></div>

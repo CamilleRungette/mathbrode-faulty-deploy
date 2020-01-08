@@ -3,9 +3,9 @@ import {Card,   Col, Table} from 'react-bootstrap';
 import NavbarAdmin from './NavbarAdmin';
 import Footer from '../Footer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import DateFormat from '../function';
-import {Modal, Form, Button, ListGroup, InputGroup, FormControl} from 'react-bootstrap'
+import {Modal, Form, Button, ListGroup} from 'react-bootstrap'
 import '../../App.css';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -15,12 +15,6 @@ let modalStyle={
   width:"50em",
   backgroundColor: "white",
   fontFamily: "Raleway"
-}
-
-const details={
-  '&:hover':{
-    textDecoration: "underline"
-  }
 }
 
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Card, Button, Col, Form, Row, Table,} from 'react-bootstrap';
+import {Card, Button, Col, Form, Row} from 'react-bootstrap';
 import '../App.css';
 import NavbarAdmin from './dashboardComponents/NavbarAdmin';
 import Footer from './Footer'
@@ -153,7 +153,7 @@ class Dashboard extends Component {
     render(){
       console.log("--------------->", this.props.adminConnected)
       console.log("CHECKBOX:", this.state.CreateItemFirstPres)
-      if (this.props.adminConnected == false || this.props.adminConnected == null){
+      if (this.props.adminConnected === false || this.props.adminConnected == null){
          return <Redirect to="/loginadmin" />
       }
       
@@ -203,7 +203,7 @@ class Dashboard extends Component {
                 {this.state.loading ? (
                   <h6> Chargement ...</h6>
                 ) : (
-                 <img src={this.state.CreateItemPhoto} alt="item chosen photo" style={{width:"10em", marginLeft:'8em'}} />
+                 <img src={this.state.CreateItemPhoto} alt=" " style={{width:"10em", marginLeft:'8em'}} />
                 )}
             </Form.Group>
 
@@ -251,7 +251,7 @@ class Dashboard extends Component {
             <Form.Group as={Row} controlId="formHorizontalFees">
               <Form.Label column sm={2}>Mise en avant</Form.Label>
                 <Col sm={10}>
-                  {this.state.CreateItemFirstPres == false? (
+                  {this.state.CreateItemFirstPres === false? (
                     <Form.Check type="checkbox" onClick={() => this.setState({CreateItemFirstPres: !this.state.CreateItemFirstPres})} />
                   ):(
                     <Form.Check type="checkbox" checked onClick={() => this.setState({CreateItemFirstPres: !this.state.CreateItemFirstPres})} />
@@ -294,7 +294,7 @@ class Dashboard extends Component {
                 {this.state.loading ? (
                   <h6> Chargement ...</h6>
                 ) : (
-                 <img alt="chosen photo" src={this.state.CreateEventPhoto} style={{width:"10em"}} />
+                 <img alt=" " src={this.state.CreateEventPhoto} style={{width:"10em"}} />
                 )}
 
                 </Col>  

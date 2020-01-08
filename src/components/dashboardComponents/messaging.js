@@ -51,7 +51,7 @@ class Messages extends React.Component{
   }
 
     render(){
-      if (this.props.adminConnected == false || this.props.adminConnected == null){
+      if (this.props.adminConnected === false || this.props.adminConnected == null){
         return <Redirect to="/loginadmin" />
      }
 
@@ -81,7 +81,7 @@ class Messages extends React.Component{
           <Card className="col-8 mx-auto" >
           <h2 style={{textAlign:"center", fontSize:"3em", marginTop:'1em'}}>Messagerie ({messageList.length})</h2>
           <div style={{height:"1em"}}></div>
-          {messageList.length == 0?(
+          {messageList.length === 0?(
             <div>
               <div style={{fontSize:'1.3em', textAlign:'center', marginTop:"2em"}} >Pas de messages</div>
             </div>

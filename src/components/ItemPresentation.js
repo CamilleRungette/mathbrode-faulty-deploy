@@ -1,8 +1,8 @@
 import React  from 'react';
 import {  Button} from 'reactstrap';
 import '../App.css'
-import { Col, Row, Form, FormGroup, Input, FormControl } from 'reactstrap';
-import {Link, Redirect} from 'react-router-dom';
+import { Col, Row, Form, FormGroup, Input } from 'reactstrap';
+import {Link} from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer'
 import {connect} from 'react-redux'

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Button } from 'reactstrap';
 import '../App.css'
@@ -99,7 +99,7 @@ class Basket extends React.Component {
           <Link to="/creations" ><Button color="secondary" >Continuer mes Achats</Button></Link>
         </div>
         <div>
-         <Link to="/"> <Button style={{backgroundColor:"#1B263B", fontSize:"1.2em"}} onClick={this.OnBuyClick}  >Confirmer</Button></Link>
+         <Link to="/checkout"> <Button style={{backgroundColor:"#1B263B", fontSize:"1.2em"}} onClick={this.OnBuyClick}  >Confirmer</Button></Link>
         </div>
         <div style={{height:"5em"}}></div>  
       </div>
