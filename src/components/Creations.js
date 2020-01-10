@@ -55,7 +55,7 @@ class Creations extends React.Component {
       
 
               <div style={{fontFamily:"Raleway"}}>
-                <h1 style={{fontSize:"4em", textAlign:"center"}}> Mes Créations</h1>
+                <h1 style={{fontSize:"4em", textAlign:"center"}}> Mes Créations </h1>
                 <div style={{height:"5em"}}></div>
 
               <div className="row" style={{display:"flex"}}>

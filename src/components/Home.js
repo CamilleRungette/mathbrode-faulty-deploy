@@ -34,7 +34,7 @@ class Home extends React.Component {
       <Creations/>
       <div style={{marginBottom:"20em"}} ></div>
       <Presentation/>
-      <div style={{marginBottom:"20em"}} ></div>
+      <div style={{marginBottom:"18em"}} ></div>
       <Service/>
       <div > 
       <p style={{color:"transparent"}}>sy</p></div>
