@@ -54,7 +54,7 @@ class Items extends Component{
           </div>
           <div style={{height:"6em"}}></div>
 
-        <div className="col-lg-8" style={{ margin:"auto", display:"flex", flexWrap:"wrap"}}>     
+        <div className="col-lg-10 col-xs-11" style={{ margin:"auto", display:"flex", flexWrap:"wrap"}}>     
             {itemsList}
         </div>
       </Col>

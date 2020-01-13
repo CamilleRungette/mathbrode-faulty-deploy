@@ -47,7 +47,7 @@ class Presentation extends React.Component {
       
     return(
 
-<div className="row justify-content-center col-10 mx-auto" style={{fontFamily:"Raleway"}}>
+<div className="row justify-content-center col-sm-10 col-md-12 mx-auto" style={{fontFamily:"Raleway"}}>
   <div>
     <h1 style={{fontSize:"4em", textAlign:"center"}}> Je me présente</h1>
       <div style={{height:"8em"}}></div>
@@ -56,12 +56,12 @@ class Presentation extends React.Component {
 
         <div className="row" style={{ display:"flex", justifyContent:"center", alignItems:"center"}} >
 
-          <div className="col-lg-4">
-          <img src="presentation.png" style={{width:"100%"}} alt="Alt text" />
+          <div className="col-lg-4 col-sm-6 col-xs-12">
+          <img src="presentation.png" alt="Alt text" />
           </div>
 
-          <div className="offset-1 col-lg-4">
-            <p  style={{fontSize:"1.23em", textAlign:"center"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+          <div className="offset-1 col-lg-4 col-sm-6 col-xs-12">
+            <p  style={{fontSize:"1.23em", textAlign:"center"}}> <br/>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             </p>
             <div style={{ display:"flex", justifyContent:"center", alignItems:"center"}}>
@@ -69,9 +69,7 @@ class Presentation extends React.Component {
             </div>
           </div>
 
-        <div>
-
-          
+        <div>      
     </div>
 
             

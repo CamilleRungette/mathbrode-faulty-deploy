@@ -3,7 +3,7 @@ import {
   Button,
 } from 'reactstrap';
 import '../App.css'
-import ShopItem from './cards/Shop-item'
+import CreationItem from './cards/creations-item'
 import {Link} from 'react-router-dom'
 
 class Creations extends React.Component {
@@ -32,7 +32,7 @@ class Creations extends React.Component {
 
   render() {
     let itemsList = this.state.items.map(function(item, i){
-      return <ShopItem key={i}
+      return <CreationItem key={i}
        itemCopy={item.copy}
        itemName={item.name}
        itemDesc={item.desc}
@@ -46,14 +46,8 @@ class Creations extends React.Component {
 
 
  return (
-  
-
-
-
     <div className="row justify-content-center">
-        <div className="col-lg-8">
-      
-
+        <div className="col-lg-8 col-sm-10 col-11">
               <div style={{fontFamily:"Raleway"}}>
                 <h1 style={{fontSize:"4em", textAlign:"center"}}> Mes Créations</h1>
                 <div style={{height:"5em"}}></div>
@@ -63,30 +57,12 @@ class Creations extends React.Component {
               </div>
              
               </div>
-
-
               <div style={{height:"2em"}}></div>
               <div className="row" style={{display:"flex", justifyContent: "center"}}>
                 <Link to="/items"> <Button style={{fontSize:"1.3em", backgroundColor:"#1b263b", fontFamily:"Raleway"}}> En voir plus...</Button> </Link>
               </div>
-
-
-
         </div>
-
     </div>
-    
-    
-
-
-
-
-
-
-
-  
- 
-
   );
 
 }
