@@ -15,3 +15,6 @@ On the admin side, Mathilde can: create items, events and workshops, having a gl
 
 ### Stack :
 Express, MongoDB (Mongoose), React and Boostrap 
+
+
+Most of the front was done by [Guillaume Lanes (https://github.com/G-Lanes)]
