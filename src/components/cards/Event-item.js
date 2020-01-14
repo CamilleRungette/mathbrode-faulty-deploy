@@ -10,7 +10,7 @@ import {
 class Event extends React.Component{
   render(){
     return(
-      <div style={{fontFamily:"Raleway", marginBottom:"5em", maxWidth:"33em"}} className="col-lg-6 col-12">
+      <div style={{fontFamily:"Raleway", marginBottom:"8em", maxWidth:"33em"}} className="col-lg-6 col-12">
        <Card style={{fontSize:"1.3em"}} >
         <CardImg src={this.props.eventPhoto} />
         <CardBody>

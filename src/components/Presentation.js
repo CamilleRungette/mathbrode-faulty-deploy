@@ -134,7 +134,6 @@ class Presentation extends React.Component {
 
 
 function mapStatetoProps(state){
-  console.log(state)
   return  {user: state.user.userSigned}
 }
 

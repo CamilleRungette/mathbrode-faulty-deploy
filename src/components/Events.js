@@ -45,13 +45,13 @@ class Events extends Component{
     return(
 
 
-    <div  style={{fontFamily:"Raleway", margin:"auto"}} className="col-9">
+    <div  style={{fontFamily:"Raleway"}} >
       
       <Navigbar/>
         <div style={{height:"10em"}}></div>
-            <h1 style={{textAlign:"center", fontSize:"3.5em", marginTop:"0.5em"}}>Mes Événements</h1>
+            <h1 style={{textAlign:"center", fontSize:"3.5em", marginTop:"0.5em"}} >Mes Événements</h1>
             <div style={{height:"6em"}}></div>
-             <div style={{display:"flex", flexWrap:"wrap", justifyContent:"space-between" }}>
+             <div style={{display:"flex", flexWrap:"wrap", justifyContent:"space-between", margin:"auto"}} className="col-9">
               {eventList}
             </div>
         <div style={{height:"8em"}}></div>

@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import { Button,  Navbar,  NavbarBrand,  Nav,  NavItem,  NavLink } from 'reactstrap';
-import {NavDropdown} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import '../script'
 
 
 
@@ -48,7 +48,7 @@ class Navigbar extends React.Component{
                 </NavItem>
 
                 <NavItem>
-                <NavLink onClick={this.pageScroll}>Contact</NavLink>
+                <NavLink id="contact">Contact</NavLink>
                 </NavItem>
 
                 
@@ -96,7 +96,6 @@ class Navigbar extends React.Component{
             </Nav>
         </div>
     </Navbar>
-
 </div>
 
         )}
