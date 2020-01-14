@@ -1,3 +1,5 @@
+require('dotenv/config')
+require('../routes/send-mail')
 var express = require('express');
 var router = express.Router();
 UserModel = require('../models/user');
@@ -7,7 +9,6 @@ ItemOrderModel = require('../models/item_order');
 var uid2 = require("uid2"); 
 var SHA256 = require("crypto-js/sha256"); 
 var encBase64 = require("crypto-js/enc-base64"); 
-
 
 router.post('/sign-up', async function(req, res, next) {
   var salt = uid2(32); 
@@ -34,8 +35,21 @@ router.post('/sign-up', async function(req, res, next) {
     let isUserExists;
     if (user){
     isUserExists = false
-    console.log("NEW USER SAVED:", user)
+    console.log("HERE IS THE MAIL", req.body.email)
     
+    const sgMail = require("@sendgrid/mail");
+    sgMail.setApiKey(process.env.SECRET_SENGRID_KEY);
+    const msg={
+      to: req.body.email,
+      from:"no-reply@mathbrode.com",
+      subject: "Bienvenue sur Mathbrode !",
+      text:`Bonjour ${req.body.first_name}, et bienvenue sur Mathbrode
+      Tu as désormais un compte chez nous. Viens vite nous rendre visite sur Mathbrode.com`,
+      html:`<strong> Bonjour ${req.body.first_name}, et bienvenue sur Mathbrode
+      Tu as désormais un compte chez nous. Viens vite nous rendre visite sur Mathbrode.com </strong>`,
+    };
+
+sgMail.send(msg);
         
     res.json({user, isUserExists, userExists})
   }else if (error){
