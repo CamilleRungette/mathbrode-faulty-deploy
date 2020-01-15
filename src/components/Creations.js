@@ -5,6 +5,8 @@ import {
 import '../App.css'
 import CreationItem from './cards/creations-item'
 import {Link} from 'react-router-dom'
+import ip from './ip'
+
 
 class Creations extends React.Component {
   
@@ -30,7 +32,8 @@ class Creations extends React.Component {
   }
 
 
-  render() {
+  render(
+  ) {
     let itemsList = this.state.items.map(function(item, i){
       return <CreationItem key={i}
        itemCopy={item.copy}
@@ -44,7 +47,7 @@ class Creations extends React.Component {
       />
     })
 
-
+    console.log(ip)
  return (
     <div className="row justify-content-center">
         <div className="col-lg-8 col-sm-10 col-11">

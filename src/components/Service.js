@@ -7,6 +7,8 @@ import {Modal, Form} from 'react-bootstrap'
 import '../App.css'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
+import ip from './ip'
+
 
 
 let modalStyle={
@@ -40,7 +42,7 @@ onDrop(picture) {
 
   sendMessage(){
     this.setState({show:false});
-    fetch('http://localhost:3000/users/create-message', {
+    fetch(`${ip}/users/create-message`, {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `object=Projet_personnalisé&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}&photo=${this.state.SendMessagePhoto}&sender_name=${this.state.SendMessageName}`

@@ -4,6 +4,8 @@ import '../App.css';
 import Navbar from './dashboardComponents/NavbarAdmin';
 import {Link, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
+import ip from './ip'
+
 
 
 class LoginAdmin extends React.Component{
@@ -20,7 +22,7 @@ this.state = {
 
     handleSubmitSignIn(){
       let ctx = this;     
-    fetch("http://localhost:3000/admins/sign-in",{
+    fetch(`${ip}/admins/sign-in`,{
     method:"POST",
     headers: {'Content-Type':'application/x-www-form-urlencoded'},
     body: `email=${this.state.SignInEmail}&password=${this.state.SignInPassword}`

@@ -5,6 +5,8 @@ import Footer from './Footer'
 import {Button} from 'reactstrap'
 import {Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
+import ip from './ip'
+
 
 
 class CheckoutForm extends Component {
@@ -18,7 +20,7 @@ class CheckoutForm extends Component {
   async submit(ev) {
     let {token} = await this.props.stripe.createToken({name: "Name"});
     console.log(token)
-    let response = await fetch("http://localhost:3000/charge", {
+    let response = await fetch(`${ip}/charge`, {
       method: "POST",
       headers: {"Content-Type": "text/plain"},
       body: token.id

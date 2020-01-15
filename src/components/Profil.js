@@ -4,6 +4,8 @@ import {Redirect} from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import {Card, Form, Row, Col, Button, Modal} from 'react-bootstrap'
+import ip from './ip'
+
 
 const titre={
   fontWeight:"bold"
@@ -45,7 +47,7 @@ class Profil extends Component{
   handleSubmitUpdate(){
     let ctx = this;
     this.setState({show: false})
-    fetch('http://localhost:3000/users/update-info', {
+    fetch(`${ip}/users/update-info`, {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `id=${this.state.id}&first_name=${this.state.first_name}&last_name=${this.state.last_name}&email=${this.state.email}&address=${this.state.address}&zipcode=${this.state.zipcode}&city=${this.state.city}`

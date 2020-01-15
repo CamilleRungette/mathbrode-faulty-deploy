@@ -19,7 +19,7 @@ class Home extends React.Component {
               <div className="col-lg-12" style={{paddingLeft:0,paddingRight:0}}>
             
             
-                    <img src="background.jpg" alt="background"></img>
+                    <img src="./background.jpg" alt="background"></img>
       
                     <div className="text-block">
                     <p>Broderie <br/> Moderne</p>

@@ -3,6 +3,8 @@ import Footer from './Footer'
 import Navigbar from './Navbar'
 import Event from './cards/Event-item'
 import {Col} from 'reactstrap'
+import ip from './ip'
+
 
 class Events extends Component{
 
@@ -15,7 +17,7 @@ class Events extends Component{
 
   componentDidMount(){
     let ctx = this
-    fetch('http://localhost:3000/events')
+    fetch(`${ip}/events`)
     .then(function(response) {
       return response.json();
     })
