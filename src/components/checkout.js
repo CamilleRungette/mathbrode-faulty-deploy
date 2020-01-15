@@ -33,7 +33,7 @@ class CheckoutForm extends Component {
        fetch('http://localhost:3000/users/order',{
          method: 'POST',
          headers: {'Content-Type':'application/x-www-form-urlencoded'},
-         body: `user_id=${this.props.user._id}&total=${this.props.total.total}&items=${items}`
+         body: `user_id=${this.props.user._id}&total=${this.props.total.total}&items=${items}&name=${this.props.user.first_name}&email=${this.props.user.email}`
        },
        this.props.onResetClick()
        )

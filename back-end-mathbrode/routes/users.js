@@ -1,5 +1,4 @@
 require('dotenv/config')
-require('../routes/send-mail')
 var express = require('express');
 var router = express.Router();
 UserModel = require('../models/user');
@@ -9,6 +8,11 @@ ItemOrderModel = require('../models/item_order');
 var uid2 = require("uid2"); 
 var SHA256 = require("crypto-js/sha256"); 
 var encBase64 = require("crypto-js/enc-base64"); 
+var dateFormat = function(date){    
+	var newDate = new Date(date)    
+	var format = newDate.getDate()+'/'+(newDate.getMonth()+1+"/"+newDate.getFullYear())    
+	return format  
+};  
 
 router.post('/sign-up', async function(req, res, next) {
   var salt = uid2(32); 
@@ -40,13 +44,13 @@ router.post('/sign-up', async function(req, res, next) {
     const sgMail = require("@sendgrid/mail");
     sgMail.setApiKey(process.env.SECRET_SENGRID_KEY);
     const msg={
-      to: req.body.email,
+      to: "c.rungette@gmail.com",
       from:"no-reply@mathbrode.com",
       subject: "Bienvenue sur Mathbrode !",
       text:`Bonjour ${req.body.first_name}, et bienvenue sur Mathbrode
       Tu as désormais un compte chez nous. Viens vite nous rendre visite sur Mathbrode.com`,
-      html:`<strong> Bonjour ${req.body.first_name}, et bienvenue sur Mathbrode
-      Tu as désormais un compte chez nous. Viens vite nous rendre visite sur Mathbrode.com </strong>`,
+      html:`<h2> Bonjour ${req.body.first_name} </h2> ! 
+      Et bienvenue sur Mathbrode. Tu as désormais un compte chez nous. Viens vite nous rendre visite sur Mathbrode.com`,
     };
 
 sgMail.send(msg);
@@ -104,8 +108,7 @@ router.post('/create-message', async function (req, res, next){
 })
 
 router.post('/order', function (req, res, next){
-  console.log("coucou=================")
-  console.log(req.body)
+  console.log("ORDER INFO===================>", req.body)
   Date.prototype.addDays = function(days) {
       this.setDate(this.getDate() + parseInt(days));
       return this;
@@ -143,6 +146,24 @@ router.post('/order', function (req, res, next){
             }
           });
         }
+
+      const sgMail = require("@sendgrid/mail");
+      sgMail.setApiKey(process.env.SECRET_SENGRID_KEY);
+      const msg={
+          to: "c.rungette@gmail.com",
+          from:"no-reply@mathbrode.com",
+          subject: "Commande validée",
+          text:`Bonjour ${req.body.name},
+          Ta commande n° ${newOrder._id} a bien été passée pour un total de ${req.body.total}. La livraison sera prévue le ${dateFormat(newOrder.shipping_date)}. Tu peux retrouver toutes les infos de ta commande dans la partie "Mes commandes". 
+          `,
+          html:`<h5> Bonjour ${req.body.name}, </h5>
+          Ta commande n° ${newOrder._id} a bien été passée pour un total de ${req.body.total}. La livraison sera prévue le ${dateFormat(newOrder.shipping_date)}. Tu peux retrouver toutes les infos de ta commande dans la partie "Mes commandes". 
+          `,
+        };
+    
+    sgMail.send(msg);
+    
+
   res.json({order})
 } else if (error){
   console.log("ORDER NOT SAVED:", error)
