@@ -11,7 +11,7 @@ class ShopItem extends React.Component {
     <Link to={`/item/${this.props.itemName}`}>
       <div className="productTitle">
         <div className="overlay-image">
-            <img className="image" style={{height:"80%", objectFit:"contain"}} src={this.props.itemPhoto} alt={this.props.itemName} />
+            <img style={{height:"24em", objectFit:"contain", backgroundColor:"white"}} src={this.props.itemPhoto} alt={this.props.itemName} />
             <div className="normal">
               <div className="text"></div>
             </div>
