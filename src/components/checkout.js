@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import ip from './ip'
 
 
-
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +31,7 @@ class CheckoutForm extends Component {
      
     
        let items = JSON.stringify(this.props.item);
-       fetch('http://localhost:3000/users/order',{
+       fetch(`${ip}/users/order`,{
          method: 'POST',
          headers: {'Content-Type':'application/x-www-form-urlencoded'},
          body: `user_id=${this.props.user._id}&total=${this.props.total.total}&items=${items}&name=${this.props.user.first_name}&email=${this.props.user.email}`

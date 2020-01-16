@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrashAlt, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import ip from '../ip'
+
 
 
 let displayMessage ={
@@ -41,7 +43,7 @@ class stock extends React.Component{
   }
   componentDidMount(){
     let ctx = this;
-    fetch('http://localhost:3000/admins/stock')
+    fetch(`${ip}/admins/stock`)
     .then(function(response) {
       return response.json();
     })
@@ -73,7 +75,7 @@ class stock extends React.Component{
   onDeleteClick(item){
     let ctx = this
     console.log("coucou", item)
-    fetch('http://localhost:3000/admins/delete-item',{
+    fetch(`${ip}/admins/delete-item`,{
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `id=${item._id}`
@@ -90,7 +92,7 @@ class stock extends React.Component{
 
   updateItem(){
     let ctx = this
-    fetch('http://localhost:3000/admins/update-item', {
+    fetch(`${ip}/admins/update-item`, {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `id=${this.state.id}&name=${this.state.name}&desc=${this.state.desc}&price=${this.state.price}&size=${this.state.size}&copy=${this.state.copy}&shipping_fee=${this.state.shipping_fee}&first_presentation=${this.state.checked}`

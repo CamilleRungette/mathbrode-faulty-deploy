@@ -7,7 +7,6 @@ import CreationItem from './cards/creations-item'
 import {Link} from 'react-router-dom'
 import ip from './ip'
 
-
 class Creations extends React.Component {
   
   constructor(props){
@@ -19,7 +18,7 @@ class Creations extends React.Component {
 
   componentDidMount(){
     let ctx=this
-    fetch('http://localhost:3000/items-creations')
+    fetch(`${ip}/items-creations`)
     .then(function(response) {
       return response.json();
     })

@@ -7,6 +7,7 @@ import Service from './Service'
 import Footer from './Footer'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {connect} from 'react-redux';
+import ip from './ip'
 
 class Home extends React.Component {
 

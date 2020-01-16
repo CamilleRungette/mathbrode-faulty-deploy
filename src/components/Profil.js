@@ -6,7 +6,6 @@ import Footer from './Footer'
 import {Card, Form, Row, Col, Button, Modal} from 'react-bootstrap'
 import ip from './ip'
 
-
 const titre={
   fontWeight:"bold"
 }

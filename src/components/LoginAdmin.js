@@ -7,7 +7,6 @@ import {connect} from 'react-redux';
 import ip from './ip'
 
 
-
 class LoginAdmin extends React.Component{
     constructor(){
 super();

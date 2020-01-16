@@ -7,7 +7,6 @@ import {connect} from 'react-redux'
 import ip from './ip'
 
 
-
 let modalStyle={
   width:"50em",
   backgroundColor: "white",

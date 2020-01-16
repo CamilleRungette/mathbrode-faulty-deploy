@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import Footer from './Footer'
 import Navigbar from './Navbar'
 import Event from './cards/Event-item'
-import {Col} from 'reactstrap'
 import ip from './ip'
-
 
 class Events extends Component{
 

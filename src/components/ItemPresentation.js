@@ -8,7 +8,6 @@ import Footer from './Footer'
 import {connect} from 'react-redux'
 import ip from './ip'
 
-
 class ItemPresentation extends React.Component {
   constructor(props){
     super(props);

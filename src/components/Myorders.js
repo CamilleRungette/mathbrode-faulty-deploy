@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import {Redirect, Link} from 'react-router-dom'
 import ip from './ip'
 
-
  
 class MyOrders extends Component{
   constructor(){

@@ -9,7 +9,6 @@ import { Redirect } from 'react-router-dom';
 import ip from './ip'
 
 
-
 class Dashboard extends Component {
   constructor(props){
   super(props);
@@ -99,7 +98,7 @@ class Dashboard extends Component {
 
   WorkshopSubmit(){
     let ctx = this
-    fetch(`${ip}/admins/create-workshop`, {
+    fetch(`${ip}/admins/create-workhop`, {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `title=${this.state.CreateWorkshopTitle}&desc=${this.state.CreateWorkshopDesc}&price=${this.state.CreateWorkshopPrice}&duration=${this.state.CreateWorkshopDuration}`
