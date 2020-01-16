@@ -6,6 +6,7 @@ import NavbarAdmin from './dashboardComponents/NavbarAdmin';
 import Footer from './Footer'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import ip from './ip'
 
 
 class Dashboard extends Component {
@@ -49,7 +50,7 @@ class Dashboard extends Component {
 
   ItemSubmit(){
     let ctx = this
-    fetch('http://localhost:3000/admins/create-item', {
+    fetch(`${ip}/admins/create-item`, {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             body: `name=${this.state.CreateItemName}&price=${this.state.CreateItemPrice}&size=${this.state.CreateItemSize}&description=${this.state.CreateItemDesc}&shipping_fee=${this.state.CreateItemShipFee}&copy=1&photo=${this.state.CreateItemPhoto}&first_presentation=${this.state.CreateItemFirstPres}`
@@ -74,7 +75,7 @@ class Dashboard extends Component {
 
   EventSubmit(){
     let ctx = this
-    fetch('http://localhost:3000/admins/create-event', {
+    fetch(`${ip}/admins/create-even`, {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `name=${this.state.CreateEventName}&address=${this.state.CreateEventAddress}&date=${this.state.CreateEventDate}&starting_time=${this.state.CreateEventStart}&ending_time=${this.state.CreateEventEnd}&photo=${this.state.CreateEventPhoto}&link=${this.state.CreateEventLink}`
@@ -97,7 +98,7 @@ class Dashboard extends Component {
 
   WorkshopSubmit(){
     let ctx = this
-    fetch('http://localhost:3000/admins/create-workshop', {
+    fetch(`${ip}/admins/create-workhop`, {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `title=${this.state.CreateWorkshopTitle}&desc=${this.state.CreateWorkshopDesc}&price=${this.state.CreateWorkshopPrice}&duration=${this.state.CreateWorkshopDuration}`

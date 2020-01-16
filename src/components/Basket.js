@@ -10,7 +10,6 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
 
 
-
 class Basket extends React.Component {
   constructor(props){
     super(props);

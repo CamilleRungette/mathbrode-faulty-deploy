@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer'
 import {connect} from 'react-redux'
+import ip from './ip'
 
 class ItemPresentation extends React.Component {
   constructor(props){
@@ -30,7 +31,7 @@ class ItemPresentation extends React.Component {
 
   componentDidMount(){
     let ctx = this
-  fetch(`http://localhost:3000/find-items?name=${this.props.match.params.id}`)
+  fetch(`${ip}/find-items?name=${this.props.match.params.id}`)
       .then(function(response) {
         return response.json();
       })
@@ -51,12 +52,12 @@ class ItemPresentation extends React.Component {
 
     sendMessage(){
       if (this.props.user == null){
-      fetch('http://localhost:3000/users/create-message',{
+      fetch(`${ip}/users/create-message`,{
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body: `object=${this.props.match.params.id}&content=${this.state.content}&sender_email=${this.state.userEmail}&sender_name=${this.state.userName}&item_id=${this.state.item_id}`
       })} else if (this.props.user != null){
-        fetch('http://localhost:3000/users/create-message',{
+        fetch('${ip}/users/create-message',{
           method: 'POST',
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
           body: `object=${this.props.match.params.id}&content=${this.state.content}&sender_email=${this.props.user.email}&sender_name=${this.props.user.first_name}&item_id=${this.state.item_id}&user_id=${this.props.user._id}`

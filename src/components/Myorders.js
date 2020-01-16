@@ -5,6 +5,7 @@ import DateFormat from '../components/function'
 import {Card, Button} from 'react-bootstrap'
 import { connect } from 'react-redux';
 import {Redirect, Link} from 'react-router-dom'
+import ip from './ip'
 
  
 class MyOrders extends Component{
@@ -17,7 +18,7 @@ class MyOrders extends Component{
   componentDidMount(){
     console.log(this.props.user)
     let ctx = this;
-    fetch(`http://localhost:3000/users/myorders?id=${this.props.user._id}`)
+    fetch(`${ip}/users/myorders?id=${this.props.user._id}`)
     .then(function(response) {
       return response.json();
     })

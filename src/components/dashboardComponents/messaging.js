@@ -5,6 +5,7 @@ import MessageItem from '../cards/Message-item';
 import {Card} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import ip from '../ip'
 
 const givenSize ={
   height: '70vh',
@@ -28,7 +29,7 @@ class Messages extends React.Component{
   handleClick(){
     console.log("coucou")
     let ctx = this;
-    fetch('http://localhost:3000/admins/messages')
+    fetch(`${ip}/admins/messages`)
     .then(function(response) {
       return response.json();
     })
@@ -40,7 +41,7 @@ class Messages extends React.Component{
 
   componentDidMount(){
     let ctx = this;
-    fetch('http://localhost:3000/admins/messages')
+    fetch(`${ip}/admins/messages`)
     .then(function(response) {
       return response.json();
     })

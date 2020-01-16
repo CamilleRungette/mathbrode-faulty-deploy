@@ -4,6 +4,7 @@ import '../App.css';
 import Navbar from './Navbar';
 import {Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
+import ip from './ip'
 
 
 class Login extends React.Component{
@@ -24,7 +25,7 @@ this.state = {
 
   handleSubmitSignUp(){
     let ctx = this
-    fetch("http://localhost:3000/users/sign-up",{
+    fetch(`${ip}/users/sign-up`,{
     method:"POST",
     headers: {'Content-Type':'application/x-www-form-urlencoded'},
     body:`first_name=${this.state.newUserFirstName}&last_name=${this.state.newUserLastName}&email=${this.state.newUserEmail}&password=${this.state.newUserPassword}`
@@ -42,7 +43,7 @@ this.state = {
 
     handleSubmitSignIn(){   
       let ctx = this;     
-    fetch("http://localhost:3000/users/sign-in",{
+    fetch(`${ip}/users/sign-in`,{
     method:"POST",
     headers: {'Content-Type':'application/x-www-form-urlencoded'},
     body: `email=${this.state.SignInEmail}&password=${this.state.SignInPassword}`

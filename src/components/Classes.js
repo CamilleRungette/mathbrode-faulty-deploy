@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import {Button, Input, Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem, Col, Row } from 'reactstrap';
 import {Modal, Form} from 'react-bootstrap'
 import {connect} from 'react-redux'
+import ip from './ip'
 
 
 let modalStyle={
@@ -39,7 +40,7 @@ class Classes extends Component{
 
   sendMessage(){
     this.setState({show:false});
-    fetch('http://localhost:3000/users/create-message', {
+    fetch(`${ip}/users/create-message`, {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `object=Atelier&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}&photo=${this.state.SendMessagePhoto}&sender_name=${this.state.SendMessageName}`
@@ -48,7 +49,7 @@ class Classes extends Component{
 
   componentDidMount(){
     let ctx = this
-    fetch('http://localhost:3000/workshops')
+    fetch(`${ip}/workshops`)
     .then(function(response) {
       return response.json();
     })

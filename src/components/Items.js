@@ -3,6 +3,7 @@ import ShopItem from './cards/Shop-item'
 import Footer from './Footer'
 import Navigbar from './Navbar'
 import {Col} from 'reactstrap'
+import ip from './ip'
 
 
 class Items extends Component{
@@ -16,7 +17,7 @@ class Items extends Component{
 
   componentDidMount(){
     let ctx=this
-    fetch('http://localhost:3000/items')
+    fetch(`${ip}/items`)
     .then(function(response) {
       return response.json();
     })

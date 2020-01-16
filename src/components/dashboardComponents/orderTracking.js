@@ -9,6 +9,7 @@ import {Modal, Form, Button, ListGroup} from 'react-bootstrap'
 import '../../App.css';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import ip from '../ip'
 
 
 let modalStyle={
@@ -41,7 +42,7 @@ class tracking extends React.Component{
   handleShow(order){
     this.setState({show:true})
     let ctx = this;
-    fetch(`http://localhost:3000/admins/order?id=${order._id}`)
+    fetch(`${ip}/admins/order?id=${order._id}`)
     .then(function(response) {
       return response.json();
     })
@@ -63,7 +64,7 @@ class tracking extends React.Component{
     this.setState({show: false})
     console.log(this.state.show)
     if (this.state.sent === true){
-      fetch('http://localhost:3000/admins/update-order',{
+      fetch(`${ip}/admins/update-order`,{
         method: 'POST',
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body: `order=${order}`
@@ -84,7 +85,7 @@ class tracking extends React.Component{
 
   componentDidMount(){
     let ctx = this;
-    fetch('http://localhost:3000/admins/orders')
+    fetch(`${ip}/admins/orders`)
     .then(function(response) {
       return response.json();
     })
