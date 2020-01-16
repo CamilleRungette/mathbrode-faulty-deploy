@@ -48,7 +48,7 @@ class Presentation extends React.Component {
 
       
     return(
- <ScrollableAnchor id={'ancre'} >
+ <ScrollableAnchor id={'contact'} >
 <div className="row justify-content-center col-sm-10 col-md-12 mx-auto" style={{fontFamily:"Raleway"}}>
   <div>
     <h1 style={{fontSize:"4em", textAlign:"center"}}> Je me présente</h1>

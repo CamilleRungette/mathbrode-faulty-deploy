@@ -68,7 +68,7 @@ class Navigbar extends React.Component{
                 </NavItem>
 
                 <NavItem>
-                <a href="#ancre"><NavLink>Contact</NavLink></a>
+                <a href="/#contact"><NavLink>Contact</NavLink></a>
                 </NavItem>
 
                 
