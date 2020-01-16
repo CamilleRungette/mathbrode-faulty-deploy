@@ -47,9 +47,9 @@ class Basket extends React.Component {
           </div>
         )
       } else {
-        for (let i=0; i<this.props.item.length; i++){
-          this.state.total = this.state.total + this.props.item[i].price
-          console.log("VOILA LE PRIX DE L'Item;", this.props.item[i].price)
+        for (let i=0; i<this.state.items.length; i++){
+          this.state.total = this.state.total + this.state.items[i].price
+          console.log("VOILA LE PRIX DE L'Item;", this.state.items[i].price, "voila le prix du total", this.state.total)
         } 
    return(
     <div style={{fontFamily:"Raleway"}}>

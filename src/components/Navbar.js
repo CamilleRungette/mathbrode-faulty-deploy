@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Button,  Navbar,  NavbarBrand,  Nav,  NavItem,  NavLink } from 'reactstrap';
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import '../script'
 
 
@@ -10,16 +10,36 @@ class Navigbar extends React.Component{
   constructor(props){
     super(props);
     this.LogOut = this.LogOut.bind(this) 
+    this.setRedirect = this.setRedirect.bind(this)
+    this.renderRedirect = this.renderRedirect.bind(this)
+    this.state={
+      redirect: false
+    }
    }
 
   LogOut(){
     this.props.onLogOutClick(this.props.connected) 
   }
 
+  setRedirect(){
+
+    this.setState({
+      redirect: true
+    })
+  }
+  renderRedirect(){
+    console.log("====================", this.state.redirect)
+    if (this.state.redirect) {
+      console.log("true")
+      window.scrollBy(0, 3000)
+      return <Redirect to='/' />
+    }
+  }
+
   render(){
     return(
-
-<div className="row topnav" style={{marginLeft:"0px",marginRight:"0px"}}>
+      <div className="row topnav" style={{marginLeft:"0px",marginRight:"0px"}}>
+      {this.renderRedirect()}
 
     <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "95%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto",padding:"0"}}>
         <div xs="2" style={{textAlign:"right"}}>
@@ -48,7 +68,7 @@ class Navigbar extends React.Component{
                 </NavItem>
 
                 <NavItem>
-                <NavLink id="contact">Contact</NavLink>
+                <a href="#ancre"><NavLink>Contact</NavLink></a>
                 </NavItem>
 
                 
