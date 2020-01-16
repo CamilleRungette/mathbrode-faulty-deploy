@@ -20,6 +20,8 @@ class Classes extends Component{
     this.handleClose = this.handleClose.bind(this)
     this.handleShow = this.handleShow.bind(this)
     this.sendMessage = this.sendMessage.bind(this)  
+    this.uploadMessageImage = this.uploadMessageImage.bind(this);
+
     this.state = {
       workshops:[],
       show: false,
@@ -27,6 +29,7 @@ class Classes extends Component{
       SendMessageEmail: '',
       SendMessagePhoto: '', 
       SendMessageName:'', 
+      loading: '',
     }
   }
 
@@ -46,6 +49,24 @@ class Classes extends Component{
       body: `object=Atelier&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}&photo=${this.state.SendMessagePhoto}&sender_name=${this.state.SendMessageName}`
     })
   }
+
+  async uploadMessageImage(e){
+    const files = e.target.files
+    const data= new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'camille')
+    this.setState({loading: true})
+    const res = await fetch('https://api.cloudinary.com/v1_1/dduugb9jy/image/upload', {
+        method: 'POST',
+        body: data
+      })
+    const file = await res.json()
+    console.log("==================>", file.secure_url)
+    
+    this.setState({SendMessagePhoto: file.secure_url})
+    this.setState({loading: false})
+  }
+
 
   componentDidMount(){
     let ctx = this
@@ -134,6 +155,21 @@ class Classes extends Component{
             <Form.Group controlId="formBasicPassword">
               <Form.Control as="textarea" placeholder="Message" onChange={(e)=> this.setState({SendMessageContent: e.target.value})} 
               value={this.state.SendMessageContent} />
+            </Form.Group>
+
+            <Form.Group as={Row} >
+              <Form.Label column sm={2}>Photo</Form.Label>
+                <Col sm={10}>
+                <input type="file"
+                placeholder="upload an image"
+                onChange={this.uploadMessageImage} 
+                />
+                  </Col>  
+                {this.state.loading ? (
+                  <h6> Chargement ...</h6>
+                ) : (
+                 <img src={this.state.SendMessagePhoto} alt=" " style={{width:"10em", marginLeft:'8em'}} />
+                )}
             </Form.Group>
           </Form>
           <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.sendMessage}> 
