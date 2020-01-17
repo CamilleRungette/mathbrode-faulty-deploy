@@ -70,7 +70,7 @@ class Profil extends Component{
 
   render(){
     console.log("USER", this.props.connected)
-    if (this.props.connected === false || this.props.connected == null){
+    if (this.props.connected === false || this.props.connected === null){
       return <Redirect to="/" />
     }
 
@@ -80,26 +80,30 @@ class Profil extends Component{
           <Navbar/>
           <div >
           <div style={{height:"8em"}}></div>
-          <Card className="col-6 mx-auto"  style={{marginTop:"8em"}}>
+          <Card className="col-5 mx-auto"  style={{marginTop:"8em"}}>
           <h2 style={{textAlign:"center", fontSize:"3em", marginTop:'1em'}}>Ton Profil</h2>
           <div style={{height:"1em"}}></div>
             <div>
               <div style={{fontSize:'1.8em', textAlign:'center'}} >Salut {this.props.userSigned.first_name} !</div>
-              <div style={{marginTop: "3em", textAlign:"center"}}>
-                  <h4>Voilà tes infos :</h4>
+              <div style={{marginTop: "3em"}}>
+                <div className="col-8 border" style={{margin:"auto", padding:"2em"}}>
+                  <h4 style={{textAlign:"center"}} >Voilà tes infos :</h4>
                   <div style={{fontSize:"1.2em"}}>
                     <div> <span style={titre}>Nom:</span> {this.props.userSigned.first_name} {this.props.userSigned.last_name} </div>
                     <div> <span style={titre}>Adresse e-mail:</span> {this.props.userSigned.email}</div>
                       <div><span style={titre}>Adresse postale:</span></div>
+                      
                      {this.props.userSigned.address}
                      {this.state.zipcode != null?(
-                       <div>{this.state.zipcode} 
-                       {this.state.city}</div>
+                       <div>{this.state.zipcode}, {this.state.city}</div>
                      ):(
                       <div></div>
                      )}
-                     <br/> <br/>
-                    <Button style={{backgroundColor:"#1B263B", border:"none", marginTop:'2em'}}  onClick={this.handleShow}>Modifier</Button>
+                     <br/>
+                     <div style={{textAlign:"center"}}>
+                      <Button style={{backgroundColor:"#1B263B", border:"none"}}  onClick={this.handleShow}>Modifier</Button>
+                    </div>
+               </div>
                  </div>
               </div>
 
@@ -134,21 +138,18 @@ class Profil extends Component{
 
                   <Form.Group>
                     <Form.Label>Adresse</Form.Label>
-                    <Form.Control as="textarea" onChange={(e)=> this.setState({address: e.target.value})}
-                    value={this.state.address}  />
+                    <Form.Control as="textarea" onChange={(e)=> this.setState({address: e.target.value})}  />
                   </Form.Group>
 
                   <Form.Group >
                     <Row>
                       <Col>
                     <Form.Label>Code postal</Form.Label>
-                    <Form.Control type="text" onChange={(e)=> this.setState({zipcode: e.target.value})}
-                    value={this.state.zipcode} />
+                    <Form.Control type="text" onChange={(e)=> this.setState({zipcode: e.target.value})} />
                   </Col>
                   <Col>
                     <Form.Label>Ville</Form.Label>
-                    <Form.Control type="text" onChange={(e)=> this.setState({city: e.target.value})}
-                    value={this.state.city} />
+                    <Form.Control type="text" onChange={(e)=> this.setState({city: e.target.value})} />
                     </Col>
                     </Row>
                   </Form.Group>
@@ -166,7 +167,7 @@ class Profil extends Component{
             <div style={{height:"6em"}}></div>
             </Card>
             </div>
-            <div style={{height:"6em"}}></div>
+            <div style={{height:"8em"}}></div>
           <Footer/>
         </div>     
       </div>
