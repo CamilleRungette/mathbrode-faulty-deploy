@@ -34,7 +34,7 @@ class CheckoutForm extends Component {
        fetch(`${ip}/users/order`,{
          method: 'POST',
          headers: {'Content-Type':'application/x-www-form-urlencoded'},
-         body: `user_id=${this.props.user._id}&total=${this.props.total.total}&items=${items}&name=${this.props.user.first_name}&email=${this.props.user.email}`
+         body: `user_id=${this.props.user._id}&total=${this.props.total.total}&items=${items}&name=${this.props.user.first_name}&email=${this.props.user.email}&in_person=${this.props.total.in_person}`
        },
        this.props.onResetClick()
        )
@@ -87,6 +87,11 @@ class CheckoutForm extends Component {
                       <p> {item.price} €</p>
                     </div>
                   ))}
+                  {this.props.total.in_person? (
+                    <p>Remise en main propre</p>
+                  ):(
+                    <div></div>
+                  )}
                 </div>
                 <br/>
                   <div style={{width:"60%", margin:'auto', marginBottom:'1em' }}>

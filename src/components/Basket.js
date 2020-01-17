@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Button } from 'reactstrap';
+  Button, Form } from 'reactstrap';
 import '../App.css'
 import {Link, Redirect} from 'react-router-dom';
 import Navbar from './Navbar'
@@ -15,7 +15,8 @@ class Basket extends React.Component {
     super(props);
     this.state={
       total: 0,
-      items: []
+      items: [],
+      in_person: false
     }
   }
   
@@ -24,6 +25,7 @@ class Basket extends React.Component {
   }
   
   render() {
+    console.log(this.state.in_person)
       if (this.props.connected == false || this.props.connected == null){
         return <Redirect to="/" />
       }else if (this.props.item.length == 0){
@@ -77,8 +79,9 @@ class Basket extends React.Component {
           )      
         )}
         </div>
-      <div className="col-8 border" style={{margin:"auto", display:"flex", paddingTop:"0.3em", fontSize:"1.3em", textAlign:"right"}}>
-        <p className="col-9">Total:</p>
+      <div className="col-8 border" style={{margin:"auto", display:"flex", paddingTop:"0.3em", fontSize:"1.3em", textAlign:"right", alignItems:'center'}}>
+      <p  className="col-4"><input type="checkbox" onClick={() => this.setState({in_person: !this.state.in_person})}/> Remise en main propre</p>
+        <p className="col-5">Total:</p>
         <p className="col-3">{this.state.total} €</p>
       </div>
       <div style={{height:"5em"}}></div>
@@ -87,7 +90,7 @@ class Basket extends React.Component {
           <Link to="/creations" ><Button color="secondary" >Continuer mes Achats</Button></Link>
         </div>
         <div>
-         <Link to="/checkout"> <Button style={{backgroundColor:"#1B263B", fontSize:"1.2em"}} onClick={() => this.props.onOrderClick(this.state.total)} >Confirmer</Button></Link>
+         <Link to="/checkout"> <Button style={{backgroundColor:"#1B263B", fontSize:"1.2em"}} onClick={() => this.props.onOrderClick(this.state.total, this.state.in_person)} >Confirmer</Button></Link>
         </div>
         <div style={{height:"5em"}}></div>  
       </div>
@@ -112,8 +115,8 @@ function mapDispatchToProps(dispatch){
       console.log(position)
       dispatch({type: 'delete', position: position})
     },
-    onOrderClick: function(total){
-      dispatch({type: 'payOrder', total: total})
+    onOrderClick: function(total, in_person){
+      dispatch({type: 'payOrder', total: total, in_person: in_person})
     }
   }
 }
