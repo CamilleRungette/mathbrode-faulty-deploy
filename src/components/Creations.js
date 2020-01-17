@@ -31,8 +31,7 @@ class Creations extends React.Component {
   }
 
 
-  render(
-  ) {
+  render() {
     let itemsList = this.state.items.map(function(item, i){
       return <CreationItem key={i}
        itemCopy={item.copy}
@@ -52,9 +51,9 @@ class Creations extends React.Component {
         <div className="col-lg-8 col-sm-10 col-11">
               <div style={{fontFamily:"Raleway"}}>
                 <h1 style={{fontSize:"4em", textAlign:"center"}}> Mes Créations </h1>
-                <div style={{height:"5em"}}></div>
+                <div style={{height:"8em"}}></div>
 
-              <div className="row" style={{display:"flex"}}>
+              <div className="row" style={{display:"flex", margin:'auto'}}>
                 {itemsList}
               </div>
              
