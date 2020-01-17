@@ -37,6 +37,7 @@ class tracking extends React.Component{
   }
 
   handleClose(){
+    this.setState({show: false})
   }
 
   handleShow(order){
@@ -99,6 +100,7 @@ class tracking extends React.Component{
   }
 
     render(){
+      console.log("=======================================>",this.state.orders)
       if (this.props.adminConnected == false || this.props.adminConnected == null){
         return <Redirect to="/loginadmin" />
      }
@@ -117,10 +119,11 @@ class tracking extends React.Component{
               <Table striped>
                 <thead>
                   <tr>
-                  <th>Date de la commande</th>
+                  <th>Date de commande</th>
                   <th>Statut</th>
                   <th>Montant</th>
-                  <th>Date d'envoi prévue</th>
+                  <th>Date de livraison</th>
+                  <th>Remise</th>
                   <th></th>
                   <th></th>
                   </tr>
@@ -136,6 +139,11 @@ class tracking extends React.Component{
                     )}
                     <td>{order.total}€</td>
                     <td>{DateFormat(order.shipping_date)}</td>
+                    {order.in_person == true?(
+                      <td>Main propre</td>
+                    ):(
+                      <td>Livraison</td>
+                    )}
                     {order.sent == true ?
                     (
                       <td><FontAwesomeIcon icon={faCheck} style={{color:"green"}} /> </td>

@@ -18,17 +18,17 @@ class Navigbar extends React.Component{
     render(){
       if (this.props.adminConnected == false || this.props.adminConnected == null){
         return (
-          <div className="row" style={{marginLeft:"0px",marginRight:"0px"}}>
-              <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "95%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto",padding:"0"}}s>
+          <div>
+              <Navbar className="px-5" light style={{fontFamily:"Raleway", width: "100%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto",padding:"0", backgroundColor:"white", borderBottom:"1px solid #d3d3d3"}}>
                   <div style={{textAlign:"right"}}>
                       <NavbarBrand>
-                      <Link to="/" ><img src="/logo bis.png" style={{width:"6em"}} /> </Link>
+                      <Link to="/" ><img src="/logo bis.png" style={{width:"5.3em"}} /> </Link>
                       </NavbarBrand>
                   </div>
 
                   <div xs="10">
-                      <Nav navbar style={{fontSize:"1.2em"}}>
-                        <Link to="/loginadmin" >  <Button color="secondary">Se connecter</Button> </Link>
+                      <Nav navbar>
+                        <Link to="/loginadmin" >  <Button color="secondary" style={{fontSize:'1.3em'}}>Se Connecter</Button> </Link>
                       </Nav>
                   </div>
               </Navbar>
@@ -38,12 +38,12 @@ class Navigbar extends React.Component{
 
         return(
 
-<div className="row" style={{marginLeft:"0px",marginRight:"0px"}}>
+<div style={{marginLeft:"0px",marginRight:"0px"}}>
 
     <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "95%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto",padding:"0"}}s>
         <div style={{textAlign:"right"}}>
             <NavbarBrand>
-            <Link to="/" ><img src="/logo bis.png" style={{width:"6em"}} /> </Link>
+            <Link to="/" ><img src="/logo bis.png" style={{width:"5.3em"}} /> </Link>
             </NavbarBrand>
         </div>
 
