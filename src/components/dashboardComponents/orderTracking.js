@@ -1,11 +1,11 @@
 import React from 'react';
 import {Card,   Col, Table} from 'react-bootstrap';
 import NavbarAdmin from './NavbarAdmin';
-import Footer from '../Footer'
+import FooterAdmin from './footerAdmin'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import DateFormat from '../function';
-import {Modal, Form, Button, ListGroup} from 'react-bootstrap'
+import {Modal, Form, Button, ListGroup, Row} from 'react-bootstrap'
 import '../../App.css';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -23,9 +23,13 @@ class tracking extends React.Component{
   constructor(){
     super();
     this.handleClose = this.handleClose.bind(this)
+    this.handlePersoClose = this.handlePersoClose.bind(this)
     this.handleShow = this.handleShow.bind(this)
+    this.handlePersoShow = this.handlePersoShow.bind(this)
     this.checkOrderSent = this.checkOrderSent.bind(this); 
     this.orderSent = this.orderSent.bind(this) 
+    this.persoOrderSent = this.persoOrderSent.bind(this)
+    this.uploadImage = this.uploadImage.bind(this)
     this.state={
       orders:[],
       show: false,
@@ -33,6 +37,15 @@ class tracking extends React.Component{
       order: [],
       user: [],
       sent: '',
+      persoShow: false,
+      persoOrderUser :'',
+      persoOrderTotal: '',
+      persoOrderInPerson: false,
+      persoOrderPhoto: '',
+      persoOrderShippingFee: '',
+      persoOrderDesc: '',
+      loading: false,
+      persoOrders: [],
     }
   }
 
@@ -40,6 +53,7 @@ class tracking extends React.Component{
     this.setState({show: false})
   }
 
+  
   handleShow(order){
     this.setState({show:true})
     let ctx = this;
@@ -49,17 +63,17 @@ class tracking extends React.Component{
     })
     .then(function(data){
       ctx.setState({items: data.items, order: data.thisOrder, user: data.thisUser})
-     console.log("THE STATE ===========>", ctx.state.items)
+      console.log("THE STATE ===========>", ctx.state.items)
     })
     .catch(function(error) {
       console.log('Request failed ->', error)
-  });
+    });
   }
-
+  
   checkOrderSent(){
     this.setState({sent: !this.state.sent})
   }
-
+  
   orderSent(order){
     let ctx = this;
     this.setState({show: false})
@@ -75,13 +89,47 @@ class tracking extends React.Component{
       })
       .then(function(data){
         ctx.setState({orders: data.allOrders})
-       console.log("THE STATE QUE JE CHERCHE ===========>", ctx.state.orders)
+        console.log("THE STATE QUE JE CHERCHE ===========>", ctx.state.orders)
       })
       .catch(function(error) {
         console.log('Request failed ->', error)
-    });
-  
+      });
+      
     }
+  }
+  
+  handlePersoShow(){
+    this.setState({persoShow: true})
+  }
+  
+  handlePersoClose(){
+    this.setState({persoShow: false})
+  }
+
+  persoOrderSent(){
+    let ctx = this;
+    this.setState({persoShow: false})
+    fetch(`http://localhost:3000/admins/create-perso-order`,{
+      method: 'POST',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: `user=${this.state.persoOrderUser}&total=${this.state.persoOrderTotal}&shipping_fee=${this.state.persoOrderShippingFee}&in_person=${this.state.persoOrderInPerson}&photo=${this.state.persoOrderPhoto}&description=${this.state.persoOrderDesc}`
+    })
+  }
+
+  async uploadImage(e){
+    const files = e.target.files
+    const data= new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'camille')
+    this.setState({loading: true})
+    const res = await fetch('https://api.cloudinary.com/v1_1/dduugb9jy/image/upload', {
+        method: 'POST',
+        body: data
+      })
+    const file = await res.json()
+    
+    this.setState({persoOrderPhoto: file.secure_url})
+    this.setState({loading: false})
   }
 
   componentDidMount(){
@@ -91,8 +139,11 @@ class tracking extends React.Component{
       return response.json();
     })
     .then(function(data){
-      ctx.setState({orders: data.allOrders})
-     console.log("THE STATE ===========>", ctx.state.orders)
+      console.log(data)
+      ctx.setState({orders: data.allOrders, 
+        persoOrders: data.allPersoOrders})
+     console.log("THE STATE ===========>", ctx.state.persoOrders,
+     )
     })
     .catch(function(error) {
       console.log('Request failed ->', error)
@@ -100,19 +151,23 @@ class tracking extends React.Component{
   }
 
     render(){
-      console.log("=======================================>",this.state.orders)
-      if (this.props.adminConnected == false || this.props.adminConnected == null){
-        return <Redirect to="/loginadmin" />
-     }
+      // console.log("=======================================>",this.state.orders)
+    //   if (this.props.adminConnected == false || this.props.adminConnected == null){
+    //     return <Redirect to="/loginadmin" />
+    //  }
+    console.log(this.state.persoOrderInPerson)
 
       return(
-  <div style={{fontFamily:"Raleway"}}>
+  <div style={{fontFamily:"Raleway"}} className="mainBack">
   <NavbarAdmin/>
     
+    <div style={{textAlign:'center'}} >
+      <Button onClick={this.handlePersoShow} style={{backgroundColor:'#1b263b', border:'transparent', marginTop:'5em', fontSize:'1.2em'}}>Créer une commande</Button>
+    </div>
 
-      <div style={{ height:"100%", display:"flex", justifyContent:"center", paddingTop:"10%"}}>
+      <div style={{ height:"100%", display:"flex", justifyContent:"center", paddingTop:"5%"}}>
         <Col lg={9}>
-          <Card>
+          <Card style={{maxHeight:"150vh", overflow:"auto"}}>
           <Card.Header style={{fontSize:'1.7em',  textAlign:'center'}}>Commandes et suivi</Card.Header>
             <Card.Body>
 
@@ -203,8 +258,85 @@ class tracking extends React.Component{
     <div style={{height:"6em"}}></div>
 
 
+    
+
+
+<Modal show={this.state.persoShow} onHide={this.handlePersoClose} className="col-lg-8" >
+  <div style={modalStyle}>
+    <Modal.Header closeButton>
+      <Modal.Title>Créer une commande personnalisée :</Modal.Title>
+    </Modal.Header>
+      <Modal.Body>
+        
+      <Form>
+            <Form.Group as={Row}>
+            <Form.Label column sm={2}>Email client</Form.Label>
+            <Col sm={10}>
+                <Form.Control type="email" onChange={(e)=> this.setState({persoOrderUser: e.target.value})}
+                value={this.state.persoOrderUser} />
+                </Col>
+            </Form.Group>
+
+            <Form.Group as={Row}>
+            <Form.Label column sm={2}>Description</Form.Label>
+            <Col sm={10}>
+                <Form.Control as="textarea" onChange={(e)=> this.setState({persoOrderDesc: e.target.value})}
+                value={this.state.persoOrderDesc} />
+                </Col>
+            </Form.Group>
+
+              <Form.Group as={Row}>
+              <Form.Label column sm={2}>Total</Form.Label>
+              <Col>
+                  <Form.Control type="text" onChange={(e)=> this.setState({persoOrderTotal: e.target.value})}
+                  value={this.state.persoOrderTotal} />
+                  </Col>
+              </Form.Group>
+
+              <Form.Group as={Row}>
+              <Form.Label column sm={2}>Frais de port</Form.Label>
+              <Col>
+                  <Form.Control type="text" onChange={(e)=> this.setState({persoOrderShippingFee: e.target.value})}
+                  value={this.state.persoOrderShippingFee} />
+                  </Col>
+
+                <Form.Label column sm={2}>Remise en main propre</Form.Label>
+              <Col sm={4}>
+                  <Form.Check type="checkbox" onClick={() => this.setState({persoOrderInPerson: !this.state.persoOrderInPerson})} />
+              </Col> 
+
+              </Form.Group>
+
+           
+
+            <Form.Group as={Row} controlId="formHorizontalPicture">
+              <Form.Label column sm={2}>Photo</Form.Label>
+                <Col sm={10}>
+                <input type="file"
+                placeholder=""
+                onChange={this.uploadImage} 
+                />
+                  </Col>  
+                {this.state.loading ? (
+                  <h6> Chargement ...</h6>
+                ) : (
+                 <img src={this.state.SendMessagePhoto} alt="item chosen photo" style={{width:"10em", marginLeft:'8em'}} />
+                )}
+            </Form.Group>
+
+            
+
+          </Form>
+
+        <Button style={{backgroundColor:"#1B263B", border:"none", marginLeft:'47%', marginTop:'2em'}} variant="secondary" onClick={this.persoOrderSent}>
+          Enregistrer
+        </Button>
+      </Modal.Body>
+  </div>
+</Modal>
+
    
-  <Footer/>
+  <FooterAdmin/>
   </div>
  )}
 }

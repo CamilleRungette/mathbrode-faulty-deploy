@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card, Button, Col, Form, Row} from 'react-bootstrap';
 import '../App.css';
 import NavbarAdmin from './dashboardComponents/NavbarAdmin';
-import Footer from './Footer'
+import FooterAdmin from './dashboardComponents/footerAdmin'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import ip from './ip'
@@ -154,39 +154,24 @@ class Dashboard extends Component {
     render(){
       console.log("--------------->", this.props.adminConnected)
       console.log("CHECKBOX:", this.state.CreateItemFirstPres)
-      if (this.props.adminConnected === false || this.props.adminConnected == null){
-         return <Redirect to="/loginadmin" />
-      }
+      // if (this.props.adminConnected === false || this.props.adminConnected == null){
+      //    return <Redirect to="/loginadmin" />
+      // }
       
       return(
 <div style={{fontFamily:"Raleway"}}>
        
-  <NavbarAdmin/>
-
-<div className="my-5" style={{ display:"flex", justifyContent:"space-between"}}>
-  <div className="col-3" style={{textAlign:"center"}}> <img src="./clients.png" alt="icon" class="iconstat"/></div>
-  <div className="col-3" style={{textAlign:"center"}}><img src="./income.png" class="iconstat" alt="icon"/></div>
-  <div className="col-3" style={{textAlign:"center"}} ><img src="./doneorder.png" class="iconstat" alt="icon"/></div>
-  <div className="col-3" style={{textAlign:"center"}} ><img src="./waitingorder.png" class="iconstat"alt="icon"/></div>
-</div>
-
-<div className="my-5" style={{ display:"flex", fontSize:'1.7em' ,justifyContent:"space-between"}}>
-  <div className="col-3" style={{textAlign:"center"}}> 18 client inscrits</div>
-  <div className="col-3" style={{textAlign:"center"}}> 120€ de revenus</div>
-  <div className="col-3" style={{textAlign:"center"}} > 6 commandes terminées</div>
-  <div className="col-3" style={{textAlign:"center"}} > 4 commandes en attente</div>
-</div>
-
-
-
-  <div style={{display:"flex", flexDirection:"column" }}>
-  <div style={{height:"4em"}}></div>
-
   
 
 
-            {/* Create-item form */}
-    <Col xs={{span:12}} lg={{offset:3, span:6 }}>
+  <div style={{display:"flex", flexDirection:"column" }} className="mainBack" >
+  <NavbarAdmin/>
+  <div style={{height:"6em"}}></div>
+
+  
+
+    <div style={{maxHeight:"150vh", overflow:"auto"}}>
+      <Col xs={{span:12}} sm={{span:10}} md={{span:10}} lg={{offset:3, span:6 }}>
         <Card>
           <Card.Header style={{fontSize:"1.8em",textAlign:"center"}}>Ajouter un produit</Card.Header>
             <Card.Body>
@@ -194,64 +179,22 @@ class Dashboard extends Component {
             <Form>
 
             <Form.Group as={Row} controlId="formHorizontalPicture">
-              <Form.Label column sm={2}>Photo</Form.Label>
-                <Col sm={10}>
+              <Form.Label  column sm={2}>Photo</Form.Label>
+                <Col sm={4}>
                 <input type="file"
                 placeholder="upload an image"
                 onChange={this.uploadItemImage} 
                 />
-                  </Col>  
+                  
                 {this.state.loading ? (
                   <h6> Chargement ...</h6>
                 ) : (
                  <img src={this.state.CreateItemPhoto} alt=" " style={{width:"10em", marginLeft:'8em'}} />
                 )}
-            </Form.Group>
-
-            <Form.Group as={Row} controlId="formHorizontalName">
-              <Form.Label column sm={2}>Nom</Form.Label>
-                <Col sm={10}>
-                  <Form.Control type="name" onChange={(e)=> this.setState({CreateItemName: e.target.value})}
-                        value={this.state.CreateItemName} />
-                </Col>  
-            </Form.Group>
-
-            <Form.Group as={Row} controlId="formHorizontalPrice">
-              <Form.Label column sm={2}>Prix</Form.Label>
-                <Col sm={10}>
-                  <Form.Control type="text" onChange={(e)=> this.setState({CreateItemPrice: e.target.value})}
-                        value={this.state.CreateItemPrice} />
-                </Col>  
-            </Form.Group>
-
-            <Form.Group as={Row} controlId="formHorizontalSize">
-              <Form.Label column sm={2}>Taille</Form.Label>
-                <Col sm={10}>
-                  <Form.Control type="text" onChange={(e)=> this.setState({CreateItemSize: e.target.value})}
-                        value={this.state.CreateItemSize}/>
-                </Col>  
-            </Form.Group>
-
-
-            <Form.Group as={Row} controlId="formHorizontalDesc">
-              <Form.Label column sm={2}>Description</Form.Label>
-                <Col sm={10}>
-                  <Form.Control as="textarea" onChange={(e)=> this.setState({CreateItemDesc: e.target.value})}
-                        value={this.state.CreateItemDesc} />
-                </Col>  
-            </Form.Group>
-
-            <Form.Group as={Row} controlId="formHorizontalFees">
-              <Form.Label column sm={2}>Frais de port</Form.Label>
-                <Col sm={10}>
-                  <Form.Control type="textarea" onChange={(e)=> this.setState({CreateItemShipFee: e.target.value})}
-                        value={this.state.CreateItemShipFee} />
-                </Col>  
-            </Form.Group>
-
-            <Form.Group as={Row} controlId="formHorizontalFees">
+                 </Col> 
+            
               <Form.Label column sm={2}>Mise en avant</Form.Label>
-                <Col sm={10}>
+                <Col sm={4}>
                   {this.state.CreateItemFirstPres === false? (
                     <Form.Check type="checkbox" onClick={() => this.setState({CreateItemFirstPres: !this.state.CreateItemFirstPres})} />
                   ):(
@@ -260,7 +203,37 @@ class Dashboard extends Component {
                 </Col>  
             </Form.Group>
 
+            <Form.Group as={Row} controlId="formHorizontalName">
+                <Col sm={6}>
+                  <Form.Control type="name" placeholder="Nom" onChange={(e)=> this.setState({CreateItemName: e.target.value})}
+                        value={this.state.CreateItemName} />
+                </Col>  
+           
+                <Col sm={6}>
+                  <Form.Control type="text" placeholder="Prix" onChange={(e)=> this.setState({CreateItemPrice: e.target.value})}
+                        value={this.state.CreateItemPrice} />
+                </Col>  
+            </Form.Group>
 
+            <Form.Group as={Row} controlId="formHorizontalSize">
+                <Col sm={6}>
+                  <Form.Control type="text" placeholder="Taile" onChange={(e)=> this.setState({CreateItemSize: e.target.value})}
+                        value={this.state.CreateItemSize}/>
+                </Col> 
+
+
+                <Col sm={6}>
+                  <Form.Control type="textarea" placeholder="Frais de port" onChange={(e)=> this.setState({CreateItemShipFee: e.target.value})}
+                        value={this.state.CreateItemShipFee} />
+                </Col>  
+            </Form.Group>
+
+            <Form.Group as={Row} controlId="formHorizontalDesc">
+                <Col>
+                  <Form.Control as="textarea" placeholder="Description " onChange={(e)=> this.setState({CreateItemDesc: e.target.value})}
+                        value={this.state.CreateItemDesc} />
+                </Col>  
+            </Form.Group>
 
             <Form.Group style={{textAlign:"center"}} as={Row}>
                 <Col sm={{ offset: 1 }}>
@@ -301,46 +274,40 @@ class Dashboard extends Component {
                 </Col>  
             </Form.Group>
 
-              <Form.Group as={Row} controlId="formHorizontalName">
-                <Form.Label column sm={2}>Nom</Form.Label>
-                  <Col sm={10}>
-                    <Form.Control type="name" onChange={(e)=> this.setState({CreateEventName: e.target.value})}
+              <Form.Group as={Row}>
+                  <Col sm={6}>
+                    <Form.Control type="name" placeholder="Nom" onChange={(e)=> this.setState({CreateEventName: e.target.value})}
                           value={this.state.CreateEventName} />
                   </Col>  
-            </Form.Group>
-
-            <Form.Group as={Row} controlId="formHorizontalPrice">
-              <Form.Label column sm={2}>Adresse</Form.Label>
-                <Col sm={10}>
-                  <Form.Control type="text" onChange={(e)=> this.setState({CreateEventAddress: e.target.value})}
-                        value={this.state.CreateEventAddress} />
-                </Col>  
-            </Form.Group>
-
-            <Form.Group as={Row} controlId="formHorizontalSize">
-              <Form.Label column sm={2}>Lien</Form.Label>
-                <Col sm={10}>
-                  <Form.Control type="text" onChange={(e)=> this.setState({CreateEventLink: e.target.value})}
+            
+             
+                <Col sm={6}>
+                  <Form.Control type="text" placeholder="Lien" onChange={(e)=> this.setState({CreateEventLink: e.target.value})}
                         value={this.state.CreateEventLink}/>
                 </Col>  
             </Form.Group>
 
-            <Form.Group as={Row} controlId="formHorizontalSize">
-              <Form.Label column sm={2}>Date</Form.Label>
-                <Col sm={10}>
-                  <Form.Control type="date" onChange={(e)=> this.setState({CreateEventDate: e.target.value})}
-                        value={this.state.CreateEventDate}/>
+            <Form.Group as={Row}>
+                <Col>
+                  <Form.Control type="text" placeholder="Adresse" onChange={(e)=> this.setState({CreateEventAddress: e.target.value})}
+                        value={this.state.CreateEventAddress} />
                 </Col>  
             </Form.Group>
 
-            <Form.Group as={Row} controlId="formHorizontalPrice">
-              <Form.Label column sm={2}>Heure</Form.Label>
-                <Col sm={5}>
-                  <Form.Control placeholder="Début" type="text" onChange={(e)=> this.setState({CreateEventStart: e.target.value})}
+          
+
+            <Form.Group as={Row} controlId="formHorizontalSize">
+                <Col sm={4}>
+                  <Form.Control type="date" onChange={(e)=> this.setState({CreateEventDate: e.target.value})}
+                        value={this.state.CreateEventDate}/>
+                </Col>  
+           
+                <Col sm={4}>
+                  <Form.Control placeholder="Heure de début" type="text" onChange={(e)=> this.setState({CreateEventStart: e.target.value})}
                         value={this.state.CreateEventStart} />
                 </Col> 
-                <Col sm={5                }>
-                  <Form.Control placeholder="Fin" type="text" onChange={(e)=> this.setState({CreateEventEnd: e.target.value})}
+                <Col sm={4}>
+                  <Form.Control placeholder="Heure de fin" type="text" onChange={(e)=> this.setState({CreateEventEnd: e.target.value})}
                         value={this.state.CreateEventEnd} />
                 </Col>  
             </Form.Group>
@@ -356,7 +323,6 @@ class Dashboard extends Component {
         </Card>
       </Col> 
 
-      </div>
 
 
       <div style={{height:"12em"}}></div>
@@ -367,40 +333,34 @@ class Dashboard extends Component {
             <Card.Body>
                         
             <Form>
-            <Form.Group as={Row} controlId="formHorizontalTitle">
-              <Form.Label column sm={2}>Titre</Form.Label>
+            <Form.Group as={Row} >
                 <Col sm={10}>
-                  <Form.Control type="text" onChange={(e)=> this.setState({CreateWorkshopTitle: e.target.value})}
+                  <Form.Control type="text" placeholder="Titre" onChange={(e)=> this.setState({CreateWorkshopTitle: e.target.value})}
                         value={this.state.CreateWorkshopTitle} />
                 </Col>  
             </Form.Group>
 
-            <Form.Group as={Row} controlId="formHorizontalDesc">
-              <Form.Label column sm={2}>Description</Form.Label>
-                <Col sm={10}>
-                  <Form.Control as="textarea"  onChange={(e)=> this.setState({CreateWorkshopDesc: e.target.value})}
+            <Form.Group as={Row} >
+                <Col sm={12}>
+                  <Form.Control as="textarea" placeholder="Description" onChange={(e)=> this.setState({CreateWorkshopDesc: e.target.value})}
                         value={this.state.CreateWorkshopDesc} />
                 </Col>  
             </Form.Group>
 
-            <Form.Group as={Row} controlId="formHorizontalPrice">
-              <Form.Label column sm={2}>Prix</Form.Label>
-                <Col sm={10}>
-                  <Form.Control type="text"  onChange={(e)=> this.setState({CreateWorkshopPrice: e.target.value})}
+            <Form.Group as={Row} >
+                <Col sm={12}>
+                  <Form.Control type="text" placeholder="Prix" onChange={(e)=> this.setState({CreateWorkshopPrice: e.target.value})}
                         value={this.state.CreateWorkshopPrice} />
                 </Col>  
             </Form.Group>
 
-            <Form.Group as={Row} controlId="formHorizontalDuration">
-              <Form.Label column sm={2}>Durée</Form.Label>
-                <Col sm={10}>
-                  <Form.Control type="text" onChange={(e)=> this.setState({CreateWorkshopDuration: e.target.value})}
+            <Form.Group as={Row}>
+                <Col sm={6}>
+                  <Form.Control type="text" placeholder="Durée" onChange={(e)=> this.setState({CreateWorkshopDuration: e.target.value})}
                         value={this.state.CreateWorkshopDuration} />
                 </Col>  
-            </Form.Group>
 
-            <Form.Group style={{textAlign:"center"}} as={Row}>
-                <Col sm={{ offset: 1 }}>
+                <Col sm={6}>
                   <Button onClick={this.WorkshopSubmit} style={{border:"none", backgroundColor:"#1B263B"}}>Valider</Button>
                 </Col>
             </Form.Group>
@@ -410,12 +370,14 @@ class Dashboard extends Component {
         </Card>
       </Col> 
  
-
+</div>
 
 <div style={{height:"8em"}}></div>
 
 
-<Footer/>
+
+</div>
+<FooterAdmin/>
 
 </div>
       )

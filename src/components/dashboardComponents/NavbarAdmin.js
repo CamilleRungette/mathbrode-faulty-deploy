@@ -19,7 +19,7 @@ class Navigbar extends React.Component{
       if (this.props.adminConnected == false || this.props.adminConnected == null){
         return (
           <div>
-              <Navbar className="px-5" light style={{fontFamily:"Raleway", width: "100%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto",padding:"0", backgroundColor:"white", borderBottom:"1px solid #d3d3d3"}}>
+              <Navbar className="px-5" light style={{fontFamily:"Raleway", width: "100%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto", backgroundColor:'rgba(255, 255, 255, 0.85)', borderBottom:"1px solid #d3d3d3"}}>
                   <div style={{textAlign:"right"}}>
                       <NavbarBrand>
                       <Link to="/" ><img src="/logo bis.png" style={{width:"5.3em"}} /> </Link>
@@ -40,7 +40,7 @@ class Navigbar extends React.Component{
 
 <div style={{marginLeft:"0px",marginRight:"0px"}}>
 
-    <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "95%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto",padding:"0"}}s>
+    <Navbar  light expand="md" className="px-5" style={{fontFamily:"Raleway", backgroundColor:'rgba(255, 255, 255, 0.85)', width: "100%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto",  borderBottom:"1px solid #d3d3d3"}}s>
         <div style={{textAlign:"right"}}>
             <NavbarBrand>
             <Link to="/" ><img src="/logo bis.png" style={{width:"5.3em"}} /> </Link>
@@ -61,7 +61,7 @@ class Navigbar extends React.Component{
                 <NavItem>
                 <Link to="/stock" class="navigbar nav-link">Liste du stock</Link>
                 </NavItem>
-                <Link to="/loginadmin"><Button color="secondary"  onClick={this.LogOut}>Se déconnecter</Button> </Link>
+                <Link to="/loginadmin"><Button color="secondary" style={{fontSize:'1em'}} onClick={this.LogOut}>Se déconnecter</Button> </Link>
             </Nav>
         </div>
     </Navbar>

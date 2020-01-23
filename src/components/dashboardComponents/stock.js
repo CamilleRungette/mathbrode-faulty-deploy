@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Card, Button,   Col, Form, Row, Table, Modal } from 'react-bootstrap';
 import NavbarAdmin from './NavbarAdmin';
-import Footer from '../Footer';
+import FooterAdmin from './footerAdmin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrashAlt, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
@@ -109,9 +109,9 @@ class stock extends React.Component{
 }
 
     render(){
-      if (this.props.adminConnected == false || this.props.adminConnected == null){
-        return <Redirect to="/loginadmin" />
-     }
+    //   if (this.props.adminConnected == false || this.props.adminConnected == null){
+    //     return <Redirect to="/loginadmin" />
+    //  }
      console.log("checked", this.state.number)
       var show = unDisplayMessage
       if (this.state.show === true){
@@ -119,13 +119,13 @@ class stock extends React.Component{
       }
 
         return(
-    <div style={{fontFamily:"Raleway"}}>
+    <div style={{fontFamily:"Raleway"}} className="mainBack">
       <NavbarAdmin/>
         <div >
 
             <div style={{display:"flex", justifyContent:"center", paddingTop:"10%"}}>
               <Col lg="9">
-                <Card>
+                <Card style={{maxHeight:"125vh", overflow:"auto"}}>
                 <Card.Header style={{fontSize:'1.7em'}}>Liste du stock</Card.Header>
                 <Card.Header>
                     <Row style={{fontWeight:"bold"}} >
@@ -208,7 +208,7 @@ class stock extends React.Component{
             </div>
         <div style={{height:"6em"}}></div>
         </div>
-      <Footer/>
+      <FooterAdmin/>
     </div>
                     
   )}

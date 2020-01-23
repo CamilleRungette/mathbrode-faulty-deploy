@@ -259,3 +259,8 @@ html {
 .background-body{
   background-color:rgb(250, 250, 250);
 }
+
+.mainBack{
+  background-image: url('/dashboard.jpeg');
+  background-size: cover;
+}

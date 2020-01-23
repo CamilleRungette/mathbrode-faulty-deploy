@@ -1,6 +1,6 @@
 import React from 'react';
 import NavbarAdmin from './NavbarAdmin';
-import Footer from '../Footer'
+import FooterAdmin from './footerAdmin'
 import MessageItem from '../cards/Message-item';
 import {Card} from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -52,9 +52,9 @@ class Messages extends React.Component{
   }
 
     render(){
-      if (this.props.adminConnected === false || this.props.adminConnected == null){
-        return <Redirect to="/loginadmin" />
-     }
+    //   if (this.props.adminConnected === false || this.props.adminConnected == null){
+    //     return <Redirect to="/loginadmin" />
+    //  }
 
       let messageList = this.state.messages.map(function(message, i){
         return <MessageItem handleClickParent={this.handleClick} key={i}
@@ -75,11 +75,11 @@ class Messages extends React.Component{
         size= noGivenSize
       }
         return(
-          <div style={{fontFamily:"Raleway"}}>
+          <div style={{fontFamily:"Raleway"}} className="mainBack">
           <NavbarAdmin/>
           <div style={size}>
           <div style={{height:"6em"}}></div>
-          <Card className="col-8 mx-auto" >
+          <Card className="col-8 mx-auto" style={{maxHeight:"150vh", overflow:"auto"}} >
           <h2 style={{textAlign:"center", fontSize:"3em", marginTop:'1em'}}>Messagerie ({messageList.length})</h2>
           <div style={{height:"1em"}}></div>
           {messageList.length === 0?(
@@ -94,8 +94,9 @@ class Messages extends React.Component{
           )}
             <div style={{height:"6em"}}></div>
             </Card>
+            <div style={{height:"6em"}}></div>
+          <FooterAdmin/>
             </div>
-          <Footer/>
           </div>     
         )}
 }
