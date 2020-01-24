@@ -7,6 +7,7 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import DateFormat from '../function';
 import {Modal, Form, Button, ListGroup, Row} from 'react-bootstrap'
 import '../../App.css';
+import {Redirect} from 'react-router-dom'
 import { connect } from 'react-redux';
 import ip from '../ip'
 
