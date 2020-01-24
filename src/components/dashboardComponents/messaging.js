@@ -52,10 +52,6 @@ class Messages extends React.Component{
   }
 
     render(){
-      if (this.props.adminConnected === false || this.props.adminConnected == null){
-        return <Redirect to="/loginadmin" />
-     }
-
       let messageList = this.state.messages.map(function(message, i){
         return <MessageItem handleClickParent={this.handleClick} key={i}
         messageObject={message.object}

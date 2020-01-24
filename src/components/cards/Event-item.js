@@ -24,7 +24,7 @@ class Event extends React.Component{
         De {this.props.eventStart}h à {this.props.eventEnd}h </CardText>
         </CardBody>
         <ListGroup>
-          <ListGroupItem> <a href={this.props.eventLink}>Voir l'évènement sur Facebook</a> </ListGroupItem>
+          <ListGroupItem> <a href={this.props.eventLink} target="_blank">Voir l'évènement sur Facebook</a> </ListGroupItem>
         </ListGroup>
       </Card>
       </div>  
