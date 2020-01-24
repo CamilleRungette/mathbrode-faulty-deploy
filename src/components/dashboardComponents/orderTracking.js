@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card,   Col, Table} from 'react-bootstrap';
+import {Card,   Col, Table, ListGroupItem} from 'react-bootstrap';
 import NavbarAdmin from './NavbarAdmin';
 import FooterAdmin from './footerAdmin'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,7 +8,6 @@ import DateFormat from '../function';
 import {Modal, Form, Button, ListGroup, Row} from 'react-bootstrap'
 import '../../App.css';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import ip from '../ip'
 
 
@@ -30,6 +29,9 @@ class tracking extends React.Component{
     this.orderSent = this.orderSent.bind(this) 
     this.persoOrderSent = this.persoOrderSent.bind(this)
     this.uploadImage = this.uploadImage.bind(this)
+    this.handleCreateShow = this.handleCreateShow.bind(this)
+    this.handleCreateClose = this.handleCreateClose.bind(this)
+    this.persoOrderCreate = this.persoOrderCreate.bind(this)
     this.state={
       orders:[],
       show: false,
@@ -37,6 +39,7 @@ class tracking extends React.Component{
       order: [],
       user: [],
       sent: '',
+      createShow:false,
       persoShow: false,
       persoOrderUser :'',
       persoOrderTotal: '',
@@ -97,23 +100,77 @@ class tracking extends React.Component{
       
     }
   }
-  
-  handlePersoShow(){
+
+  handlePersoShow(order){
     this.setState({persoShow: true})
+    let ctx = this;
+    fetch(`${ip}/admins/perso-order?id=${order._id}`)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data){
+      console.log(data)
+      ctx.setState({order: data.thisOrder, user: data.thisUser})
+      console.log("THE STATE ===========>", ctx.state.user)
+    })
+    .catch(function(error) {
+      console.log('Request failed ->', error)
+    });
   }
   
   handlePersoClose(){
     this.setState({persoShow: false})
   }
+  
+  handleCreateShow(){
+    this.setState({createShow: true})
+  }
 
-  persoOrderSent(){
+  handleCreateClose(){
+    this.setState({createShow: false})
+  }
+
+
+  persoOrderCreate(){
     let ctx = this;
-    this.setState({persoShow: false})
-    fetch(`http://localhost:3000/admins/create-perso-order`,{
+    this.setState({createShow: false})
+    fetch(`${ip}/admins/create-perso-order`,{
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `user=${this.state.persoOrderUser}&total=${this.state.persoOrderTotal}&shipping_fee=${this.state.persoOrderShippingFee}&in_person=${this.state.persoOrderInPerson}&photo=${this.state.persoOrderPhoto}&description=${this.state.persoOrderDesc}`
     })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data){
+      ctx.setState({persoOrders: data.allPersoOrders})
+      console.log("========> LES PERSO ORDERS", ctx.state.persoOrders)
+    })
+    .catch(function(error) {
+      console.log('Request failed ->', error)
+    });
+  }
+
+  persoOrderSent(order){
+    let ctx = this;
+    this.setState({persoShow: false})
+    if (this.state.sent === true){
+      fetch(`${ip}/admins/update-perso-order`,{
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body: `order=${order}`
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data){
+        ctx.setState({persoOrders: data.allOrders})
+      })
+      .catch(function(error) {
+        console.log('Request failed ->', error)
+      });
+      
+    }
   }
 
   async uploadImage(e){
@@ -139,11 +196,8 @@ class tracking extends React.Component{
       return response.json();
     })
     .then(function(data){
-      console.log(data)
       ctx.setState({orders: data.allOrders, 
         persoOrders: data.allPersoOrders})
-     console.log("THE STATE ===========>", ctx.state.persoOrders,
-     )
     })
     .catch(function(error) {
       console.log('Request failed ->', error)
@@ -151,117 +205,20 @@ class tracking extends React.Component{
   }
 
     render(){
-      // console.log("=======================================>",this.state.orders)
-    //   if (this.props.adminConnected == false || this.props.adminConnected == null){
-    //     return <Redirect to="/loginadmin" />
-    //  }
-    console.log(this.state.persoOrderInPerson)
+      console.log("=======================================>",this.state.orders)
+      if (this.props.adminConnected == false || this.props.adminConnected == null){
+        return <Redirect to="/loginadmin" />
+     }
 
       return(
   <div style={{fontFamily:"Raleway"}} className="mainBack">
   <NavbarAdmin/>
     
     <div style={{textAlign:'center'}} >
-      <Button onClick={this.handlePersoShow} style={{backgroundColor:'#1b263b', border:'transparent', marginTop:'5em', fontSize:'1.2em'}}>Créer une commande</Button>
+      <Button onClick={this.handleCreateShow} style={{backgroundColor:'#1b263b', border:'transparent', marginTop:'5em', fontSize:'1.2em'}}>Créer une commande</Button>
     </div>
 
-      <div style={{ height:"100%", display:"flex", justifyContent:"center", paddingTop:"5%"}}>
-        <Col lg={9}>
-          <Card style={{maxHeight:"150vh", overflow:"auto"}}>
-          <Card.Header style={{fontSize:'1.7em',  textAlign:'center'}}>Commandes et suivi</Card.Header>
-            <Card.Body>
-
-              <Table striped>
-                <thead>
-                  <tr>
-                  <th>Date de commande</th>
-                  <th>Statut</th>
-                  <th>Montant</th>
-                  <th>Date de livraison</th>
-                  <th>Remise</th>
-                  <th></th>
-                  <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.orders.map((order,i) =>(               
-                  <tr>                                  
-                    <td>{DateFormat(order.date)}</td>
-                    {order.sent == false ?(
-                      <td> En préparation</td>
-                    ):(
-                    <td>Envoyée</td>
-                    )}
-                    <td>{order.total}€</td>
-                    <td>{DateFormat(order.shipping_date)}</td>
-                    {order.in_person == true?(
-                      <td>Main propre</td>
-                    ):(
-                      <td>Livraison</td>
-                    )}
-                    {order.sent == true ?
-                    (
-                      <td><FontAwesomeIcon icon={faCheck} style={{color:"green"}} /> </td>
-                      ):(
-                        <td> <FontAwesomeIcon style={{color:"red"}} icon={faTimes} /> </td>
-                    )}
-                    <td onClick={() => this.handleShow(order)}> Détails</td>
-                  </tr>
-                  ))}
-                </tbody>
-              </Table>
-                  <Modal show={this.state.show} onHide={this.handleClose} className="col-lg-8" >
-                    <div style={modalStyle}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Détails de la commande :</Modal.Title>
-                      </Modal.Header>
-                        <Modal.Body>
-                          <Card style={{ width: "90%", margin:"auto" }}>
-                            <Card.Body>
-                              <Card.Title> <strong>Produits: </strong></Card.Title>
-                              <Card.Text>
-                                {this.state.items.map((item, i) =>(
-                                  <ListGroup.Item> - {item.name} ({item.price}€)</ListGroup.Item>
-                                ))}
-                              </Card.Text>
-                              <Card.Title> <strong>Acheteur: </strong></Card.Title>
-                              <Card.Text>
-                                  <ListGroup.Item> {this.state.user.first_name} {this.state.user.last_name}: <br/>
-                                              {this.state.user.email}
-                                  </ListGroup.Item>
-                              </Card.Text>
-                                
-                                <Card.Text>
-                                  <ListGroup.Item style={{display:"flex"}}>
-                                    {this.state.order.sent === false? (
-                                      <Form.Check onClick={() => this.checkOrderSent(this.state.order)} type="checkbox"/>
-                                    ): (
-                                      <FontAwesomeIcon style={{marginRight:'1em'}} icon={faCheck} />
-                                    )}
-                                    Commande envoyée 
-                                  </ListGroup.Item>
-                                </Card.Text>
-          
-                            </Card.Body>
-                          </Card>
-                          <Button style={{backgroundColor:"#1B263B", border:"none", marginLeft:'47%', marginTop:'2em'}} variant="secondary" onClick={() => this.orderSent(this.state.order._id)}>
-                          Enregistrer
-                          </Button>
-                        </Modal.Body>
-                    </div>
-                  </Modal>
-            </Card.Body>
-          </Card>
-        </Col>
-      </div>
-
-    <div style={{height:"6em"}}></div>
-
-
-    
-
-
-<Modal show={this.state.persoShow} onHide={this.handlePersoClose} className="col-lg-8" >
+    <Modal show={this.state.createShow} onHide={this.handleCreateClose} className="col-lg-8" >
   <div style={modalStyle}>
     <Modal.Header closeButton>
       <Modal.Title>Créer une commande personnalisée :</Modal.Title>
@@ -307,8 +264,6 @@ class tracking extends React.Component{
 
               </Form.Group>
 
-           
-
             <Form.Group as={Row} controlId="formHorizontalPicture">
               <Form.Label column sm={2}>Photo</Form.Label>
                 <Col sm={10}>
@@ -323,17 +278,225 @@ class tracking extends React.Component{
                  <img src={this.state.SendMessagePhoto} alt="item chosen photo" style={{width:"10em", marginLeft:'8em'}} />
                 )}
             </Form.Group>
-
-            
-
           </Form>
 
-        <Button style={{backgroundColor:"#1B263B", border:"none", marginLeft:'47%', marginTop:'2em'}} variant="secondary" onClick={this.persoOrderSent}>
+        <Button style={{backgroundColor:"#1B263B", border:"none", marginLeft:'47%', marginTop:'2em'}} variant="secondary" onClick={this.persoOrderCreate}>
           Enregistrer
         </Button>
       </Modal.Body>
   </div>
 </Modal>
+
+      <div style={{ height:"100%", paddingTop:"5%"}}>
+        <Col style={{margin: "auto"}} lg={9}>
+          <Card style={{maxHeight:"80vh", overflow:"auto"}}>
+          <Card.Header style={{fontSize:'1.7em',  textAlign:'center'}}>Commandes du site</Card.Header>
+            <Card.Body>
+
+              <Table striped>
+                <thead>
+                  <tr>
+                  <th>Date de commande</th>
+                  <th>Statut</th>
+                  <th>Montant</th>
+                  <th>Date de livraison</th>
+                  <th>Remise</th>
+                  <th></th>
+                  <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.orders.map((order,i) =>(               
+                  <tr>                                  
+                    <td>{DateFormat(order.date)}</td>
+                    {order.sent == false ?(
+                      <td> En préparation</td>
+                    ):(
+                    <td>Envoyée</td>
+                    )}
+                    <td>{order.total}€</td>
+                    <td>{DateFormat(order.shipping_date)}</td>
+                    {order.in_person == true?(
+                      <td>Main propre</td>
+                    ):(
+                      <td>Livraison</td>
+                    )}
+                    {order.sent == true ?
+                    (
+                      <td><FontAwesomeIcon icon={faCheck} style={{color:"green"}} /> </td>
+                      ):(
+                        <td> <FontAwesomeIcon style={{color:"red"}} icon={faTimes} /> </td>
+                    )}
+                    <td onClick={() => this.handleShow(order)}> Détails</td>
+                  </tr>
+                  ))}
+                </tbody>
+               </Table>
+            </Card.Body>
+          </Card>
+          </Col>
+          </div>
+
+          <Modal show={this.state.show} onHide={this.handleClose} className="col-lg-8" >
+                    <div style={modalStyle}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Détails de la commande :</Modal.Title>
+                      </Modal.Header>
+                        <Modal.Body>
+                          <Card style={{ width: "90%", margin:"auto" }}>
+                            <Card.Body>
+                              <Card.Title> <strong>Produits: </strong></Card.Title>
+                              <Card.Text>
+                                {this.state.items.map((item, i) =>(
+                                  <ListGroup.Item> - {item.name} ({item.price}€)</ListGroup.Item>
+                                ))}
+                              </Card.Text>
+                              <Card.Title> <strong>Acheteur: </strong></Card.Title>
+                              <Card.Text>
+                                  <ListGroup.Item> {this.state.user.first_name} {this.state.user.last_name}: <br/>
+                                              {this.state.user.email}
+                                  </ListGroup.Item>
+                              </Card.Text>
+                                
+                                <Card.Text>
+                                  <ListGroup.Item style={{display:"flex"}}>
+                                    {this.state.order.sent === false? (
+                                      <Form.Check onClick={() => this.checkOrderSent(this.state.order)} type="checkbox"/>
+                                    ): (
+                                      <FontAwesomeIcon style={{marginRight:'1em'}} icon={faCheck} />
+                                    )}
+                                    Commande envoyée 
+                                  </ListGroup.Item>
+                                </Card.Text>
+          
+                            </Card.Body>
+                          </Card>
+                          <Button style={{backgroundColor:"#1B263B", border:"none", marginLeft:'47%', marginTop:'2em'}} variant="secondary" onClick={() => this.orderSent(this.state.order._id)}>
+                          Enregistrer
+                          </Button>
+                        </Modal.Body>
+                    </div>
+                  </Modal>
+
+
+
+
+      <div style={{ height:"100%", paddingTop:"5%"}}>
+        <Col style={{margin: "auto"}} lg={9}>
+          <Card style={{maxHeight:"80vh", overflow:"auto"}}>
+          <Card.Header style={{fontSize:'1.7em',  textAlign:'center'}}>Commandes personnalisées</Card.Header>
+            <Card.Body>
+
+              <Table striped>
+                <thead>
+                  <tr>
+                  <th>Date de commande</th>
+                  <th>Statut</th>
+                  <th>Montant</th>
+                  <th>Date de livraison</th>
+                  <th>Remise</th>
+                  <th></th>
+                  <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.persoOrders.map((order,i) =>(               
+                  <tr>                                  
+                    <td>{DateFormat(order.date)}</td>
+                    {order.sent == false ?(
+                      <td> En préparation</td>
+                    ):(
+                    <td>Envoyée</td>
+                    )}
+                    <td>{order.total}€</td>
+                    <td>{DateFormat(order.shipping_date)}</td>
+                    {order.in_person == true?(
+                      <td>Main propre</td>
+                    ):(
+                      <td>Livraison</td>
+                    )}
+                    {order.sent == true ?
+                    (
+                      <td><FontAwesomeIcon icon={faCheck} style={{color:"green"}} /> </td>
+                      ):(
+                        <td> <FontAwesomeIcon style={{color:"red"}} icon={faTimes} /> </td>
+                    )}
+                    <td onClick={() => this.handlePersoShow(order)}> Détails</td>
+                  </tr>
+                  ))}
+                </tbody>
+               </Table>
+            </Card.Body>
+          </Card>
+          </Col>
+          </div>
+
+
+          <Modal show={this.state.persoShow} onHide={this.handlePersoClose} className="col-lg-8" >
+                    <div style={modalStyle}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Détails de la commande :</Modal.Title>
+                      </Modal.Header>
+                        <Modal.Body>
+                          <Card style={{ width: "90%", margin:"auto" }}>
+                            <Card.Body>
+                              <Card.Title> <strong>Description: </strong></Card.Title>
+                              <Card.Text>
+                                <ListGroupItem>
+                                {this.state.order.description}
+                                </ListGroupItem>
+                              </Card.Text>
+
+                              <Card.Title> <strong>Acheteur: </strong></Card.Title>
+                              <Card.Text>
+                                 <ListGroupItem>
+                                   {this.state.user.first_name} {this.state.user.last_name}: <br/>
+                                   {this.state.user.email}
+                                 </ListGroupItem>
+                              </Card.Text>
+                              
+                              {this.state.order.photo != "" ? (
+                                <div>
+                              <Card.Title> <strong>Photo: </strong></Card.Title>
+                                <Card.Text>
+                                  <ListGroupItem>
+                                 <img src={this.state.order.photo} style={{width:"10em"}} />
+                                 </ListGroupItem>
+                                </Card.Text>
+                                </div>
+                              ):(
+                                <div></div>
+                              )}
+
+                                <Card.Text>
+                                  <ListGroup.Item style={{display:"flex", marginTop:'1em'}}>
+                                    {this.state.order.sent === false? (
+                                      <Form.Check onClick={() => this.checkOrderSent(this.state.order)} type="checkbox"/>
+                                    ): (
+                                      <FontAwesomeIcon style={{marginRight:'1em'}} icon={faCheck} />
+                                    )}
+                                    Commande envoyée 
+                                  </ListGroup.Item>
+                                </Card.Text>
+          
+                            </Card.Body>
+                          </Card>
+                          <Button style={{backgroundColor:"#1B263B", border:"none", marginLeft:'47%', marginTop:'2em'}} variant="secondary" onClick={() => this.persoOrderSent(this.state.order._id)}>
+                            Enregistrer
+                          </Button>
+                        </Modal.Body>
+                    </div>
+                  </Modal>
+
+
+
+    <div style={{height:"6em"}}></div>
+
+
+    
+
+
+
 
    
   <FooterAdmin/>
