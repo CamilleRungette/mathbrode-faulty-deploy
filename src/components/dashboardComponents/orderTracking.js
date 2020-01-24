@@ -8,6 +8,7 @@ import DateFormat from '../function';
 import {Modal, Form, Button, ListGroup, Row} from 'react-bootstrap'
 import '../../App.css';
 import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom'
 import ip from '../ip'
 
 

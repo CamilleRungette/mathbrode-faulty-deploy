@@ -16,12 +16,19 @@ class Basket extends React.Component {
     this.state={
       total: 0,
       items: [],
-      in_person: false
+      in_person: false,
+      shipping_fee: 0,
     }
   }
   
   componentDidMount(){
     this.setState({items: this.props.item})
+    for (let i=0; i<this.props.item.length; i++){
+      this.state.total = this.state.total + this.props.item[i].price
+      this.state.shipping_fee = this.state.shipping_fee + this.props.item[i].shipping_fee
+    } 
+    console.log("VOILA LE PRIX DE L'Item;", this.state.shipping_fee)
+
   }
   
   render() {
@@ -49,10 +56,13 @@ class Basket extends React.Component {
           </div>
         )
       } else {
-        for (let i=0; i<this.state.items.length; i++){
-          this.state.total = this.state.total + this.state.items[i].price
-          console.log("VOILA LE PRIX DE L'Item;", this.state.items[i].price, "voila le prix du total", this.state.total)
-        } 
+      if (this.state.in_person === false) {
+        console.log("coucou", this.state.shipping_fee)
+        this.state.total = this.state.total + this.state.shipping_fee
+        console.log(this.state.total)
+      } else{
+        this.state.total = this.state.total - this.state.shipping_fee
+      }
    return(
     <div style={{fontFamily:"Raleway"}}>
       <Navbar/>
@@ -63,15 +73,23 @@ class Basket extends React.Component {
               <p>Mon Panier</p>
             </div>
             <div style={{height:"5em"}}></div>
-      {this.props.item.map((item, i) => (
+      {this.props.item.map((item, i) =>(
             <div className="col-lg-8 border" style={{display:"flex", alignItems:"center", margin:"auto", fontSize:"1.3em", paddingRight:"3em", height:"13em"}}>
             <img src={item.photo} className="col-4" style={{marginLeft:"-1.5em", height:"11em", objectFit:"contain"}} alt="Alt text" /> 
-              <div className="col-5">
+                <div className="col-3">
                 <p >{item.name}</p>
               </div>
-              <div className="col-3">
+              <div className="col-2">
                 <p >{item.price} €</p>
               </div> 
+              {this.state.in_person === false ?(
+              <div className="col-3">
+                {item.shipping_fee} €<br/>
+                (frais de port)
+              </div>
+              ):(
+                <div className='col-3'></div>
+              )}
               <div className="col-2">
                 <Button style={{backgroundColor:"#1b263b", color:"white"}} ><FontAwesomeIcon onClick={() => this.props.onDeleteClick(i)} icon={faTrashAlt} /> </Button>
               </div> 
