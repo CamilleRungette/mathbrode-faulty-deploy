@@ -48,7 +48,7 @@ this.state = {
           <Navbar></Navbar>
             <div class="container" style={{marginTop:'5em', fontFamily:"Raleway"}}>
             <Row style={{justifyContent:"space-around"}}>
-            <Col sm={5}>
+            <Col lg={5} md={8}>
               <h3 style={{marginBottom:"2em", textAlign:'center'}}>Se connecter</h3>
                 <Form>
                   <Form.Group controlId="formBasicEmail">

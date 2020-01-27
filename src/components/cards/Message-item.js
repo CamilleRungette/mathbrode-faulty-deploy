@@ -3,6 +3,8 @@ import { Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTrashAlt, faReply, faTimes } from '@fortawesome/free-solid-svg-icons'
 import DateFormat from '../function'
+import ip from '../ip'
+import Mailto from 'react-protected-mailto'
 
 
 const readMessage ={
@@ -25,7 +27,7 @@ class MessageItem extends Component{
 
   onReadClick(data){
     let ctx = this;
-    fetch('http://localhost:3000/admins/read-message',{
+    fetch(`${ip}/admins/read-message`,{
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `message_id=${data}&`
@@ -41,7 +43,7 @@ class MessageItem extends Component{
 
   deleteMessage(data){
     let ctx = this
-     fetch('http://localhost:3000/admins/delete-message',{
+     fetch(`${ip}/admins/delete-message`,{
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `message_id=${data}`
@@ -93,7 +95,7 @@ class MessageItem extends Component{
         </Col>
         <Col lg={1}>
           <div>
-            <Button style={{backgroundColor: "#1B263B", border:"none"}}> <FontAwesomeIcon style={{backgroundColor:'#1B263B'}} icon={faReply} /> </Button>
+            <Button style={{backgroundColor: "#1B263B", border:"none"}}><a style={{color:"white"}} href={"mailto:"+this.props.messageSender}> <FontAwesomeIcon style={{backgroundColor:'#1B263B'}} icon={faReply} /></a></Button>
             <br></br>
             <br></br>
             <Button onClick={() => this.onReadClick(this.props.messageId)} style={{backgroundColor: "#1B263B", border:"none"}}><FontAwesomeIcon  style={{color:"white"}} title={marker} icon={iconMessage} /></Button>

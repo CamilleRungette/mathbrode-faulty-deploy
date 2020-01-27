@@ -52,6 +52,10 @@ class Messages extends React.Component{
   }
 
     render(){
+      if (this.props.adminConnected == false || this.props.adminConnected == null){
+        return <Redirect to="/loginadmin" />
+     }
+
       let messageList = this.state.messages.map(function(message, i){
         return <MessageItem handleClickParent={this.handleClick} key={i}
         messageObject={message.object}
@@ -75,7 +79,7 @@ class Messages extends React.Component{
           <NavbarAdmin/>
           <div style={size}>
           <div style={{height:"6em"}}></div>
-          <Card className="col-8 mx-auto" style={{maxHeight:"150vh", overflow:"auto"}} >
+          <Card className="col-8 mx-auto" style={{maxHeight:"160vh", overflow:"auto"}} >
           <h2 style={{textAlign:"center", fontSize:"3em", marginTop:'1em'}}>Messagerie ({messageList.length})</h2>
           <div style={{height:"1em"}}></div>
           {messageList.length === 0?(

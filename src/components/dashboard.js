@@ -171,7 +171,7 @@ class Dashboard extends Component {
   
 
     <div style={{maxHeight:"150vh", overflow:"auto"}}>
-      <Col xs={{span:12}} sm={{span:10}} md={{span:10}} lg={{offset:3, span:6 }}>
+      <Col lg={{offset:3, span:6 }}>
         <Card>
           <Card.Header style={{fontSize:"1.8em",textAlign:"center"}}>Ajouter un produit</Card.Header>
             <Card.Body>
@@ -334,36 +334,33 @@ class Dashboard extends Component {
                         
             <Form>
             <Form.Group as={Row} >
-                <Col sm={10}>
+                <Col>
                   <Form.Control type="text" placeholder="Titre" onChange={(e)=> this.setState({CreateWorkshopTitle: e.target.value})}
                         value={this.state.CreateWorkshopTitle} />
                 </Col>  
             </Form.Group>
 
             <Form.Group as={Row} >
-                <Col sm={12}>
+                <Col>
                   <Form.Control as="textarea" placeholder="Description" onChange={(e)=> this.setState({CreateWorkshopDesc: e.target.value})}
                         value={this.state.CreateWorkshopDesc} />
                 </Col>  
             </Form.Group>
 
             <Form.Group as={Row} >
-                <Col sm={12}>
+                <Col sm={6}>
                   <Form.Control type="text" placeholder="Prix" onChange={(e)=> this.setState({CreateWorkshopPrice: e.target.value})}
                         value={this.state.CreateWorkshopPrice} />
                 </Col>  
-            </Form.Group>
-
-            <Form.Group as={Row}>
                 <Col sm={6}>
                   <Form.Control type="text" placeholder="Durée" onChange={(e)=> this.setState({CreateWorkshopDuration: e.target.value})}
                         value={this.state.CreateWorkshopDuration} />
                 </Col>  
-
-                <Col sm={6}>
-                  <Button onClick={this.WorkshopSubmit} style={{border:"none", backgroundColor:"#1B263B"}}>Valider</Button>
-                </Col>
             </Form.Group>
+
+                <Col style={{textAlign:'center'}}>
+                  <Button onClick={this.WorkshopSubmit} style={{border:"none", margin:'auto', backgroundColor:"#1B263B"}}>Valider</Button>
+                </Col>
           </Form>
 
           </Card.Body>

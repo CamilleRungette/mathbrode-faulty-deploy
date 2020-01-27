@@ -109,11 +109,17 @@ class stock extends React.Component{
 }
 
     render(){
+      if (this.props.adminConnected == false || this.props.adminConnected == null){
+        return <Redirect to="/loginadmin" />
+     }
+
+
      console.log("checked", this.state.number)
       var show = unDisplayMessage
       if (this.state.show === true){
         show = displayMessage
       }
+    
 
         return(
     <div style={{fontFamily:"Raleway"}} className="mainBack">
