@@ -94,7 +94,7 @@ class CheckoutForm extends Component {
                 </div>
                 <br/>
                   <div style={{width:"60%", margin:'auto', marginBottom:'1em' }}>
-                    <CardElement />
+                    <CardElement style={{hidePostalCode:true }} />
                   </div> <br/>
                   <div style={{textAlign:"center"}}>
                     <Button onClick={this.submit} style={{backgroundColor:"#1b263b"}} >Payer</Button>
