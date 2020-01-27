@@ -1,13 +1,18 @@
 import React from 'react';
-import {
-  Button, Form } from 'reactstrap';
+import {Button} from 'reactstrap';
 import '../App.css'
 import {Link, Redirect} from 'react-router-dom';
 import Navbar from './Navbar'
 import Footer from './Footer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
+
+let modalStyle={
+  width:"50em",
+  backgroundColor: "white",
+  fontFamily: "Raleway"
+}
 
 
 class Basket extends React.Component {
@@ -16,16 +21,21 @@ class Basket extends React.Component {
     this.state={
       total: 0,
       items: [],
-      in_person: false
+      in_person: false,
+      shipping_fee: 0,
     }
   }
   
   componentDidMount(){
     this.setState({items: this.props.item})
-  }
-  
+    for (let i=0; i<this.props.item.length; i++){
+      this.state.total = this.state.total + this.props.item[i].price
+      this.state.shipping_fee = this.state.shipping_fee + this.props.item[i].shipping_fee
+    } 
+  }  
+
   render() {
-    console.log(this.state.in_person)
+    console.log(this.props.user)
       if (this.props.connected == false || this.props.connected == null){
         return <Redirect to="/" />
       }else if (this.props.item.length == 0){
@@ -49,10 +59,13 @@ class Basket extends React.Component {
           </div>
         )
       } else {
-        for (let i=0; i<this.state.items.length; i++){
-          this.state.total = this.state.total + this.state.items[i].price
-          console.log("VOILA LE PRIX DE L'Item;", this.state.items[i].price, "voila le prix du total", this.state.total)
-        } 
+      if (this.state.in_person === false) {
+        console.log("coucou", this.state.shipping_fee)
+        this.state.total = this.state.total + this.state.shipping_fee
+        console.log(this.state.total)
+      } else{
+        this.state.total = this.state.total - this.state.shipping_fee
+      }
    return(
     <div style={{fontFamily:"Raleway"}}>
       <Navbar/>
@@ -63,15 +76,23 @@ class Basket extends React.Component {
               <p>Mon Panier</p>
             </div>
             <div style={{height:"5em"}}></div>
-      {this.props.item.map((item, i) => (
+      {this.props.item.map((item, i) =>(
             <div className="col-lg-8 border" style={{display:"flex", alignItems:"center", margin:"auto", fontSize:"1.3em", paddingRight:"3em", height:"13em"}}>
             <img src={item.photo} className="col-4" style={{marginLeft:"-1.5em", height:"11em", objectFit:"contain"}} alt="Alt text" /> 
-              <div className="col-5">
+                <div className="col-3">
                 <p >{item.name}</p>
               </div>
-              <div className="col-3">
+              <div className="col-2">
                 <p >{item.price} €</p>
               </div> 
+              {this.state.in_person === false ?(
+              <div className="col-3">
+                {item.shipping_fee} €<br/>
+                (frais de port)
+              </div>
+              ):(
+                <div className='col-3'></div>
+              )}
               <div className="col-2">
                 <Button style={{backgroundColor:"#1b263b", color:"white"}} ><FontAwesomeIcon onClick={() => this.props.onDeleteClick(i)} icon={faTrashAlt} /> </Button>
               </div> 
@@ -84,6 +105,13 @@ class Basket extends React.Component {
         <p className="col-5">Total:</p>
         <p className="col-3">{this.state.total} €</p>
       </div>
+      <div className="col-8 border" style={{margin:"auto", display:"flex", textAlign:"center", paddingTop:"0.3em", fontSize:"1.3em", alignItems:'center'}}>
+        <p className="offset-1 col-2" >Livraison: </p>
+        <p className="offset-2 col-6">{this.props.user.address} - {this.props.user.zip_code} {this.props.user.city} - {this.props.user.details} </p>
+         <Link to="/profil"> <Button style={{backgroundColor:"#1b263b", color:"white", marginLeft:'2em'}}><FontAwesomeIcon icon={faEdit} /></Button></Link>
+      </div>
+
+
       <div style={{height:"5em"}}></div>
       <div className="d-flex justify-content-center col-lg-12">  
         <div className="justify-content-center col-lg-6">          
@@ -100,6 +128,8 @@ class Basket extends React.Component {
     </div>
 )}
    }
+
+
 }
 
 function mapStatetoProps(state){
