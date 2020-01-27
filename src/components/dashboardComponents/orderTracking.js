@@ -216,7 +216,7 @@ class tracking extends React.Component{
   <NavbarAdmin/>
     
     <div style={{textAlign:'center'}} >
-      <Button onClick={this.handleCreateShow} style={{backgroundColor:'#1b263b', border:'transparent', marginTop:'5em', fontSize:'1.2em'}}>Créer une commande</Button>
+      <Button onClick={this.handleCreateShow} style={{backgroundColor:'#1b263b', border:'#fff', marginTop:'5em', fontSize:'1.2em'}}>Créer une commande</Button>
     </div>
 
     <Modal show={this.state.createShow} onHide={this.handleCreateClose} className="col-lg-8" >
@@ -354,8 +354,19 @@ class tracking extends React.Component{
                               </Card.Text>
                               <Card.Title> <strong>Acheteur: </strong></Card.Title>
                               <Card.Text>
-                                  <ListGroup.Item> {this.state.user.first_name} {this.state.user.last_name}: <br/>
-                                              {this.state.user.email}
+                                  <ListGroup.Item style={{display:"flex", justifyContent:"space-around"}}> 
+                                    <div>
+                                      {this.state.user.first_name} {this.state.user.last_name}: <br/>
+                                      {this.state.user.email} <br/>
+                                    </div>
+                                    {this.state.order.in_person === false?(
+                                   <div>
+                                     {this.state.user.address} <br/>
+                                     {this.state.user.zip_code}, {this.state.user.city}
+                                   </div>
+                                   ):(
+                                     <div>Remise en main propre</div>
+                                   )}
                                   </ListGroup.Item>
                               </Card.Text>
                                 
@@ -450,9 +461,19 @@ class tracking extends React.Component{
 
                               <Card.Title> <strong>Acheteur: </strong></Card.Title>
                               <Card.Text>
-                                 <ListGroupItem>
-                                   {this.state.user.first_name} {this.state.user.last_name}: <br/>
-                                   {this.state.user.email}
+                                 <ListGroupItem style={{display:"flex", justifyContent:"space-around"}}>
+                                   <div>
+                                    {this.state.user.first_name} {this.state.user.last_name}: <br/>
+                                    {this.state.user.email}
+                                   </div>
+                                   {this.state.order.in_person === false?(
+                                   <div>
+                                     {this.state.user.address} <br/>
+                                     {this.state.user.zip_code}, {this.state.user.city}
+                                   </div>
+                                   ):(
+                                     <div>Remise en main propre</div>
+                                   )}
                                  </ListGroupItem>
                               </Card.Text>
                               

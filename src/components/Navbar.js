@@ -27,6 +27,7 @@ class Navigbar extends React.Component{
       redirect: true
     })
   }
+  
   renderRedirect(){
     console.log("====================", this.state.redirect)
     if (this.state.redirect) {

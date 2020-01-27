@@ -30,6 +30,7 @@ class Profil extends Component{
       address: this.props.userSigned.address,
       zipcode: this.props.userSigned.zip_code,
       city: this.props.userSigned.city,
+      details: this.props.userSigned.details,
       show: false,
     }
   }
@@ -49,7 +50,7 @@ class Profil extends Component{
     fetch(`${ip}/users/update-info`, {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `id=${this.state.id}&first_name=${this.state.first_name}&last_name=${this.state.last_name}&email=${this.state.email}&address=${this.state.address}&zipcode=${this.state.zipcode}&city=${this.state.city}`
+      body: `id=${this.state.id}&first_name=${this.state.first_name}&last_name=${this.state.last_name}&email=${this.state.email}&address=${this.state.address}&zipcode=${this.state.zipcode}&city=${this.state.city}&details=${this.state.details}`
     })
     .then(function(response) {
       return response.json();
@@ -63,6 +64,7 @@ class Profil extends Component{
       address: data.thisUser.address,
       zipcode: data.thisUser.zip_code,
       city: data.thisUser.city,
+      details: data.thisUser.details
       })
     })
   }
@@ -95,7 +97,8 @@ class Profil extends Component{
                       
                      {this.props.userSigned.address}
                      {this.state.zipcode != null?(
-                       <div>{this.state.zipcode}, {this.state.city}</div>
+                       <div>{this.state.zipcode}, {this.state.city} <br/>
+                       {this.state.details} </div>
                      ):(
                       <div></div>
                      )}
@@ -137,8 +140,16 @@ class Profil extends Component{
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label>Adresse</Form.Label>
-                    <Form.Control as="textarea" onChange={(e)=> this.setState({address: e.target.value})}  />
+                    <Row>
+                      <Col sm={6}>
+                        <Form.Label>Adresse</Form.Label>
+                        <Form.Control type="text" onChange={(e)=> this.setState({address: e.target.value})}  />
+                      </Col>
+                      <Col sm={6}>
+                        <Form.Label>Bâtiment, étage ...</Form.Label>
+                        <Form.Control type="text" onChange={(e)=> this.setState({details: e.target.value})}  />
+                      </Col>
+                    </Row>
                   </Form.Group>
 
                   <Form.Group >

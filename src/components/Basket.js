@@ -1,13 +1,18 @@
 import React from 'react';
-import {
-  Button, Form } from 'reactstrap';
+import {Button} from 'reactstrap';
 import '../App.css'
 import {Link, Redirect} from 'react-router-dom';
 import Navbar from './Navbar'
 import Footer from './Footer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
+
+let modalStyle={
+  width:"50em",
+  backgroundColor: "white",
+  fontFamily: "Raleway"
+}
 
 
 class Basket extends React.Component {
@@ -27,12 +32,10 @@ class Basket extends React.Component {
       this.state.total = this.state.total + this.props.item[i].price
       this.state.shipping_fee = this.state.shipping_fee + this.props.item[i].shipping_fee
     } 
-    console.log("VOILA LE PRIX DE L'Item;", this.state.shipping_fee)
+  }  
 
-  }
-  
   render() {
-    console.log(this.state.in_person)
+    console.log(this.props.user)
       if (this.props.connected == false || this.props.connected == null){
         return <Redirect to="/" />
       }else if (this.props.item.length == 0){
@@ -102,6 +105,13 @@ class Basket extends React.Component {
         <p className="col-5">Total:</p>
         <p className="col-3">{this.state.total} €</p>
       </div>
+      <div className="col-8 border" style={{margin:"auto", display:"flex", textAlign:"center", paddingTop:"0.3em", fontSize:"1.3em", alignItems:'center'}}>
+        <p className="offset-1 col-2" >Livraison: </p>
+        <p className="offset-2 col-6">{this.props.user.address} - {this.props.user.zip_code} {this.props.user.city} - {this.props.user.details} </p>
+         <Link to="/profil"> <Button style={{backgroundColor:"#1b263b", color:"white", marginLeft:'2em'}}><FontAwesomeIcon icon={faEdit} /></Button></Link>
+      </div>
+
+
       <div style={{height:"5em"}}></div>
       <div className="d-flex justify-content-center col-lg-12">  
         <div className="justify-content-center col-lg-6">          
@@ -118,6 +128,8 @@ class Basket extends React.Component {
     </div>
 )}
    }
+
+
 }
 
 function mapStatetoProps(state){
