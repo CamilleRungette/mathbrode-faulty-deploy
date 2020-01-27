@@ -16,13 +16,13 @@ class CreationItem extends React.Component {
               <div className="text"></div>
             </div>
             <div className="hover">
-              <img className="imageBlur" style={{height:"24em", objectFit:"contain"}} src={this.props.itemPhoto} alt={this.props.itemName} />
+              <img className="imageBlur" style={{height:"18em", objectFit:"contain"}} src={this.props.itemPhoto} alt={this.props.itemName} />
             <div className="text">{this.props.itemName}<br/>{this.props.itemSize}</div>
             </div>
         </div>
       </div>
       </Link>
-    </div>
+    </div> 
   
   )}
 }

@@ -19,7 +19,7 @@ class Footer extends React.Component{
     </Navbar>
     
 
-</div>
+</div> 
 
         )}
 }
