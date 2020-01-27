@@ -7,6 +7,13 @@ import {Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import ip from './ip'
 
+let stripeStyle={
+  hidePostalCode:true,
+  base: {
+    fontSize:'1.1em'
+  }
+}
+
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
@@ -51,9 +58,9 @@ class CheckoutForm extends Component {
   }
 
   render() {
-    console.log("lalalalalalaal", this.props.total)
-
-    if (this.state.complete){
+    if (this.props.connected == false || this.props.connected == null){
+      return <Redirect to="/" />
+    } else if (this.state.complete){
       this.RedirectMethod()
       return(
         <div style={{fontFamily:'Raleway'}}>
@@ -94,7 +101,7 @@ class CheckoutForm extends Component {
                 </div>
                 <br/>
                   <div style={{width:"60%", margin:'auto', marginBottom:'1em' }}>
-                    <CardElement style={{hidePostalCode:true }} />
+                    <CardElement style={stripeStyle} />
                   </div> <br/>
                   <div style={{textAlign:"center"}}>
                     <Button onClick={this.submit} style={{backgroundColor:"#1b263b"}} >Payer</Button>
