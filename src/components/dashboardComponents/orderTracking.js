@@ -9,7 +9,6 @@ import {Modal, Form, Button, ListGroup, Row} from 'react-bootstrap'
 import '../../App.css';
 import {Redirect} from 'react-router-dom'
 import { connect } from 'react-redux';
-import {Redirect} from 'react-router-dom'
 import ip from '../ip'
 
 
