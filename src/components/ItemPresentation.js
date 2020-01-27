@@ -76,27 +76,25 @@ class ItemPresentation extends React.Component {
           <p style={{textAlign:"center", fontSize:"3em"}}>{this.state.name}</p>
         </div>
 
-        <div className="row col-lg-6 border" style={{margin:"auto"}} >
-        <div class="hover">
-          <div class="zoom">
-        <img src={this.state.photo} className=" col-lg-8" style={{height:"40em", objectFit:"contain", margin:"auto"}} alt="Alt text" />
+        <div className="row col-lx-6 col-lg-9 col-xs-11 border" style={{margin:"auto"}} >
+        <div class="hover mb-3">
+          <div class="zoom ">
+            <img src={this.state.photo} className=" col-lg-8" style={{height:"40em", objectFit:"contain", margin:"auto"}} alt="Alt text" />
           </div>
         </div>
-          <div className="col-lg-11" style={{margin:"auto"}}>
-            <div >
+          <div className="col-sm-11 col-md-10" style={{margin:"auto"}}>
               <Row> 
-                <Col sm={8}>          
-                  <p style={{display:"flex", alignItems:"center", fontSize:"1em",marginTop: "2rem",marginBottom: "2rem", height:"8em"}}>{this.state.desc}</p>
+                <Col lg={8} style={{maxWidth:'28em', margin:'auto'}}>          
+                  <p style={{display:"flex", alignItems:"center", fontSize:"1em",marginBottom: "2rem", height:"8em"}}>{this.state.desc}</p>
                 </Col>
-                <Col sm={4} >
-                  <p style={{ fontSize:"1.2em", marginTop: "2rem",marginBottom: "2rem",padding:"0.5rem" ,backgroundColor:"#1b263b",color:"white"}}>Info Pratiques :<br/>
+                <Col lg={4} style={{minWidth:'10em', maxWidth:'15em', margin:"auto"}}>
+                  <p style={{ fontSize:"1.2em",marginBottom: "2rem",padding:"0.5rem" ,backgroundColor:"#1b263b",color:"white"}}>Info Pratiques :<br/>
                   Prix: {this.state.price}€<br/>
                   Exemplaire: {this.state.copy}<br/>
                   Taille: {this.state.size}
                   </p>
                 </Col>
             </Row>          
-            </div> 
               <div className="d-flex justify-content-center my-4" >
               <Link to="/items"><Button color="secondary" style={{marginRight:"2em", fontSize:'1.2em'}}> Retour </Button></Link>
                 {this.props.user == null ? (

@@ -42,8 +42,8 @@ class Basket extends React.Component {
         return(
           <div>
             <Navbar />
-            <div style={{fontFamily:"Raleway", height:"75vh"}}>
-            <div style={{height:"10em"}}></div>
+            <div style={{fontFamily:"Raleway", height:"84vh"}}>
+            <div style={{height:"13em"}}></div>
               <div style={{textAlign:"center", fontSize:"3.3em"}}>
                 <p>Mon Panier</p>
               </div>
@@ -77,35 +77,35 @@ class Basket extends React.Component {
             </div>
             <div style={{height:"5em"}}></div>
       {this.props.item.map((item, i) =>(
-            <div className="col-lg-8 border" style={{display:"flex", alignItems:"center", margin:"auto", fontSize:"1.3em", paddingRight:"3em", height:"13em"}}>
-            <img src={item.photo} className="col-4" style={{marginLeft:"-1.5em", height:"11em", objectFit:"contain"}} alt="Alt text" /> 
-                <div className="col-3">
+            <div className="col-lg-8 col-xs-11 col-md-10 border" style={{display:"flex", alignItems:"center", margin:"auto", fontSize:"1.3em", paddingRight:"3em", minWidth:"25em"}}>
+            <img src={item.photo} className="col-md-4 col-xs-12" style={{marginLeft:"-1.5em", minHeight:"11em", objectFit:"contain", minWidth:'9em'}} alt="Alt text" /> 
+              <div className="col-md-2 col-xs-2">
                 <p >{item.name}</p>
               </div>
-              <div className="col-2">
+              <div className="col-md-2 col-xs-2">
                 <p >{item.price} €</p>
               </div> 
               {this.state.in_person === false ?(
-              <div className="col-3">
+              <div className="col-md-2 col-xs-2">
                 {item.shipping_fee} €<br/>
                 (frais de port)
               </div>
               ):(
-                <div className='col-3'></div>
+                <div className='col-md-2'></div>
               )}
-              <div className="col-2">
+              <div className="col-md-1 col-xs-3">
                 <Button style={{backgroundColor:"#1b263b", color:"white"}} ><FontAwesomeIcon onClick={() => this.props.onDeleteClick(i)} icon={faTrashAlt} /> </Button>
               </div> 
             </div>  
           )      
         )}
         </div>
-      <div className="col-8 border" style={{margin:"auto", display:"flex", paddingTop:"0.3em", fontSize:"1.3em", textAlign:"right", alignItems:'center'}}>
-      <p  className="col-4"><input type="checkbox" onClick={() => this.setState({in_person: !this.state.in_person})}/> Remise en main propre</p>
+      <div className="col-lg-8 col-xs-11 col-md-10 border" style={{margin:"auto", display:"flex", paddingTop:"0.3em", fontSize:"1.3em", textAlign:"right", alignItems:'center'}}>
+        <p className="col-4"><input type="checkbox" onClick={() => this.setState({in_person: !this.state.in_person})}/> Remise en main propre</p>
         <p className="col-5">Total:</p>
         <p className="col-3">{this.state.total} €</p>
       </div>
-      <div className="col-8 border" style={{margin:"auto", display:"flex", textAlign:"center", paddingTop:"0.3em", fontSize:"1.3em", alignItems:'center'}}>
+      <div className="col-lg-8 col-xs-11 col-md-10 border" style={{margin:"auto", display:"flex", textAlign:"center", paddingTop:"0.3em", fontSize:"1.3em", alignItems:'center'}}>
         <p className="offset-1 col-2" >Livraison: </p>
         <p className="offset-2 col-6">{this.props.user.address} - {this.props.user.zip_code} {this.props.user.city} - {this.props.user.details} </p>
          <Link to="/profil"> <Button style={{backgroundColor:"#1b263b", color:"white", marginLeft:'2em'}}><FontAwesomeIcon icon={faEdit} /></Button></Link>

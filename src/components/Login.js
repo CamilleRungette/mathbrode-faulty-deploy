@@ -71,7 +71,7 @@ this.state = {
             <div class="container" style={{marginTop:'5em', fontFamily:"Raleway"}}>
               <div style={{height:"10em"}}></div>
             <Row style={{justifyContent:"space-around"}}>
-            <Col sm={5}>
+            <Col lg={5} xs={11}>
               <h3 style={{marginBottom:"2em", textAlign:'center'}}>Se connecter</h3>
                 <Form>
                   <Form.Group controlId="formBasicEmail">
@@ -91,7 +91,7 @@ this.state = {
                   </Button>
             </Col>
 
-            <Col sm={5}>              
+            <Col lg={5} xs={11}>              
               <h3 style={{marginBottom:"2em", textAlign:'center'}}>S'inscrire</h3>
                 <Form>
                 <Form.Group >

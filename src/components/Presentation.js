@@ -5,6 +5,8 @@ import {Modal, Form} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import ip from './ip'
 import ScrollableAnchor from 'react-scrollable-anchor'
+import { goToAnchor } from 'react-scrollable-anchor'
+
 
 
 let modalStyle={
@@ -44,92 +46,82 @@ class Presentation extends React.Component {
         handleShow(){
           this.setState({show:true})
         }
+
+
         render() {
 
       
     return(
  <ScrollableAnchor id={'contact'} >
-<div className="row justify-content-center col-sm-10 col-md-12 mx-auto" style={{fontFamily:"Raleway"}}>
-  <div>
+  <div className="row justify-content-center col-11 mx-auto" style={{fontFamily:"Raleway"}}>
+    <div>
     <h1 style={{fontSize:"4em", textAlign:"center"}}> Je me présente</h1>
-      <div style={{height:"8em"}}></div>
+    <div style={{height:"8em"}}></div>
 
       <div className="row">
 
         <div className="row" style={{ display:"flex", justifyContent:"center", alignItems:"center"}} >
 
-          <div className="col-lg-4 col-sm-6 col-xs-12">
-          <img src="presentation.png" alt="Alt text" />
+          <div className=" col-lg-6" style={{ maxWidth:'35em', marginBottom:'4em'}} >
+            <img src="presentation.png" alt="Alt text" />
           </div>
 
-          <div className="offset-1 col-lg-4 col-sm-6 col-xs-12">
+          <div className="offset-1 col-lg-5" style={{maxWidth:'40em'}}>
             <p  style={{fontSize:"1.23em", textAlign:"center"}}> <br/>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             </p>
             <div style={{ display:"flex", justifyContent:"center", alignItems:"center"}}>
-            <Button onClick={this.handleShow} style={{backgroundColor: "#1B263B" , marginTop:"1.3em", fontSize:"1.2em"}}>Me contacter</Button>
+              <Button onClick={this.handleShow} style={{backgroundColor: "#1B263B" , marginTop:"1.3em", fontSize:"1.2em"}}>Me contacter</Button>
             </div>
-          </div>
-
-        <div>      
-    </div>
-
-            
-              
-            
           </div>
         </div>
       </div>
+    </div>
 
-      <Modal show={this.state.show} onHide={this.handleClose} className="col-lg-10" >
-         <div style={modalStyle}>
-          <Modal.Header closeButton>
-            <Modal.Title>Me contacter</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-          <Form>
-          <Row>
-            <Col>
-              <Form.Group>
-                {this.props.user == null?(
-                  <Form.Control type="text" placeholder="Nom" onChange={(e)=> this.setState({SendMessageName: e.target.value})}
-                  value={this.state.SendMessageName} />
-                ):(
-                  <Input type="text" placeholder="Nom" value={this.props.user.first_name}/>
-                  )}
-              </Form.Group>
-            </Col>
-
-            <Col>
+    <Modal show={this.state.show} onHide={this.handleClose} className="col-lg-10" >
+      <div style={modalStyle}>
+        <Modal.Header closeButton>
+          <Modal.Title>Me contacter</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form>
+        <Row>
+          <Col>
             <Form.Group>
-              {this.props.user == null ? (
-                <Form.Control type="email" placeholder="Email" onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
-                value={this.state.SendMessageEmail} />
+              {this.props.user == null?(
+                <Form.Control type="text" placeholder="Nom" onChange={(e)=> this.setState({SendMessageName: e.target.value})}
+                value={this.state.SendMessageName} />
               ):(
-                <Input type="Email"  placeholder="Email" value={this.props.user.email} />
-
-              )}
+                <Input type="text" placeholder="Nom" value={this.props.user.first_name}/>
+                )}
             </Form.Group>
-            </Col>
-            </Row>
+          </Col>
 
-            <Form.Group controlId="formBasicPassword">
-              <Form.Control as="textarea" placeholder="Message" onChange={(e)=> this.setState({SendMessageContent: e.target.value})} 
-              value={this.state.SendMessageContent} />
-            </Form.Group>
-          </Form>
-          <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.sendMessage}> 
-              Envoyer
-            </Button>
-          </Modal.Body>
-         </div>
-       </Modal>
+          <Col>
+          <Form.Group>
+            {this.props.user == null ? (
+              <Form.Control type="email" placeholder="Email" onChange={(e)=> this.setState({SendMessageEmail: e.target.value})}
+              value={this.state.SendMessageEmail} />
+            ):(
+              <Input type="Email"  placeholder="Email" value={this.props.user.email} />
 
+            )}
+          </Form.Group>
+          </Col>
+          </Row>
 
-
-
-</div>
-
+          <Form.Group controlId="formBasicPassword">
+            <Form.Control as="textarea" placeholder="Message" onChange={(e)=> this.setState({SendMessageContent: e.target.value})} 
+            value={this.state.SendMessageContent} />
+          </Form.Group>
+        </Form>
+        <Button style={{backgroundColor:"#1B263B", border:"none"}} variant="secondary" onClick={this.sendMessage}> 
+            Envoyer
+          </Button>
+        </Modal.Body>
+      </div>
+    </Modal>
+  </div>
 </ScrollableAnchor>
 )}
 }

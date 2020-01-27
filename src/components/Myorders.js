@@ -62,7 +62,7 @@ class MyOrders extends Component{
         <Navbar/>
         <div style={{height:'5em'}}></div>
         {this.state.myOrders.map((order, i)=>(
-        <Card className="col-8 mx-auto" style={{margin:"5em"}} >
+        <Card className="col-8 mx-auto" style={{margin:"5em", minWidth:'30em' }} >
           <Card.Body  >
             <Card.Title><h1>Commande du {DateFormat(order.date)} </h1></Card.Title>
             <Card.Subtitle className="mb-2 text-muted"># {order._id} </Card.Subtitle>
@@ -70,9 +70,9 @@ class MyOrders extends Component{
               <h4>Détails de la commande: </h4>
               {order.items.map((item,i)=>(
               <div>
-                <Card style={{ width:'100%' }}>
+                <Card style={{ width:'100%'}}>
                   <div style={{display:"flex"}}>
-                  <Card.Img variant="top" style={{width:'12em'}} src={item.photo} />
+                  <Card.Img  variant="top" className="my-auto" style={{width:'12em', maxHeight:'14em', display:'flex',}} src={item.photo} />
                   <Card.Body style={{display:"flex", flexDirection:"column", justifyContent:"center", marginLeft:"2em"}}>
                     <Card.Title style={{fontSize:'1.5em', textDecoration:"underline"}}>{item.name}</Card.Title>
                     <Card.Text>

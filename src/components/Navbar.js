@@ -72,7 +72,7 @@ class Navigbar extends React.Component{
                 <a href="/#contact"><NavLink>Contact</NavLink></a>
                 </NavItem>
 
-                
+                 
                 
                 {this.props.connected ? (
                 <NavItem>

@@ -82,7 +82,7 @@ class Profil extends Component{
           <Navbar/>
           <div >
           <div style={{height:"8em"}}></div>
-          <Card className="col-5 mx-auto"  style={{marginTop:"8em"}}>
+          <Card className="col-xl-5 col-sm-8  col-xs-11 mx-auto"  style={{marginTop:"8em"}}>
           <h2 style={{textAlign:"center", fontSize:"3em", marginTop:'1em'}}>Ton Profil</h2>
           <div style={{height:"1em"}}></div>
             <div>

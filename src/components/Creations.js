@@ -6,7 +6,7 @@ import '../App.css'
 import CreationItem from './cards/creations-item'
 import {Link} from 'react-router-dom'
 import ip from './ip'
-
+ 
 class Creations extends React.Component {
   
   constructor(props){
@@ -48,7 +48,7 @@ class Creations extends React.Component {
     console.log(ip)
  return (
     <div className="row justify-content-center">
-        <div className="col-lg-8 col-sm-10 col-11">
+        <div className="col-xl-8 col-md-10 ">
               <div style={{fontFamily:"Raleway"}}>
                 <h1 style={{fontSize:"4em", textAlign:"center"}}> Mes Créations </h1>
                 <div style={{height:"8em"}}></div>

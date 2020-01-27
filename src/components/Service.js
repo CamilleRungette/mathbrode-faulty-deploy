@@ -85,10 +85,8 @@ onDrop(picture) {
 
 
 
-        <Row className="col-10 mx-auto" style={{fontFamily:"Raleway", display:"flex",  justifyContent:"space-around"}}>
-          
-
-          <Col style={{display:"flex", justifyContent:"center",marginBottom:"2em"}}>
+        <Row className="col-10 mx-auto" style={{ fontFamily:"Raleway", display:"flex", paddingLeft:'5%'}}>
+          <Col style={{display:"flex",marginBottom:"3em"}}>
             <Card style={{cursor:"pointer", backgroundColor:"#EDF3F7", width:"20em", height:"15em", padding:"1em", border:"none"}}>
               <CardBody >
                 <div style={{display:"flex", justifyContent:"space-between", marginBottom:"0.6em"}} >
@@ -100,7 +98,7 @@ onDrop(picture) {
             </Card>
           </Col>
 
-          <Col style={{display:"flex", justifyContent:"center",marginBottom:"2em"}}>
+          <Col style={{display:"flex", marginBottom:"3em"}}>
             <Card style={{cursor:"pointer", backgroundColor:"#EDF3F7", width:"20em", height:"15em", padding:"1em", border:"none"}}>
               <CardBody onClick={this.handleShow} >
                 <div style={{display:"flex", justifyContent:"space-between", marginBottom:"0.6em"}} >
@@ -112,7 +110,7 @@ onDrop(picture) {
             </Card>
           </Col>
 
-          <Col style={{display:"flex", justifyContent:"center",marginBottom:"2em"}}>
+          <Col style={{display:"flex", marginBottom:"2em"}}>
             <Card style={{cursor:"pointer", backgroundColor:"#EDF3F7", width:"20em", height:"15em", padding:"1em", border:"none"}}>
               <CardBody >
                 <div style={{display:"flex", justifyContent:"space-between", marginBottom:"0.6em"}} >

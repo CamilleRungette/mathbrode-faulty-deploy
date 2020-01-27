@@ -7,7 +7,7 @@ class CreationItem extends React.Component {
   render() {  
   return (
    
-    <div className="col-lg-4 col-sm-6 col-xs-12 my-3">  
+    <div className="col-xl-4 col-md-6 col-xs-12 my-3">  
     <Link to={`/item/${this.props.itemName}`}>
       <div className="productTitle mx-auto" style={{ width:"18em", marginBottom:"4em"}}>
         <div className="overlay-image">
