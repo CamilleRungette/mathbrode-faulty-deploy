@@ -19,4 +19,4 @@ Express, MongoDB (Mongoose), React and Boostrap
 
 ### Team :
 
-From the 5th to the 20th December, I was helped by [Guillaume] (https://github.com/G-Lanes/)
+From the 5th to the 20th December, I was helped by [Guillaume Lanes](https://github.com/G-Lanes/) for the front.
