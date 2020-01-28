@@ -32,7 +32,7 @@ class Presentation extends React.Component {
       
         sendMessage(){
           this.setState({show:false});
-          fetch(`${ip}/users/create-message`, {
+          fetch(`http://localhost:3000/users/create-message`, {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             body: `object=Contactez_moi&content=${this.state.SendMessageContent}&sender_email=${this.state.SendMessageEmail}&sender_name=${this.state.SendMessageName}`
