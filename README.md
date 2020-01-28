@@ -19,4 +19,4 @@ Express, MongoDB (Mongoose), React and Boostrap
 
 
 
-_Most of the front was done by [Guillaume Lanes] (https://github.com/G-Lanes)_
+_From the 5th to the 20th December, I was helped by  [Guillaume Lanes] (https://github.com/G-Lanes) for the front-end_ 
