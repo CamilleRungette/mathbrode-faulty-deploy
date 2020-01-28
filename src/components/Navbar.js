@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { Button,  Navbar,  NavbarBrand,  Nav,  NavItem,  NavLink } from 'reactstrap';
+import { Button,  Navbar, NavbarBrand,  Nav,  NavItem,  NavLink, DropdownMenu, DropdownItem, DropdownToggle, Dropdown } from 'reactstrap';
 import {Link, Redirect} from 'react-router-dom'
 import '../script'
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import '../App.css'
 
 class Navigbar extends React.Component{
   constructor(props){
@@ -12,8 +13,10 @@ class Navigbar extends React.Component{
     this.LogOut = this.LogOut.bind(this) 
     this.setRedirect = this.setRedirect.bind(this)
     this.renderRedirect = this.renderRedirect.bind(this)
+    this.toggle = this.toggle.bind(this)
     this.state={
-      redirect: false
+      redirect: false,
+      dropdownOpen: false,
     }
    }
 
@@ -28,6 +31,10 @@ class Navigbar extends React.Component{
     })
   }
   
+  toggle(){
+    this.setState({dropdownOpen: !this.state.dropdownOpen});
+  }
+  
   renderRedirect(){
     console.log("====================", this.state.redirect)
     if (this.state.redirect) {
@@ -40,16 +47,39 @@ class Navigbar extends React.Component{
   render(){
     return(
       <div className="row topnav" style={{marginLeft:"0px",marginRight:"0px"}}>
-      {this.renderRedirect()}
 
-    <Navbar  light expand="md" style={{fontFamily:"Raleway", width: "95%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto",padding:"0"}}>
+
+    <Navbar light expand="md" style={{fontFamily:"Raleway", width: "95%", height:"12*5em" , display:"flex", justifyContent:"space-between", margin:"auto",padding:"0"}}>
         <div xs="2" style={{textAlign:"right"}}>
             <NavbarBrand>
               <Link to="/"><img src="/logo bis.png" style={{width:"5.3em"}} /> </Link>
             </NavbarBrand>
         </div>
 
-        <div xs="10">
+      <div class="ml-auto burger-menu" >
+        <Dropdown direction="left" isOpen={this.state.dropdownOpen} toggle={this.toggle}  style={{marginRight:'3em'}} >
+        <DropdownToggle style={{backgroundColor:"transparent", color:"grey", border:"transparent"}} >
+          <FontAwesomeIcon className={"fa-4x"} icon={faBars} />
+        </DropdownToggle>
+        <DropdownMenu >
+          <Link to="/items" style={{fontSize:'1.2em'}}><DropdownItem>Articles</DropdownItem></Link> 
+          <Link to="/events" style={{fontSize:'1.2em'}}> <DropdownItem >Événements</DropdownItem></Link>
+          <Link to ="/#contact" style={{fontSize:'1.2em'}}><DropdownItem>Contact</DropdownItem></Link>
+          {this.props.connected ? (
+            <span>
+          <Link to ="/profil" style={{fontSize:'1.2em'}}><DropdownItem>Mon profil</DropdownItem></Link>
+          <Link to="/myorders" style={{fontSize:'1.2em'}}><DropdownItem>Mes commandes</DropdownItem></Link>
+          <Link to="/basket" style={{fontSize:'1.2em'}}><DropdownItem >Panier</DropdownItem></Link>
+          <Button color="secondary" style={{marginLeft:'1em', fontSize:"1.2em"}} id="dropHover" onClick={this.LogOut}>Se Déconnecter</Button>
+          </span>
+          ):(
+            <Button color="secondary "style={{marginLeft:'1em', fontSize:"1.1em"}} href="/login"> Se Connecter</Button>
+          )}
+        </DropdownMenu>
+      </Dropdown>
+      </div>
+    
+        <div xs="10" class="menu" >
             <Nav navbar style={{fontSize:"1.3em", fontWeight:"bold"}}> 
 
             {this.props.connected ? (
@@ -65,7 +95,7 @@ class Navigbar extends React.Component{
                 </NavItem>
 
                 <NavItem>
-                  <Link to="/events"> <NavLink>Evénements</NavLink></Link>
+                  <Link to="/events"> <NavLink>Événements</NavLink></Link>
                 </NavItem>
 
                 <NavItem>

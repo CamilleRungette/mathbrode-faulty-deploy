@@ -262,3 +262,19 @@ html {
   background-image: url('/dashboard.jpeg');
   background-size: cover;
 }
+
+@media screen and (min-width: 1350px){
+  .burger-menu{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1350px){
+  .menu{
+    display: none;
+  }
+}
+
+#dropHover:hover{
+  text-decoration: underline white;
+}
