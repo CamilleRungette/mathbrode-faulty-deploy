@@ -53,9 +53,19 @@ body{
   bottom: 10%;
   left: 8%;
   color: white;
-  font-size: 4vw ;
+  font-size: 5em ;
   font-family:'Raleway',sans-serif;
+}
+@media screen and (max-width: 1400px){
+  .text-block{
+    font-size: 4em;
+  }
+}
 
+@media screen and (max-width: 1330px){
+  .text-block{
+    font-size: 3em;
+  }
 
 }
 
@@ -65,14 +75,11 @@ img {
   
 }
 
-
-
 .text-block-black {
   text-align: center;
   bottom: 10%;
   left: 10%;
   color: rgb(0, 0, 0);
-  font-size: 4vw ;
   font-family:'Raleway',sans-serif;
 }
 
@@ -277,4 +284,10 @@ html {
 
 #dropHover:hover{
   text-decoration: underline white;
+}
+
+.back-img{
+  min-width: 50em;
+  background-attachment: fixed;
+  background-position: "center";
 }

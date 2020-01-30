@@ -50,7 +50,7 @@ class Creations extends React.Component {
     <div className="row justify-content-center">
         <div className="col-xl-8 col-md-10 ">
               <div style={{fontFamily:"Raleway"}}>
-                <h1 style={{fontSize:"4em", textAlign:"center"}}> Mes Créations </h1>
+                <h1 style={{fontSize:"4em", textAlign:"center"}} class="creations-title"> Mes Créations </h1>
                 <div style={{height:"8em"}}></div>
 
               <div className="row" style={{display:"flex", margin:'auto'}}>

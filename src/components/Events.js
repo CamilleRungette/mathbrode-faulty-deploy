@@ -4,6 +4,7 @@ import Navigbar from './Navbar'
 import Event from './cards/Event-item'
 import ip from './ip'
 
+
 class Events extends Component{
 
   constructor(props){
@@ -43,10 +44,8 @@ class Events extends Component{
     }, this)
   
     return(
-
-
     <div  style={{fontFamily:"Raleway"}} >
-      
+
       <Navigbar/>
         <div style={{height:"10em"}}></div>
             <h1 style={{textAlign:"center", fontSize:"3.5em", marginTop:"0.5em"}} >Mes Événements</h1>

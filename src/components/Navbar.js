@@ -11,8 +11,6 @@ class Navigbar extends React.Component{
   constructor(props){
     super(props);
     this.LogOut = this.LogOut.bind(this) 
-    this.setRedirect = this.setRedirect.bind(this)
-    this.renderRedirect = this.renderRedirect.bind(this)
     this.toggle = this.toggle.bind(this)
     this.state={
       redirect: false,
@@ -23,27 +21,11 @@ class Navigbar extends React.Component{
   LogOut(){
     this.props.onLogOutClick(this.props.connected) 
   }
-
-  setRedirect(){
-
-    this.setState({
-      redirect: true
-    })
-  }
   
   toggle(){
     this.setState({dropdownOpen: !this.state.dropdownOpen});
   }
   
-  renderRedirect(){
-    console.log("====================", this.state.redirect)
-    if (this.state.redirect) {
-      console.log("true")
-      window.scrollBy(0, 3000)
-      return <Redirect to='/' />
-    }
-  }
-
   render(){
     return(
       <div className="row topnav" style={{marginLeft:"0px",marginRight:"0px"}}>

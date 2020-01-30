@@ -10,27 +10,29 @@ import {connect} from 'react-redux';
 
 
 class Home extends React.Component {
+
   render(){
 
     return (
       <div className="col-12 col-lg-12" style={{paddingLeft:"0px", paddingRight:"0px"}}>
         <Navigbar/>
+
+
+
           <div className="row" style={{margin:"auto"}}>
-              <div className="col-lg-12" style={{paddingLeft:0,paddingRight:0}}>
-            
-            
-                    <img src="./background.jpg" alt="background" ></img>
+              <div className="col-lg-12" style={{paddingLeft:0,paddingRight:0}}>            
+                    <img class="back-img" src="./background.jpg" alt="background" ></img>
       
                     <div className="text-block">
                     <p>Broderie <br/> Moderne</p>
                     </div>
       
-      
               </div>
           </div>
           <div style={{marginBottom:"10em"}} ></div>
 
-      
+    
+
       <Creations/>
       <div style={{marginBottom:"20em"}} ></div>
       <Presentation/>
