@@ -422,7 +422,11 @@ class tracking extends React.Component{
                     <td>Envoyée</td>
                     )}
                     <td>{order.total}€</td>
-                    <td>{DateFormat(order.shipping_date)}</td>
+                    {order.paid === true?(
+                      <td>{DateFormat(order.shipping_date)}</td>
+                    ):(
+                      <td>A payer</td>
+                    )}
                     {order.in_person == true?(
                       <td>Main propre</td>
                     ):(
