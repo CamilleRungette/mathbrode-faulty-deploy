@@ -8,12 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux';
 
-let modalStyle={
-  width:"50em",
-  backgroundColor: "white",
-  fontFamily: "Raleway"
-}
-
 
 class Basket extends React.Component {
   constructor(props){
@@ -25,6 +19,7 @@ class Basket extends React.Component {
       shipping_fee: 0,
     }
   }
+
   
   componentDidMount(){
     this.setState({items: this.props.item})
@@ -118,7 +113,7 @@ class Basket extends React.Component {
           <Link to="/creations" ><Button color="secondary" >Continuer mes Achats</Button></Link>
         </div>
         <div>
-         <Link to="/checkout"> <Button style={{backgroundColor:"#1B263B", fontSize:"1.2em"}} onClick={() => this.props.onOrderClick(this.state.total, this.state.in_person)} >Confirmer</Button></Link>
+       <Link to="/checkout"> <Button style={{backgroundColor:"#1B263B", fontSize:"1.2em"}} onClick={()=> this.props.onOrderClick(this.state.total, this.state.in_person)} >Confirmer</Button></Link>
         </div>
         <div style={{height:"5em"}}></div>  
       </div>
@@ -146,6 +141,7 @@ function mapDispatchToProps(dispatch){
       dispatch({type: 'delete', position: position})
     },
     onOrderClick: function(total, in_person){
+      console.log("HELLO")
       dispatch({type: 'payOrder', total: total, in_person: in_person})
     }
   }
