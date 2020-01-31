@@ -57,7 +57,7 @@ class tracking extends React.Component{
     this.setState({show: false})
   }
 
-  
+   
   handleShow(order){
     this.setState({show:true})
     let ctx = this;
@@ -92,6 +92,7 @@ class tracking extends React.Component{
         return response.json();
       })
       .then(function(data){
+        console.log(data)
         ctx.setState({orders: data.allOrders})
         console.log("THE STATE QUE JE CHERCHE ===========>", ctx.state.orders)
       })
