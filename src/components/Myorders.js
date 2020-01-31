@@ -13,6 +13,7 @@ class MyOrders extends Component{
     super();
     this.state={
       myOrders: [],
+      myPersoOrders: [],
     }
   }
   componentDidMount(){
@@ -23,12 +24,14 @@ class MyOrders extends Component{
       return response.json();
     })
     .then(function(data){
-      console.log("DATA", data)
-      ctx.setState({myOrders: data.myOrders, myItems: data.myItems})
+      ctx.setState({myOrders: data.myOrders, myPersoOrders: data.myPersoOrders})
+      console.log(ctx.state.myPersoOrders)
     })
     .catch(function(error) {
       console.log('Request failed ->', error)
   });
+
+
   }
 
 
@@ -60,7 +63,12 @@ class MyOrders extends Component{
       return(
       <div style={{fontFamily:"Raleway"}}>
         <Navbar/>
+        <div style={{height:'10em'}}></div>
+        <div style={{textAlign:"center", fontSize:"3.3em"}}>
+              <p>Mes Commandes</p>
+            </div>
         <div style={{height:'5em'}}></div>
+
         {this.state.myOrders.map((order, i)=>(
         <Card className="col-8 mx-auto" style={{margin:"5em", minWidth:'30em' }} >
           <Card.Body  >
@@ -90,6 +98,50 @@ class MyOrders extends Component{
           </Card.Body>
         </Card>
         ))}
+
+<div style={{textAlign:"center", fontSize:"3.3em"}}>
+              <p>Mes Commandes personnalisées</p>
+            </div>
+        <div style={{height:'5em'}}></div>
+
+        {this.state.myPersoOrders.map((order, i)=>(
+        <Card className="col-8 mx-auto" style={{margin:"5em", minWidth:'30em' }} >
+          <Card.Body  >
+            <Card.Title><h1>Commande du {DateFormat(order.date)} </h1></Card.Title>
+            <Card.Subtitle className="mb-2 text-muted"># {order._id} </Card.Subtitle>
+            <Card.Text>
+              <h4>Détails de la commande: </h4>
+              <div>
+                <Card style={{ width:'100%'}}>
+                  <div style={{display:"flex"}}>
+                    {order.photo != "" ?(
+                      <Card.Img  variant="top" className="my-auto" style={{width:'12em', maxHeight:'14em', display:'flex',}} src={order.photo} />
+                    ):(
+                      <div className="col-1"></div>
+                    )}
+                    <div>
+                      <Card.Body style={{display:"flex", flexDirection:"column", justifyContent:"center", marginLeft:"2em"}}>
+                        <Card.Text>
+                          {order.description} <br/><br/>
+                          {order.paid === false?(
+                            <Link to="/checkout"  style={{fontSize:"1.2em"}} onClick={()=> this.props.onOrderClick(order)}>À payer</Link>
+                            ):(
+                              <p>Payée</p>
+                              )}
+                        </Card.Text>
+                      </Card.Body>
+                      </div>
+                    </div>
+                </Card>              
+                </div>
+              <br/>
+              <h4 style={{textAlign:"center"}}>Total: {order.total} €</h4>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        ))}
+
+
         <div style={{height:'5em'}}></div>
         <Footer />
       </div>
@@ -103,8 +155,18 @@ function mapStatetoProps(state){
           }
 }
 
+function mapDispatchToProps(dispatch){
+  console.log("===============++>", dispatch)
+  return{
+    onOrderClick: function(order){
+      console.log("coucou")
+      dispatch({type: 'payPersoOrder', persoOrder: order})
+    }
+  }
+}
+
 
 export default connect(
   mapStatetoProps,
-  null
+  mapDispatchToProps
 )(MyOrders);
