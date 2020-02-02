@@ -159,7 +159,7 @@ class Dashboard extends Component {
       }
       
       return(
-<div style={{fontFamily:"Raleway"}}>
+<div style={{fontFamily:"Open Sans Condensed"}}>
        
   
 

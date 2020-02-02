@@ -12,7 +12,7 @@ import { goToAnchor } from 'react-scrollable-anchor'
 let modalStyle={
   width:"50em",
   backgroundColor: "white",
-  fontFamily: "Raleway"
+  fontFamily: "Open Sans Condensed"
 }
 
 
@@ -53,9 +53,9 @@ class Presentation extends React.Component {
       
     return(
  <ScrollableAnchor id={'contact'} >
-  <div className="row justify-content-center col-11 mx-auto" style={{fontFamily:"Raleway"}}>
+  <div className="row justify-content-center col-11 mx-auto" style={{fontFamily:"Open Sans Condensed"}}>
     <div>
-    <h1 style={{fontSize:"4em", textAlign:"center"}}> Je me présente</h1>
+    <h1 style={{fontSize:"5em", textAlign:"center"}}> Je me présente</h1>
     <div style={{height:"8em"}}></div>
 
       <div className="row">
@@ -67,9 +67,9 @@ class Presentation extends React.Component {
           </div>
 
           <div className="offset-1 col-lg-5" style={{maxWidth:'40em'}}>
-            <p  style={{fontSize:"1.23em", textAlign:"center"}}> <br/>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            </p>
+            <p  style={{fontSize:"1.4em", textAlign:"center"}}>
+            Depuis mon canapé parisien, je vous confectionne des petites broderies toutes droit sorties de mon imagination débordante. Je m’appelle Mathilde et depuis plus d’un an j’ai troqué mes papiers et crayons pour une aiguille et du fil. 
+Alors pour redorer votre blason, faire plaisir à mamie ou tout simplement se faire un petit cadeau, n’hésitez pas à vous lancer dans l’aventure brodée !            </p>
             <div style={{ display:"flex", justifyContent:"center", alignItems:"center"}}>
               <Button onClick={this.handleShow} style={{backgroundColor: "#1B263B" , marginTop:"1.3em", fontSize:"1.2em"}}>Me contacter</Button>
             </div>

@@ -37,7 +37,7 @@ class Basket extends React.Component {
         return(
           <div>
             <Navbar />
-            <div style={{fontFamily:"Raleway", height:"84vh"}}>
+            <div style={{fontFamily:"Open Sans Condensed", height:"84vh"}}>
             <div style={{height:"13em"}}></div>
               <div style={{textAlign:"center", fontSize:"3.3em"}}>
                 <p>Mon Panier</p>
@@ -62,9 +62,9 @@ class Basket extends React.Component {
         this.state.total = this.state.total - this.state.shipping_fee
       }
    return(
-    <div style={{fontFamily:"Raleway"}}>
+    <div style={{fontFamily:"Open Sans Condensed"}}>
       <Navbar/>
-            <div style={{fontFamily:"Raleway"}}>
+            <div>
             <div style={{height:"10em"}}></div>
 
             <div style={{textAlign:"center", fontSize:"3.3em"}}>
