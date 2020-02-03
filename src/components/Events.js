@@ -44,7 +44,7 @@ class Events extends Component{
     }, this)
   
     return(
-    <div  style={{fontFamily:"Open Sans Condensed"}} >
+    <div  style={{fontFamily:"Raleway"}} >
 
       <Navigbar/>
         <div style={{height:"10em"}}></div>

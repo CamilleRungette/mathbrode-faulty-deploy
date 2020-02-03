@@ -53,9 +53,8 @@ body{
   bottom: 10%;
   left: 8%;
   color: white;
-  font-size: 5em ;
-  font-family:'Pacifico', cursive;
-  font-weight: lighter;
+  font-size: 6em ;
+  font-family:'Playball', cursive;
 }
 @media screen and (max-width: 1400px){
   .text-block{
@@ -263,7 +262,7 @@ html {
 
 .background-body{
   background-color:rgb(250, 250, 250);
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 .mainBack{

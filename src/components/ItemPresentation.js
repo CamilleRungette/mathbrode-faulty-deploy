@@ -69,7 +69,7 @@ class ItemPresentation extends React.Component {
    return(
 <div>
   <Navbar/>
-    <div className="row justify-content-center" style={{fontFamily:"Open Sans Condensed"}}>
+    <div className="row justify-content-center" style={{fontFamily:"Raleway"}}>
       <div className="col-lg-10" >
       <div style={{height:"10em"}}></div>
         <div>

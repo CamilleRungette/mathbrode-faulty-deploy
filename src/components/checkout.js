@@ -85,7 +85,7 @@ class CheckoutForm extends Component {
     } else if (this.state.complete){
       this.RedirectMethod()
       return(
-        <div style={{fontFamily:'Open Sans Condensed'}}>
+        <div style={{fontFamily:'Raleway'}}>
           <Navbar />
           <div style={{height:'75vh', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
             <h1> Commande validée ! </h1>
@@ -98,7 +98,7 @@ class CheckoutForm extends Component {
       }
 
     return (
-      <div style={{fontFamily:'Open Sans Condensed'}}>
+      <div style={{fontFamily:'Raleway'}}>
         <Navbar/>
           <div style={{height:"85vh"}}>
             <div style={{height:'10em'}}></div>

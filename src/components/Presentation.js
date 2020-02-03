@@ -12,7 +12,7 @@ import { goToAnchor } from 'react-scrollable-anchor'
 let modalStyle={
   width:"50em",
   backgroundColor: "white",
-  fontFamily: "Open Sans Condensed"
+  fontFamily: "Raleway"
 }
 
 
@@ -53,9 +53,9 @@ class Presentation extends React.Component {
       
     return(
  <ScrollableAnchor id={'contact'} >
-  <div className="row justify-content-center col-11 mx-auto" style={{fontFamily:"Open Sans Condensed"}}>
+  <div className="row justify-content-center col-11 mx-auto" style={{fontFamily:"Raleway"}}>
     <div>
-    <h1 style={{fontSize:"5em", textAlign:"center"}}> Je me présente</h1>
+    <h1 style={{fontSize:"4em", textAlign:"center"}}> Je me présente</h1>
     <div style={{height:"8em"}}></div>
 
       <div className="row">

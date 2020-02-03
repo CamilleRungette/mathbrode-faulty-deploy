@@ -50,7 +50,7 @@ class Dashboard extends Component {
 
   ItemSubmit(){
     let ctx = this
-    fetch(`${ip}/admins/create-item`, {
+    fetch(`http://localhost:3000/admins/create-item`, {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             body: `name=${this.state.CreateItemName}&price=${this.state.CreateItemPrice}&size=${this.state.CreateItemSize}&description=${this.state.CreateItemDesc}&shipping_fee=${this.state.CreateItemShipFee}&copy=1&photo=${this.state.CreateItemPhoto}&first_presentation=${this.state.CreateItemFirstPres}`
@@ -159,7 +159,7 @@ class Dashboard extends Component {
       }
       
       return(
-<div style={{fontFamily:"Open Sans Condensed"}}>
+<div style={{fontFamily:"Raleway"}}>
        
   
 
