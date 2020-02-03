@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { Button,  Navbar, NavbarBrand,  Nav,  NavItem,  NavLink, DropdownMenu, DropdownItem, DropdownToggle, Dropdown } from 'reactstrap';
 import {Link, Redirect} from 'react-router-dom'
-import '../script'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import '../App.css'
@@ -46,7 +45,7 @@ class Navigbar extends React.Component{
         <DropdownMenu >
           <Link to="/items" style={{fontSize:'1.2em'}}><DropdownItem>Articles</DropdownItem></Link> 
           <Link to="/events" style={{fontSize:'1.2em'}}> <DropdownItem >Événements</DropdownItem></Link>
-          <Link to ="/#contact" style={{fontSize:'1.2em'}}><DropdownItem>Contact</DropdownItem></Link>
+          <Link to ="/classes" style={{fontSize:'1.2em'}}><DropdownItem>Ateliers</DropdownItem></Link>
           {this.props.connected ? (
             <span>
           <Link to ="/profil" style={{fontSize:'1.2em'}}><DropdownItem>Mon profil</DropdownItem></Link>
@@ -81,7 +80,7 @@ class Navigbar extends React.Component{
                 </NavItem>
 
                 <NavItem>
-                <a href="/#contact"><NavLink>Contact</NavLink></a>
+                <a href="/classes"><NavLink>Ateliers</NavLink></a>
                 </NavItem>
 
                  

@@ -82,7 +82,7 @@ class Classes extends Component{
       console.log("FAILED")
     });
 
-  }
+  } 
 
   render(){
     return(
@@ -92,11 +92,11 @@ class Classes extends Component{
       <Col sm={11} style={{margin:"auto"}}>
       <h1 style={{textAlign:"center", fontSize:"3.5em", marginTop:"0.5em"}}>Les Ateliers</h1>
       <div style={{height:"8em"}}></div>
-      <div style={{margin:"auto", display:"flex", justifyContent:"space-around"}}>
+      <div style={{margin:"auto", display:"flex", justifyContent:"space-around", flexWrap:"wrap"}}>
       {this.state.workshops.map((workshop, i) =>(
         <div>
-          <Card style={{ width: '38rem'}}>
-          <CardImg variant="top" src={workshop.photo}/>
+          <Card style={{maxWidth:'33em', marginBottom:'3em'}}>
+          <CardImg variant="top" style={{height:"18em"}} src={workshop.photo}/>
           <CardBody>
             <CardTitle style={{fontSize:"1.3em", textAlign:"center"}}> <strong> {workshop.title} </strong></CardTitle>
             <br/>

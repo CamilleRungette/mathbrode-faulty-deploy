@@ -18,6 +18,7 @@ class Dashboard extends Component {
   this.onDrop = this.onDrop.bind(this);
   this.uploadItemImage = this.uploadItemImage.bind(this);
   this.uploadEventImage = this.uploadEventImage.bind(this);
+  this.uploadWorkshopImage = this.uploadWorkshopImage.bind(this)
   this.state = {
           CreateItemName: '',
           CreateItemPrice: '',
@@ -32,12 +33,13 @@ class Dashboard extends Component {
           CreateEventPhoto:'',
           CreateEventStart: '',
           CreateEventEnd: '',
+          CreateEventLink:'',
           loading: '',
           CreateWorkshopTitle: '',
           CreateWorkshopDesc: '',
           CreateWorkshopPrice: '',
           CreateWorkshopDuration: '',
-          CreateEventLink:'',
+          CreateWorkshopPhoto: '',
           allItems: '',
         }
   }
@@ -50,7 +52,7 @@ class Dashboard extends Component {
 
   ItemSubmit(){
     let ctx = this
-    fetch(`http://localhost:3000/admins/create-item`, {
+    fetch(`${ip}/admins/create-item`, {
             method: 'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             body: `name=${this.state.CreateItemName}&price=${this.state.CreateItemPrice}&size=${this.state.CreateItemSize}&description=${this.state.CreateItemDesc}&shipping_fee=${this.state.CreateItemShipFee}&copy=1&photo=${this.state.CreateItemPhoto}&first_presentation=${this.state.CreateItemFirstPres}`
@@ -97,11 +99,12 @@ class Dashboard extends Component {
   }
 
   WorkshopSubmit(){
+    console.log("hello")
     let ctx = this
-    fetch(`${ip}/admins/create-workhop`, {
+    fetch(`${ip}/admins/create-workshop`, {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: `title=${this.state.CreateWorkshopTitle}&desc=${this.state.CreateWorkshopDesc}&price=${this.state.CreateWorkshopPrice}&duration=${this.state.CreateWorkshopDuration}`
+      body: `title=${this.state.CreateWorkshopTitle}&desc=${this.state.CreateWorkshopDesc}&price=${this.state.CreateWorkshopPrice}&duration=${this.state.CreateWorkshopDuration}&photo=${this.state.CreateWorkshopPhoto}`
     })
     .then(function(response) {
       return response.json();
@@ -112,6 +115,7 @@ class Dashboard extends Component {
         CreateWorkshopDesc: '',
         CreateWorkshopPrice: '',
         CreateWorkshopDuration: '',
+        CreateWorkshopPhoto: '',
       })
     })
   }
@@ -149,11 +153,27 @@ class Dashboard extends Component {
     this.setState({loading: false})
   }
 
+  async uploadWorkshopImage(e){
+    console.log("THE STATE =====>", this.state.loading)
+    const files = e.target.files
+    const data= new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'camille')
+    this.setState({loading: true})
+    const res = await fetch('https://api.cloudinary.com/v1_1/dduugb9jy/image/upload', {
+        method: 'POST',
+        body: data
+      })
+    const file = await res.json()
+    
+    this.setState({CreateWorkshopPhoto: file.secure_url})
+    this.setState({loading: false})
+      console.log(this.state.CreateWorkshopPhoto)
+  }
+
 
   
     render(){
-      console.log("--------------->", this.props.adminConnected)
-      console.log("CHECKBOX:", this.state.CreateItemFirstPres)
       if (this.props.adminConnected === false || this.props.adminConnected == null){
          return <Redirect to="/loginadmin" />
       }
@@ -358,6 +378,23 @@ class Dashboard extends Component {
                 </Col>  
             </Form.Group>
 
+            <Form.Group as={Row} controlId="formHorizontalPicture">
+              <Form.Label column sm={2}>Photo</Form.Label>
+                <Col sm={10}>
+                <input type="file"
+                placeholder="upload an image"
+                onChange={this.uploadWorkshopImage} 
+                />
+                {this.state.loading ? (
+                  <h6> Chargement ...</h6>
+                ) : (
+                 <img alt=" " src={this.state.CreateWorkshopPhoto} style={{width:"10em"}} />
+                )}
+
+                </Col>  
+            </Form.Group>
+
+
                 <Col style={{textAlign:'center'}}>
                   <Button onClick={this.WorkshopSubmit} style={{border:"none", margin:'auto', backgroundColor:"#1B263B"}}>Valider</Button>
                 </Col>
@@ -383,7 +420,6 @@ class Dashboard extends Component {
 }
 
 function mapStatetoProps(state){
-  console.log("======>", state)
   return {adminConnected: state.admin.isAdminExist}
 }
 

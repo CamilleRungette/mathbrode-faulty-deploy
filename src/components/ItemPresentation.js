@@ -73,7 +73,7 @@ class ItemPresentation extends React.Component {
       <div className="col-lg-10" >
       <div style={{height:"10em"}}></div>
         <div>
-          <p style={{textAlign:"center", fontSize:"5em"}}>{this.state.name}</p>
+          <p style={{textAlign:"center", fontSize:"4em"}}>{this.state.name}</p>
         </div>
 
         <div className="row col-lx-6 col-lg-9 col-xs-11 border" style={{margin:"auto", fontSize:'1.1em'}} >
