@@ -27,7 +27,7 @@ class Events extends Component{
     .catch(function(error) {
       console.log('Request failed ->', error)
   });
-  }  
+  }   
 
 
   render(){

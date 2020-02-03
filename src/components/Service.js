@@ -91,7 +91,7 @@ onDrop(picture) {
               <CardBody >
                 <div style={{display:"flex", justifyContent:"space-between", marginBottom:"0.6em"}} >
                 <Link to="/classes" ><CardTitle style={{ fontSize:"1.2em", color:"black"}} ><strong>Atelier d'initiation</strong> </CardTitle></Link>
-                <FontAwesomeIcon icon={faCalendarAlt} className={"fa-2x"}/>
+                <FontAwesomeIcon icon={faCalendarAlt} className="fa-2x"/>
                 </div>
                   <CardText>Je vous propose de vous initier aux bases de la broderie pendant un cours de 2h. Réservez-votre créneau</CardText>
                 </CardBody>
