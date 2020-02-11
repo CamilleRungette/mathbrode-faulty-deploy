@@ -67,7 +67,6 @@ onDrop(picture) {
         body: data
       })
     const file = await res.json()
-    
     this.setState({SendMessagePhoto: file.secure_url})
     this.setState({loading: false})
   }

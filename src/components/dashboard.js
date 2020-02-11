@@ -206,10 +206,15 @@ class Dashboard extends Component {
                 onChange={this.uploadItemImage} 
                 />
                   
-                {this.state.loading ? (
+                {/* {this.state.loading ? (
                   <h6> Chargement ...</h6>
                 ) : (
                  <img src={this.state.CreateItemPhoto} alt=" " style={{width:"10em", marginLeft:'8em'}} />
+                )} */}
+                {this.state.CreateItemPhoto? (
+                                   <img src={this.state.CreateItemPhoto} alt=" " style={{width:"10em", marginLeft:'8em'}} />
+                ):(
+                  <div></div>
                 )}
                  </Col> 
             
